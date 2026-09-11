@@ -21,7 +21,7 @@
 
 <section class="section wrap">
     <h2>You write PHP. It compiles to flat HTML.</h2>
-    <p class="lead" style="max-width:60ch">
+    <p class="lead lead--wide">
         A page is a real PHP file — includes, loops, a PHPDOC block that
         becomes your variables. Kirigami runs a PHP 8.5 runtime entirely in
         WebAssembly, inside Node, and compiles every page straight to plain

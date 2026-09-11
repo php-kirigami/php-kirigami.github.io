@@ -89,7 +89,7 @@
           | `generator` | string \| `false` | Default `Kirigami`. |
           | `author` / `designer` | string | `<meta name="author">` / a `designer` tag. |
           | `themeColor` | string | `<meta name="theme-color">`. |
-          | `image` | string | Default `og:image` / `twitter:image`. |
+          | `image` | string | Default `og:image` / `twitter:image`. Unset here, it falls back to the `kirigami:` block's own loose `image` / `ogimage` key, then `jsonld.image` / `jsonld.logo` — handy for a single sitewide default set once, outside the `meta:` block. |
           | `ogType` | string | Default `website`. |
           | `twitterCard` | string | Default `summary_large_image`. |
           | `twitter` | string \| map | Handle for `twitter:site` / `twitter:creator`. |

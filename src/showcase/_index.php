@@ -15,37 +15,50 @@
 <section class="section wrap">
     <div class="grid" data-reveal>
         <article class="card">
+            <img asset="showcase/kirigami.png" width="640" height="360" cover class="card__thumb" alt="Kirigami's own documentation site, homepage">
             <h3>Kirigami</h3>
             <p>
-                This site. Built in the open, phase by phase, with the
-                <code>@kirigami/canva</code> design system and
-                <code>@kirigami/plugin-highlight</code> — the same packages
-                anyone installs from npm.
+                This site. Every page you're reading is a PHP template
+                compiled by <code>kiri export</code> — the docs, the CLI
+                reference, this showcase — built in the open, phase by
+                phase, on the <code>@kirigami/canva</code> design system and
+                <code>@kirigami/plugin-highlight</code> for its code blocks:
+                the same packages anyone installs from npm, not a private
+                fork.
             </p>
-            <p style="margin-top:.8rem">
+            <p class="card__links">
                 <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source</a>
             </p>
         </article>
         <article class="card">
+            <img asset="showcase/template-demo.png" width="640" height="360" cover class="card__thumb" alt="The Kirigami Demo template, homepage">
             <h3>Kirigami Demo</h3>
             <p>
-                The <code>demo</code> template, deployed: a guided tour of
-                Markdown, images, syntax highlighting, data files, and the
-                tag/hook extension points — each feature as a real page.
+                The <code>demo</code> template, deployed as-is: a guided tour
+                of Markdown, images, syntax highlighting, data files, and the
+                tag/hook extension points — each one demoed as a real page
+                rather than described in prose. It's also where
+                <code>&lt;extlink&gt;</code> and <code>&lt;youtube&gt;</code>
+                / <code>&lt;vimeo&gt;</code> — two of the official plugins —
+                get their first real usage outside their own repos.
             </p>
-            <p style="margin-top:.8rem">
+            <p class="card__links">
                 <a href="https://php-kirigami.github.io/template-demo/">Live</a>
                 &middot; <a href="https://github.com/php-kirigami/template-demo">Source</a>
             </p>
         </article>
         <article class="card">
+            <img asset="showcase/template-default.png" width="640" height="360" cover class="card__thumb" alt="The Kirigami Site starter template, homepage">
             <h3>Kirigami Site (starter)</h3>
             <p>
-                The <code>default</code> template, deployed as-is: what
-                <code>npx kiri create default</code> gives you before you've
-                changed a single line.
+                The <code>default</code> template, deployed without a single
+                line changed — exactly what <code>npx kiri create default</code>
+                gives you. Its own homepage doubles as a map of the project
+                (<em>"Where things live"</em>): where pages, layouts, tags,
+                and styles/scripts each go, so the very first thing a new
+                project shows is how it's organized.
             </p>
-            <p style="margin-top:.8rem">
+            <p class="card__links">
                 <a href="https://php-kirigami.github.io/template-default/">Live</a>
                 &middot; <a href="https://github.com/php-kirigami/template-default">Source</a>
             </p>
@@ -57,10 +70,17 @@
 
 <section class="section wrap">
     <div class="prose">
-        <p>
-            Built something with Kirigami you'd like listed here? Open an
-            issue on <a href="https://github.com/php-kirigami/kirigami/issues">the
-            main repo</a> with a link — this list is meant to grow.
-        </p>
+        <markdown>
+          All three deploy the same way: push to `main`, and
+          [`kiribuild`](https://github.com/php-kirigami/kiribuild) (the
+          reusable GitHub Action) runs `kiri export` and publishes `dist/`
+          to GitHub Pages — no separate hosting, no build server to
+          maintain. See [Tutorial → Deploy](../start/tutorial/7-deploy/) for
+          the exact workflow file each of them ships.
+
+          Built something with Kirigami you'd like listed here? Open an
+          issue on [the main repo](https://github.com/php-kirigami/kirigami/issues)
+          with a link — this list is meant to grow.
+        </markdown>
     </div>
 </section>

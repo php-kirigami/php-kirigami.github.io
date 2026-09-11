@@ -64,10 +64,52 @@
           lifted into one place. Plus themed native scrollbars, following
           the palette in dark mode instead of defaulting to white.
 
+          **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**
+          `1.5.3` → `1.5.6` — two commands that hadn't been called out here
+          yet: **`kiri serve`**, everything `kiri watch` does plus a local
+          dev server with browser hot-reload (a `sass`-only change hot-swaps
+          the stylesheet in place instead of a full page reload), and
+          **`kiri install <plugin>`**, which installs a plugin and prints
+          the exact `plugins:` block to paste into `kirigami.yaml`, built
+          from the plugin's own option schema. `1.5.6` also replaces a raw
+          `EADDRINUSE` crash with a direct "try a different port" message.
+          Full reference: [Docs → CLI](../docs/cli/).
+
+          **[@kirigami/php-prepros](https://www.npmjs.com/package/@kirigami/php-prepros)**
+          `1.9.1` → `1.9.3` — fixed a real Markdown bug: a soft-wrapped
+          continuation line inside a list item (no marker of its own) closed
+          the list early instead of extending the item — the same fix that
+          let [Roadmap](../roadmap/) go back to natural wrapped prose instead
+          of one line per bullet.
+
+          **[@kirigami/plugin-highlight](https://www.npmjs.com/package/@kirigami/plugin-highlight)**
+          `0.1.1` → `0.1.6` — two real bugs fixed: an unknown `languages:`
+          name now fails the build immediately instead of warning once and
+          silently leaving that language unhighlighted forever; `copyButton`
+          no longer renders a real, styled, non-functional button on a
+          project with no `esbuild` task available to bundle its click
+          handler. Also fixed, alongside **[@kirigami/canva](https://www.npmjs.com/package/@kirigami/canva)**
+          `2.5.0` → `2.5.2`: a CSS specificity bug where `styles/prose`'s
+          own code resets could out-rank plugin-highlight's theme in light
+          mode, visible as a highlighted block's font/size reflowing on
+          every theme toggle.
+
+          **[@kirigami/plugin-embed](https://www.npmjs.com/package/@kirigami/plugin-embed)**
+          `0.1.1` → `0.1.2` — replaced the 16∶9 aspect-ratio floor with a
+          `maxWidth` cap (default `40rem`) plus the video's real aspect
+          ratio, and a `forcedAspectRatio` option to pin every card in a
+          grid to one uniform shape.
+
+          **[@kirigami/plugin-extlink](https://www.npmjs.com/package/@kirigami/plugin-extlink)**
+          `0.1.1` → `0.1.2` — added the `{% extlink URL ["title"] %}`
+          Markdown shortcut, alongside the existing `<extlink src="…">` tag.
+
           New on this site: [Plugins](../plugins/), with a live demo of all
-          three official plugins, and
-          [Writing a plugin](../plugins/authoring/), a hands-on tutorial —
-          this page too.
+          three official plugins,
+          [Writing a plugin](../plugins/authoring/), a hands-on tutorial,
+          this page, and a real `og:image` — set once, sitewide, via the
+          `kirigami:` block's `image` key rather than a per-page afterthought
+          (a page still overrides it with its own `@meta_image`).
 
           ## September 10, 2026
 

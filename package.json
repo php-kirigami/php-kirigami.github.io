@@ -15,10 +15,10 @@
     "export": "kiri export"
   },
   "devDependencies": {
-    "@kirigami/kirigami": "^1.5.6",
-    "@kirigami/canva": "^2.5.2",
-    "@kirigami/plugin-embed": "^0.1.4",
+    "@kirigami/kirigami": "^1.5.7",
+    "@kirigami/canva": "^2.6.0",
+    "@kirigami/plugin-embed": "^0.1.5",
     "@kirigami/plugin-extlink": "^0.1.3",
-    "@kirigami/plugin-highlight": "^0.1.6"
+    "@kirigami/plugin-highlight": "^0.1.7"
   }
 }

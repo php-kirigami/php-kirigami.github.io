@@ -18,7 +18,8 @@
             <h3>Add the workflow</h3>
             <div class="prose">
                 <markdown>
-                `.github/workflows/page.yml`:
+                `.github/workflows/page.yml` — this is the exact file both
+                official templates ship, and what this site itself runs on:
 
                 ```yaml
                 name: Build & Deploy
@@ -28,30 +29,67 @@
                     branches: ["main"]
 
                 permissions:
-                  contents: write
+                  contents: write      # commit files the build regenerated
                   pages: write
                   id-token: write
 
                 jobs:
                   build-and-deploy:
                     runs-on: ubuntu-latest
+                    environment:
+                      name: github-pages
+                      url: ${{ steps.deployment.outputs.page_url }}
                     steps:
-                      - uses: actions/checkout@v7
-                      - uses: php-kirigami/kiribuild@v2
+                      - name: Checkout
+                        uses: actions/checkout@v7
+
+                      - name: KiriBuild
+                        uses: php-kirigami/kiribuild@v2
                         with: { node-version: '24' }
-                      - uses: actions/upload-pages-artifact@v5
+
+                      - name: Commit regenerated files
+                        shell: bash
+                        run: |
+                          if [ -n "$(git status --porcelain)" ]; then
+                            git config user.name  "kirigami[bot]"
+                            git config user.email "kirigami-bot@users.noreply.github.com"
+                            git add -A
+                            git commit -m "chore: update generated files [skip ci]"
+                            git push
+                          else
+                            echo "Nothing to commit."
+                          fi
+
+                      - name: Upload artifact
+                        uses: actions/upload-pages-artifact@v5
                         with: { path: dist }
-                      - uses: actions/deploy-pages@v5
+
+                      - name: Deploy to GitHub Pages
+                        id: deployment
+                        uses: actions/deploy-pages@v5
                 ```
 
                 `kiribuild@v2` does exactly three things: install Node 24,
-                install the `kiri` CLI, run `kiri export`. Checkout, uploading
-                the artifact, and the Pages deploy step are yours to wire —
-                that's deliberate, so the action stays small and the workflow
-                stays readable. It's a real published action — listed on the
+                install the `kiri` CLI, run `kiri export`. Checkout, the
+                commit-back, uploading the artifact, and the Pages deploy
+                step are yours to wire — that's deliberate, so the action
+                stays small and the workflow stays readable. It's a real
+                published action — listed on the
                 [GitHub Marketplace](https://github.com/marketplace/actions/kiribuild),
                 findable straight from a workflow file's Actions sidebar,
                 not just a repo you happen to reference.
+
+                The **commit-back step matters** the moment a project uses
+                the [image pipeline](../5-images/): `kiri export` can write
+                new resized derivatives into `src/images/` as a side effect,
+                and those are meant to be committed — otherwise every future
+                CI run regenerates them from scratch instead of finding them
+                already there. `[skip ci]` in the commit message stops that
+                commit from triggering an infinite rebuild loop. A project
+                with no `image:` block has nothing to regenerate, so the step
+                just logs "Nothing to commit." and moves on — harmless either
+                way, so it's simpler to always include it than to decide
+                per-project whether it's needed.
                 </markdown>
             </div>
         </li>

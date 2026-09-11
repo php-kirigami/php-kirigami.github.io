@@ -17,6 +17,7 @@ kirigami:
     running in WebAssembly, right inside Node.
   keywords:    [static site generator, php, webassembly, kirigami, zero dependency, github pages]
   tagline:     Fold PHP into flat HTML.
+  image:       images/meta/ogimage-1200x630-cover.webp   # sitewide og:image / twitter:image default (generated, see _layouts/header.php); a page overrides via @meta_image
 
 
 # SEO / social metadata. This block opts @kirigami/php-prepros' META class in;
@@ -24,7 +25,11 @@ kirigami:
 # Card, canonical, favicon and apple-touch-icon are derived from the `kirigami:`
 # keys above and each page's PHPDOC (@title, @description, @image, @robots, …).
 # Any tag _layouts/header.php already writes by hand is detected and skipped.
-meta: {}
+# favicon / appleTouchIcon point at the generated PNGs (see _layouts/header.php,
+# where the two IMG::asset() calls that produce them live).
+meta:
+  favicon:        images/meta/favicon-48x48.png
+  appleTouchIcon: images/meta/favicon-180x180.png
 
 
 # schema.org JSON-LD. Opt-in the same way — reads the `kirigami:` keys too.

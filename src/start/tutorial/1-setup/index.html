@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../../../styles/kirigami.core.min.css?###TIMESTAMP###">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tutorial · Setup — Kirigami</title>
-        <meta name="description" content="Scaffold the project and get kiri watching it.">
+        <meta name="description" content="Scaffold the project and get kiri serving it.">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
@@ -16,16 +16,18 @@
         <meta name="author" content="Maxime Larrivée-Roy">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Tutorial · Setup — Kirigami">
-        <meta name="twitter:description" content="Scaffold the project and get kiri watching it.">
+        <meta name="twitter:description" content="Scaffold the project and get kiri serving it.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Tutorial · Setup — Kirigami">
-        <meta property="og:description" content="Scaffold the project and get kiri watching it.">
+        <meta property="og:description" content="Scaffold the project and get kiri serving it.">
         <meta property="og:url" content="https://php-kirigami.github.io/start/tutorial/1-setup/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/start/tutorial/1-setup/">
-        <link rel="icon" type="image/x-icon" href="../../../favicon.ico">
-        <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="../../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../../images/meta/favicon-180x180.png">
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
@@ -117,13 +119,9 @@
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
-                <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                        <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
-                        <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
-                        </g>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
                     </svg>
                 </button>
                 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
@@ -133,7 +131,7 @@
             <section class="section wrap doc-head">
                 <span class="eyebrow">Tutorial · Part 1 of 7</span>
                 <h1>Setup</h1>
-                <p class="lead">Scaffold the project and get kiri watching it.</p>
+                <p class="lead">Scaffold the project and get kiri serving it.</p>
             </section>
             <section class="section wrap">
                 <ol class="steps">
@@ -165,12 +163,12 @@
                         </div>
                     </li>
                     <li>
-                        <h3>Start watching</h3>
+                        <h3>Start the dev server</h3>
                         <div class="prose">
                             <pre><code class="hljs language-bash">
-                                npx kiri watch
+                                npx kiri serve
                             </code></pre>
-                            <p>Leave this running. It rebuilds pages, styles and scripts on every save — no server, no browser refresh. Open <code>src/index.html</code> in a browser tab and reload it by hand, or point an editor live-preview extension at <code>src/</code>.</p>
+                            <p>Leave this running. It rebuilds pages, styles and scripts on every save, serves <code>src/</code> at <code>http://127.0.0.1:4321</code>, and reloads the open tab once a rebuild finishes — a <code>sass</code>-only change even hot-swaps the stylesheet without a full reload. Open that URL and leave it be for the rest of this tutorial.</p>
                         </div>
                     </li>
                 </ol>
@@ -180,7 +178,7 @@
                 <div class="prose">
                     <div class="markdown-alert markdown-alert-note">
                         <p class="markdown-alert-title">NOTE</p>
-                        <p>Nothing was compiled by a server and nothing needs to run again to serve the site — <code>kiri watch</code> only regenerates files on disk. The next part turns the single starter page into the three real pages Studio Plié needs.</p>
+                        <p><code>kiri serve</code>&apos;s reload is Server-Sent Events, not a live-reload framework or a WebSocket library — <code>node:http</code> and <code>node:fs</code> are the whole dependency list. The next part turns the single starter page into the three real pages Studio Plié needs.</p>
                     </div>
                 </div>
             </section>

@@ -80,7 +80,7 @@ function kirigami_breadcrumb_nav(string $currentTitle, string $relroot): string
 function kirigami_packages(): array
 {
     return [
-        ['npm_pkg' => 'kirigami',         'role' => 'The kiri CLI — build / export / watch / run / create / phpinfo.',              'license' => 'MIT'],
+        ['npm_pkg' => 'kirigami',         'role' => 'The kiri CLI — build / export / watch / serve / run / create / install / cache / phpinfo.', 'license' => 'MIT'],
         ['npm_pkg' => 'php-prepros',      'role' => 'The PHP → HTML compiler and PHP class library.',                                'license' => 'MIT'],
         ['npm_pkg' => 'php-wasm',         'role' => 'PHP 8.5 compiled to WebAssembly for Node (JSPI, no browser support).',          'license' => 'GPL-2.0-or-later'],
         ['npm_pkg' => 'struct-walker',    'role' => 'Recursive YAML/JSON walker — file refs, data URIs.',                            'license' => 'MIT'],

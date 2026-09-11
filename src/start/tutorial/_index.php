@@ -6,7 +6,7 @@
  */
 
 $parts = [
-    ['1-setup',          'Setup',              'kiri create, the folder layout, kiri watch.'],
+    ['1-setup',          'Setup',              'kiri create, the folder layout, kiri serve.'],
     ['2-pages-layout',   'Pages & layout',     'Three pages, a shared header/footer, PHPDOC.'],
     ['3-content',        'Content',            'Markdown, a YAML data file, @content.'],
     ['4-styles-scripts', 'Styles & scripts',   'Retheming with canva, dark mode, the managed <head>.'],

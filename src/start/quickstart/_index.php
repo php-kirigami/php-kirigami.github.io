@@ -64,16 +64,18 @@
             </div>
         </li>
         <li>
-            <h3>Watch it</h3>
+            <h3>Serve it</h3>
             <div class="prose">
                 <markdown>
                 ```bash
-                npx kiri watch
+                npx kiri serve
                 ```
 
-                Rebuilds `src/index.html` every time you save. There's no
-                server and no browser reload — open `src/index.html` directly,
-                or point an editor preview extension at `src/`.
+                Rebuilds `src/index.html` every time you save, serves `src/`
+                at `http://127.0.0.1:4321`, and reloads the open tab once the
+                rebuild finishes — nothing to open by hand. (`kiri watch`
+                does the same rebuild with no server, if that's all you
+                need.)
                 </markdown>
             </div>
         </li>

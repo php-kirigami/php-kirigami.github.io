@@ -17,15 +17,17 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Showcase — Kirigami">
         <meta name="twitter:description" content="Sites actually running on Kirigami — starting with this one.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Showcase — Kirigami">
         <meta property="og:description" content="Sites actually running on Kirigami — starting with this one.">
         <meta property="og:url" content="https://php-kirigami.github.io/showcase/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/showcase/">
-        <link rel="icon" type="image/x-icon" href="../favicon.ico">
-        <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../images/meta/favicon-180x180.png">
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
@@ -105,13 +107,9 @@
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
-                <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                        <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
-                        <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
-                        </g>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
                     </svg>
                 </button>
                 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
@@ -126,26 +124,30 @@
             <section class="section wrap">
                 <div class="grid" data-reveal="">
                     <article class="card">
+                        <img class="card__thumb" alt="Kirigami&apos;s own documentation site, homepage" src="../images/showcase/kirigami-640x360-cover.webp">
                         <h3>Kirigami</h3>
-                        <p>This site. Built in the open, phase by phase, with the <code>@kirigami/canva</code> design system and <code>@kirigami/plugin-highlight</code> — the same packages anyone installs from npm.</p>
-                        <p style="margin-top:.8rem"><a href="https://github.com/php-kirigami/php-kirigami.github.io">Source</a></p>
+                        <p>This site. Every page you&apos;re reading is a PHP template compiled by <code>kiri export</code> — the docs, the CLI reference, this showcase — built in the open, phase by phase, on the <code>@kirigami/canva</code> design system and <code>@kirigami/plugin-highlight</code> for its code blocks: the same packages anyone installs from npm, not a private fork.</p>
+                        <p class="card__links"><a href="https://github.com/php-kirigami/php-kirigami.github.io">Source</a></p>
                     </article>
                     <article class="card">
+                        <img class="card__thumb" alt="The Kirigami Demo template, homepage" src="../images/showcase/template-demo-640x360-cover.webp">
                         <h3>Kirigami Demo</h3>
-                        <p>The <code>demo</code> template, deployed: a guided tour of Markdown, images, syntax highlighting, data files, and the tag/hook extension points — each feature as a real page.</p>
-                        <p style="margin-top:.8rem"><a href="https://php-kirigami.github.io/template-demo/">Live</a> · <a href="https://github.com/php-kirigami/template-demo">Source</a></p>
+                        <p>The <code>demo</code> template, deployed as-is: a guided tour of Markdown, images, syntax highlighting, data files, and the tag/hook extension points — each one demoed as a real page rather than described in prose. It&apos;s also where <code>&lt;extlink&gt;</code> and <code>&lt;youtube&gt;</code> / <code>&lt;vimeo&gt;</code> — two of the official plugins — get their first real usage outside their own repos.</p>
+                        <p class="card__links"><a href="https://php-kirigami.github.io/template-demo/">Live</a> · <a href="https://github.com/php-kirigami/template-demo">Source</a></p>
                     </article>
                     <article class="card">
+                        <img class="card__thumb" alt="The Kirigami Site starter template, homepage" src="../images/showcase/template-default-640x360-cover.webp">
                         <h3>Kirigami Site (starter)</h3>
-                        <p>The <code>default</code> template, deployed as-is: what <code>npx kiri create default</code> gives you before you&apos;ve changed a single line.</p>
-                        <p style="margin-top:.8rem"><a href="https://php-kirigami.github.io/template-default/">Live</a> · <a href="https://github.com/php-kirigami/template-default">Source</a></p>
+                        <p>The <code>default</code> template, deployed without a single line changed — exactly what <code>npx kiri create default</code> gives you. Its own homepage doubles as a map of the project (<em>&quot;Where things live&quot;</em>): where pages, layouts, tags, and styles/scripts each go, so the very first thing a new project shows is how it&apos;s organized.</p>
+                        <p class="card__links"><a href="https://php-kirigami.github.io/template-default/">Live</a> · <a href="https://github.com/php-kirigami/template-default">Source</a></p>
                     </article>
                 </div>
             </section>
             <hr class="fold">
             <section class="section wrap">
                 <div class="prose">
-                    <p>Built something with Kirigami you&apos;d like listed here? Open an issue on <a href="https://github.com/php-kirigami/kirigami/issues">the main repo</a> with a link — this list is meant to grow.</p>
+                    <p>All three deploy the same way: push to <code>main</code>, and <a href="https://github.com/php-kirigami/kiribuild" target="_blank" rel="noopener noreferrer"><code>kiribuild</code></a> (the reusable GitHub Action) runs <code>kiri export</code> and publishes <code>dist/</code> to GitHub Pages — no separate hosting, no build server to maintain. See <a href="../start/tutorial/7-deploy/">Tutorial → Deploy</a> for the exact workflow file each of them ships.</p>
+                    <p>Built something with Kirigami you&apos;d like listed here? Open an issue on <a href="https://github.com/php-kirigami/kirigami/issues" target="_blank" rel="noopener noreferrer">the main repo</a> with a link — this list is meant to grow.</p>
                 </div>
             </section>
         </main>

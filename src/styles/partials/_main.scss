@@ -1,8 +1,9 @@
 // This site's styles, on top of the tokens + reset from `conf`.
 
 @use "@kirigami/canva/utils" as *;
-@use "@kirigami/canva/prose";   // → `.prose { … }` for Markdown output
-@use "@kirigami/canva/main";    // → `.breadcrumb` / `.docs-toc` / `.table` / `.badge` / `.palette`
+@use "@kirigami/canva/prose";       // → `.prose { … }` for Markdown output
+@use "@kirigami/canva/main";        // → `.breadcrumb` / `.docs-toc` / `.table` / `.badge` / `.palette`
+@use "@kirigami/canva/lightswitch"; // → `.lightswitch` animated theme toggle
 
 :root {
     // Not a canva token (conf only knows $font-body / $font-heading) — this
@@ -156,29 +157,15 @@ code {
     &[aria-current="page"] { color: var(--accent); }
 }
 
-.theme-toggle {
-    display: grid;
-    place-items: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: var(--surface-2);
-    color: var(--ink);
-    cursor: pointer;
-
-    .theme-toggle__sun { display: none; }
-}
-
-:root:not([data-theme="light"]) .theme-toggle {
-    @media (prefers-color-scheme: dark) {
-        .theme-toggle__moon { display: none; }
-        .theme-toggle__sun  { display: block; }
-    }
-}
-:root[data-theme="dark"] .theme-toggle {
-    .theme-toggle__moon { display: none; }
-    .theme-toggle__sun  { display: block; }
+// `.lightswitch` itself comes from @kirigami/canva/lightswitch — just a
+// header-appropriate size here (default is 1.75rem, meant for a larger target).
+// The nudge corrects an optical mismatch: the nav text's visual centre sits
+// above the geometric middle of its line box (line-height leading), so a
+// box centred via `.site-header__inner`'s `align-items: center` looks a
+// touch low next to it.
+.theme-toggle.lightswitch {
+    --lightswitch-size: 1.15rem;
+    margin-top: -0.1rem;
 }
 
 .nav-toggle { display: none; }
@@ -202,19 +189,25 @@ code {
     }
 }
 
+// ── Eyebrow label ────────────────────────────────────────────────────
+// A small-caps mono label used above a heading anywhere on the site — the
+// hero, doc-head, and any standalone card that needs one (e.g. /design/'s
+// type samples). One base rule; only the bottom margin varies by context.
+.eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .7rem;
+}
+
 // ── Home / hero ──────────────────────────────────────────────────────
 .hero {
     padding-block: clamp(3rem, 9vw, 6rem);
 
-    .eyebrow {
-        font-family: var(--font-mono);
-        font-size: .78rem;
-        letter-spacing: .1em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: .9rem;
-    }
-
+    .eyebrow { margin-bottom: .9rem; }
     .lead { margin-block: 1rem 1.6rem; }
     .btn + .btn { margin-left: 0.6rem; }
 }
@@ -223,6 +216,12 @@ code {
     font-size: 1.2rem;
     color: var(--ink-muted);
     max-width: 46ch;
+
+    // A closing call-to-action line — same role, quieter size.
+    &--sm { font-size: 1rem; }
+
+    // A longer, more technical paragraph that needs the extra width.
+    &--wide { max-width: 60ch; }
 }
 
 .grid {
@@ -245,9 +244,24 @@ code {
     h3 { margin-bottom: 0.4rem; font-family: var(--font-heading); }
     p { color: var(--ink-muted); margin: 0; }
     code { font-size: 0.82em; }
+
+    // A purely informational card — not a link, no hover affordance.
+    &--static { cursor: default; }
 }
 
 a.card:hover { border-color: var(--accent); }
+
+.card__thumb {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: .9rem;
+    border: 1px solid var(--border);
+}
+
+.card__links { margin-top: .8rem; }
 
 // ── "You write / it compiles to" comparison (home) ──────────────────
 .compare {
@@ -316,16 +330,6 @@ a.card:hover { border-color: var(--accent); }
 // The shared shape every /docs/, /start/ and /plugins/ page will reuse:
 // an eyebrow label, an h1, an abstract, then .prose content.
 .doc-head {
-    .eyebrow {
-        font-family: var(--font-mono);
-        font-size: .78rem;
-        letter-spacing: .1em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: .7rem;
-        display: block;
-    }
-
     .lead { margin-top: .6rem; }
 }
 
@@ -530,6 +534,46 @@ a.card:hover { border-color: var(--accent); }
 
 @media (max-width: 40rem) {
     .site-footer__grid { grid-template-columns: 1fr 1fr; }
+}
+
+// ── /design/ page ────────────────────────────────────────────────────
+// A `.card` with a flush colour swatch on top instead of the usual padded
+// content throughout — one static class per token instead of an inline
+// `style="background: var(--x)"`, since the token list is fixed and small.
+.token-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.token-card__swatch {
+    height: 4.5rem;
+    border-bottom: 1px solid var(--border);
+
+    @each $token in bg, surface, surface-2, border, ink, ink-muted, accent, accent-soft {
+        &--#{$token} { background: var(--#{$token}); }
+    }
+}
+
+.token-card__body { padding: 1rem; }
+
+.token-card__label {
+    margin-top: .4rem;
+    color: var(--ink-muted);
+    font-size: .88rem;
+}
+
+// A larger heading inside a `.card--static`, for the type-sample cards.
+.type-sample__heading { font-size: 1.8rem; }
+
+// Spacing between successive "one component, demoed" blocks — the doc-head
+// + live markup pairs under /design/'s "Shared components" section.
+.component-demo {
+    margin-block: 2rem;
+
+    &__note {
+        color: var(--ink-muted);
+        margin-bottom: .75rem;
+    }
 }
 
 // ── Reveal-on-scroll ───────────────────────────────────────────────

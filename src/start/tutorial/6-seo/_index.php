@@ -77,7 +77,12 @@
         > [!NOTE]
         > This whole site runs on exactly this pair of blocks — every page
         > you've read in this tutorial got its title, description and social
-        > card the same way, straight from its own PHPDOC.
+        > card the same way, straight from its own PHPDOC. It goes one step
+        > further for its favicon and `og:image`: since it already has the
+        > [image pipeline](../5-images/) wired up, `meta.favicon` /
+        > `meta.appleTouchIcon` / the `kirigami:` block's `image` key point
+        > at generated files instead of ones dropped in by hand — see
+        > [Docs → Config → meta](../../../docs/config/#meta) for that option.
         </markdown>
     </div>
 </section>

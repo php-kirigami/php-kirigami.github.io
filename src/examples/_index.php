@@ -225,6 +225,40 @@
 
 <hr class="fold">
 
+<section class="section wrap" id="img-asset-shortcode">
+    <div class="doc-head">
+        <span class="eyebrow">Live — the default Markdown plugin</span>
+        <h2>The same thing, one line, inside Markdown</h2>
+    </div>
+
+    <div class="prose">
+        <markdown>
+          For a single image dropped straight into prose — no PHPDOC
+          annotation, no loop — `{% img-asset %}` is the same `IMG::asset()`
+          call as a Markdown shortcode, shipped by default (no plugin to
+          install):
+
+          ```
+          {% img-asset male-african-bush-elephant.jpg 320 180 cover %}
+          ```
+        </markdown>
+
+        <div class="demo">
+            <markdown>
+              {% img-asset male-african-bush-elephant.jpg 320 180 cover %}
+            </markdown>
+        </div>
+
+        <markdown>
+          Positional args: `path [width [height [cover]]]` — a missing or
+          unresolvable path degrades to an HTML comment instead of failing
+          the build. Full mechanics: [Writing pages → MD plugins](../docs/authoring/#md-plugins).
+        </markdown>
+    </div>
+</section>
+
+<hr class="fold">
+
 <section class="section wrap" id="rich-cards">
     <div class="doc-head">
         <span class="eyebrow">Two official plugins</span>

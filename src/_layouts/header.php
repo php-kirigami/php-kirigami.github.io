@@ -14,6 +14,21 @@
 
 $section = $section ?? '';
 
+// Registers the sitewide og:image / favicon / apple-touch-icon derivatives —
+// the deterministic output paths kirigami.yaml's `image` / `meta.favicon` /
+// `meta.appleTouchIcon` keys point at. Needs to run once per build regardless
+// of which page is first, so it lives here rather than on a specific page.
+IMG::asset('meta/ogimage.png', 1200, 630, true);
+
+// favicon.ico / apple-touch-icon.png live outside this site's webp default —
+// browsers (and iOS specifically, for the touch icon) expect a real PNG for
+// both, so the project format is swapped for these two calls only.
+$__format = PREPROS::$config->image->format;
+PREPROS::$config->image->format = 'png';
+IMG::asset('meta/favicon.png', 48, 48);
+IMG::asset('meta/favicon.png', 180, 180);
+PREPROS::$config->image->format = $__format;
+
 // path (relative to the site root) => [label, section key]. Only list pages
 // that actually exist — grow this as each phase of the site lands.
 $nav = [
@@ -54,13 +69,9 @@ $nav = [
                 </ul>
             </nav>
 
-            <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle dark mode">
-                <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                    <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"/>
-                    <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                        <circle cx="12" cy="12" r="4"/>
-                        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
-                    </g>
+            <button class="theme-toggle lightswitch" type="button" data-theme-toggle aria-label="Toggle dark mode">
+                <svg viewBox="0 0 55 55" aria-hidden="true">
+                    <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"/>
                 </svg>
             </button>
 

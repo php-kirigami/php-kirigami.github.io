@@ -17,15 +17,17 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Roadmap — Kirigami">
         <meta name="twitter:description" content="What&apos;s actually being considered next — not a promise, not a release schedule.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Roadmap — Kirigami">
         <meta property="og:description" content="What&apos;s actually being considered next — not a promise, not a release schedule.">
         <meta property="og:url" content="https://php-kirigami.github.io/roadmap/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/roadmap/">
-        <link rel="icon" type="image/x-icon" href="../favicon.ico">
-        <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../images/meta/favicon-180x180.png">
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
@@ -105,13 +107,9 @@
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
-                <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                        <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
-                        <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
-                        </g>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
                     </svg>
                 </button>
                 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
@@ -125,27 +123,34 @@
             </section>
             <section class="section wrap">
                 <div class="prose">
-                    <p>Kirigami has one maintainer and no release schedule. This page is the honest version of that: the open backlog, grouped by theme, in roughly the order it&apos;s likely to get picked up — not a commitment, and the order shifts whenever something more useful shows up first. See the <a href="../changelog/">Changelog</a> for what&apos;s already shipped.</p>
-                    <h2 id="on-this-site">On this site</h2>
-                    <ul>
-                        <li><strong><code>/examples</code></strong> — a gallery of small, focused code snippets (one PHPDOC trick, one Sass function, one plugin hook) — shorter and more scannable than the tutorial or the reference.</li>
-                        <li><strong><code>/design</code></strong> — the design language this site itself uses (palette, type, the handful of shared components in <code>@kirigami/canva</code>&apos;s <code>styles/main</code>), as a reference rather than something you have to reverse-engineer from the CSS.</li>
-                    </ul>
+                    <p>Kirigami has one maintainer and no release schedule. This page is the honest version of that: the open backlog, grouped by theme, in roughly the order it&apos;s likely to get picked up — not a commitment, and the order shifts whenever something more useful shows up first. See the <a href="../changelog/">Changelog</a> for what&apos;s already shipped — recently, exactly two items that used to live on this page: <code>/examples</code> and <code>/design</code>.</p>
                     <h2 id="plugins">Plugins</h2>
                     <ul>
                         <li><strong>Plugin-declared tasks and commands.</strong> <code>kirigami.type: &quot;plugin&quot;</code> exists; a plugin contributing its own <strong>task type</strong> (beyond <code>esbuild</code>/<code>sass</code>/<code>prepros</code>/<code>dist</code>) or its own <code>kiri</code> subcommand doesn&apos;t yet. Related: right now a plugin that needs to bundle its own client-side script (<code>plugin-highlight</code>&apos;s copy button, <code>plugin-embed</code>&apos;s observer script) just requires the <em>project</em> to already have an <code>esbuild</code> task — it&apos;d be nicer if a plugin could supply that bundling itself when the project has none.</li>
-                        <li><strong>A hard failure for a genuinely unknown option</strong>, not just a silent warning — <code>plugin-highlight</code>&apos;s <code>languages:</code> list is the concrete case: a typo&apos;d language name can&apos;t be caught by JSON Schema (the valid values are highlight.js&apos;s own internal names, an open set), so it currently just warns and skips it.</li>
+                        <li><strong>Line numbers for <code>plugin-highlight</code>.</strong> No option today to show a <code>#</code> gutter next to a highlighted block.</li>
+                        <li><strong>A <code>class=&quot;&quot;</code> attribute on <code>&lt;extlink&gt;</code></strong>, so the generated preview card can be styled per-instance without a global override.</li>
                     </ul>
                     <h2 id="build-amp-authoring">Build &amp; authoring</h2>
                     <ul>
-                        <li><strong>A real end-to-end test of the <code>kiribuild</code> GitHub Action</strong> — not just a smoke test, but confirming a real site actually deploys correctly through it, <code>kiribuild@v2</code> → commit-back → Pages, with real content.</li>
+                        <li><strong><code>kiri deploy</code>, with a plugin system for the deploy mechanism</strong> (FTP, a push to a Git branch, …) — takes the exported <code>dist/</code> and ships it, for hosting outside GitHub Pages. Complements <code>kiribuild</code> (already GitHub Pages via Actions) rather than replacing it.</li>
+                        <li><strong>A local, gitignored env file that mirrors GitHub Actions&apos;</strong>, so a build can be tested locally under close-to-CI conditions (the same env var names) without needing a real GitHub run.</li>
+                        <li><strong>A <code>humans.txt</code> generator</strong> from <code>kirigami.yaml</code>&apos;s dev info (<code>author</code> / <code>email</code>), generated alongside <code>sitemap.xml</code> / <code>robots.txt</code> — the same spirit as <code>fillBanner()</code> already filling <code>###AUTHOR###</code> / <code>###EMAIL###</code> from that block.</li>
                         <li><strong>A <code>favicon.ico</code> / <code>apple-touch-icon.png</code> generator</strong> from one source image, alongside the existing image autogenerator (<code>image.source</code> / <code>image.dest</code>) — multi-resolution <code>.ico</code> needs Imagick, not just GD.</li>
+                        <li><strong>Submitting <code>kirigami.schema.json</code> to <a href="https://www.schemastore.org/" target="_blank" rel="noopener noreferrer">SchemaStore</a></strong> so editor autocompletion works without a <code># yaml-language-server: $schema=...</code> comment in every project&apos;s <code>kirigami.yaml</code>.</li>
                         <li><strong>A build-free theme toggle.</strong> The managed <code>&lt;head&gt;</code> already injects a small FOUC guard; extending it to also drop in the full toggle runtime when a page has <code>data-theme-toggle</code> would mean zero JS/import/task needed for a working light/dark switch — <code>@kirigami/canva/theme</code> stays the option for anyone who wants the JS API (<code>setTheme()</code>, events) instead.</li>
                         <li><strong>A <code>prepros:before-render</code> hook</strong> — <code>prepros:html</code> (after render) already exists; a symmetric before-render one is being weighed.</li>
-                        <li>Smaller ones: a clearer error than a raw <code>EADDRINUSE</code> when <code>kiri serve</code>&apos;s port is already taken; the <code>sass</code> task&apos;s package importer (Node-style resolution, <code>npm link</code>/pnpm/workspaces included) doing the same for <code>esbuild</code>&apos;s imports, if a real case for it ever shows up.</li>
+                        <li>Smaller: the <code>sass</code> task&apos;s package importer (Node-style resolution, <code>npm link</code>/pnpm/workspaces included) doing the same for <code>esbuild</code>&apos;s imports, if a real case for it ever shows up.</li>
+                    </ul>
+                    <h2 id="data-integrations">Data integrations</h2>
+                    <p>Further out, and less scoped than the rest of this page — the common thread is feeding a page or a <code>_data/</code> file from something other than a hand-written YAML/Markdown file:</p>
+                    <ul>
+                        <li>A <strong><code>kiri run</code>-friendly class for querying a database over an HTTP tunnel</strong>, in the spirit of Navicat&apos;s HTTP-tunnel mechanism (the concept, not borrowed code) — live data instead of a static export.</li>
+                        <li>A <strong>PHP class for WordPress&apos; REST API</strong> (<code>/wp-json/wp/v2/posts</code>, …), the same spirit as <code>SCRAPER</code>, for pulling real WordPress content into a page or <code>_data/</code>.</li>
+                        <li>Official <strong>Google Docs → Markdown</strong> and <strong>Excel → JSON</strong> conversion scripts/actions, for feeding a <code>_data/</code> file from a source non-developers can actually edit.</li>
                     </ul>
                     <h2 id="bigger-picture">Bigger picture</h2>
                     <ul>
+                        <li><strong><code>template-react</code></strong> — a new official template with a real JSX/TSX pipeline (esbuild already supports it natively). Not scoped yet: build-time-only static rendering vs. client hydration, and how it sits alongside the existing PHP pages, both need deciding first.</li>
                         <li><strong>A Kirigami-maintained fork of the PHP→WebAssembly build</strong>, instead of tracking the upstream WordPress Playground fork as-is — for more control over which PHP version and extensions ship. Not scoped yet: this is a real undertaking (reproducing the build pipeline, deciding what to keep), and it&apos;ll get its own planning pass before any code moves.</li>
                     </ul>
                 </div>

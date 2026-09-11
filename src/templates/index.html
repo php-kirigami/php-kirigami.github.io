@@ -17,15 +17,17 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Templates — Kirigami">
         <meta name="twitter:description" content="Official starting points for `kiri create` — clone one instead of starting from a blank folder.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Templates — Kirigami">
         <meta property="og:description" content="Official starting points for `kiri create` — clone one instead of starting from a blank folder.">
         <meta property="og:url" content="https://php-kirigami.github.io/templates/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/templates/">
-        <link rel="icon" type="image/x-icon" href="../favicon.ico">
-        <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../images/meta/favicon-180x180.png">
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
@@ -105,13 +107,9 @@
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
-                <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                        <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
-                        <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
-                        </g>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
                     </svg>
                 </button>
                 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
@@ -134,21 +132,24 @@
                 </div>
                 <div class="grid" data-reveal="">
                     <article class="card">
+                        <img class="card__thumb" alt="The default template&apos;s homepage" src="../images/showcase/template-default-640x360-cover.webp">
                         <h3>default</h3>
-                        <p>The minimal starter: a layout, two pages, a themeable light/dark stylesheet, and a few lines of progressive- enhancement JavaScript. Start here for a real site.</p>
-                        <p style="margin-top:.8rem"><a href="https://php-kirigami.github.io/template-default/">Live demo</a> · <a href="https://github.com/php-kirigami/template-default">Source</a></p>
+                        <p>The minimal starter: a layout, two pages, a themeable light/dark stylesheet, and a few lines of progressive- enhancement JavaScript. Start here for a real site — there&apos;s nothing to strip out first.</p>
+                        <p class="card__links"><a href="https://php-kirigami.github.io/template-default/">Live demo</a> · <a href="https://github.com/php-kirigami/template-default">Source</a></p>
                     </article>
                     <article class="card">
+                        <img class="card__thumb" alt="The demo template&apos;s homepage" src="../images/showcase/template-demo-640x360-cover.webp">
                         <h3>demo</h3>
-                        <p>A guided tour of every feature — Markdown, images, code highlighting, data files, tags &amp; hooks — each as a real page with its source alongside. Start here to see what Kirigami can do before committing to a shape for your own site.</p>
-                        <p style="margin-top:.8rem"><a href="https://php-kirigami.github.io/template-demo/">Live demo</a> · <a href="https://github.com/php-kirigami/template-demo">Source</a></p>
+                        <p>A guided tour of every feature — Markdown, images, code highlighting, data files, tags &amp; hooks, three official plugins — each as a real page with its source alongside. Start here to see what Kirigami can do before committing to a shape for your own site.</p>
+                        <p class="card__links"><a href="https://php-kirigami.github.io/template-demo/">Live demo</a> · <a href="https://github.com/php-kirigami/template-demo">Source</a></p>
                     </article>
                 </div>
             </section>
             <hr class="fold">
             <section class="section wrap">
                 <div class="prose">
-                    <p>Both templates ship a <code>.github/workflows/page.yml</code> wired to <a href="https://github.com/marketplace/actions/kiribuild">kiribuild</a>, our GitHub Action published on the Marketplace — push to <code>main</code> and it deploys to GitHub Pages, no further setup. See <a href="../docs/">the docs</a> for how that workflow is put together.</p>
+                    <p>Both templates ship a <code>.github/workflows/page.yml</code> wired to <a href="https://github.com/marketplace/actions/kiribuild" target="_blank" rel="noopener noreferrer">kiribuild</a>, our GitHub Action published on the Marketplace — push to <code>main</code> and it deploys to GitHub Pages, no further setup. See <a href="../start/tutorial/7-deploy/">Tutorial → Deploy</a> for how that workflow is put together, or <a href="../showcase/">Showcase</a> to see both templates live, deployed exactly as cloned.</p>
+                    <p>Each also ships its own <code>CLAUDE.md</code> — a project-specific brief for <a href="https://claude.com/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a> covering where things live and how this exact template is put together, so an AI-assisted session starts oriented instead of guessing from the file tree.</p>
                 </div>
             </section>
         </main>

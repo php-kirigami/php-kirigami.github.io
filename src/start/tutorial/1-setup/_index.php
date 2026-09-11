@@ -2,7 +2,7 @@
 /**
  * @title    Tutorial · Setup
  * @section  start
- * @abstract Scaffold the project and get kiri watching it.
+ * @abstract Scaffold the project and get kiri serving it.
  */
 ?>
 
@@ -54,17 +54,18 @@
             </div>
         </li>
         <li>
-            <h3>Start watching</h3>
+            <h3>Start the dev server</h3>
             <div class="prose">
                 <markdown>
                 ```bash
-                npx kiri watch
+                npx kiri serve
                 ```
 
                 Leave this running. It rebuilds pages, styles and scripts on
-                every save — no server, no browser refresh. Open
-                `src/index.html` in a browser tab and reload it by hand, or
-                point an editor live-preview extension at `src/`.
+                every save, serves `src/` at `http://127.0.0.1:4321`, and
+                reloads the open tab once a rebuild finishes — a `sass`-only
+                change even hot-swaps the stylesheet without a full reload.
+                Open that URL and leave it be for the rest of this tutorial.
                 </markdown>
             </div>
         </li>
@@ -77,10 +78,10 @@
     <div class="prose">
         <markdown>
         > [!NOTE]
-        > Nothing was compiled by a server and nothing needs to run again to
-        > serve the site — `kiri watch` only regenerates files on disk. The
-        > next part turns the single starter page into the three real pages
-        > Studio Plié needs.
+        > `kiri serve`'s reload is Server-Sent Events, not a live-reload
+        > framework or a WebSocket library — `node:http` and `node:fs` are
+        > the whole dependency list. The next part turns the single starter
+        > page into the three real pages Studio Plié needs.
         </markdown>
     </div>
 </section>

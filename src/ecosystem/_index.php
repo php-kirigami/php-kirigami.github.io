@@ -68,16 +68,26 @@ $packages = kirigami_packages();
 <section class="section wrap">
     <h2>Release order</h2>
     <div class="prose">
-        <p>
-            Every internal <code>@kirigami/*</code> dependency is pinned to an
-            <strong>exact</strong> version, so a release walks the dependency
-            graph in this order — each package skipped if that exact version
-            is already on npm:
-        </p>
         <markdown>
-        ```
-        sdk → canva → struct-walker → php-prepros → kirigami → plugin-highlight
-        ```
+          Every internal `@kirigami/*` dependency is pinned to an **exact**
+          version — bumping `canva`, say, means also bumping the dep range
+          of every package that depends on it (`kirigami`, `plugin-highlight`,
+          `plugin-embed`, …), even if nothing else about them changed. The
+          release script topologically sorts the graph and walks it in that
+          order, skipping a package outright if that exact version is
+          already published:
+
+          ```
+          sdk → canva → struct-walker → php-prepros → kirigami
+              → plugin-highlight → plugin-extlink → plugin-embed
+          ```
+
+          For each one still needing a release: run its `build` script,
+          `npm pack` it into `packs/`, `npm publish`, then move to the next.
+          Once everything is out, it purges the jsDelivr cache for
+          `kirigami.schema.json` and every plugin's `kirigami.optionsSchema`
+          — both are served from GitHub `@main`, and an editor would
+          otherwise keep the stale copy for up to 12h after a schema change.
         </markdown>
     </div>
 </section>
@@ -114,7 +124,7 @@ $packages = kirigami_packages();
 
 <section class="section wrap">
     <div class="prose">
-        <p class="lead" style="font-size:1rem">
+        <p class="lead lead--sm">
             <a href="<?php echo $relroot; ?>about/">More about the project &rarr;</a>
         </p>
     </div>

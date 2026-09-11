@@ -17,15 +17,17 @@
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Design — Kirigami">
         <meta name="twitter:description" content="The palette, type and shared components this site itself is built from — a reference, not something to reverse-engineer from the CSS.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Design — Kirigami">
         <meta property="og:description" content="The palette, type and shared components this site itself is built from — a reference, not something to reverse-engineer from the CSS.">
         <meta property="og:url" content="https://php-kirigami.github.io/design/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/design/">
-        <link rel="icon" type="image/x-icon" href="../favicon.ico">
-        <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+        <link rel="icon" type="image/png" href="../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../images/meta/favicon-180x180.png">
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
@@ -105,13 +107,9 @@
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
-                <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                        <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
-                        <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                            <circle cx="12" cy="12" r="4"></circle>
-                            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
-                        </g>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
                     </svg>
                 </button>
                 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
@@ -126,65 +124,66 @@
             <section class="section wrap">
                 <div class="prose">
                     <p>Warm paper, near-black ink, one deep-green accent — decided once, early, and never redecided per page. Every color below is a <code>@kirigami/canva</code> <code>conf</code> token: a CSS custom property, so this whole page (and the whole site) repaints correctly in dark mode with nothing hand-toggled. Try the switch in the header.</p>
+                    <p>None of these eight names are this site&apos;s invention — they&apos;re <code>conf</code>&apos;s own token set (<code>$bg</code>, <code>$surface</code>, <code>$ink</code>, <code>$accent</code>, …), the same eight every Kirigami project starts from and overrides through <code>@forward &quot;@kirigami/canva/conf&quot; with (...)</code>. This page is what that override looks like once it&apos;s actually been used — <a href="../docs/config/#conf">Config → conf tokens</a> has the full option list, including the dark-palette counterparts (<code>$dark-bg</code>, <code>$dark-ink</code>, …) this site&apos;s own dark mode is built from.</p>
                 </div>
             </section>
             <section class="section wrap">
                 <h2>Palette</h2>
                 <div class="grid" data-reveal="">
-                    <div class="card" style="padding:0; overflow:hidden;">
-                        <div style="height:4.5rem; background:var(--bg); border-bottom:1px solid var(--border);"></div>
-                        <div style="padding:1rem;">
+                    <div class="card card--static token-card">
+                        <div class="token-card__swatch token-card__swatch--bg"></div>
+                        <div class="token-card__body">
                             <code>--bg</code>
-                            <p style="margin-top:.4rem; color:var(--ink-muted); font-size:.88rem;">Page background</p>
+                            <p class="token-card__label">Page background</p>
                         </div>
                     </div>
-                    <div class="card" style="padding:0; overflow:hidden;">
-                        <div style="height:4.5rem; background:var(--surface); border-bottom:1px solid var(--border);"></div>
-                        <div style="padding:1rem;">
+                    <div class="card card--static token-card">
+                        <div class="token-card__swatch token-card__swatch--surface"></div>
+                        <div class="token-card__body">
                             <code>--surface</code>
-                            <p style="margin-top:.4rem; color:var(--ink-muted); font-size:.88rem;">Cards, code blocks</p>
+                            <p class="token-card__label">Cards, code blocks</p>
                         </div>
                     </div>
-                    <div class="card" style="padding:0; overflow:hidden;">
-                        <div style="height:4.5rem; background:var(--surface-2); border-bottom:1px solid var(--border);"></div>
-                        <div style="padding:1rem;">
+                    <div class="card card--static token-card">
+                        <div class="token-card__swatch token-card__swatch--surface-2"></div>
+                        <div class="token-card__body">
                             <code>--surface-2</code>
-                            <p style="margin-top:.4rem; color:var(--ink-muted); font-size:.88rem;">A step up — nav, pills, table stripes</p>
+                            <p class="token-card__label">A step up — nav, pills, table stripes</p>
                         </div>
                     </div>
-                    <div class="card" style="padding:0; overflow:hidden;">
-                        <div style="height:4.5rem; background:var(--border); border-bottom:1px solid var(--border);"></div>
-                        <div style="padding:1rem;">
+                    <div class="card card--static token-card">
+                        <div class="token-card__swatch token-card__swatch--border"></div>
+                        <div class="token-card__body">
                             <code>--border</code>
-                            <p style="margin-top:.4rem; color:var(--ink-muted); font-size:.88rem;">Hairlines, outlines</p>
+                            <p class="token-card__label">Hairlines, outlines</p>
                         </div>
                     </div>
-                    <div class="card" style="padding:0; overflow:hidden;">
-                        <div style="height:4.5rem; background:var(--ink); border-bottom:1px solid var(--border);"></div>
-                        <div style="padding:1rem;">
+                    <div class="card card--static token-card">
+                        <div class="token-card__swatch token-card__swatch--ink"></div>
+                        <div class="token-card__body">
                             <code>--ink</code>
-                            <p style="margin-top:.4rem; color:var(--ink-muted); font-size:.88rem;">Body text, headings</p>
+                            <p class="token-card__label">Body text, headings</p>
                         </div>
                     </div>
-                    <div class="card" style="padding:0; overflow:hidden;">
-                        <div style="height:4.5rem; background:var(--ink-muted); border-bottom:1px solid var(--border);"></div>
-                        <div style="padding:1rem;">
+                    <div class="card card--static token-card">
+                        <div class="token-card__swatch token-card__swatch--ink-muted"></div>
+                        <div class="token-card__body">
                             <code>--ink-muted</code>
-                            <p style="margin-top:.4rem; color:var(--ink-muted); font-size:.88rem;">Secondary text, captions</p>
+                            <p class="token-card__label">Secondary text, captions</p>
                         </div>
                     </div>
-                    <div class="card" style="padding:0; overflow:hidden;">
-                        <div style="height:4.5rem; background:var(--accent); border-bottom:1px solid var(--border);"></div>
-                        <div style="padding:1rem;">
+                    <div class="card card--static token-card">
+                        <div class="token-card__swatch token-card__swatch--accent"></div>
+                        <div class="token-card__body">
                             <code>--accent</code>
-                            <p style="margin-top:.4rem; color:var(--ink-muted); font-size:.88rem;">Links, the one brand color</p>
+                            <p class="token-card__label">Links, the one brand color</p>
                         </div>
                     </div>
-                    <div class="card" style="padding:0; overflow:hidden;">
-                        <div style="height:4.5rem; background:var(--accent-soft); border-bottom:1px solid var(--border);"></div>
-                        <div style="padding:1rem;">
+                    <div class="card card--static token-card">
+                        <div class="token-card__swatch token-card__swatch--accent-soft"></div>
+                        <div class="token-card__body">
                             <code>--accent-soft</code>
-                            <p style="margin-top:.4rem; color:var(--ink-muted); font-size:.88rem;">Accent&apos;s own quiet background</p>
+                            <p class="token-card__label">Accent&apos;s own quiet background</p>
                         </div>
                     </div>
                 </div>
@@ -193,19 +192,19 @@
             <section class="section wrap">
                 <h2>Type</h2>
                 <div class="prose">
-                    <p>Three roles, three families, all embedded locally (no Google Fonts request): <strong>Quicksand</strong> for headings, <strong>Roboto Flex</strong> for body copy, <strong>JetBrains Mono</strong> for labels, nav numbers and code.</p>
+                    <p>Three roles, three families, all embedded locally (no Google Fonts request): <strong>Quicksand</strong> for headings, <strong>Roboto Flex</strong> for body copy, <strong>JetBrains Mono</strong> for labels, nav numbers and code. All three are declared once, in <code>_conf.scss</code>&apos;s <code>$fonts</code> map — `conf` handles the <code>@font-face</code> (variable-font ranges included) and the two role variables (<code>--font-heading</code> / <code>--font-body</code>); <code>--font-mono</code> is this site&apos;s own third role, since `conf` only ships the first two.</p>
                 </div>
                 <div class="grid" data-reveal="">
-                    <div class="card" style="cursor:default;">
-                        <p class="eyebrow" style="margin-bottom:.6rem;">Heading · Quicksand</p>
-                        <h3 style="font-size:1.8rem;">Fold PHP into flat HTML</h3>
+                    <div class="card card--static">
+                        <p class="eyebrow">Heading · Quicksand</p>
+                        <h3 class="type-sample__heading">Fold PHP into flat HTML</h3>
                     </div>
-                    <div class="card" style="cursor:default;">
-                        <p class="eyebrow" style="margin-bottom:.6rem;">Body · Roboto Flex</p>
+                    <div class="card card--static">
+                        <p class="eyebrow">Body · Roboto Flex</p>
                         <p>A static site generator that turns PHP into fast, dependency-free HTML — no server required.</p>
                     </div>
-                    <div class="card" style="cursor:default;">
-                        <p class="eyebrow" style="margin-bottom:.6rem;">Mono · JetBrains Mono</p>
+                    <div class="card card--static">
+                        <p class="eyebrow">Mono · JetBrains Mono</p>
                         <code>kiri build &amp;&amp; kiri export</code>
                     </div>
                 </div>
@@ -214,67 +213,78 @@
             <section class="section wrap">
                 <h2>Shared components</h2>
                 <div class="prose">
-                    <p>Five small, generic patterns that kept turning up identically across Kirigami sites — lifted into <a href="https://www.npmjs.com/package/@kirigami/canva" target="_blank" rel="noopener noreferrer"><code>@kirigami/canva</code>&apos;s <code>styles/main</code></a> so nobody has to re-implement them. Opt-in: <code>@use &quot;@kirigami/canva/main&quot;;</code>.</p>
+                    <p>Five small, generic patterns that kept turning up identically across Kirigami sites — lifted into <a href="https://www.npmjs.com/package/@kirigami/canva" target="_blank" rel="noopener noreferrer"><code>@kirigami/canva</code>&apos;s <code>styles/main</code></a> so nobody has to re-implement them. Opt-in: <code>@use &quot;@kirigami/canva/main&quot;;</code> — every one of them is <code>conf</code> tokens underneath, so light/dark comes for free. Each is used for real elsewhere on this site (linked below its demo), not just shown here in isolation.</p>
                 </div>
-                <div class="doc-head" style="margin-top:2rem;">
-                    <p class="eyebrow">Breadcrumb</p>
+                <div class="component-demo">
+                    <div class="doc-head">
+                        <p class="eyebrow">Breadcrumb</p>
+                    </div>
+                    <p class="component-demo__note">A trail of links plus the current page — pairs with <code>FS::getBreadcrumb()</code>, which walks a page&apos;s real position in the file tree instead of a hand-maintained array. Every <a href="../docs/">Docs</a> sub-page uses exactly this.</p>
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <a href="../docs/">Docs</a>
+                        <span aria-hidden="true">/</span>
+                        <a href="../docs/php/">PHP class library</a>
+                        <span aria-hidden="true">/</span>
+                        <span aria-current="page">FS</span>
+                    </nav>
                 </div>
-                <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom:2rem;">
-                    <a href="../docs/">Docs</a>
-                    <span aria-hidden="true">/</span>
-                    <a href="../docs/php/">PHP class library</a>
-                    <span aria-hidden="true">/</span>
-                    <span aria-current="page">FS</span>
-                </nav>
-                <div class="doc-head">
-                    <p class="eyebrow">Quick-jump list</p>
+                <div class="component-demo">
+                    <div class="doc-head">
+                        <p class="eyebrow">Quick-jump list</p>
+                    </div>
+                    <p class="component-demo__note">An inline list of anchor links for a long reference page — see the top of <a href="../docs/php/">PHP class library</a> or <a href="../docs/cli/">CLI</a> for the real thing, one link per `##` heading.</p>
+                    <ul class="docs-toc">
+                        <li><a href="../docs/php/#prepros">PREPROS</a></li>
+                        <li><a href="../docs/php/#md">MD</a></li>
+                        <li><a href="../docs/php/#html">HTML</a></li>
+                        <li><a href="../docs/php/#yaml">YAML</a></li>
+                        <li><a href="../docs/php/#img">IMG</a></li>
+                        <li><a href="../docs/php/#fs">FS</a></li>
+                        <li><a href="../docs/php/#curl">CURL</a></li>
+                    </ul>
                 </div>
-                <ul class="docs-toc" style="margin-bottom:2rem;">
-                    <li><a href="../docs/php/#prepros">PREPROS</a></li>
-                    <li><a href="../docs/php/#md">MD</a></li>
-                    <li><a href="../docs/php/#html">HTML</a></li>
-                    <li><a href="../docs/php/#yaml">YAML</a></li>
-                    <li><a href="../docs/php/#img">IMG</a></li>
-                    <li><a href="../docs/php/#fs">FS</a></li>
-                    <li><a href="../docs/php/#curl">CURL</a></li>
-                </ul>
-                <div class="doc-head">
-                    <p class="eyebrow">Table &amp; badges</p>
+                <div class="component-demo">
+                    <div class="doc-head">
+                        <p class="eyebrow">Table &amp; badges</p>
+                    </div>
+                    <p class="component-demo__note">A generic data table (wrap in <code>.table-wrap</code> to scroll horizontally instead of widening the page) plus a small status/license tag — <a href="../ecosystem/">Ecosystem</a> uses both for the real package/version/license grid.</p>
+                    <div class="table-wrap">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Package</th>
+                                    <th>Version</th>
+                                    <th>License</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>@kirigami/kirigami</code></td>
+                                    <td class="table__num">v1.5.7</td>
+                                    <td><span class="badge">MIT</span></td>
+                                </tr>
+                                <tr>
+                                    <td><code>@kirigami/php-wasm</code></td>
+                                    <td class="table__num">v8.5.10-5</td>
+                                    <td><span class="badge badge--muted">GPL-2.0-or-later</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div class="table-wrap" style="margin-bottom:2rem;">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Package</th>
-                                <th>Version</th>
-                                <th>License</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>@kirigami/kirigami</code></td>
-                                <td class="table__num">v1.5.3</td>
-                                <td><span class="badge">MIT</span></td>
-                            </tr>
-                            <tr>
-                                <td><code>@kirigami/php-wasm</code></td>
-                                <td class="table__num">v8.5.10-5</td>
-                                <td><span class="badge badge--muted">GPL-2.0-or-later</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="component-demo">
+                    <div class="doc-head">
+                        <p class="eyebrow">Palette swatches</p>
+                    </div>
+                    <p class="component-demo__note">Live — <code>IMG::palette()</code> run against this page&apos;s own source photo, not hard-coded. `colors()` (the Sass function version, for a value baked in at build time rather than fetched in PHP) does the same median-cut extraction; see <a href="../docs/php/#img">Docs → PHP → IMG</a>.</p>
+                    <ul class="palette palette--compact">
+                        <li style="background: #929298" title="#929298"></li>
+                        <li style="background: #e1bf8a" title="#e1bf8a"></li>
+                        <li style="background: #977b5e" title="#977b5e"></li>
+                        <li style="background: #6a5540" title="#6a5540"></li>
+                        <li style="background: #b79976" title="#b79976"></li>
+                    </ul>
                 </div>
-                <div class="doc-head">
-                    <p class="eyebrow">Palette swatches</p>
-                </div>
-                <p style="color:var(--ink-muted); margin-bottom:.75rem;">Live — <code>IMG::palette()</code> run against this page&apos;s own source photo, not hard-coded:</p>
-                <ul class="palette" style="max-width:20rem;">
-                    <li style="background: #929298" title="#929298"></li>
-                    <li style="background: #e1bf8a" title="#e1bf8a"></li>
-                    <li style="background: #977b5e" title="#977b5e"></li>
-                    <li style="background: #6a5540" title="#6a5540"></li>
-                    <li style="background: #b79976" title="#b79976"></li>
-                </ul>
             </section>
         </main>
         <footer class="site-footer">
