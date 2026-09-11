@@ -227,7 +227,32 @@
           `<name>-<W>w` / `-<H>h` / `-<W>x<H>[-cover].<format>`. The same
           call is reachable from Sass (`img-asset()`) and from markup
           (`<img asset>`) — see [config → image](../config/#image).
+        </markdown>
+    </div>
 
+    <?php $palette = img_palette('male-african-bush-elephant.jpg', 5); ?>
+    <figure class="img-demo">
+        <div class="img-demo__grid">
+            <img asset="male-african-bush-elephant.jpg" width="480" alt="African bush elephant, Etosha National Park" loading="lazy">
+            <img asset="male-african-bush-elephant.jpg" width="220" height="220" cover alt="African bush elephant, Etosha National Park, cropped square" loading="lazy">
+        </div>
+        <ul class="img-demo__palette">
+            <?php foreach ($palette as $color): ?>
+                <li style="background: <?php echo str_htmlesc($color); ?>" title="<?php echo str_htmlesc($color); ?>"></li>
+            <?php endforeach; ?>
+        </ul>
+        <figcaption>
+            Both sizes and the swatches above are generated at build time from
+            one source photo in <code>assets/images/</code> — the wide crop is
+            <code>&lt;img asset width="480"&gt;</code> (contain), the square is
+            <code>&lt;img asset width="220" height="220" cover&gt;</code>, and
+            the swatches are <code>IMG::palette()</code>. Photo: Giles Laurent,
+            Wikimedia Commons (CC BY-SA).
+        </figcaption>
+    </figure>
+
+    <div class="prose">
+        <markdown>
           ## FS
 
           ```php

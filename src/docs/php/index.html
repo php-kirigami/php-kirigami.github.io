@@ -245,6 +245,22 @@ CACHE::<span class="hljs-title function_ invoke__">purge</span>(): <span class="
 IMG::<span class="hljs-title function_ invoke__">asset</span>(<span class="hljs-keyword">string</span> <span class="hljs-variable">$path</span>, <span class="hljs-keyword">int</span> <span class="hljs-variable">$w</span> = <span class="hljs-number">0</span>, <span class="hljs-keyword">int</span> <span class="hljs-variable">$h</span> = <span class="hljs-number">0</span>, <span class="hljs-keyword">bool</span> <span class="hljs-variable">$cover</span> = <span class="hljs-literal">false</span>): <span class="hljs-keyword">string</span>;  <span class="hljs-comment">// → generated file URL, relative to caller</span>
 IMG::<span class="hljs-title function_ invoke__">palette</span>(<span class="hljs-keyword">string</span> <span class="hljs-variable">$path</span>, <span class="hljs-keyword">int</span> <span class="hljs-variable">$colors</span> = <span class="hljs-number">5</span>): <span class="hljs-keyword">string</span>[];                          <span class="hljs-comment">// CACHE-backed</span></code></pre>
                     <p><code>asset()</code> resolves <code>$path</code> against <code>image.source</code>, writes into <code>image.dest</code> only when missing or stale, and names files <code>&lt;name&gt;-&lt;W&gt;w</code> / <code>-&lt;H&gt;h</code> / <code>-&lt;W&gt;x&lt;H&gt;[-cover].&lt;format&gt;</code>. The same call is reachable from Sass (<code>img-asset()</code>) and from markup (<code>&lt;img asset&gt;</code>) — see <a href="../config/#image">config → image</a>.</p>
+                </div>
+                <figure class="img-demo">
+                    <div class="img-demo__grid">
+                        <img alt="African bush elephant, Etosha National Park" loading="lazy" src="../../images/male-african-bush-elephant-480w.webp">
+                        <img alt="African bush elephant, Etosha National Park, cropped square" loading="lazy" src="../../images/male-african-bush-elephant-220x220-cover.webp">
+                    </div>
+                    <ul class="img-demo__palette">
+                        <li style="background: #929298" title="#929298"></li>
+                        <li style="background: #e1bf8a" title="#e1bf8a"></li>
+                        <li style="background: #977b5e" title="#977b5e"></li>
+                        <li style="background: #6a5540" title="#6a5540"></li>
+                        <li style="background: #b79976" title="#b79976"></li>
+                    </ul>
+                    <figcaption>Both sizes and the swatches above are generated at build time from one source photo in <code>assets/images/</code> — the wide crop is <code>&lt;img asset width=&quot;480&quot;&gt;</code> (contain), the square is <code>&lt;img asset width=&quot;220&quot; height=&quot;220&quot; cover&gt;</code>, and the swatches are <code>IMG::palette()</code>. Photo: Giles Laurent, Wikimedia Commons (CC BY-SA).</figcaption>
+                </figure>
+                <div class="prose">
                     <h2 id="fs">FS</h2>
                     <pre><code class="hljs language-php">FS::<span class="hljs-title function_ invoke__">dig</span>(<span class="hljs-keyword">string</span> <span class="hljs-variable">$glob</span>): <span class="hljs-keyword">iterable</span>;                 <span class="hljs-comment">// recursive glob, yields paths</span>
 FS::<span class="hljs-title function_ invoke__">getRelativePath</span>(<span class="hljs-keyword">string</span> <span class="hljs-variable">$from</span>, <span class="hljs-keyword">string</span> <span class="hljs-variable">$to</span>): <span class="hljs-keyword">string</span>;

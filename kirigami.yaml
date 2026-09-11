@@ -39,6 +39,15 @@ prepros:
   includes: [_lib/functions.php]  # register custom tags / shortcodes / hooks here
 
 
+# The image autogenerator. Source originals in assets/images/ (rel. to cwd),
+# derivatives land in src/images/ (rel. to kirigami.root) — see the live demo
+# on /docs/php/#img (<img asset>, sized and cropped from the same source file).
+image:
+  format: webp
+  source: assets/images
+  dest:   images
+
+
 plugins:
   # Build-time syntax highlighting — every fenced code block on the site (docs,
   # tutorials, the config reference) is colored at build time. 0 bytes of

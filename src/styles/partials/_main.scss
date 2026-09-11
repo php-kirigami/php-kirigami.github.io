@@ -10,6 +10,12 @@
     // highlight's own `embedFont` is off (kirigami.yaml) so it isn't
     // duplicated for highlighted code blocks.
     --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+    // --border / --surface-2 already flip with the theme, so this alone
+    // themes every scrollbar on the site — code blocks included — without a
+    // separate dark-mode override.
+    scrollbar-color: var(--border) var(--surface-2);
+    scrollbar-width: thin;
 }
 
 // ── Layout primitives ──────────────────────────────────────────────
@@ -320,6 +326,51 @@ a.card:hover { border-color: var(--accent); }
     a { color: inherit; text-decoration: none; }
     a:hover { color: var(--accent); }
     [aria-current="page"] { color: var(--ink); }
+}
+
+// ── Image autogenerator live demo (/docs/php/#img) ───────────────────
+.img-demo {
+    margin: 1.5rem 0 2rem;
+
+    &__grid {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 2fr 1fr;
+        align-items: start;
+
+        @media (max-width: 30rem) { grid-template-columns: 1fr; }
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+        border: 1px solid var(--border);
+    }
+
+    &__palette {
+        display: flex;
+        list-style: none;
+        margin: .75rem 0 0;
+        padding: 0;
+        border-radius: 5px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+
+        li {
+            flex: 1;
+            height: 1.75rem;
+        }
+    }
+
+    figcaption {
+        margin-top: .75rem;
+        font-size: .85rem;
+        color: var(--ink-muted);
+
+        code { font-size: .85em; }
+    }
 }
 
 // ── Quick-jump list (long reference pages, e.g. /docs/php/) ──────────
