@@ -55,10 +55,12 @@ The footer grew from a one-liner to a 3-column grid (brand/tagline, Site links,
 Kirigami links) now that there are enough pages to link.
 
 Design identity locked in phase 0 (do not redecide per-page): warm paper /
-near-black ink, a single deep-green accent, IBM Plex Serif for headings,
-IBM Plex Sans for body copy, IBM Plex Mono for labels/nav numbers/code (loaded
-via Google Fonts in `_layouts/header.php`, not through `canva`'s local
-`$fonts` embedding).
+near-black ink, a single deep-green accent. Type switched 2026-09-11 to match
+`template-demo`'s pairing: Quicksand for headings, Roboto Flex for body copy,
+JetBrains Mono for labels/nav numbers/code — all three embedded locally via
+`canva`'s `$fonts` (`src/styles/partials/_conf.scss`, files in
+`assets/fonts/`), no Google Fonts request. `plugin-highlight`'s own
+`embedFont` is off (`kirigami.yaml`) so JetBrains Mono isn't duplicated.
 
 **Phase 2 — Getting started** also shipped: `/start/` (hub), `/start/install/`,
 `/start/quickstart/`, and the full **7-part tutorial** at `/start/tutorial/` —
@@ -120,9 +122,9 @@ Not started yet: `/docs` filled out beyond the one model page, `/plugins`
 .
 ├── kirigami.yaml          # the one config file — see full reference below
 ├── package.json           # dev dep: @kirigami/kirigami (+ plugins, if any)
-├── assets/                # source assets NOT served as-is (not present yet — added with the images phase)
-│   ├── images/            #   originals for the image autogenerator
-│   └── fonts/             #   font files inlined by the Sass font-*() functions
+├── assets/                # source assets NOT served as-is
+│   ├── images/            #   originals for the image autogenerator (not present yet — added with the images phase)
+│   └── fonts/             #   font files inlined via canva's $fonts — roboto-flex.woff2, quicksand.woff2, jetbrains-mono.woff2
 ├── scripts/               # named PHP scripts for `kiri run` / triggers (not present yet)
 │   └── <name>.php
 └── src/                   # = kirigami.root — everything here is the site

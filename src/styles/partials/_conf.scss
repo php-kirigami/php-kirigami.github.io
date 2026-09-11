@@ -5,8 +5,10 @@
 //
 // The identity: warm paper, near-black ink, a single deep-green accent — a
 // paper-cutting / fold vocabulary instead of a generic SaaS palette. Type
-// (IBM Plex Serif / Sans / Mono) is loaded from Google Fonts in
-// _layouts/header.php, so $fonts stays empty here — nothing local to embed.
+// is Roboto Flex (body) + Quicksand (headings) — the same pairing
+// template-demo uses — plus JetBrains Mono for labels/nav numbers/code.
+// All three are embedded locally via $fonts (self-contained woff2, no
+// Google Fonts request); _main.scss points --font-mono at JetBrains Mono.
 
 @forward "@kirigami/canva/conf" with (
 
@@ -45,6 +47,11 @@
 
     // ── Type ─────────────────────────────────────────────────────
     $font-base:    19,
-    $font-body:    "IBM Plex Sans",
-    $font-heading: "IBM Plex Serif",
+    $font-body:    "Roboto Flex",
+    $font-heading: "Quicksand",
+    $fonts: (
+        "Roboto Flex":   "assets/fonts/roboto-flex.woff2",
+        "Quicksand":     "assets/fonts/quicksand.woff2",
+        "JetBrains Mono": "assets/fonts/jetbrains-mono.woff2",
+    ),
 );

@@ -50,6 +50,7 @@ plugins:
       theme: auto
       copyButton: true
       tag: true
+      embedFont: false  # JetBrains Mono is already embedded site-wide as --font-mono, via $fonts in _conf.scss
 
 
 sass:

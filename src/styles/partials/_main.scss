@@ -5,9 +5,11 @@
 
 :root {
     // Not a canva token (conf only knows $font-body / $font-heading) — this
-    // site's own third role, for labels, nav numbers, and (as a fallback
-    // before plugin-highlight's embedded font loads) code.
-    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    // site's own third role, for labels, nav numbers, and code. JetBrains
+    // Mono is embedded once, site-wide, via $fonts in _conf.scss — plugin-
+    // highlight's own `embedFont` is off (kirigami.yaml) so it isn't
+    // duplicated for highlighted code blocks.
+    --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 // ── Layout primitives ──────────────────────────────────────────────
