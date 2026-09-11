@@ -280,6 +280,12 @@ a.card:hover { border-color: var(--accent); }
 }
 
 // ── Requirements list (home) ─────────────────────────────────────────
+// li isn't a flex container: its content (a <strong> lead-in, sometimes a
+// <code> span, then trailing prose) is mixed inline content that needs to
+// wrap as one continuous paragraph. Flex used to split each of those into
+// its own column — fine-ish at desktop widths, but at mobile width each
+// column had too little room and wrapped into an unreadable narrow strip.
+// The bullet is an absolutely-positioned ::before in the gutter instead.
 .reqs {
     list-style: none;
     display: grid;
@@ -287,17 +293,18 @@ a.card:hover { border-color: var(--accent); }
     margin-top: 1rem;
 
     li {
-        display: flex;
-        gap: .6rem;
+        position: relative;
+        padding-inline-start: 1.1rem;
         color: var(--ink-muted);
     }
 
     li::before {
         content: "";
-        flex: none;
+        position: absolute;
+        left: 0;
+        top: .55em;
         width: .5rem;
         height: .5rem;
-        margin-top: .5em;
         background: var(--accent);
         clip-path: polygon(0 0, 100% 0, 100% 100%, 40% 100%, 0 40%);
     }
@@ -407,6 +414,11 @@ a.card:hover { border-color: var(--accent); }
         counter-increment: step;
         position: relative;
         padding-left: 2.6rem;
+        // Grid items default to min-width: auto (their content's min-content
+        // size) — a code block's min-content is its longest unwrapped line,
+        // so without this the grid track blows out past the viewport instead
+        // of letting the block's own overflow-x: auto contain it.
+        min-width: 0;
     }
 
     > li::before {
