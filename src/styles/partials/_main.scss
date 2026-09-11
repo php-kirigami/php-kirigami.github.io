@@ -95,16 +95,32 @@ code {
     margin-right: auto;
 }
 
-// A folded paper corner, drawn in CSS — the brand mark. No inline SVG (sidesteps
-// the known HTML::format() SVG-casing bug entirely) and it's the one shape this
-// whole site is named after.
+// The official Kirigami mark, via @kirigami/canva's icon system: `conf`
+// recolours the source SVGs to the current palette (light/dark both) and
+// exposes each as a `--icon-<name>` data-URI custom property — a background
+// image, not an inline <svg>, so HTML::format()'s SVG-casing bug never enters
+// into it. `logo-2` is the compact glyph-only mark (viewBox ratio ~1.57:1);
+// `logo` is the full wordmark lockup, used in the footer below.
 .brand__mark {
     display: block;
-    width: .85rem;
-    height: .85rem;
-    background: var(--accent);
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 40% 100%, 0 40%);
+    width: 1.55rem;
+    aspect-ratio: 55.9 / 35.6;
+    background-image: var(--icon-logo-2);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     flex: none;
+}
+
+.footer-logo {
+    display: block;
+    width: 9rem;
+    max-width: 100%;
+    aspect-ratio: 2535.4 / 446;
+    background-image: var(--icon-logo);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: left center;
 }
 
 .site-nav ul {
@@ -249,9 +265,12 @@ code {
 .site-footer__inner {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: 1rem 1.5rem;
 }
+
+.site-footer__text p + p { margin-top: .3rem; }
 
 // ── Reveal-on-scroll ───────────────────────────────────────────────
 .js [data-reveal] {
