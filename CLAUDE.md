@@ -682,8 +682,11 @@ below), mirrors every token onto `:root` (`--bg`, `--accent`, …), builds
 IBM Plex fonts from Google Fonts in `_layouts/header.php` instead of through
 `$fonts` (no local font files to embed), so `$fonts` stays empty here.
 `@kirigami/canva/utils` adds pure helpers: `wash()`, `hex6()`, `hexbin()`,
-`str-replace()`, `url-encode()`, `svg-url()`, `apply-colors()`. (`styles/main`
-and the `Burger` JS component are still stubs.)
+`str-replace()`, `url-encode()`, `svg-url()`, `apply-colors()`. Since canva
+2.5.0 this site also `@use`s `@kirigami/canva/main` for `.breadcrumb`,
+`.docs-toc`, `.table`/`.table-wrap`, `.badge`, and `.palette` — `_main.scss`
+only keeps this site's spacing/font overrides on top (see that file). The
+`Burger` JS component is still a stub.
 
 Browser JS (canva ≥ 2.0.0 subpaths, no `scripts/` segment):
 `@kirigami/canva/dom` (`create()`), `@kirigami/canva/helpers` (`busy()`,
