@@ -11,6 +11,25 @@
 // Used in _layouts/footer.php's copyright line.
 register_tag('year', fn() => date('Y'));
 
+// Cookbook examples (see /examples/) — small, real, one-off tags registered
+// straight from a project's own prepros.includes, no plugin package needed.
+
+// {% badge default|muted text %} — wraps canva's `.badge`/`.badge--muted`.
+md_register_plugin('badge', function (array $args, string $body): string {
+    $tone = ($args[0] ?? 'default') === 'muted' ? ' badge--muted' : '';
+    $text = implode(' ', array_slice($args, 1));
+    if ($text === '') return '<!-- badge: missing text -->';
+    return '<span class="badge' . $tone . '">' . str_htmlesc($text) . '</span>';
+});
+
+// <shortcut keys="Ctrl+K"> — a row of <kbd> for a keyboard shortcut. The "+"
+// between keys is a `kbd + kbd::before` rule (_main.scss), not markup.
+register_tag('shortcut', function (string $tag, array $attrs, string $body): string {
+    $keys = array_filter(array_map('trim', explode('+', $attrs['keys'] ?? '')));
+    if (!$keys) return '<!-- shortcut: missing keys attribute -->';
+    return implode('', array_map(fn($k) => '<kbd>' . str_htmlesc($k) . '</kbd>', $keys));
+});
+
 
 /**
  * Site-relative URL to another page's `_index.php` — the shape

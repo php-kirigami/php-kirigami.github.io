@@ -439,6 +439,24 @@ a.card:hover { border-color: var(--accent); }
     --prose-measure: 44rem;
 
     code, kbd, samp, pre { font-family: var(--font-mono); }
+
+    // <shortcut keys="Ctrl+K"> (see /examples/) emits bare adjacent <kbd>s —
+    // the "+" between them is drawn here, not as markup.
+    kbd + kbd {
+        margin-inline-start: .4em;
+
+        &::before {
+            content: "+";
+            margin-inline-end: .4em;
+            color: var(--ink-muted);
+        }
+    }
+
+    // Breathing room around a live recipe demo dropped straight into prose
+    // (see /examples/), without reaching for a one-off style="".
+    .demo {
+        margin-block: 1.5rem;
+    }
 }
 
 // canva/main's `.table`/`.table-wrap`/`.badge` cover the base look; this site
