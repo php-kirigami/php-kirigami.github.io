@@ -123,10 +123,16 @@ testing. Worth remembering for future plugin work in the monorepo itself too.
 Nav split by design: the header (`_layouts/header.php`) only ever lists pages
 that exist — now Home, Start, Docs, **Plugins**, GitHub; `/examples` joins it
 once that hub exists too. Secondary pages (`/about`, `/templates`,
-`/showcase`, `/ecosystem`) live in the footer grid instead of crowding the
-header.
+`/showcase`, `/ecosystem`, `/changelog`) live in the footer grid instead of
+crowding the header.
 
-Not started yet: `/examples`, `/design`, `/roadmap`, `/changelog`.
+Also shipped: **`/changelog/`** — a grouped, human-written summary (not a
+raw commit log), newest first, one entry per package per date with the
+version jump and 1-2 sentences on what actually matters, linking to that
+package's own README for the full detail. Covers 2026-09-10 and
+2026-09-11 so far; older history stays in each README's own "What's new".
+
+Not started yet: `/examples`, `/design`, `/roadmap`.
 
 ---
 
