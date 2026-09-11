@@ -1,8 +1,9 @@
 <?php
 /**
- * @title    Plugins
- * @section  plugins
- * @abstract Official Kirigami plugins — install one, or write your own.
+ * @title      Plugins
+ * @section    plugins
+ * @abstract   Official Kirigami plugins — install one, or write your own.
+ * @breadcrumb true
  */
 ?>
 
@@ -121,12 +122,12 @@
           from `kirigami.yaml`. From there it's the exact same
           [`@kirigami/sdk`](https://www.npmjs.com/package/@kirigami/sdk)
           hook registry a project's own `prepros.includes` file can reach
-          into — `SASS_BEFORE`/`SASS_AFTER`, `ESBUILD_BEFORE`/`AFTER`,
-          `PREPROS_HTML`, `PREPROS_PHP` — covered in
-          [Writing pages → Sass hooks](../docs/authoring/#sass-hooks). The
-          three plugins above are real, MIT-licensed, source-linked
-          examples to start from — `plugin-highlight`'s `index.js` is the
-          shortest complete one.
+          into. [**Writing a plugin →**](authoring/) walks through building
+          one from scratch — package shape, registering a tag, shipping
+          default styles, the options schema, and a couple of gotchas that
+          only show up once you actually try it. The three plugins above
+          are real, MIT-licensed, source-linked examples to read alongside
+          it — `plugin-highlight`'s `index.js` is the shortest complete one.
         </markdown>
     </div>
 </section>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Writing a plugin — Kirigami</title>
+        <meta name="description" content="Package a tag/hook registration as an installable plugin — from an empty folder to something `kiri install` can find.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Writing a plugin — Kirigami">
+        <meta name="twitter:description" content="Package a tag/hook registration as an installable plugin — from an empty folder to something `kiri install` can find.">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Writing a plugin — Kirigami">
+        <meta property="og:description" content="Package a tag/hook registration as an installable plugin — from an empty folder to something `kiri install` can find.">
+        <meta property="og:url" content="https://php-kirigami.github.io/plugins/authoring/">
+        <link rel="canonical" href="https://php-kirigami.github.io/plugins/authoring/">
+        <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+        <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/plugins/authoring/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Plugins",
+                                "item": "https://php-kirigami.github.io/plugins/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Writing a plugin",
+                                "item": "https://php-kirigami.github.io/plugins/authoring/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/plugins/authoring/#webpage",
+                        "url": "https://php-kirigami.github.io/plugins/authoring/",
+                        "name": "Writing a plugin",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/plugins/authoring/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-plugins">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../">Home</a></li>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/">Docs</a></li>
+                        <li><a href="../../plugins/" aria-current="page">Plugins</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
+                        <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                        </g>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <section class="section wrap doc-head">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="../../plugins/">Plugins</a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">Writing a plugin</span>
+                </nav>
+                <span class="eyebrow">Plugins</span>
+                <h1>Writing a plugin</h1>
+                <p class="lead">Package a tag/hook registration as an installable plugin — from an empty folder to something `kiri install` can find.</p>
+            </section>
+            <section class="section wrap">
+                <div class="prose">
+                    <p>If you&apos;ve registered a tag or a hook in a project&apos;s own <code>prepros.includes</code> file (see <a href="../../docs/authoring/#registering-tags-and-hooks">Writing pages</a>), you already know most of this — a plugin is exactly that, moved into its own npm package so it can be versioned, published, and reused across projects instead of copy-pasted. <code>kiri</code> loads it, calls one function, and the rest is the same tag/hook registry.</p>
+                    <p>This page builds one from scratch: a <code>&lt;badge&gt;</code> tag that renders a small colored pill, <code>{% badge %}</code>-style but packaged. It&apos;s small on purpose — the three <a href="../">official plugins</a> do the same thing at real scale, and are worth reading alongside this.</p>
+                </div>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
+                <ol class="steps">
+                    <li>
+                        <h3 id="step-1">The package shape</h3>
+                        <div class="prose">
+                            <p>A plugin is an ordinary npm package with one extra block in its <code>package.json</code>:</p>
+                            <pre><code class="hljs language-json">
+                                <span class="hljs-punctuation">{</span>
+                                  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;kirigami-plugin-badge&quot;</span><span class="hljs-punctuation">,</span>
+                                  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.1.0&quot;</span><span class="hljs-punctuation">,</span>
+                                  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;module&quot;</span><span class="hljs-punctuation">,</span>
+                                  <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index.js&quot;</span><span class="hljs-punctuation">,</span>
+                                  <span class="hljs-attr">&quot;kirigami&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                                    <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;plugin&quot;</span><span class="hljs-punctuation">,</span>
+                                    <span class="hljs-attr">&quot;minVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.5.0&quot;</span><span class="hljs-punctuation">,</span>
+                                    <span class="hljs-attr">&quot;optionsSchema&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./options.schema.json&quot;</span>
+                                  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+                                  <span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                                    <span class="hljs-attr">&quot;@kirigami/sdk&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.2.0&quot;</span>
+                                  <span class="hljs-punctuation">}</span>
+                                <span class="hljs-punctuation">}</span>
+                            </code></pre>
+                            <p><code>kiri</code> only accepts three naming shapes for the <code>name</code> field — this is how it tells a plugin apart from an unrelated dependency in <code>plugins:</code>:</p>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Convention</th>
+                                        <th>Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><code>@kirigami/plugin-*</code></td>
+                                        <td>reserved for official plugins</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>&lt;scope&gt;/kirigami-plugin-*</code></td>
+                                        <td><code>@acme/kirigami-plugin-badge</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>kirigami-plugin-*</code></td>
+                                        <td><code>kirigami-plugin-badge</code> (used here)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p><code>kirigami.minVersion</code> gates the loader against a <code>kiri</code> too old for whatever hooks you use; <code>optionsSchema</code> is optional but worth having from the start — see <a href="#step-5">step 5</a>.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Register on load</h3>
+                        <div class="prose">
+                            <p><code>main</code> exports a default function. <code>kiri</code> calls it once, at the top of every <code>build</code>/<code>export</code>/<code>watch</code>, with the <code>options:</code> this project gave it in <code>kirigami.yaml</code>:</p>
+                            <pre><code class="hljs language-js">
+                                <span class="hljs-comment">// index.js</span>
+                                <span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:path&#x27;</span>;
+                                <span class="hljs-keyword">import</span> { fileURLToPath } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:url&#x27;</span>;
+                                <span class="hljs-keyword">import</span> { on, <span class="hljs-variable constant_">HOOKS</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/sdk&#x27;</span>;
+
+                                <span class="hljs-keyword">const</span> dir = path.<span class="hljs-title function_">dirname</span>(<span class="hljs-title function_">fileURLToPath</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>));
+
+                                <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">register</span>(<span class="hljs-params">options = {}</span>) {
+                                    <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">PREPROS_PHP</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;php&#x27;</span>, <span class="hljs-string">&#x27;badge.php&#x27;</span>));
+                                }
+                            </code></pre>
+                            <p><code>on(hook, fn)</code> is <a href="https://www.npmjs.com/package/@kirigami/sdk" target="_blank" rel="noopener noreferrer"><code>@kirigami/sdk</code></a>&apos;s whole API surface, shared by every task and every plugin in the process. <code>PREPROS_PHP</code> tells <code>kiri</code> &quot;mount this absolute PHP path and <code>include_once</code> it before any page renders&quot; — the seam that lets a plugin call <code>PREPROS::registerTag()</code> from real PHP, the same call a project&apos;s own <code>_lib/functions.php</code> would make.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>The tag itself</h3>
+                        <div class="prose">
+                            <p>Ordinary <code>@kirigami/php-prepros</code> PHP — nothing plugin-specific about this file at all:</p>
+                            <pre><code class="hljs language-php">
+                                <span class="hljs-comment">// php/badge.php</span>
+                                PREPROS::<span class="hljs-title function_ invoke__">registerTag</span>(<span class="hljs-string">&#x27;badge&#x27;</span>, function (<span class="hljs-variable">$tag</span>, <span class="hljs-variable">$attrs</span>, <span class="hljs-variable">$body</span>) {
+                                    <span class="hljs-variable">$text</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$body</span>) ?: (<span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;text&#x27;</span>] ?? <span class="hljs-string">&#x27;&#x27;</span>);
+                                    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$text</span> === <span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>;
+                                    <span class="hljs-variable">$tone</span> = <span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;tone&#x27;</span>] ?? <span class="hljs-string">&#x27;accent&#x27;</span>;
+                                    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;span class=&quot;pg-badge pg-badge--&#x27;</span> . <span class="hljs-title function_ invoke__">htmlspecialchars</span>(<span class="hljs-variable">$tone</span>, ENT_QUOTES) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span>
+                                         . <span class="hljs-title function_ invoke__">htmlspecialchars</span>(<span class="hljs-variable">$text</span>, ENT_QUOTES) . <span class="hljs-string">&#x27;&lt;/span&gt;&#x27;</span>;
+                                });
+                            </code></pre>
+                            <p><code>&lt;badge&gt;New&lt;/badge&gt;</code> and <code>&lt;badge text=&quot;Beta&quot; tone=&quot;accent&quot;&gt;</code> both work — <code>STR::replaceTags()</code> (what <code>registerTag()</code> runs on under the hood) accepts a tag with a body, self-closing, or bare. Full signature and the rest of the <code>PREPROS</code> API — <code>mount()</code>, <code>exportFile()</code>, <code>fstat()</code>, <code>$config</code> — is in the <a href="../../docs/php/#prepros">PHP class library</a>.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Ship default styles</h3>
+                        <div class="prose">
+                            <p>The same <code>on()</code> call, a different hook — <code>SASS_AFTER</code> appends a file to every <code>sass</code> task, after the project&apos;s own entry (so the project&apos;s tokens are already defined when it compiles):</p>
+                            <pre><code class="hljs language-js">
+                                <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;badge.scss&#x27;</span>));
+                            </code></pre>
+                            <pre><code class="hljs language-scss">
+                                <span class="hljs-comment">// badge.scss</span>
+                                <span class="hljs-selector-class">.pg-badge</span> {
+                                    <span class="hljs-attribute">display</span>: inline-block;
+                                    <span class="hljs-attribute">padding</span>: .<span class="hljs-number">15em</span> .<span class="hljs-number">6em</span>;
+                                    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">3px</span>;
+                                    <span class="hljs-attribute">font-size</span>: .<span class="hljs-number">78em</span>;
+
+                                    &amp;<span class="hljs-attr">--accent</span> { <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--accent-soft); <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--accent); }
+                                    &amp;<span class="hljs-attr">--muted</span>  { <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--surface-<span class="hljs-number">2</span>);   <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--ink-muted); }
+                                }
+                            </code></pre>
+                            <p>Reading <code>var(--accent)</code> instead of a hard-coded color is what lets this render correctly in <strong>any</strong> project&apos;s own palette, light or dark, with nothing to configure — <code>@kirigami/canva</code>&apos;s <code>conf</code> is what defines those tokens; see <a href="../#embed">plugin-embed</a>&apos;s play button for a slightly fancier version of the same idea.</p>
+                            <p><code>ESBUILD_BEFORE</code>/<code>ESBUILD_AFTER</code> work identically for client-side JS — see <code>plugin-embed</code>&apos;s <code>src/embed.js</code> for a real one, and <code>PREPROS_HTML</code> if what you need is to transform each page&apos;s <em>rendered</em> HTML rather than contribute a tag (<code>plugin-highlight</code>&apos;s whole job runs on that hook).</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3 id="step-5">Make it configurable</h3>
+                        <div class="prose">
+                            <p><code>register(options)</code> receives whatever this project wrote under this plugin&apos;s <code>options:</code> in <code>kirigami.yaml</code> — but that value only exists on the <strong>JS</strong> side. There&apos;s no built-in channel from a JS-side option into the PHP file <code>PREPROS_PHP</code> mounts; if a tag&apos;s PHP-side behavior needs to vary, either hard-code the default in the PHP file itself (simplest — every official plugin here does exactly that for anything PHP-side), or gate a whole <em>hook</em> on an option, which <em>is</em> a normal JS-side decision:</p>
+                            <pre><code class="hljs language-js">
+                                <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">register</span>(<span class="hljs-params">options = {}</span>) {
+                                    <span class="hljs-keyword">const</span> opts = { <span class="hljs-attr">style</span>: <span class="hljs-literal">true</span>, ...options };
+                                    <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">PREPROS_PHP</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;php&#x27;</span>, <span class="hljs-string">&#x27;badge.php&#x27;</span>));
+                                    <span class="hljs-keyword">if</span> (opts.<span class="hljs-property">style</span>) <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;badge.scss&#x27;</span>));
+                                }
+                            </code></pre>
+                            <p><code>kiri</code> validates <code>options:</code> against <code>optionsSchema</code> before calling <code>register()</code> — point it at a small JSON Schema:</p>
+                            <pre><code class="hljs language-json">
+                                <span class="hljs-comment">// options.schema.json</span>
+                                <span class="hljs-punctuation">{</span>
+                                  <span class="hljs-attr">&quot;$schema&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="hljs-punctuation">,</span>
+                                  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object&quot;</span><span class="hljs-punctuation">,</span>
+                                  <span class="hljs-attr">&quot;additionalProperties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+                                  <span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                                    <span class="hljs-attr">&quot;style&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;boolean&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span> <span class="hljs-punctuation">}</span>
+                                  <span class="hljs-punctuation">}</span>
+                                <span class="hljs-punctuation">}</span>
+                            </code></pre>
+                            <p>This is also what makes <code>plugins[].options</code> autocomplete in an editor once <code>kirigami.schema.json</code> <code>$ref</code>s it — see how the three official plugins wire that in their own repo if you&apos;re publishing under <code>@kirigami/</code>; a third-party plugin&apos;s options are still validated at build time either way.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Try it</h3>
+                        <div class="prose">
+                            <pre><code class="hljs language-yaml">
+                                <span class="hljs-attr">plugins:</span>
+                                  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;kirigami-plugin-badge&quot;</span>
+                                    <span class="hljs-attr">active:</span> <span class="hljs-literal">true</span>
+                                    <span class="hljs-attr">options:</span>
+                                      <span class="hljs-attr">style:</span> <span class="hljs-literal">true</span>
+                            </code></pre>
+                            <p>For local development before publishing, point at the folder with a <code>file:</code> dependency and <code>npm install</code> — exactly what every plugin on this site was verified with before it shipped.</p>
+                            <div class="markdown-alert markdown-alert-note">
+                                <p class="markdown-alert-title">NOTE</p>
+                                <p>If a hook you registered seems to silently never fire while developing this way, check for a <strong>second copy</strong> of <code>@kirigami/sdk</code> — e.g. an <code>npm install</code> run standalone inside the plugin&apos;s own folder, which can leave it with its own <code>node_modules/@kirigami/sdk</code> instead of sharing the consuming project&apos;s one. The hook registry is a single module-level <code>Map</code>; two copies of the module means two disconnected registries, and <code>on()</code> in one is invisible to <code>run()</code> in the other — no error either side, it just never fires. A real <code>npm install</code> of a <strong>published</strong> plugin doesn&apos;t hit this: npm dedupes <code>@kirigami/sdk</code> to one copy in the consuming project&apos;s <code>node_modules</code> in the normal case.</p>
+                            </div>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
+                <div class="prose">
+                    <h2 id="hook-reference">Hook reference</h2>
+                    <p>Every hook below is <code>@kirigami/sdk</code>&apos;s <code>on(HOOKS.&lt;NAME&gt;, fn)</code>. A hook either <strong>collects</strong> (every listener&apos;s return value is gathered into a list — <code>undefined</code>/<code>null</code> is skipped, an array is flattened in) or <strong>pipes</strong> (each listener receives the previous one&apos;s output and can transform it).</p>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Hook</th>
+                                <th>Kind</th>
+                                <th>Receives</th>
+                                <th>Returns</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>SASS_BEFORE</code> / <code>SASS_AFTER</code></td>
+                                <td>collect</td>
+                                <td><code>{ __root, task, exportPath, config }</code></td>
+                                <td>a `.scss` path, or an array of them</td>
+                            </tr>
+                            <tr>
+                                <td><code>SASS_FUNCTIONS</code></td>
+                                <td>collect</td>
+                                <td>same as above</td>
+                                <td><code>{ &apos;my-fn($x)&apos;: (args) =&gt; SassValue }</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>ESBUILD_BEFORE</code> / <code>ESBUILD_AFTER</code></td>
+                                <td>collect</td>
+                                <td><code>{ __root, task, exportPath, config }</code></td>
+                                <td>a `.js`/`.ts` path, or an array — bundled as a side-effect import</td>
+                            </tr>
+                            <tr>
+                                <td><code>ESBUILD_PLUGINS</code></td>
+                                <td>collect</td>
+                                <td>same as above</td>
+                                <td>an esbuild plugin object, or an array</td>
+                            </tr>
+                            <tr>
+                                <td><code>PREPROS_PHP</code></td>
+                                <td>collect</td>
+                                <td><code>{ __root, config }</code></td>
+                                <td>an absolute `.php` path, or an array — mounted + <code>include_once</code>&apos;d once, before any page renders</td>
+                            </tr>
+                            <tr>
+                                <td><code>PREPROS_HTML</code></td>
+                                <td>pipe</td>
+                                <td><code>(html, { file, abs, exportPath, config })</code></td>
+                                <td>the transformed HTML string (or nothing, to leave it untouched)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>On a signature collision with a native Sass function, the native one always wins. Multiple listeners on the same hook all run, in registration order — a project&apos;s own <code>prepros.includes</code> file and three plugins can all hook <code>PREPROS_HTML</code> without stepping on each other.</p>
+                    <h2 id="publishing">Publishing</h2>
+                    <ul>
+                        <li>Package name matches one of the three conventions in</li>
+                    </ul>
+                    <p><a href="#step-1">step 1</a> — anything else, <code>kiri</code> won&apos;t load it from <code>plugins:</code> at all.</p>
+                    <ul>
+                        <li><code>kirigami.minVersion</code> set to whatever <code>kiri</code> version you</li>
+                    </ul>
+                    <p>actually tested against.</p>
+                    <ul>
+                        <li><code>kirigami.optionsSchema</code> present, even a trivial one — free</li>
+                    </ul>
+                    <p>build-time validation and editor completion for anyone using the plugin.</p>
+                    <ul>
+                        <li><code>npm publish</code>. <code>kiri install your-plugin-name</code> then resolves,</li>
+                    </ul>
+                    <p>installs, and prints the <code>plugins:</code> block for anyone to paste in — nothing else to wire up on your end.</p>
+                    <p><a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-highlight" target="_blank" rel="noopener noreferrer"><code>plugin-highlight</code></a>, <a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-extlink" target="_blank" rel="noopener noreferrer"><code>plugin-extlink</code></a> and <a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-embed" target="_blank" rel="noopener noreferrer"><code>plugin-embed</code></a> are real, MIT-licensed packages built exactly this way — worth reading end to end once this page&apos;s toy example makes sense.</p>
+                </div>
+            </section>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Site</h3>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Docs</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                            <li><a href="../../about/">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>
