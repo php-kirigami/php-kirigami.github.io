@@ -63,9 +63,10 @@
     <div class="prose">
         <p>
             Both templates ship a <code>.github/workflows/page.yml</code>
-            wired to <a href="https://github.com/php-kirigami/kiribuild">kiribuild</a>
-            — push to <code>main</code> and it deploys to GitHub Pages, no
-            further setup. See <a href="<?php echo $relroot; ?>docs/">the docs</a>
+            wired to <a href="https://github.com/marketplace/actions/kiribuild">kiribuild</a>,
+            our GitHub Action published on the Marketplace — push to
+            <code>main</code> and it deploys to GitHub Pages, no further
+            setup. See <a href="<?php echo $relroot; ?>docs/">the docs</a>
             for how that workflow is put together.
         </p>
     </div>

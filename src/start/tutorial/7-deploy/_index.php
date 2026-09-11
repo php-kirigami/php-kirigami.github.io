@@ -48,7 +48,10 @@
                 install the `kiri` CLI, run `kiri export`. Checkout, uploading
                 the artifact, and the Pages deploy step are yours to wire —
                 that's deliberate, so the action stays small and the workflow
-                stays readable.
+                stays readable. It's a real published action — listed on the
+                [GitHub Marketplace](https://github.com/marketplace/actions/kiribuild),
+                findable straight from a workflow file's Actions sidebar,
+                not just a repo you happen to reference.
                 </markdown>
             </div>
         </li>
