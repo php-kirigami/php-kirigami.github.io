@@ -400,6 +400,7 @@
                           <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">scss-core</span>, <span class="hljs-attr">type:</span> <span class="hljs-string">sass</span>,    <span class="hljs-attr">entry:</span> <span class="hljs-string">styles/kirigami.core.scss</span> }
                     </code></pre>
                     <h3 id="task-types">Task types</h3>
+                    <p>The two you actually write into <code>tasks:</code> yourself — <code>prepros</code> and <code>dist</code> are internal, added automatically (see above), never declared by hand.</p>
                     <table>
                         <thead>
                             <tr>
@@ -424,20 +425,6 @@
                                 <td><code>name</code>, <code>type</code>, <code>entry</code></td>
                                 <td><code>force</code>, <code>head</code></td>
                                 <td><code>&lt;entry&gt;.min.css</code> (+ <code>.css.map</code> outside export)</td>
-                            </tr>
-                            <tr>
-                                <td><code>prepros</code></td>
-                                <td>Render pages + <code>sitemap.xml</code>. Watch-only unless forced/implicit.</td>
-                                <td><code>name</code>, <code>type</code></td>
-                                <td><code>target</code>, <code>force</code></td>
-                                <td><code>*.html</code>, <code>sitemap.xml</code>, <code>robots.txt</code></td>
-                            </tr>
-                            <tr>
-                                <td><code>dist</code></td>
-                                <td>Copy <code>kirigami.root</code> into <code>path</code>, stamping the banner. Implicit during <code>kiri export</code> only.</td>
-                                <td><code>name</code>, <code>type</code>, <code>path</code></td>
-                                <td><code>ignore</code>, <code>force</code></td>
-                                <td>the exported tree</td>
                             </tr>
                         </tbody>
                     </table>

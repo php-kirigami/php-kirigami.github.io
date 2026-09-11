@@ -243,12 +243,14 @@
 
           ### Task types
 
+          The two you actually write into `tasks:` yourself — `prepros` and
+          `dist` are internal, added automatically (see above), never
+          declared by hand.
+
           | `type` | Purpose | Required | Optional | Output |
           |---|---|---|---|---|
           | `esbuild` | Bundle + minify a JS/TS entry. Build + watch. | `name`, `type`, `entry` | `force`, `head` | `<entry>.min.js` (+ `.map` outside export) |
           | `sass` | Compile a `.scss`/`.sass` entry, re-minified with csso on export. Build + watch. | `name`, `type`, `entry` | `force`, `head` | `<entry>.min.css` (+ `.css.map` outside export) |
-          | `prepros` | Render pages + `sitemap.xml`. Watch-only unless forced/implicit. | `name`, `type` | `target`, `force` | `*.html`, `sitemap.xml`, `robots.txt` |
-          | `dist` | Copy `kirigami.root` into `path`, stamping the banner. Implicit during `kiri export` only. | `name`, `type`, `path` | `ignore`, `force` | the exported tree |
 
           ## Managed head
 
