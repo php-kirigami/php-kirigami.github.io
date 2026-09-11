@@ -106,8 +106,26 @@
             </section>
             <hr class="fold">
             <section class="section wrap">
-                <h2>How it works</h2>
-                <p class="lead" style="max-width:60ch">You write <code>_*.php</code> page templates — real PHP, with includes, loops and Markdown. Kirigami runs a PHP 8.5 runtime entirely in WebAssembly, inside Node, and compiles every page straight to plain HTML. No PHP install, no server, no headless browser.</p>
+                <h2>You write PHP. It compiles to flat HTML.</h2>
+                <p class="lead" style="max-width:60ch">A page is a real PHP file — includes, loops, a PHPDOC block that becomes your variables. Kirigami runs a PHP 8.5 runtime entirely in WebAssembly, inside Node, and compiles every page straight to plain HTML at build time. Nothing runs on your server, because there is no server.</p>
+                <div class="compare">
+                    <div class="compare__panel">
+                        <span class="compare__label">src/_index.php</span>
+                        <pre><code class="hljs language-php"><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@title</span> Home
+ */</span>
+
+<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$tagline</span>);</code></pre>
+                    </div>
+                    <div class="compare__panel">
+                        <span class="compare__label">src/index.html — after `kiri build`</span>
+                        <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Fold PHP into flat HTML.<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></code></pre>
+                    </div>
+                </div>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
+                <h2>What you get</h2>
                 <div class="grid" data-reveal="">
                     <article class="card">
                         <h3>Real PHP templating</h3>
@@ -123,15 +141,34 @@
                     </article>
                     <article class="card">
                         <h3>Instant scaffolding</h3>
-                        <p><code>kiri create</code> clones an official template so a new project starts from something real, not a blank folder.</p>
+                        <p><code>kiri create</code> clones an <a href="./templates/">official template</a> so a new project starts from something real.</p>
+                    </article>
+                    <article class="card">
+                        <h3>A managed &lt;head&gt;</h3>
+                        <p>Stylesheet, bundle, theme guard, SEO metadata and JSON-LD — injected automatically, nothing to hand-wire per page.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Zero native dependencies</h3>
+                        <p>Images, the cache, tar extraction — all built on WASM and Node&apos;s own standard library, not a compiled binding.</p>
                     </article>
                 </div>
             </section>
             <hr class="fold">
             <section class="section wrap">
+                <h2>What it needs — and doesn&apos;t</h2>
+                <ul class="reqs">
+                    <li><strong>Node.js ≥ 24</strong> and npm — that&apos;s the whole install.</li>
+                    <li><strong>No PHP install.</strong> The runtime is bundled, compiled to WebAssembly.</li>
+                    <li><strong>No server process</strong> at any point, dev or production — <code>kiri watch</code> rebuilds files, it doesn&apos;t serve them.</li>
+                    <li><strong>No headless browser</strong> anywhere in the toolchain.</li>
+                    <li>Everything is MIT, except the bundled PHP runtime itself (<code>@kirigami/php-wasm</code>, GPL-2.0-or-later) — see <a href="./about/">About</a>.</li>
+                </ul>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
                 <h2>Built with itself, in the open</h2>
                 <div class="prose">
-                    <p>This page is a <code>_index.php</code> file, compiled to <code>index.html</code> by the same <code>kiri</code> CLI anyone installs from npm. The site is being built in public, phase by phase — the <a href="docs/"><code>/docs/</code></a> page is the first real piece of documentation, and more lands as each phase of the plan ships.</p>
+                    <p>This page is a <code>_index.php</code> file, compiled by the same <code>kiri</code> CLI anyone installs from npm. The site is being built in public, phase by phase — <a href="docs/"><code>/docs/</code></a> is the doc-page model, <a href="ecosystem/"><code>/ecosystem/</code></a> pulls its version numbers live from npm at build time, and more lands as each phase ships.</p>
                     <pre><code class="hljs language-bash">npm install -D @kirigami/kirigami
 npx kiri watch      <span class="hljs-comment"># rebuild on save, no server</span>
 npx kiri <span class="hljs-built_in">export</span>     <span class="hljs-comment"># production build into dist/</span></code></pre>
@@ -139,9 +176,33 @@ npx kiri <span class="hljs-built_in">export</span>     <span class="hljs-comment
             </section>
         </main>
         <footer class="site-footer">
-            <div class="wrap site-footer__inner">
-                <span class="footer-logo" role="img" aria-label="Kirigami"></span>
-                <div class="site-footer__text">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Site</h3>
+                        <ul>
+                            <li><a href="./">Home</a></li>
+                            <li><a href="./docs/">Docs</a></li>
+                            <li><a href="./templates/">Templates</a></li>
+                            <li><a href="./showcase/">Showcase</a></li>
+                            <li><a href="./about/">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="./ecosystem/">Ecosystem</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
                     <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
                     <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="./sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
                 </div>

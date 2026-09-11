@@ -32,13 +32,27 @@ this repo's own `todo.md` and removed once the upstream fix ships).
 
 ## Current work (as of 2026-09-10)
 
-**Phase 0 — Foundations** is what exists so far: `kirigami.yaml` on the current
-schema, `package.json` (`@kirigami/kirigami` + `@kirigami/canva` +
+**Phase 0 — Foundations** shipped: `kirigami.yaml` on the current schema,
+`package.json` (`@kirigami/kirigami` + `@kirigami/canva` +
 `@kirigami/plugin-highlight`), `.github/workflows/page.yml` (kiribuild v2),
-`.vscode/`, `banner.txt`, this file, `@kirigami/canva` wired in
-(`conf` with the site's own palette + `prose`), the header/footer/nav shell, a
-home page skeleton, and one doc-page model page (`/docs/`) demonstrating the
-prose wrapper + build-time syntax highlighting.
+`.vscode/`, `banner.txt`, this file, `@kirigami/canva` wired in (`conf` with the
+site's own palette + `prose`), the header/footer/nav shell, and one doc-page
+model page (`/docs/`) demonstrating the prose wrapper + build-time syntax
+highlighting. The header/footer use the **official Kirigami mark** via canva's
+icon system — `--icon-logo-2` (compact glyph) in the header, `--icon-logo` (full
+wordmark) in the footer — not a hand-drawn shape.
+
+**Phase 1 — The pitch** also shipped: the home page is a real pitch (hero, a
+"you write / it compiles to" code comparison, a 6-card feature grid, a
+requirements list, the dogfooding note), plus four new pages — `/about/`
+(why PHP+WASM, the maintainer, MIT/GPL licensing), `/templates/` (`default` +
+`demo`, `kiri create` usage), `/showcase/` (this site + both templates, live +
+source links), and `/ecosystem/` (the package table with **live npm version
+numbers fetched at build time** via `curl_get_contents()` + `CACHE`, 1h TTL —
+see `kirigami_pkg_version()` in `_lib/functions.php`; confirmed working against
+the real npm registry from inside the WASM sandbox, `prepros.network: true`).
+The footer grew from a one-liner to a 3-column grid (brand/tagline, Site links,
+Kirigami links) now that there are enough pages to link.
 
 Design identity locked in phase 0 (do not redecide per-page): warm paper /
 near-black ink, a single deep-green accent, IBM Plex Serif for headings,
@@ -46,12 +60,15 @@ IBM Plex Sans for body copy, IBM Plex Mono for labels/nav numbers/code (loaded
 via Google Fonts in `_layouts/header.php`, not through `canva`'s local
 `$fonts` embedding).
 
+Nav split by design: the header (`_layouts/header.php`) stays minimal (Home,
+Docs, GitHub) and only ever lists pages that exist — `/start`, `/plugins`,
+`/examples` join it once those hubs exist. Secondary pages (`/about`,
+`/templates`, `/showcase`, `/ecosystem`) live in the footer grid instead of
+crowding the header.
+
 Not started yet: `/start` (install, quickstart, the 7-part starter tutorial),
 `/docs` filled out beyond the one model page, `/plugins` (+ the plugin-authoring
-tutorial), `/examples`, `/showcase`, `/templates`, `/ecosystem`, `/design`,
-`/roadmap`, `/changelog`, `/about`. Nav in `_layouts/header.php` only lists pages
-that actually exist — extend it as each section lands, never add a link ahead
-of the page.
+tutorial), `/examples`, `/design`, `/roadmap`, `/changelog`.
 
 ---
 
@@ -86,10 +103,13 @@ of the page.
 │   └── <name>.php
 └── src/                   # = kirigami.root — everything here is the site
     ├── _layouts/          #   header.php / footer.php (prepros before/after)
-    ├── _lib/              #   PHP included via prepros.includes
-    ├── _index.php         #   → src/index.html
-    ├── docs/
-    │   └── _index.php     #   → src/docs/index.html — the doc-page model
+    ├── _lib/              #   PHP included via prepros.includes (functions, kirigami_pkg_version())
+    ├── _index.php         #   → src/index.html — the pitch
+    ├── docs/_index.php    #   → src/docs/index.html — the doc-page model
+    ├── about/_index.php
+    ├── templates/_index.php
+    ├── showcase/_index.php
+    ├── ecosystem/_index.php   #   live npm versions via kirigami_pkg_version()
     ├── styles/            #   Sass task entry(ies), compiled to *.min.css
     ├── scripts/           #   esbuild task entry(ies), bundled to *.min.js
     └── images/            #   = image.dest — generated images land here (not present yet)
