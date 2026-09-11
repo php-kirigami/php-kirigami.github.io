@@ -14,6 +14,7 @@
                         <li><a href="<?php echo $relroot; ?>docs/">Docs</a></li>
                         <li><a href="<?php echo $relroot; ?>templates/">Templates</a></li>
                         <li><a href="<?php echo $relroot; ?>showcase/">Showcase</a></li>
+                        <li><a href="<?php echo $relroot; ?>design/">Design</a></li>
                         <li><a href="<?php echo $relroot; ?>about/">About</a></li>
                     </ul>
                 </div>
