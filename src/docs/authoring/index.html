@@ -139,17 +139,10 @@
                     <h2 id="project-structure">Project structure</h2>
                     <p>Inside <code>kirigami.root</code>:</p>
                     <ul>
-                        <li>A file <code>_name.php</code> is a <strong>page source</strong>; it compiles to</li>
+                        <li>A file <code>_name.php</code> is a <strong>page source</strong>; it compiles to <code>name.html</code> in the same directory (leading <code>_</code> stripped). <code>_index.php</code> → <code>index.html</code>, exactly like this page.</li>
+                        <li>A directory whose name starts with <code>_</code> (<code>_layouts/</code>, <code>_lib/</code>) is <strong>skipped</strong> during directory-wide builds — use it for partials, layouts, includes, data.</li>
+                        <li>Data files (<code>.yaml</code>, <code>.yml</code>, <code>.json</code>, <code>.md</code>) are not compiled; they&apos;re loaded by pages via PHPDOC annotations, below.</li>
                     </ul>
-                    <p><code>name.html</code> in the same directory (leading <code>_</code> stripped). <code>_index.php</code> → <code>index.html</code>, exactly like this page.</p>
-                    <ul>
-                        <li>A directory whose name starts with <code>_</code> (<code>_layouts/</code>, <code>_lib/</code>) is</li>
-                    </ul>
-                    <p><strong>skipped</strong> during directory-wide builds — use it for partials, layouts, includes, data.</p>
-                    <ul>
-                        <li>Data files (<code>.yaml</code>, <code>.yml</code>, <code>.json</code>, <code>.md</code>) are not compiled;</li>
-                    </ul>
-                    <p>they&apos;re loaded by pages via PHPDOC annotations, below.</p>
                     <h2 id="phpdoc-header">PHPDOC header</h2>
                     <p>Every page starts with a docblock. Each <code>@key value</code> becomes a PHP variable (<code>$key</code>), available in the page <strong>and</strong> in the <code>before</code> / <code>after</code> includes.</p>
                     <pre><code class="hljs language-php">
@@ -204,13 +197,9 @@
                     <p>need a TTL).</p>
                     <h2 id="content-and-indent">Content and indent</h2>
                     <ul>
-                        <li><strong><code>@content</code></strong> — if a <code>content</code> variable resolves to a</li>
+                        <li><strong><code>@content</code></strong> — if a <code>content</code> variable resolves to a non-empty value (typically an auto-loaded <code>.md</code> / <code>.yaml</code> / <code>.json</code> annotation), it&apos;s used <strong>as-is</strong> as the page body, and the PHP file is <strong>not executed</strong> for output. Good for pure data/markdown pages wrapped by a shared layout.</li>
+                        <li><strong><code>@indent N</code></strong> — prefixes every line of the rendered body with <code>N</code> spaces before <code>before</code> / <code>after</code> wrap it, keeping generated HTML readable inside an indented layout.</li>
                     </ul>
-                    <p>non-empty value (typically an auto-loaded <code>.md</code> / <code>.yaml</code> / <code>.json</code> annotation), it&apos;s used <strong>as-is</strong> as the page body, and the PHP file is <strong>not executed</strong> for output. Good for pure data/markdown pages wrapped by a shared layout.</p>
-                    <ul>
-                        <li><strong><code>@indent N</code></strong> — prefixes every line of the rendered body with</li>
-                    </ul>
-                    <p><code>N</code> spaces before <code>before</code> / <code>after</code> wrap it, keeping generated HTML readable inside an indented layout.</p>
                     <pre><code class="hljs language-php">
                         <span class="hljs-comment">/**
                          * <span class="hljs-doctag">@name</span>    changelog
@@ -235,9 +224,8 @@
                     <div class="prose">
                         <p><code>) to wrap the output in </code>.prose` (<code>@kirigami/canva</code>&apos;s prose partial) — <code>class</code> / <code>id</code> on the tag land on that wrapper. This whole page is one such block.</p>
                         <ul>
-                            <li><code>&lt;img asset=&quot;path/in/assets-images.jpg&quot; width=&quot;450&quot; height=&quot;300&quot; cover&gt;</code> —</li>
+                            <li><code>&lt;img asset=&quot;path/in/assets-images.jpg&quot; width=&quot;450&quot; height=&quot;300&quot; cover&gt;</code> — resolves through the image autogenerator, calling <code>IMG::asset()</code> with the same parameters (<code>asset</code> → <code>$path</code>; <code>width</code> / <code>height</code> optional ints; <code>cover</code> presence = <code>true</code>, crop to fill) and swapping <code>asset</code> for the generated <code>src</code>. Any other attribute (<code>alt</code>, <code>class</code>, <code>loading</code>, …) passes straight through. Empty or missing <code>asset</code> leaves the tag untouched.</li>
                         </ul>
-                        <p>resolves through the image autogenerator, calling <code>IMG::asset()</code> with the same parameters (<code>asset</code> → <code>$path</code>; <code>width</code> / <code>height</code> optional ints; <code>cover</code> presence = <code>true</code>, crop to fill) and swapping <code>asset</code> for the generated <code>src</code>. Any other attribute (<code>alt</code>, <code>class</code>, <code>loading</code>, …) passes straight through. Empty or missing <code>asset</code> leaves the tag untouched.</p>
                         <pre><code class="hljs language-javascript">
                             <span class="hljs-title class_">One</span> authoring gotcha <span class="hljs-keyword">with</span> <span class="hljs-string">`&lt;markdown&gt;`</span>: nesting a *literal*
                             <span class="hljs-string">`&lt;markdown&gt;`</span> / <span class="hljs-string">`</span>

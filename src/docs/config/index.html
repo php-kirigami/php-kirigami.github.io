@@ -434,14 +434,10 @@
                     <h2 id="managed-head">Managed head</h2>
                     <p>Unless <code>prepros.head</code> is <code>false</code>, every rendered page&apos;s <code>&lt;head&gt;</code> is auto-wired — no need to hand-write any of it in <code>before</code>:</p>
                     <ul>
-                        <li>a small theme/FOUC guard as the first child of <code>&lt;head&gt;</code> (adds a</li>
-                    </ul>
-                    <p><code>js</code> class, applies the stored <code>data-theme</code> before first paint);</p>
-                    <ul>
+                        <li>a small theme/FOUC guard as the first child of <code>&lt;head&gt;</code> (adds a <code>js</code> class, applies the stored <code>data-theme</code> before first paint);</li>
                         <li>a <code>&lt;link rel=&quot;stylesheet&quot;&gt;</code> for every <code>sass</code> task output;</li>
-                        <li>a <code>&lt;script&gt;</code> (no <code>defer</code>, just before <code>&lt;/body&gt;</code>) for every</li>
+                        <li>a <code>&lt;script&gt;</code> (no <code>defer</code>, just before <code>&lt;/body&gt;</code>) for every <code>esbuild</code> task output.</li>
                     </ul>
-                    <p><code>esbuild</code> task output.</p>
                     <p>Paths are per-page-relative and carry a <code>?&lt;timestamp&gt;</code> cache-bust, left literal at build time and only expanded on <code>kiri export</code> — so rebuilding never rewrites a committed page. A file already referenced in the page is left alone; skip a single task&apos;s tag with <code>head: false</code> on that task.</p>
                 </div>
             </section>

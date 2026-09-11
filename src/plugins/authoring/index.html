@@ -349,21 +349,11 @@
                     <p>On a signature collision with a native Sass function, the native one always wins. Multiple listeners on the same hook all run, in registration order — a project&apos;s own <code>prepros.includes</code> file and three plugins can all hook <code>PREPROS_HTML</code> without stepping on each other.</p>
                     <h2 id="publishing">Publishing</h2>
                     <ul>
-                        <li>Package name matches one of the three conventions in</li>
+                        <li>Package name matches one of the three conventions in <a href="#step-1">step 1</a> — anything else, <code>kiri</code> won&apos;t load it from <code>plugins:</code> at all.</li>
+                        <li><code>kirigami.minVersion</code> set to whatever <code>kiri</code> version you actually tested against.</li>
+                        <li><code>kirigami.optionsSchema</code> present, even a trivial one — free build-time validation and editor completion for anyone using the plugin.</li>
+                        <li><code>npm publish</code>. <code>kiri install your-plugin-name</code> then resolves, installs, and prints the <code>plugins:</code> block for anyone to paste in — nothing else to wire up on your end.</li>
                     </ul>
-                    <p><a href="#step-1">step 1</a> — anything else, <code>kiri</code> won&apos;t load it from <code>plugins:</code> at all.</p>
-                    <ul>
-                        <li><code>kirigami.minVersion</code> set to whatever <code>kiri</code> version you</li>
-                    </ul>
-                    <p>actually tested against.</p>
-                    <ul>
-                        <li><code>kirigami.optionsSchema</code> present, even a trivial one — free</li>
-                    </ul>
-                    <p>build-time validation and editor completion for anyone using the plugin.</p>
-                    <ul>
-                        <li><code>npm publish</code>. <code>kiri install your-plugin-name</code> then resolves,</li>
-                    </ul>
-                    <p>installs, and prints the <code>plugins:</code> block for anyone to paste in — nothing else to wire up on your end.</p>
                     <p><a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-highlight" target="_blank" rel="noopener noreferrer"><code>plugin-highlight</code></a>, <a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-extlink" target="_blank" rel="noopener noreferrer"><code>plugin-extlink</code></a> and <a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-embed" target="_blank" rel="noopener noreferrer"><code>plugin-embed</code></a> are real, MIT-licensed packages built exactly this way — worth reading end to end once this page&apos;s toy example makes sense.</p>
                 </div>
             </section>
