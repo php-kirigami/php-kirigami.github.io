@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../../../styles/kirigami.core.min.css?###TIMESTAMP###">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tutorial · SEO — Kirigami</title>
-        <meta name="description" content="Two config blocks and a per-page override, and the whole head is handled.">
+        <meta name="description" content="One config block and a per-page override, and the whole head is handled.">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
@@ -16,13 +16,13 @@
         <meta name="author" content="Maxime Larrivée-Roy">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Tutorial · SEO — Kirigami">
-        <meta name="twitter:description" content="Two config blocks and a per-page override, and the whole head is handled.">
+        <meta name="twitter:description" content="One config block and a per-page override, and the whole head is handled.">
         <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Tutorial · SEO — Kirigami">
-        <meta property="og:description" content="Two config blocks and a per-page override, and the whole head is handled.">
+        <meta property="og:description" content="One config block and a per-page override, and the whole head is handled.">
         <meta property="og:url" content="https://php-kirigami.github.io/start/tutorial/6-seo/">
         <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/start/tutorial/6-seo/">
@@ -58,19 +58,19 @@
             <section class="section wrap doc-head">
                 <span class="eyebrow">Tutorial · Part 6 of 7</span>
                 <h1>SEO</h1>
-                <p class="lead">Two config blocks and a per-page override, and the whole head is handled.</p>
+                <p class="lead">One config block and a per-page override, and the whole head is handled.</p>
             </section>
             <section class="section wrap">
                 <ol class="steps">
                     <li>
                         <h3>Turn metadata on</h3>
                         <div class="prose">
-                            <p>Two blocks in <code>kirigami.yaml</code>, both fine empty:</p>
+                            <p>One block in <code>kirigami.yaml</code>, fine empty:</p>
                             <pre><code class="hljs language-yaml">
-                                <span class="hljs-attr">meta:</span> {}
-                                <span class="hljs-attr">jsonld:</span> {}
+                                <span class="hljs-attr">seo:</span>
+                                  <span class="hljs-attr">jsonld:</span> {}
                             </code></pre>
-                            <p><code>meta:</code> derives <code>&lt;title&gt;</code>, the description, Open Graph, Twitter Card, the canonical link, and the favicon tags from the <code>kirigami:</code> block plus each page&apos;s PHPDOC — nothing to write by hand in <code>header.php</code>. <code>jsonld:</code> does the same for a schema.org <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code> block. Drop <code>favicon.ico</code> and <code>apple-touch-icon.png</code> in <code>src/</code> and they&apos;re picked up automatically.</p>
+                            <p><code>seo:</code> derives <code>&lt;title&gt;</code>, the description, Open Graph, Twitter Card, the canonical link, and the favicon tags from the <code>kirigami:</code> block plus each page&apos;s PHPDOC — nothing to write by hand in <code>header.php</code>. The nested <code>jsonld:</code> does the same for a schema.org <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code> block — its own independent opt-in, so a project can skip it and keep just the <code>&lt;head&gt;</code> tags. Drop <code>favicon.ico</code> and <code>apple-touch-icon.png</code> in <code>src/</code> and they&apos;re picked up automatically.</p>
                         </div>
                     </li>
                     <li>
@@ -84,7 +84,7 @@
                                  * <span class="hljs-doctag">@meta</span>_image      images/fold-01.jpg
                                  */</span>
                             </code></pre>
-                            <p>A tag <code>header.php</code> already writes by hand is detected and left alone — <code>meta:</code> fills gaps, it never duplicates.</p>
+                            <p>A tag <code>header.php</code> already writes by hand is detected and left alone — <code>seo:</code> fills gaps, it never duplicates.</p>
                         </div>
                     </li>
                     <li>
@@ -100,7 +100,7 @@
                 <div class="prose">
                     <div class="markdown-alert markdown-alert-note">
                         <p class="markdown-alert-title">NOTE</p>
-                        <p>This whole site runs on exactly this pair of blocks — every page you&apos;ve read in this tutorial got its title, description and social card the same way, straight from its own PHPDOC. It goes one step further for its favicon and <code>og:image</code>: since it already has the <a href="../5-images/">image pipeline</a> wired up, <code>meta.favicon</code> / <code>meta.appleTouchIcon</code> / the <code>kirigami:</code> block&apos;s <code>image</code> key point at generated files instead of ones dropped in by hand — see <a href="../../../docs/config/#meta">Docs → Config → meta</a> for that option.</p>
+                        <p>This whole site runs on exactly this one block — every page you&apos;ve read in this tutorial got its title, description and social card the same way, straight from its own PHPDOC. It goes one step further for its favicon and <code>og:image</code>: since it already has the <a href="../5-images/">image pipeline</a> wired up, <code>seo.favicon</code> / <code>seo.appleTouchIcon</code> / <code>seo.image</code> point at generated files instead of ones dropped in by hand — see <a href="../../../docs/config/#seo">Docs → Config → seo</a> for that option.</p>
                     </div>
                 </div>
             </section>

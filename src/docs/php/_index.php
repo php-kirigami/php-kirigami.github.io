@@ -127,7 +127,7 @@
           ## LD
 
           A schema.org JSON-LD graph builder — the engine behind the
-          [`jsonld:`](../config/#jsonld) block.
+          [`seo.jsonld`](../config/#seojsonld) sub-block.
 
           ```php
           LD::add(string|array $type, array $props = [], ?string $id = null): array   // build + register a node
@@ -173,7 +173,7 @@
           ## META
 
           A `<head>` SEO / social metadata generator — the companion to
-          `LD`, and the engine behind the [`meta:`](../config/#meta) block.
+          `LD`, and the engine behind the [`seo:`](../config/#seo) block.
           Manual builders are always emitted, whether or not the config
           block is present, and are de-duplicated against whatever the page
           already writes by hand:

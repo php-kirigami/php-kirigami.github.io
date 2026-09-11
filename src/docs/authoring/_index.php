@@ -51,8 +51,8 @@
 
           Define any keys you want — `before` / `after` typically read
           `$title`, `$description`, etc. to build `<head>` metas (though with
-          the `meta:` block on, you rarely need to by hand — see the
-          [config reference](../config/#meta)).
+          the `seo:` block on, you rarely need to by hand — see the
+          [config reference](../config/#seo)).
 
           ## Auto-loaded data files
 

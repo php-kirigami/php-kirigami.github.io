@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Config — Kirigami</title>
-        <meta name="description" content="Everything kirigami.yaml can hold — the kirigami:, meta:, jsonld:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.">
+        <meta name="description" content="Everything kirigami.yaml can hold — the kirigami:, seo:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
@@ -16,13 +16,13 @@
         <meta name="author" content="Maxime Larrivée-Roy">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Config — Kirigami">
-        <meta name="twitter:description" content="Everything kirigami.yaml can hold — the kirigami:, meta:, jsonld:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.">
+        <meta name="twitter:description" content="Everything kirigami.yaml can hold — the kirigami:, seo:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.">
         <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Config — Kirigami">
-        <meta property="og:description" content="Everything kirigami.yaml can hold — the kirigami:, meta:, jsonld:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.">
+        <meta property="og:description" content="Everything kirigami.yaml can hold — the kirigami:, seo:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.">
         <meta property="og:url" content="https://php-kirigami.github.io/docs/config/">
         <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/docs/config/">
@@ -130,7 +130,7 @@
                 </nav>
                 <span class="eyebrow">Documentation</span>
                 <h1>Config</h1>
-                <p class="lead">Everything kirigami.yaml can hold — the kirigami:, meta:, jsonld:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.</p>
+                <p class="lead">Everything kirigami.yaml can hold — the kirigami:, seo:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.</p>
             </section>
             <section class="section wrap">
                 <div class="prose">
@@ -187,12 +187,18 @@
                         </tbody>
                     </table>
                     <p>Loose keys are free project data. This site&apos;s own header/footer read <code>$project</code>, <code>$baseurl</code>, <code>$author</code>, <code>$tagline</code>, <code>$description</code> straight out of them — no separate &quot;site config&quot; object to keep in sync.</p>
-                    <h2 id="meta">meta</h2>
-                    <p>Opt-in <code>&lt;head&gt;</code> SEO / social metadata — <code>&lt;title&gt;</code>, description, Open Graph, Twitter Card, canonical, favicon. A <strong>top-level</strong> block, sibling of <code>kirigami:</code>. An empty <code>meta: {}</code> is enough to turn injection on for every page; values are then derived from the <code>kirigami:</code> keys above and each page&apos;s PHPDOC (<code>@title</code>, <code>@description</code>, <code>@image</code>, <code>@robots</code>, …), with a tag your layout already writes by hand detected and skipped.</p>
+                    <h2 id="seo">seo</h2>
+                    <p>The unified SEO surface — opt-in <code>&lt;head&gt;</code> metadata (<code>&lt;title&gt;</code>, description, Open Graph, Twitter Card, canonical, favicon) plus a nested <code>jsonld</code> sub-block for schema.org JSON-LD. A <strong>top-level</strong> block, sibling of <code>kirigami:</code>, replacing what used to be two separate blocks (<code>meta:</code> and <code>jsonld:</code>) — one place for a project&apos;s whole SEO setup. An empty <code>seo: {}</code> is enough to turn the <code>&lt;head&gt;</code> tags on for every page; values are then derived from the <code>kirigami:</code> keys above and each page&apos;s PHPDOC (<code>@title</code>, <code>@description</code>, <code>@image</code>, <code>@robots</code>, …), with a tag your layout already writes by hand detected and skipped. JSON-LD is a <strong>separate, independent</strong> opt-in nested inside the same block — a project can have one without the other.</p>
                     <pre><code class="hljs language-yaml">
-                        <span class="hljs-attr">meta:</span>
-                          <span class="hljs-attr">twitter:</span>     <span class="hljs-string">&quot;@myhandle&quot;</span>
-                          <span class="hljs-attr">themeColor:</span>  <span class="hljs-string">&quot;#0b7285&quot;</span>
+                        <span class="hljs-attr">seo:</span>
+                          <span class="hljs-attr">twitter:</span>    <span class="hljs-string">&quot;@myhandle&quot;</span>
+                          <span class="hljs-attr">themeColor:</span> <span class="hljs-string">&quot;#0b7285&quot;</span>
+
+                          <span class="hljs-attr">jsonld:</span>
+                            <span class="hljs-attr">type:</span>   <span class="hljs-string">ProfessionalService</span>   <span class="hljs-comment"># @type for the main entity</span>
+                            <span class="hljs-attr">lang:</span>   <span class="hljs-string">en-CA</span>                  <span class="hljs-comment"># inLanguage on WebSite / WebPage</span>
+                            <span class="hljs-attr">logo:</span>   <span class="hljs-string">assets/logo.png</span>        <span class="hljs-comment"># absolute, or relative to baseurl</span>
+                            <span class="hljs-attr">search:</span> <span class="hljs-string">https://example.com/?q={search_term_string}</span>
                     </code></pre>
                     <table>
                         <thead>
@@ -206,7 +212,7 @@
                             <tr>
                                 <td><code>auto</code></td>
                                 <td>bool</td>
-                                <td>Inject automatically. Default <code>true</code> once the block exists; <code>auto: false</code> (or <code>meta: false</code>) keeps the values without injecting — call <code>META::tags()</code> by hand instead.</td>
+                                <td>Inject the <code>&lt;head&gt;</code> tags automatically. Default <code>true</code> once the block exists; <code>auto: false</code> (or <code>seo: false</code>) keeps the values without injecting — call <code>META::tags()</code> by hand instead. Independent of <code>jsonld.auto</code>.</td>
                             </tr>
                             <tr>
                                 <td><code>titleFormat</code> / <code>titleFormatHome</code></td>
@@ -216,7 +222,7 @@
                             <tr>
                                 <td><code>description</code> / <code>keywords</code></td>
                                 <td>string / string[]</td>
-                                <td>Fallback for pages with no <code>@description</code> / <code>@keywords</code>.</td>
+                                <td>Fallback for pages with no <code>@description</code> / <code>@keywords</code>. Also feed <code>jsonld</code>&apos;s own description/keywords when those aren&apos;t set separately.</td>
                             </tr>
                             <tr>
                                 <td><code>robots</code></td>
@@ -246,7 +252,7 @@
                             <tr>
                                 <td><code>image</code></td>
                                 <td>string</td>
-                                <td>Default <code>og:image</code> / <code>twitter:image</code>. Unset here, it falls back to the <code>kirigami:</code> block&apos;s own loose <code>image</code> / <code>ogimage</code> key, then <code>jsonld.image</code> / <code>jsonld.logo</code> — handy for a single sitewide default set once, outside the <code>meta:</code> block.</td>
+                                <td>Default <code>og:image</code> / <code>twitter:image</code>. Unset here, it falls back to <code>jsonld.image</code> / <code>jsonld.logo</code>, then the <code>kirigami:</code> block&apos;s own loose <code>image</code> / <code>ogimage</code> key.</td>
                             </tr>
                             <tr>
                                 <td><code>ogType</code></td>
@@ -273,18 +279,16 @@
                                 <td>string | bool</td>
                                 <td>A path sets it; <code>true</code> forces the default file; omitted, the default is auto-detected on disk; <code>false</code> disables it.</td>
                             </tr>
+                            <tr>
+                                <td><code>jsonld</code></td>
+                                <td>object | bool</td>
+                                <td>Nested sub-block for schema.org JSON-LD, own independent opt-in — see below.</td>
+                            </tr>
                         </tbody>
                     </table>
                     <p>Per-page overrides live in the PHPDOC block: <code>@meta false</code> skips a page entirely; <code>@meta_title</code>, <code>@meta_description</code>, <code>@meta_image</code>, <code>@meta_robots</code>, <code>@meta_type</code>, <code>@canonical</code> override the generic tag. See <a href="../php/#meta"><code>META</code></a> for the manual builders.</p>
-                    <h2 id="jsonld">jsonld</h2>
-                    <p>Opt-in schema.org JSON-LD — the companion to <code>meta:</code>. Same switch: a top-level <code>jsonld: {}</code> block turns on an automatic JSON-LD block in the page&apos;s head, derived from the same <code>kirigami:</code> keys.</p>
-                    <pre><code class="hljs language-yaml">
-                        <span class="hljs-attr">jsonld:</span>
-                          <span class="hljs-attr">type:</span> <span class="hljs-string">ProfessionalService</span>   <span class="hljs-comment"># @type for the main entity</span>
-                          <span class="hljs-attr">lang:</span> <span class="hljs-string">en-CA</span>                  <span class="hljs-comment"># inLanguage on WebSite / WebPage</span>
-                          <span class="hljs-attr">logo:</span> <span class="hljs-string">assets/logo.png</span>        <span class="hljs-comment"># absolute, or relative to baseurl</span>
-                          <span class="hljs-attr">search:</span> <span class="hljs-string">https://example.com/?q={search_term_string}</span>
-                    </code></pre>
+                    <h3 id="seojsonld">seo.jsonld</h3>
+                    <p><code>jsonld</code> inside the <code>seo:</code> block turns on an automatic JSON-LD <code>&lt;script&gt;</code> in the page&apos;s <code>&lt;head&gt;</code>, derived from the same <code>kirigami:</code> keys — an empty <code>seo: { jsonld: {} }</code> is enough.</p>
                     <table>
                         <thead>
                             <tr>
@@ -297,7 +301,7 @@
                             <tr>
                                 <td><code>auto</code></td>
                                 <td>bool</td>
-                                <td>Same switch as <code>meta.auto</code>.</td>
+                                <td>Same idea as <code>seo.auto</code>, but independent — controls JSON-LD only.</td>
                             </tr>
                             <tr>
                                 <td><code>type</code></td>

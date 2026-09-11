@@ -37,20 +37,22 @@
 
     <div class="prose">
         <markdown>
-          No `<title>`, no Open Graph tags to hand-write. Two empty blocks in
-          `kirigami.yaml` opt every page into `<title>`, description,
-          keywords, Open Graph, Twitter Card, canonical link, and JSON-LD —
-          derived from the `kirigami:` block plus each page's own PHPDOC:
+          No `<title>`, no Open Graph tags to hand-write. One block in
+          `kirigami.yaml` — the unified `seo:` surface — opts every page into
+          `<title>`, description, keywords, Open Graph, Twitter Card,
+          canonical link, and (nested inside it, its own independent opt-in)
+          JSON-LD — derived from the `kirigami:` block plus each page's own
+          PHPDOC:
 
           ```yaml
-          meta:  {}
-          jsonld: {}
+          seo:
+            jsonld: {}
           ```
 
           A page overrides just what it needs from its own header —
           `@meta_description`, `@meta_image`, `@og_type`, … — without
           touching the other pages. Full reference:
-          [`meta`](../docs/config/#meta) / [`jsonld`](../docs/config/#jsonld).
+          [`seo`](../docs/config/#seo) / [`seo.jsonld`](../docs/config/#seojsonld).
           This site runs on exactly this, nothing hand-written in
           `_layouts/header.php`.
         </markdown>

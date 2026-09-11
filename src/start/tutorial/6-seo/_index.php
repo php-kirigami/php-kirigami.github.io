@@ -2,7 +2,7 @@
 /**
  * @title    Tutorial · SEO
  * @section  start
- * @abstract Two config blocks and a per-page override, and the whole head
+ * @abstract One config block and a per-page override, and the whole head
  *           is handled.
  */
 ?>
@@ -19,20 +19,22 @@
             <h3>Turn metadata on</h3>
             <div class="prose">
                 <markdown>
-                Two blocks in `kirigami.yaml`, both fine empty:
+                One block in `kirigami.yaml`, fine empty:
 
                 ```yaml
-                meta: {}
-                jsonld: {}
+                seo:
+                  jsonld: {}
                 ```
 
-                `meta:` derives `<title>`, the description, Open Graph,
+                `seo:` derives `<title>`, the description, Open Graph,
                 Twitter Card, the canonical link, and the favicon tags from
                 the `kirigami:` block plus each page's PHPDOC — nothing to
-                write by hand in `header.php`. `jsonld:` does the same for a
-                schema.org `<script type="application/ld+json">` block.
-                Drop `favicon.ico` and `apple-touch-icon.png` in `src/` and
-                they're picked up automatically.
+                write by hand in `header.php`. The nested `jsonld:` does the
+                same for a schema.org `<script type="application/ld+json">`
+                block — its own independent opt-in, so a project can skip it
+                and keep just the `<head>` tags. Drop `favicon.ico` and
+                `apple-touch-icon.png` in `src/` and they're picked up
+                automatically.
                 </markdown>
             </div>
         </li>
@@ -51,7 +53,7 @@
                 ```
 
                 A tag `header.php` already writes by hand is detected and
-                left alone — `meta:` fills gaps, it never duplicates.
+                left alone — `seo:` fills gaps, it never duplicates.
                 </markdown>
             </div>
         </li>
@@ -75,14 +77,14 @@
     <div class="prose">
         <markdown>
         > [!NOTE]
-        > This whole site runs on exactly this pair of blocks — every page
+        > This whole site runs on exactly this one block — every page
         > you've read in this tutorial got its title, description and social
         > card the same way, straight from its own PHPDOC. It goes one step
         > further for its favicon and `og:image`: since it already has the
-        > [image pipeline](../5-images/) wired up, `meta.favicon` /
-        > `meta.appleTouchIcon` / the `kirigami:` block's `image` key point
-        > at generated files instead of ones dropped in by hand — see
-        > [Docs → Config → meta](../../../docs/config/#meta) for that option.
+        > [image pipeline](../5-images/) wired up, `seo.favicon` /
+        > `seo.appleTouchIcon` / `seo.image` point at generated files instead
+        > of ones dropped in by hand — see
+        > [Docs → Config → seo](../../../docs/config/#seo) for that option.
         </markdown>
     </div>
 </section>

@@ -3,9 +3,9 @@
  * @title      Config
  * @section    docs
  * @position   1
- * @abstract   Everything kirigami.yaml can hold — the kirigami:, meta:,
- *             jsonld:, prepros:, image:, plugins:, esbuild:, sass:,
- *             export:, scripts: and tasks: blocks.
+ * @abstract   Everything kirigami.yaml can hold — the kirigami:, seo:,
+ *             prepros:, image:, plugins:, esbuild:, sass:, export:,
+ *             scripts: and tasks: blocks.
  * @breadcrumb true
  */
 ?>
@@ -63,61 +63,65 @@
           straight out of them — no separate "site config" object to keep in
           sync.
 
-          ## meta
+          ## seo
 
-          Opt-in `<head>` SEO / social metadata — `<title>`, description,
-          Open Graph, Twitter Card, canonical, favicon. A **top-level**
-          block, sibling of `kirigami:`. An empty `meta: {}` is enough to
-          turn injection on for every page; values are then derived from the
-          `kirigami:` keys above and each page's PHPDOC (`@title`,
+          The unified SEO surface — opt-in `<head>` metadata (`<title>`,
+          description, Open Graph, Twitter Card, canonical, favicon) plus a
+          nested `jsonld` sub-block for schema.org JSON-LD. A **top-level**
+          block, sibling of `kirigami:`, replacing what used to be two
+          separate blocks (`meta:` and `jsonld:`) — one place for a
+          project's whole SEO setup. An empty `seo: {}` is enough to turn
+          the `<head>` tags on for every page; values are then derived from
+          the `kirigami:` keys above and each page's PHPDOC (`@title`,
           `@description`, `@image`, `@robots`, …), with a tag your layout
-          already writes by hand detected and skipped.
+          already writes by hand detected and skipped. JSON-LD is a
+          **separate, independent** opt-in nested inside the same block —
+          a project can have one without the other.
 
           ```yaml
-          meta:
-            twitter:     "@myhandle"
-            themeColor:  "#0b7285"
+          seo:
+            twitter:    "@myhandle"
+            themeColor: "#0b7285"
+
+            jsonld:
+              type:   ProfessionalService   # @type for the main entity
+              lang:   en-CA                  # inLanguage on WebSite / WebPage
+              logo:   assets/logo.png        # absolute, or relative to baseurl
+              search: https://example.com/?q={search_term_string}
           ```
 
           | Key | Type | Notes |
           |---|---|---|
-          | `auto` | bool | Inject automatically. Default `true` once the block exists; `auto: false` (or `meta: false`) keeps the values without injecting — call `META::tags()` by hand instead. |
+          | `auto` | bool | Inject the `<head>` tags automatically. Default `true` once the block exists; `auto: false` (or `seo: false`) keeps the values without injecting — call `META::tags()` by hand instead. Independent of `jsonld.auto`. |
           | `titleFormat` / `titleFormatHome` | string | `<title>` templates. Tokens `{title}`, `{project}`, `{tagline}`. Defaults `{title} — {project}` / `{project} — {tagline}`. |
-          | `description` / `keywords` | string / string[] | Fallback for pages with no `@description` / `@keywords`. |
+          | `description` / `keywords` | string / string[] | Fallback for pages with no `@description` / `@keywords`. Also feed `jsonld`'s own description/keywords when those aren't set separately. |
           | `robots` | string \| `false` | Default `index, follow`. |
           | `language` | string | BCP-47 tag → `<meta name="language">` + `og:locale`. |
           | `generator` | string \| `false` | Default `Kirigami`. |
           | `author` / `designer` | string | `<meta name="author">` / a `designer` tag. |
           | `themeColor` | string | `<meta name="theme-color">`. |
-          | `image` | string | Default `og:image` / `twitter:image`. Unset here, it falls back to the `kirigami:` block's own loose `image` / `ogimage` key, then `jsonld.image` / `jsonld.logo` — handy for a single sitewide default set once, outside the `meta:` block. |
+          | `image` | string | Default `og:image` / `twitter:image`. Unset here, it falls back to `jsonld.image` / `jsonld.logo`, then the `kirigami:` block's own loose `image` / `ogimage` key. |
           | `ogType` | string | Default `website`. |
           | `twitterCard` | string | Default `summary_large_image`. |
           | `twitter` | string \| map | Handle for `twitter:site` / `twitter:creator`. |
           | `canonical` | bool | Emit `<link rel="canonical">`. Default `true`. |
           | `favicon` / `appleTouchIcon` / `humans` | string \| bool | A path sets it; `true` forces the default file; omitted, the default is auto-detected on disk; `false` disables it. |
+          | `jsonld` | object \| bool | Nested sub-block for schema.org JSON-LD, own independent opt-in — see below. |
 
           Per-page overrides live in the PHPDOC block: `@meta false` skips a
           page entirely; `@meta_title`, `@meta_description`, `@meta_image`,
           `@meta_robots`, `@meta_type`, `@canonical` override the generic
           tag. See [`META`](../php/#meta) for the manual builders.
 
-          ## jsonld
+          ### seo.jsonld
 
-          Opt-in schema.org JSON-LD — the companion to `meta:`. Same switch:
-          a top-level `jsonld: {}` block turns on an automatic JSON-LD block
-          in the page's head, derived from the same `kirigami:` keys.
-
-          ```yaml
-          jsonld:
-            type: ProfessionalService   # @type for the main entity
-            lang: en-CA                  # inLanguage on WebSite / WebPage
-            logo: assets/logo.png        # absolute, or relative to baseurl
-            search: https://example.com/?q={search_term_string}
-          ```
+          `jsonld` inside the `seo:` block turns on an automatic JSON-LD
+          `<script>` in the page's `<head>`, derived from the same
+          `kirigami:` keys — an empty `seo: { jsonld: {} }` is enough.
 
           | Key | Type | Notes |
           |---|---|---|
-          | `auto` | bool | Same switch as `meta.auto`. |
+          | `auto` | bool | Same idea as `seo.auto`, but independent — controls JSON-LD only. |
           | `type` | string | `Organization`, `ProfessionalService`, `LocalBusiness`, … |
           | `name` / `url` / `description` | string | Default to `project` / `baseurl` / `description`. |
           | `logo` / `image` | string | `image` defaults to `logo`. |

@@ -22,6 +22,21 @@
 
           ## September 11, 2026
 
+          **[@kirigami/php-prepros](https://www.npmjs.com/package/@kirigami/php-prepros)**
+          `1.9.3` → `2.0.0` — **breaking:** the separate `meta:` / `jsonld:`
+          top-level blocks are merged into one unified `seo:` block, `jsonld`
+          nested inside it — one place, one mental model for a project's
+          whole SEO/social surface, still independently toggleable (a
+          project can have META's tags without JSON-LD, or vice versa).
+          Migration is a rename: `meta:` → `seo:`, and `jsonld:`'s content
+          moves under it as `seo.jsonld:`. This site's own `kirigami.yaml`
+          made the same move, [Docs → Config](../docs/config/#seo) is
+          updated, and the [SEO tutorial step](../start/tutorial/6-seo/)
+          reflects it. **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**
+          `1.5.7` → `2.0.0` alongside it — also breaking, since the bundled
+          `kirigami.schema.json` now rejects the old `meta:`/`jsonld:` keys
+          outright.
+
           **[@kirigami/plugin-embed](https://www.npmjs.com/package/@kirigami/plugin-embed)**
           `0.1.0` → `0.1.1` — new plugin: `<youtube id="…">` /
           `<vimeo id="…">` turn into a real video card (cover thumbnail,

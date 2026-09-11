@@ -11,7 +11,7 @@ $parts = [
     ['3-content',        'Content',            'Markdown, a YAML data file, @content.'],
     ['4-styles-scripts', 'Styles & scripts',   'Retheming with canva, dark mode, the managed <head>.'],
     ['5-images',         'Images',             'The image autogenerator — a hero and a gallery.'],
-    ['6-seo',            'SEO',                'The meta: and jsonld: blocks, per-page overrides.'],
+    ['6-seo',            'SEO',                'The seo: block (and its jsonld sub-block), per-page overrides.'],
     ['7-deploy',         'Deploy',             'kiribuild, GitHub Pages, kiri export.'],
 ];
 ?>

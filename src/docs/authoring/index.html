@@ -153,7 +153,7 @@
                         <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$title</span>) . <span class="hljs-string">&#x27;&lt;/h1&gt;&#x27;</span>;
                         <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$abstract</span>) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;
                     </code></pre>
-                    <p>Define any keys you want — <code>before</code> / <code>after</code> typically read <code>$title</code>, <code>$description</code>, etc. to build <code>&lt;head&gt;</code> metas (though with the <code>meta:</code> block on, you rarely need to by hand — see the <a href="../config/#meta">config reference</a>).</p>
+                    <p>Define any keys you want — <code>before</code> / <code>after</code> typically read <code>$title</code>, <code>$description</code>, etc. to build <code>&lt;head&gt;</code> metas (though with the <code>seo:</code> block on, you rarely need to by hand — see the <a href="../config/#seo">config reference</a>).</p>
                     <h2 id="auto-loaded-data-files">Auto-loaded data files</h2>
                     <p>When an annotation value ends in <code>.yaml</code>, <code>.yml</code>, <code>.json</code>, or <code>.md</code> <strong>and</strong> resolves to a file relative to the page&apos;s own directory, it&apos;s parsed and injected as structured data instead of a plain string:</p>
                     <table>
