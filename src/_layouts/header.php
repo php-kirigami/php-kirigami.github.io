@@ -17,9 +17,10 @@ $section = $section ?? '';
 // path (relative to the site root) => [label, section key]. Only list pages
 // that actually exist — grow this as each phase of the site lands.
 $nav = [
-    ''       => ['Home',  'home'],
-    'start/' => ['Start', 'start'],
-    'docs/'  => ['Docs',  'docs'],
+    ''         => ['Home',    'home'],
+    'start/'   => ['Start',   'start'],
+    'docs/'    => ['Docs',    'docs'],
+    'plugins/' => ['Plugins', 'plugins'],
 ];
 ?>
 <!DOCTYPE html>

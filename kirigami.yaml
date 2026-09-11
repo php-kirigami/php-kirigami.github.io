@@ -61,6 +61,14 @@ plugins:
       tag: true
       embedFont: false  # JetBrains Mono is already embedded site-wide as --font-mono, via $fonts in _conf.scss
 
+  # External link preview card — live demo on /plugins/.
+  - name: "@kirigami/plugin-extlink"
+    active: true
+
+  # YouTube/Vimeo oEmbed video card — live demo on /plugins/.
+  - name: "@kirigami/plugin-embed"
+    active: true
+
 
 sass:
   # style: expanded

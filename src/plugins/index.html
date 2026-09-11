@@ -7,23 +7,23 @@
         </script>
         <link rel="stylesheet" href="../styles/kirigami.core.min.css?###TIMESTAMP###">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>About — Kirigami</title>
-        <meta name="description" content="Why Kirigami exists, who maintains it, and how it&apos;s licensed.">
+        <title>Plugins — Kirigami</title>
+        <meta name="description" content="Official Kirigami plugins — install one, or write your own.">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
         <meta name="generator" content="Kirigami">
         <meta name="author" content="Maxime Larrivée-Roy">
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="About — Kirigami">
-        <meta name="twitter:description" content="Why Kirigami exists, who maintains it, and how it&apos;s licensed.">
+        <meta name="twitter:title" content="Plugins — Kirigami">
+        <meta name="twitter:description" content="Official Kirigami plugins — install one, or write your own.">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="About — Kirigami">
-        <meta property="og:description" content="Why Kirigami exists, who maintains it, and how it&apos;s licensed.">
-        <meta property="og:url" content="https://php-kirigami.github.io/about/">
-        <link rel="canonical" href="https://php-kirigami.github.io/about/">
+        <meta property="og:title" content="Plugins — Kirigami">
+        <meta property="og:description" content="Official Kirigami plugins — install one, or write your own.">
+        <meta property="og:url" content="https://php-kirigami.github.io/plugins/">
+        <link rel="canonical" href="https://php-kirigami.github.io/plugins/">
         <link rel="icon" type="image/x-icon" href="../favicon.ico">
         <link rel="apple-touch-icon" href="../apple-touch-icon.png">
         <script type="application/ld+json">
@@ -52,7 +52,7 @@
                     },
                     {
                         "@type": "BreadcrumbList",
-                        "@id": "https://php-kirigami.github.io/about/#breadcrumb",
+                        "@id": "https://php-kirigami.github.io/plugins/#breadcrumb",
                         "itemListElement": [
                             {
                                 "@type": "ListItem",
@@ -63,16 +63,16 @@
                             {
                                 "@type": "ListItem",
                                 "position": 2,
-                                "name": "About",
-                                "item": "https://php-kirigami.github.io/about/"
+                                "name": "Plugins",
+                                "item": "https://php-kirigami.github.io/plugins/"
                             }
                         ]
                     },
                     {
                         "@type": "WebPage",
-                        "@id": "https://php-kirigami.github.io/about/#webpage",
-                        "url": "https://php-kirigami.github.io/about/",
-                        "name": "About",
+                        "@id": "https://php-kirigami.github.io/plugins/#webpage",
+                        "url": "https://php-kirigami.github.io/plugins/",
+                        "name": "Plugins",
                         "isPartOf": {
                             "@id": "https://php-kirigami.github.io/#website"
                         },
@@ -81,14 +81,14 @@
                         },
                         "inLanguage": "en",
                         "breadcrumb": {
-                            "@id": "https://php-kirigami.github.io/about/#breadcrumb"
+                            "@id": "https://php-kirigami.github.io/plugins/#breadcrumb"
                         }
                     }
                 ]
             }
         </script>
     </head>
-    <body class="page-about">
+    <body class="page-plugins">
         <a class="skip-link" href="#main">Skip to content</a>
         <header class="site-header">
             <div class="wrap site-header__inner">
@@ -98,7 +98,7 @@
                         <li><a href="../">Home</a></li>
                         <li><a href="../start/">Start</a></li>
                         <li><a href="../docs/">Docs</a></li>
-                        <li><a href="../plugins/">Plugins</a></li>
+                        <li><a href="../plugins/" aria-current="page">Plugins</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
@@ -116,20 +116,72 @@
         </header>
         <main id="main">
             <section class="section wrap doc-head">
-                <span class="eyebrow">About</span>
-                <h1>About</h1>
-                <p class="lead">Why Kirigami exists, who maintains it, and how it&apos;s licensed.</p>
+                <span class="eyebrow">Plugins</span>
+                <h1>Plugins</h1>
+                <p class="lead">Official Kirigami plugins — install one, or write your own.</p>
             </section>
             <section class="section wrap">
                 <div class="prose">
-                    <h2 id="why-php-why-webassembly">Why PHP, why WebAssembly</h2>
-                    <p>Static site generators are usually JavaScript. Kirigami starts from a different premise: a huge number of developers already know PHP — includes, loops, real control flow, a standard library — and none of that needs a running PHP server to produce a static site. It only needs to run <strong>once</strong>, at build time.</p>
-                    <p>So Kirigami compiles a custom PHP 8.5 build to WebAssembly and runs it directly inside Node. No PHP install on the machine, no server process, no headless browser rendering pages to scrape their output — just PHP templates going in and flat HTML coming out, one command. That constraint shapes everything else: the asset pipeline (esbuild + Sass), the image autogenerator, the plugin system — all wired to work without a native dependency anywhere in the toolchain.</p>
-                    <h2 id="whos-behind-it">Who&apos;s behind it</h2>
-                    <p>Kirigami is maintained by <strong>Maxime Larrivée-Roy</strong>, as a side project — the whole <a href="https://github.com/php-kirigami" target="_blank" rel="noopener noreferrer"><code>php-kirigami</code></a> GitHub org, every <code>@kirigami/*</code> package on npm, this site. Issues and pull requests are genuinely welcome; response times will vary with a one-person maintainer.</p>
-                    <h2 id="license">License</h2>
-                    <p>Everything is <strong>MIT</strong>, with one exception: <a href="https://www.npmjs.com/package/@kirigami/php-wasm" target="_blank" rel="noopener noreferrer"><code>@kirigami/php-wasm</code></a> — the compiled PHP runtime itself — is <strong>GPL-2.0-or-later</strong>, inherited from its <a href="https://github.com/WordPress/wordpress-playground" target="_blank" rel="noopener noreferrer">WordPress Playground</a> upstream. Nothing else in the toolchain is affected: a site built with Kirigami ships plain HTML/CSS/JS, with no license obligation of its own from the build tooling.</p>
-                    <p>See the full <a href="../ecosystem/">package-by-package breakdown</a> for versions and licenses at a glance.</p>
+                    <p>A plugin is an npm package — <code>@kirigami/plugin-*</code>, or your own under the same convention — declared under <code>plugins:</code> in <code>kirigami.yaml</code>. It taps into the same tag/hook registry a project&apos;s own <code>prepros.includes</code> file does (see <a href="../docs/authoring/#registering-tags-and-hooks">Writing pages</a>), just packaged and versioned for reuse across projects.</p>
+                    <pre><code class="hljs language-bash">
+                        kiri install highlight
+                    </code></pre>
+                    <p>resolves a bare name against the <code>@kirigami/plugin-*</code> convention, installs it, and prints the <code>plugins:</code> block to paste into <code>kirigami.yaml</code> — see the <a href="../docs/cli/">CLI reference</a> for the full command. Three official plugins ship today; this page demos each one live. The complete list, with versions fetched live from npm, is on <a href="../ecosystem/">Ecosystem</a>.</p>
+                </div>
+            </section>
+            <hr class="fold">
+            <section class="section wrap" id="highlight">
+                <div class="doc-head">
+                    <span class="eyebrow">Build-time</span>
+                    <h2>@kirigami/plugin-highlight</h2>
+                    <p class="lead">Syntax highlighting, resolved at build time — zero bytes of highlight.js reach the browser.</p>
+                </div>
+                <div class="prose">
+                    <p>You&apos;re already looking at the demo: every fenced code block on this entire site — the one above included — is colored by this plugin, its theme layered on via <code>sass:after</code> and tuned to match the site&apos;s own palette instead of a generic preset. Also registers a <code>&lt;highlight lang=&quot;…&quot;&gt;</code> authoring tag, and a hover copy button on every block.</p>
+                </div>
+                <p><a href="https://www.npmjs.com/package/@kirigami/plugin-highlight">npm</a> · <a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-highlight">Source</a></p>
+            </section>
+            <hr class="fold">
+            <section class="section wrap" id="extlink">
+                <div class="doc-head">
+                    <span class="eyebrow">Server-side, cached</span>
+                    <h2>@kirigami/plugin-extlink</h2>
+                    <p class="lead">External link preview cards — scraped once, at build time, and cached to disk.</p>
+                </div>
+                <div class="prose">
+                    <p><code>&lt;extlink src=&quot;…&quot;&gt;</code> scrapes the target page&apos;s title, description, preview image and site name, then caches every bit of it — <code>_data/extlink/</code>, <code>assets/extlink/</code>, <code>assets/images/extlink/</code>, meant to be committed — so a later build, CI included, never re-crawls a URL it has already resolved:</p>
+                </div>
+                <a class="extlink" href="https://github.com/php-kirigami/kirigami" target="_blank" rel="noopener noreferrer">
+                    <img class="extlink__image" src="../images/extlink/9dc4c4459f96.webp" alt="" loading="lazy">
+                    <span class="extlink__body">
+                        <strong class="extlink__title">php-kirigami/kirigami: Core package</strong>
+                        <span class="extlink__desc">Core package. Contribute to php-kirigami/kirigami development by creating an account on GitHub.</span>
+                        <span class="extlink__site">GitHub</span>
+                    </span>
+                </a>
+                <p><a href="https://www.npmjs.com/package/@kirigami/plugin-extlink">npm</a> · <a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-extlink">Source</a></p>
+            </section>
+            <hr class="fold">
+            <section class="section wrap" id="embed">
+                <div class="doc-head">
+                    <span class="eyebrow">Client-side</span>
+                    <h2>@kirigami/plugin-embed</h2>
+                    <p class="lead">YouTube / Vimeo oEmbed cards — resolved in the visitor&apos;s own browser, nothing fetched at build time.</p>
+                </div>
+                <div class="prose">
+                    <p><code>&lt;youtube id=&quot;…&quot;&gt;</code> / <code>&lt;vimeo id=&quot;…&quot;&gt;</code> swap themselves for a cover thumbnail, the video&apos;s title, and a play button the moment the page loads — the oEmbed lookup runs client-side, cached in <code>localStorage</code>, and nothing actually loads from the provider until that button is clicked:</p>
+                </div>
+                <youtube id="jNQXAC9IVRw">
+                    <vimeo id="1084537">
+                        <p><a href="https://www.npmjs.com/package/@kirigami/plugin-embed">npm</a> · <a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-embed">Source</a></p>
+                    </vimeo>
+                </youtube>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
+                <div class="prose">
+                    <h2 id="writing-your-own">Writing your own</h2>
+                    <p>A plugin&apos;s package exports a default function; <code>kiri</code> calls it once, at the top of every build/export/watch, with its <code>options:</code> from <code>kirigami.yaml</code>. From there it&apos;s the exact same <a href="https://www.npmjs.com/package/@kirigami/sdk" target="_blank" rel="noopener noreferrer"><code>@kirigami/sdk</code></a> hook registry a project&apos;s own <code>prepros.includes</code> file can reach into — <code>SASS_BEFORE</code>/<code>SASS_AFTER</code>, <code>ESBUILD_BEFORE</code>/<code>AFTER</code>, <code>PREPROS_HTML</code>, <code>PREPROS_PHP</code> — covered in <a href="../docs/authoring/#sass-hooks">Writing pages → Sass hooks</a>. The three plugins above are real, MIT-licensed, source-linked examples to start from — <code>plugin-highlight</code>&apos;s <code>index.js</code> is the shortest complete one.</p>
                 </div>
             </section>
         </main>
