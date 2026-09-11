@@ -143,7 +143,14 @@ after the first line and dumps the rest as a flat `<p>`, then reopens a new
 `<ul>` for the next item — logged in the monorepo's `todo.md`, worked
 around here by keeping every list item on one source line.
 
-Not started yet: `/examples`, `/design`.
+Also shipped: **`/design/`** — the palette (as live CSS-custom-property
+swatches, so it repaints in dark mode with nothing hand-toggled), the
+Quicksand/Roboto Flex/JetBrains Mono type trio, and the five
+`@kirigami/canva` `styles/main` shared components (breadcrumb, docs-toc,
+table + badges, palette swatches — the last one a real `IMG::palette()`
+call against the site's own demo photo, not hard-coded hex values).
+
+Not started yet: `/examples`.
 
 ---
 
