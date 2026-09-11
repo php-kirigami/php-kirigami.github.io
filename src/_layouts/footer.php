@@ -22,6 +22,7 @@
                     <ul>
                         <li><a href="<?php echo $relroot; ?>ecosystem/">Ecosystem</a></li>
                         <li><a href="<?php echo $relroot; ?>changelog/">Changelog</a></li>
+                        <li><a href="<?php echo $relroot; ?>roadmap/">Roadmap</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
                         <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
                         <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
