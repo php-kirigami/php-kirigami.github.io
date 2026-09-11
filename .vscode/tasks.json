@@ -20,6 +20,20 @@
 			"problemMatcher": []
 		},
 		{
+			"label": "kiri:serve",
+			"detail": "Watch + a local server with hot-reload. Run manually — does not start on folder open.",
+			"type": "shell",
+			"command": "npx kiri serve",
+			"isBackground": true,
+			"presentation": {
+				"panel": "shared",
+				"group": "kiri-watch",
+				"reveal": "always",
+				"showReuseMessage": false
+			},
+			"problemMatcher": []
+		},
+		{
 			"label": "kiri:build",
 			"detail": "One-off development build.",
 			"type": "shell",
