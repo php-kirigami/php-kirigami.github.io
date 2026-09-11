@@ -150,7 +150,39 @@ Quicksand/Roboto Flex/JetBrains Mono type trio, and the five
 table + badges, palette swatches — the last one a real `IMG::palette()`
 call against the site's own demo photo, not hard-coded hex values).
 
-Not started yet: `/examples`.
+Also shipped: **`/examples/`** — a cookbook, distinct from `/docs/` (exhaustive
+reference) and the tutorial (guided walk): six short recipes combining
+existing pieces the way a real project actually uses them (SEO in two
+`kirigami.yaml` blocks, a one-off `{% %}` Markdown shortcode, a one-off HTML
+authoring tag, `FS::getChildren()` for a self-maintaining page list, an image
+gallery from an auto-loaded YAML file + `IMG::asset()`, `<extlink>`/`<youtube>`
+for rich cards). Two recipes (`{% badge %}`, `<shortcut keys="…">`) are
+registered for real on this site's own `_lib/functions.php` and demoed live
+on the page itself, not just described. All six phases from the game plan are
+now shipped — nothing left in "not started."
+
+**Nav: Design and Roadmap promoted from the footer into the header.** The
+user reported not being able to find them — they were footer-only by the
+original "secondary pages live in the footer" rule. `_layouts/header.php`'s
+`$nav` now carries Home / Start / Docs / Plugins / Examples / Design /
+Roadmap / GitHub (still also in the footer grid, same as Home already was —
+duplication there is fine).
+
+**Real bug found and fixed: theme toggle reflowed the whole page.** Reported
+by the user while browsing `/docs/authoring/`. Root cause was in
+`@kirigami/canva`'s `styles/prose.scss`, not this site — see the monorepo's
+own `CLAUDE.md` "Current work" for the full specificity analysis. Fixed
+upstream (canva 2.5.1, released), this site's `@kirigami/canva` floor bumped
+to `^2.5.1` and verified with a Playwright repro (full-page height diff
+before/after a real `[data-theme-toggle]` click) against the real published
+package: 0px difference anywhere on `/docs/authoring/` or `/examples/`.
+
+Two new CSS conventions landed alongside the `/examples/` build, per user
+feedback: no `style="…"` inline attributes (a small `.demo` class in
+`_main.scss` covers the one-off spacing that used to be inline), and prefer
+`::before`/`::after` over extra markup for a purely decorative element (the
+`<shortcut>` tag's `+` separator between `<kbd>`s is `kbd + kbd::before`, not
+a `<span>`).
 
 ---
 
@@ -196,6 +228,10 @@ Not started yet: `/examples`.
     │   └── php/           #   PHP class library, + the live image-autogenerator demo
     ├── plugins/_index.php #   the 3 official plugins, each with a live demo
     ├── start/_index.php   #   hub + install/ + quickstart/ + the 7-part tutorial/
+    ├── examples/_index.php #  cookbook — 6 recipes, 2 registered + demoed live
+    ├── design/_index.php  #   palette / type / canva styles/main showcase
+    ├── roadmap/_index.php #   the monorepo's todo.md, translated
+    ├── changelog/_index.php
     ├── about/_index.php
     ├── templates/_index.php
     ├── showcase/_index.php
