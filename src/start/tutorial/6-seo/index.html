@@ -41,7 +41,7 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                         <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                             <circle cx="12" cy="12" r="4"></circle>
@@ -64,8 +64,10 @@
                         <h3>Turn metadata on</h3>
                         <div class="prose">
                             <p>Two blocks in <code>kirigami.yaml</code>, both fine empty:</p>
-                            <pre><code class="hljs language-yaml"><span class="hljs-attr">meta:</span> {}
-<span class="hljs-attr">jsonld:</span> {}</code></pre>
+                            <pre><code class="hljs language-yaml">
+                                <span class="hljs-attr">meta:</span> {}
+                                <span class="hljs-attr">jsonld:</span> {}
+                            </code></pre>
                             <p><code>meta:</code> derives <code>&lt;title&gt;</code>, the description, Open Graph, Twitter Card, the canonical link, and the favicon tags from the <code>kirigami:</code> block plus each page&apos;s PHPDOC — nothing to write by hand in <code>header.php</code>. <code>jsonld:</code> does the same for a schema.org <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code> block. Drop <code>favicon.ico</code> and <code>apple-touch-icon.png</code> in <code>src/</code> and they&apos;re picked up automatically.</p>
                         </div>
                     </li>
@@ -73,11 +75,13 @@
                         <h3>Override per page</h3>
                         <div class="prose">
                             <p>A page&apos;s own PHPDOC wins over the project-wide defaults:</p>
-                            <pre><code class="hljs language-php"><span class="hljs-comment">/**
- * <span class="hljs-doctag">@title</span>           The first pleat
- * <span class="hljs-doctag">@meta</span>_description How Studio Plié got its name.
- * <span class="hljs-doctag">@meta</span>_image      images/fold-01.jpg
- */</span></code></pre>
+                            <pre><code class="hljs language-php">
+                                <span class="hljs-comment">/**
+                                 * <span class="hljs-doctag">@title</span>           The first pleat
+                                 * <span class="hljs-doctag">@meta</span>_description How Studio Plié got its name.
+                                 * <span class="hljs-doctag">@meta</span>_image      images/fold-01.jpg
+                                 */</span>
+                            </code></pre>
                             <p>A tag <code>header.php</code> already writes by hand is detected and left alone — <code>meta:</code> fills gaps, it never duplicates.</p>
                         </div>
                     </li>
@@ -140,7 +144,7 @@
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="../../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>

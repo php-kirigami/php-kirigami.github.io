@@ -27,7 +27,7 @@ $packages = kirigami_packages();
     </div>
 
     <div class="table-wrap">
-        <table class="pkg-table">
+        <table class="table">
             <thead>
                 <tr>
                     <th>Package</th>
@@ -46,12 +46,12 @@ $packages = kirigami_packages();
                             </a>
                         </td>
                         <td><?php echo str_htmlesc($pkg['role']); ?></td>
-                        <td class="pkg-table__version">
+                        <td class="table__num">
                             <?php echo $version ? 'v' . str_htmlesc($version) : '—'; ?>
                         </td>
                         <td>
                             <?php if ($pkg['license'] === 'GPL-2.0-or-later'): ?>
-                                <span class="badge badge--gpl">GPL-2.0-or-later</span>
+                                <span class="badge badge--muted">GPL-2.0-or-later</span>
                             <?php else: ?>
                                 <span class="badge">MIT</span>
                             <?php endif; ?>

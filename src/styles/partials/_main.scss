@@ -2,6 +2,7 @@
 
 @use "@kirigami/canva/utils" as *;
 @use "@kirigami/canva/prose";   // → `.prose { … }` for Markdown output
+@use "@kirigami/canva/main";    // → `.breadcrumb` / `.docs-toc` / `.table` / `.badge` / `.palette`
 
 :root {
     // Not a canva token (conf only knows $font-body / $font-heading) — this
@@ -11,11 +12,19 @@
     // duplicated for highlighted code blocks.
     --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-    // --border / --surface-2 already flip with the theme, so this alone
-    // themes every scrollbar on the site — code blocks included — without a
-    // separate dark-mode override.
-    scrollbar-color: var(--border) var(--surface-2);
-    scrollbar-width: thin;
+    // scrollbar-color / scrollbar-width: themed globally by @kirigami/canva/conf's
+    // reset since canva 2.5.0 — no longer needed here.
+}
+
+// canva/main's components hardcode a generic mono stack; point them at this
+// site's own --font-mono (JetBrains Mono) instead, for consistency with every
+// other mono usage on the page (eyebrows, nav numbers, footer headings, …).
+.breadcrumb,
+.docs-toc a,
+.badge,
+.table thead th,
+.table__num {
+    font-family: var(--font-mono);
 }
 
 // ── Layout primitives ──────────────────────────────────────────────
@@ -313,20 +322,9 @@ a.card:hover { border-color: var(--accent); }
     .lead { margin-top: .6rem; }
 }
 
-// ── Breadcrumb (docs sub-pages, via FS::getBreadcrumb()) ─────────────
-.breadcrumb {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .35rem;
-    font-family: var(--font-mono);
-    font-size: .78rem;
-    color: var(--ink-muted);
-    margin-bottom: .9rem;
-
-    a { color: inherit; text-decoration: none; }
-    a:hover { color: var(--accent); }
-    [aria-current="page"] { color: var(--ink); }
-}
+// canva/main's `.breadcrumb` covers the layout; this site just adds spacing
+// below it (docs sub-pages, via FS::getBreadcrumb()).
+.breadcrumb { margin-bottom: .9rem; }
 
 // ── Image autogenerator live demo (/docs/php/#img) ───────────────────
 .img-demo {
@@ -349,20 +347,8 @@ a.card:hover { border-color: var(--accent); }
         border: 1px solid var(--border);
     }
 
-    &__palette {
-        display: flex;
-        list-style: none;
-        margin: .75rem 0 0;
-        padding: 0;
-        border-radius: 5px;
-        overflow: hidden;
-        border: 1px solid var(--border);
-
-        li {
-            flex: 1;
-            height: 1.75rem;
-        }
-    }
+    // Swatches use canva/main's `.palette` (see markup) — just needs spacing.
+    .palette { margin-top: .75rem; }
 
     figcaption {
         margin-top: .75rem;
@@ -373,28 +359,9 @@ a.card:hover { border-color: var(--accent); }
     }
 }
 
-// ── Quick-jump list (long reference pages, e.g. /docs/php/) ──────────
-.docs-toc {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .4rem .6rem;
-    margin: 0 0 2rem;
-    padding: 0;
-    list-style: none;
-
-    a {
-        display: inline-block;
-        padding: .2rem .55rem;
-        border: 1px solid var(--border);
-        border-radius: 3px;
-        background: var(--surface-2);
-        font-family: var(--font-mono);
-        font-size: .78rem;
-        text-decoration: none;
-        color: var(--ink-muted);
-    }
-    a:hover { color: var(--accent); border-color: var(--accent); }
-}
+// canva/main's `.docs-toc` covers the layout; this site just adds spacing
+// below it (long reference pages, e.g. /docs/php/).
+.docs-toc { margin-bottom: 2rem; }
 
 // ── Tutorial series nav (Part N of 7, prev/next) ─────────────────────
 .tutorial-nav {
@@ -474,45 +441,14 @@ a.card:hover { border-color: var(--accent); }
     code, kbd, samp, pre { font-family: var(--font-mono); }
 }
 
-// ── Tables (outside .prose — e.g. /ecosystem/'s package table) ──────
-.table-wrap { overflow-x: auto; margin-top: 1.5rem; }
+// canva/main's `.table`/`.table-wrap`/`.badge` cover the base look; this site
+// adds spacing + the one content-specific rule (/ecosystem/'s package table:
+// nothing wraps except the "Role" column).
+.table-wrap { margin-top: 1.5rem; }
 
-.pkg-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: .92rem;
-
-    th, td {
-        text-align: left;
-        padding: .65rem .9rem;
-        border-bottom: 1px solid var(--border);
-        white-space: nowrap;
-    }
+.table {
+    th, td { white-space: nowrap; }
     td:nth-child(2) { white-space: normal; color: var(--ink-muted); }
-
-    thead th {
-        font-family: var(--font-mono);
-        font-size: .72rem;
-        letter-spacing: .08em;
-        text-transform: uppercase;
-        color: var(--ink-muted);
-        border-bottom: 2px solid var(--border);
-    }
-
-    &__version { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-}
-
-.badge {
-    display: inline-block;
-    padding: .15em .6em;
-    border-radius: 3px;
-    font-family: var(--font-mono);
-    font-size: .72rem;
-    letter-spacing: .03em;
-    background: var(--accent-soft);
-    color: var(--accent);
-
-    &--gpl { background: var(--surface); color: var(--ink-muted); border: 1px solid var(--border); }
 }
 
 // ── Footer ─────────────────────────────────────────────────────────

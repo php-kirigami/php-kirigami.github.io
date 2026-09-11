@@ -114,7 +114,7 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                         <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                             <circle cx="12" cy="12" r="4"></circle>
@@ -144,21 +144,27 @@
                         <h3>List notes from a YAML file</h3>
                         <div class="prose">
                             <p><code>notes/_notes.yaml</code>:</p>
-                            <pre><code class="hljs language-yaml"><span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">The</span> <span class="hljs-string">first</span> <span class="hljs-string">pleat</span>
-  <span class="hljs-attr">date:</span> <span class="hljs-number">2026-08-02</span>
-  <span class="hljs-attr">excerpt:</span> <span class="hljs-string">Where</span> <span class="hljs-string">the</span> <span class="hljs-string">studio&#x27;s</span> <span class="hljs-string">name</span> <span class="hljs-string">actually</span> <span class="hljs-string">comes</span> <span class="hljs-string">from.</span>
-<span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">Paper</span> <span class="hljs-string">weights,</span> <span class="hljs-string">compared</span>
-  <span class="hljs-attr">date:</span> <span class="hljs-number">2026-08-19</span>
-  <span class="hljs-attr">excerpt:</span> <span class="hljs-string">80gsm</span> <span class="hljs-string">folds</span> <span class="hljs-string">crisp;</span> <span class="hljs-string">120gsm</span> <span class="hljs-string">holds</span> <span class="hljs-string">a</span> <span class="hljs-string">curve.</span></code></pre>
+                            <pre><code class="hljs language-yaml">
+                                <span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">The</span> <span class="hljs-string">first</span> <span class="hljs-string">pleat</span>
+                                  <span class="hljs-attr">date:</span> <span class="hljs-number">2026-08-02</span>
+                                  <span class="hljs-attr">excerpt:</span> <span class="hljs-string">Where</span> <span class="hljs-string">the</span> <span class="hljs-string">studio&#x27;s</span> <span class="hljs-string">name</span> <span class="hljs-string">actually</span> <span class="hljs-string">comes</span> <span class="hljs-string">from.</span>
+                                <span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">Paper</span> <span class="hljs-string">weights,</span> <span class="hljs-string">compared</span>
+                                  <span class="hljs-attr">date:</span> <span class="hljs-number">2026-08-19</span>
+                                  <span class="hljs-attr">excerpt:</span> <span class="hljs-string">80gsm</span> <span class="hljs-string">folds</span> <span class="hljs-string">crisp;</span> <span class="hljs-string">120gsm</span> <span class="hljs-string">holds</span> <span class="hljs-string">a</span> <span class="hljs-string">curve.</span>
+                            </code></pre>
                             <p><code>notes/_index.php</code> points a PHPDOC annotation at it, and gets the parsed data back as a plain array of objects — no manual <code>file_get_contents()</code> / <code>yaml_parse()</code>:</p>
-                            <pre><code class="hljs language-php"><span class="hljs-comment">/**
- * <span class="hljs-doctag">@title</span> Notes
- * <span class="hljs-doctag">@posts</span> _notes.yaml
- */</span></code></pre>
-                            <pre><code class="hljs language-php"><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$posts</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$post</span>) {
-    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h3&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$post</span>-&gt;title) . <span class="hljs-string">&#x27;&lt;/h3&gt;&#x27;</span>;
-    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$post</span>-&gt;excerpt) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;
-}</code></pre>
+                            <pre><code class="hljs language-php">
+                                <span class="hljs-comment">/**
+                                 * <span class="hljs-doctag">@title</span> Notes
+                                 * <span class="hljs-doctag">@posts</span> _notes.yaml
+                                 */</span>
+                            </code></pre>
+                            <pre><code class="hljs language-php">
+                                <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$posts</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$post</span>) {
+                                    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h3&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$post</span>-&gt;title) . <span class="hljs-string">&#x27;&lt;/h3&gt;&#x27;</span>;
+                                    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$post</span>-&gt;excerpt) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;
+                                }
+                            </code></pre>
                             <p>Any annotation value ending in <code>.yaml</code>, <code>.yml</code>, <code>.json</code> or <code>.md</code> that resolves to a real file is loaded and parsed automatically — the string becomes structured data instead.</p>
                         </div>
                     </li>
@@ -166,10 +172,12 @@
                         <h3>A whole page that&apos;s just Markdown</h3>
                         <div class="prose">
                             <p>For a single note that&apos;s pure prose, skip writing PHP at all. <code>notes/premier-pli/_premier-pli.md</code> holds the text; the page file becomes almost nothing:</p>
-                            <pre><code class="hljs language-php"><span class="hljs-comment">/**
- * <span class="hljs-doctag">@title</span>   The first pleat
- * <span class="hljs-doctag">@content</span> _premier-pli.md
- */</span></code></pre>
+                            <pre><code class="hljs language-php">
+                                <span class="hljs-comment">/**
+                                 * <span class="hljs-doctag">@title</span>   The first pleat
+                                 * <span class="hljs-doctag">@content</span> _premier-pli.md
+                                 */</span>
+                            </code></pre>
                             <p><code>@content</code> renders that file&apos;s contents <strong>as the page body</strong> and skips executing the PHP file entirely — reserved for pages that are pure data or Markdown, wrapped by the same shared header/footer as everything else.</p>
                         </div>
                     </li>
@@ -226,7 +234,7 @@
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="../../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>

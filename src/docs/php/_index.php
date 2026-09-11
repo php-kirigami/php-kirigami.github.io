@@ -236,7 +236,7 @@
             <img asset="male-african-bush-elephant.jpg" width="480" alt="African bush elephant, Etosha National Park" loading="lazy">
             <img asset="male-african-bush-elephant.jpg" width="220" height="220" cover alt="African bush elephant, Etosha National Park, cropped square" loading="lazy">
         </div>
-        <ul class="img-demo__palette">
+        <ul class="palette">
             <?php foreach ($palette as $color): ?>
                 <li style="background: <?php echo str_htmlesc($color); ?>" title="<?php echo str_htmlesc($color); ?>"></li>
             <?php endforeach; ?>

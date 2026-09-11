@@ -108,7 +108,7 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                         <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                             <circle cx="12" cy="12" r="4"></circle>
@@ -133,22 +133,26 @@
             <section class="section wrap">
                 <div class="prose">
                     <p>Everything is driven by one file, <code>kirigami.yaml</code>, at the project root. It&apos;s loaded through <code>@kirigami/struct-walker</code> (so nested file references resolve), validated against <code>kirigami.schema.json</code>, then checked imperatively — <code>kiri</code> throws on any unknown key, wrong type, or missing required property. Point your editor at the schema for autocompletion:</p>
-                    <pre><code class="hljs language-yaml"><span class="hljs-comment"># yaml-language-server: $schema=https://cdn.jsdelivr.net/gh/php-kirigami/kirigami@main/packages/kirigami/kirigami.schema.json</span></code></pre>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-comment"># yaml-language-server: $schema=https://cdn.jsdelivr.net/gh/php-kirigami/kirigami@main/packages/kirigami/kirigami.schema.json</span>
+                    </code></pre>
                     <h2 id="kirigami">kirigami</h2>
                     <p>The only required top-level block.</p>
-                    <pre><code class="hljs language-yaml"><span class="hljs-attr">kirigami:</span>
-  <span class="hljs-attr">project:</span>  <span class="hljs-string">My</span> <span class="hljs-string">Website</span>           <span class="hljs-comment"># site name — CLI banner, $project</span>
-  <span class="hljs-attr">baseurl:</span>  <span class="hljs-string">https://example.com</span>   <span class="hljs-comment"># deployed root URL, no trailing slash</span>
-  <span class="hljs-attr">root:</span>     <span class="hljs-string">src</span>                   <span class="hljs-comment"># dir holding _*.php pages</span>
-  <span class="hljs-attr">banner:</span>   <span class="hljs-string">assets/banner.txt</span>     <span class="hljs-comment"># license banner stamped on exported js/css/html</span>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-attr">kirigami:</span>
+                          <span class="hljs-attr">project:</span>  <span class="hljs-string">My</span> <span class="hljs-string">Website</span>           <span class="hljs-comment"># site name — CLI banner, $project</span>
+                          <span class="hljs-attr">baseurl:</span>  <span class="hljs-string">https://example.com</span>   <span class="hljs-comment"># deployed root URL, no trailing slash</span>
+                          <span class="hljs-attr">root:</span>     <span class="hljs-string">src</span>                   <span class="hljs-comment"># dir holding _*.php pages</span>
+                          <span class="hljs-attr">banner:</span>   <span class="hljs-string">assets/banner.txt</span>     <span class="hljs-comment"># license banner stamped on exported js/css/html</span>
 
-  <span class="hljs-comment"># Any other key here is free-form project data — it becomes a PHP</span>
-  <span class="hljs-comment"># variable of the same name in every page, in before/after, and in</span>
-  <span class="hljs-comment"># prepros.includes files (also readable as PREPROS::$config-&gt;data).</span>
-  <span class="hljs-attr">author:</span>      <span class="hljs-string">Jane</span> <span class="hljs-string">Doe</span>
-  <span class="hljs-attr">email:</span>       <span class="hljs-string">hello@example.com</span>
-  <span class="hljs-attr">description:</span> <span class="hljs-string">A</span> <span class="hljs-string">short</span> <span class="hljs-string">description,</span> <span class="hljs-string">handy</span> <span class="hljs-string">for</span> <span class="hljs-string">&lt;meta</span> <span class="hljs-string">name=&quot;description&quot;&gt;.</span>
-  <span class="hljs-attr">keywords:</span>    [<span class="hljs-string">static</span> <span class="hljs-string">site</span>, <span class="hljs-string">php</span>]</code></pre>
+                          <span class="hljs-comment"># Any other key here is free-form project data — it becomes a PHP</span>
+                          <span class="hljs-comment"># variable of the same name in every page, in before/after, and in</span>
+                          <span class="hljs-comment"># prepros.includes files (also readable as PREPROS::$config-&gt;data).</span>
+                          <span class="hljs-attr">author:</span>      <span class="hljs-string">Jane</span> <span class="hljs-string">Doe</span>
+                          <span class="hljs-attr">email:</span>       <span class="hljs-string">hello@example.com</span>
+                          <span class="hljs-attr">description:</span> <span class="hljs-string">A</span> <span class="hljs-string">short</span> <span class="hljs-string">description,</span> <span class="hljs-string">handy</span> <span class="hljs-string">for</span> <span class="hljs-string">&lt;meta</span> <span class="hljs-string">name=&quot;description&quot;&gt;.</span>
+                          <span class="hljs-attr">keywords:</span>    [<span class="hljs-string">static</span> <span class="hljs-string">site</span>, <span class="hljs-string">php</span>]
+                    </code></pre>
                     <table>
                         <thead>
                             <tr>
@@ -183,9 +187,11 @@
                     <p>Loose keys are free project data. This site&apos;s own header/footer read <code>$project</code>, <code>$baseurl</code>, <code>$author</code>, <code>$tagline</code>, <code>$description</code> straight out of them — no separate &quot;site config&quot; object to keep in sync.</p>
                     <h2 id="meta">meta</h2>
                     <p>Opt-in <code>&lt;head&gt;</code> SEO / social metadata — <code>&lt;title&gt;</code>, description, Open Graph, Twitter Card, canonical, favicon. A <strong>top-level</strong> block, sibling of <code>kirigami:</code>. An empty <code>meta: {}</code> is enough to turn injection on for every page; values are then derived from the <code>kirigami:</code> keys above and each page&apos;s PHPDOC (<code>@title</code>, <code>@description</code>, <code>@image</code>, <code>@robots</code>, …), with a tag your layout already writes by hand detected and skipped.</p>
-                    <pre><code class="hljs language-yaml"><span class="hljs-attr">meta:</span>
-  <span class="hljs-attr">twitter:</span>     <span class="hljs-string">&quot;@myhandle&quot;</span>
-  <span class="hljs-attr">themeColor:</span>  <span class="hljs-string">&quot;#0b7285&quot;</span></code></pre>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-attr">meta:</span>
+                          <span class="hljs-attr">twitter:</span>     <span class="hljs-string">&quot;@myhandle&quot;</span>
+                          <span class="hljs-attr">themeColor:</span>  <span class="hljs-string">&quot;#0b7285&quot;</span>
+                    </code></pre>
                     <table>
                         <thead>
                             <tr>
@@ -270,11 +276,13 @@
                     <p>Per-page overrides live in the PHPDOC block: <code>@meta false</code> skips a page entirely; <code>@meta_title</code>, <code>@meta_description</code>, <code>@meta_image</code>, <code>@meta_robots</code>, <code>@meta_type</code>, <code>@canonical</code> override the generic tag. See <a href="../php/#meta"><code>META</code></a> for the manual builders.</p>
                     <h2 id="jsonld">jsonld</h2>
                     <p>Opt-in schema.org JSON-LD — the companion to <code>meta:</code>. Same switch: a top-level <code>jsonld: {}</code> block turns on an automatic JSON-LD block in the page&apos;s head, derived from the same <code>kirigami:</code> keys.</p>
-                    <pre><code class="hljs language-yaml"><span class="hljs-attr">jsonld:</span>
-  <span class="hljs-attr">type:</span> <span class="hljs-string">ProfessionalService</span>   <span class="hljs-comment"># @type for the main entity</span>
-  <span class="hljs-attr">lang:</span> <span class="hljs-string">en-CA</span>                  <span class="hljs-comment"># inLanguage on WebSite / WebPage</span>
-  <span class="hljs-attr">logo:</span> <span class="hljs-string">assets/logo.png</span>        <span class="hljs-comment"># absolute, or relative to baseurl</span>
-  <span class="hljs-attr">search:</span> <span class="hljs-string">https://example.com/?q={search_term_string}</span></code></pre>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-attr">jsonld:</span>
+                          <span class="hljs-attr">type:</span> <span class="hljs-string">ProfessionalService</span>   <span class="hljs-comment"># @type for the main entity</span>
+                          <span class="hljs-attr">lang:</span> <span class="hljs-string">en-CA</span>                  <span class="hljs-comment"># inLanguage on WebSite / WebPage</span>
+                          <span class="hljs-attr">logo:</span> <span class="hljs-string">assets/logo.png</span>        <span class="hljs-comment"># absolute, or relative to baseurl</span>
+                          <span class="hljs-attr">search:</span> <span class="hljs-string">https://example.com/?q={search_term_string}</span>
+                    </code></pre>
                     <table>
                         <thead>
                             <tr>
@@ -329,53 +337,67 @@
                     <p>For anything schema.org doesn&apos;t cover from config alone, build a node by hand with <a href="../php/#ld"><code>LD</code></a> — <code>LD::article()</code>, <code>LD::faqPage()</code>, <code>LD::breadcrumb()</code>, or any type via <code>LD::typeName([...])</code>.</p>
                     <h2 id="prepros">prepros</h2>
                     <p>The PHP → HTML compiler. Present — even empty — forces the <code>prepros</code> task.</p>
-                    <pre><code class="hljs language-yaml"><span class="hljs-attr">prepros:</span>
-  <span class="hljs-attr">before:</span>   <span class="hljs-string">_layouts/header.php</span>   <span class="hljs-comment"># included before every page body</span>
-  <span class="hljs-attr">after:</span>    <span class="hljs-string">_layouts/footer.php</span>   <span class="hljs-comment"># included after every page body</span>
-  <span class="hljs-attr">format:</span>   <span class="hljs-literal">true</span>                  <span class="hljs-comment"># pretty-print HTML output</span>
-  <span class="hljs-attr">head:</span>     <span class="hljs-literal">true</span>                  <span class="hljs-comment"># default true — see &quot;Managed head&quot; below</span>
-  <span class="hljs-attr">network:</span>  <span class="hljs-literal">false</span>                 <span class="hljs-comment"># allow outbound HTTP(S) — remote @tags, CURL, SCRAPER</span>
-  <span class="hljs-attr">mountext:</span> [<span class="hljs-string">.svg</span>, <span class="hljs-string">.webp</span>]          <span class="hljs-comment"># extra extensions auto-mounted into the virtual FS</span>
-  <span class="hljs-attr">includes:</span> [<span class="hljs-string">_lib/functions.php</span>]   <span class="hljs-comment"># PHP include_once&#x27;d before any page renders</span></code></pre>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-attr">prepros:</span>
+                          <span class="hljs-attr">before:</span>   <span class="hljs-string">_layouts/header.php</span>   <span class="hljs-comment"># included before every page body</span>
+                          <span class="hljs-attr">after:</span>    <span class="hljs-string">_layouts/footer.php</span>   <span class="hljs-comment"># included after every page body</span>
+                          <span class="hljs-attr">format:</span>   <span class="hljs-literal">true</span>                  <span class="hljs-comment"># pretty-print HTML output</span>
+                          <span class="hljs-attr">head:</span>     <span class="hljs-literal">true</span>                  <span class="hljs-comment"># default true — see &quot;Managed head&quot; below</span>
+                          <span class="hljs-attr">network:</span>  <span class="hljs-literal">false</span>                 <span class="hljs-comment"># allow outbound HTTP(S) — remote @tags, CURL, SCRAPER</span>
+                          <span class="hljs-attr">mountext:</span> [<span class="hljs-string">.svg</span>, <span class="hljs-string">.webp</span>]          <span class="hljs-comment"># extra extensions auto-mounted into the virtual FS</span>
+                          <span class="hljs-attr">includes:</span> [<span class="hljs-string">_lib/functions.php</span>]   <span class="hljs-comment"># PHP include_once&#x27;d before any page renders</span>
+                    </code></pre>
                     <p><code>includes</code> is where you register custom tags, Markdown shortcodes and hooks — this site&apos;s own <a href="https://github.com/php-kirigami/php-kirigami.github.io/blob/main/src/_lib/functions.php" target="_blank" rel="noopener noreferrer"><code>_lib/functions.php</code></a> is exactly that. See <a href="../authoring/">Writing pages</a> for the render pipeline these plug into.</p>
                     <h2 id="image">image</h2>
                     <p>The image autogenerator&apos;s one config block — see <a href="../php/#img"><code>IMG</code></a> for the three surfaces that call into it (<code>img-asset()</code> in Sass, <code>IMG::asset()</code> in PHP, <code>&lt;img asset&gt;</code> in markup).</p>
-                    <pre><code class="hljs language-yaml"><span class="hljs-attr">image:</span>
-  <span class="hljs-attr">format:</span> <span class="hljs-string">webp</span>        <span class="hljs-comment"># webp | avif        (default webp)</span>
-  <span class="hljs-attr">source:</span> <span class="hljs-string">assets/images</span>   <span class="hljs-comment"># rel. to cwd()       (default assets/images)</span>
-  <span class="hljs-attr">dest:</span>   <span class="hljs-string">images</span>           <span class="hljs-comment"># rel. to kirigami.root (default images)</span></code></pre>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-attr">image:</span>
+                          <span class="hljs-attr">format:</span> <span class="hljs-string">webp</span>        <span class="hljs-comment"># webp | avif        (default webp)</span>
+                          <span class="hljs-attr">source:</span> <span class="hljs-string">assets/images</span>   <span class="hljs-comment"># rel. to cwd()       (default assets/images)</span>
+                          <span class="hljs-attr">dest:</span>   <span class="hljs-string">images</span>           <span class="hljs-comment"># rel. to kirigami.root (default images)</span>
+                    </code></pre>
                     <h2 id="plugins">plugins</h2>
                     <p>Kirigami plugins, loaded via <code>@kirigami/sdk</code>.</p>
-                    <pre><code class="hljs language-yaml"><span class="hljs-attr">plugins:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;@kirigami/plugin-highlight&quot;</span>
-    <span class="hljs-attr">active:</span> <span class="hljs-literal">true</span>
-    <span class="hljs-attr">options:</span> {}   <span class="hljs-comment"># free-form, validated against the plugin&#x27;s own schema</span></code></pre>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-attr">plugins:</span>
+                          <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;@kirigami/plugin-highlight&quot;</span>
+                            <span class="hljs-attr">active:</span> <span class="hljs-literal">true</span>
+                            <span class="hljs-attr">options:</span> {}   <span class="hljs-comment"># free-form, validated against the plugin&#x27;s own schema</span>
+                    </code></pre>
                     <p>Each <code>name</code> must match <code>@kirigami/plugin-*</code>, <code>&lt;scope&gt;/kirigami-plugin-*</code>, or <code>kirigami-plugin-*</code>. <code>kiri install &lt;plugin&gt;</code> resolves a bare name against those conventions, installs it, and prints the entry to paste here — see <a href="../cli/"><code>kiri install</code></a>.</p>
                     <h2 id="esbuild-and-sass">esbuild and sass</h2>
                     <p>Free-form blocks, merged into every task of that type (after Kirigami&apos;s own defaults) — anything the underlying tool accepts.</p>
-                    <pre><code class="hljs language-yaml"><span class="hljs-attr">esbuild:</span>
-  <span class="hljs-comment"># minify: false</span>
-<span class="hljs-attr">sass:</span>
-  <span class="hljs-attr">style:</span> <span class="hljs-string">expanded</span>
-  <span class="hljs-comment"># before / after: extra .scss files compiled before/after the entry</span></code></pre>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-attr">esbuild:</span>
+                          <span class="hljs-comment"># minify: false</span>
+                        <span class="hljs-attr">sass:</span>
+                          <span class="hljs-attr">style:</span> <span class="hljs-string">expanded</span>
+                          <span class="hljs-comment"># before / after: extra .scss files compiled before/after the entry</span>
+                    </code></pre>
                     <p><code>sass</code> resolves <code>@use</code> / <code>@forward</code> through Sass&apos;s <code>NodePackageImporter</code> plus a custom importer that also accepts an implicit <code>styles/</code> prefix (<code>@use &apos;@kirigami/canva/conf&apos;</code> → <code>@kirigami/canva/styles/conf</code>).</p>
                     <h2 id="export">export</h2>
-                    <pre><code class="hljs language-yaml"><span class="hljs-attr">export:</span>
-  <span class="hljs-attr">path:</span>   <span class="hljs-string">dist</span>                    <span class="hljs-comment"># output dir for `kiri export`</span>
-  <span class="hljs-attr">ignore:</span> [<span class="hljs-string">&quot;*.psd&quot;</span>, <span class="hljs-string">&quot;notes/&quot;</span>]      <span class="hljs-comment"># extra gitignore-style excludes</span></code></pre>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-attr">export:</span>
+                          <span class="hljs-attr">path:</span>   <span class="hljs-string">dist</span>                    <span class="hljs-comment"># output dir for `kiri export`</span>
+                          <span class="hljs-attr">ignore:</span> [<span class="hljs-string">&quot;*.psd&quot;</span>, <span class="hljs-string">&quot;notes/&quot;</span>]      <span class="hljs-comment"># extra gitignore-style excludes</span>
+                    </code></pre>
                     <p><code>kiri export</code> copies <code>kirigami.root</code> into <code>path</code>, excluding any file/dir starting with <code>_</code> or <code>.</code>, <code>.scss</code> files, <code>.map</code> files, and non-minified <code>.js</code> files, plus every <code>ignore</code> pattern. Token replacements happen during the copy: <code>2026</code> and <code>###TIMESTAMP###</code> in <code>.html</code>, <code>2026-09-11</code> in <code>sitemap.xml</code>.</p>
                     <h2 id="scripts">scripts</h2>
                     <p>Named PHP scripts, run with <code>kiri run &lt;name&gt;</code> or on a build trigger.</p>
-                    <pre><code class="hljs language-yaml"><span class="hljs-attr">scripts:</span>
-  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">convert-images</span>
-    <span class="hljs-attr">mount:</span> [<span class="hljs-string">&quot;assets/images/**/*.jpg&quot;</span>]   <span class="hljs-comment"># extra files mounted before it runs</span>
-    <span class="hljs-attr">trigger:</span> <span class="hljs-string">before-build</span>                <span class="hljs-comment"># before-build | before-export | after-export</span></code></pre>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-attr">scripts:</span>
+                          <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">convert-images</span>
+                            <span class="hljs-attr">mount:</span> [<span class="hljs-string">&quot;assets/images/**/*.jpg&quot;</span>]   <span class="hljs-comment"># extra files mounted before it runs</span>
+                            <span class="hljs-attr">trigger:</span> <span class="hljs-string">before-build</span>                <span class="hljs-comment"># before-build | before-export | after-export</span>
+                    </code></pre>
                     <p>Omit <code>trigger</code> for a script that only ever runs manually. See <code>STD::succeed()</code> / <code>STD::error()</code> in the <a href="../php/#std">PHP class library</a> for ending one early with a custom result.</p>
                     <h2 id="tasks">tasks</h2>
                     <p>The ordered build pipeline, on top of the implicit <code>prepros</code> and <code>dist</code> tasks.</p>
-                    <pre><code class="hljs language-yaml"><span class="hljs-attr">tasks:</span>
-  <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">js-core</span>,   <span class="hljs-attr">type:</span> <span class="hljs-string">esbuild</span>, <span class="hljs-attr">entry:</span> <span class="hljs-string">scripts/kirigami.core.js</span> }
-  <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">scss-core</span>, <span class="hljs-attr">type:</span> <span class="hljs-string">sass</span>,    <span class="hljs-attr">entry:</span> <span class="hljs-string">styles/kirigami.core.scss</span> }</code></pre>
+                    <pre><code class="hljs language-yaml">
+                        <span class="hljs-attr">tasks:</span>
+                          <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">js-core</span>,   <span class="hljs-attr">type:</span> <span class="hljs-string">esbuild</span>, <span class="hljs-attr">entry:</span> <span class="hljs-string">scripts/kirigami.core.js</span> }
+                          <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">scss-core</span>, <span class="hljs-attr">type:</span> <span class="hljs-string">sass</span>,    <span class="hljs-attr">entry:</span> <span class="hljs-string">styles/kirigami.core.scss</span> }
+                    </code></pre>
                     <h3 id="task-types">Task types</h3>
                     <table>
                         <thead>
@@ -467,7 +489,7 @@
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>

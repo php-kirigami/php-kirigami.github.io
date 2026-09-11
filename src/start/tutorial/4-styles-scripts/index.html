@@ -114,7 +114,7 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                         <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                             <circle cx="12" cy="12" r="4"></circle>
@@ -137,13 +137,15 @@
                         <h3>Retheme with a few tokens</h3>
                         <div class="prose">
                             <p><code>styles/partials/_conf.scss</code> forwards <code>@kirigami/canva</code>&apos;s token layer — override a handful of variables and every component built on them (buttons, cards, the toggle) follows:</p>
-                            <pre><code class="hljs language-scss"><span class="hljs-keyword">@forward</span> <span class="hljs-string">&quot;@kirigami/canva/conf&quot;</span> with (
-    <span class="hljs-variable">$bg</span>:     <span class="hljs-number">#faf7f2</span>,
-    <span class="hljs-variable">$ink</span>:    <span class="hljs-number">#26221c</span>,
-    <span class="hljs-variable">$accent</span>: <span class="hljs-number">#a8562e</span>,
-    <span class="hljs-variable">$dark</span>:   true,
-    <span class="hljs-variable">$theme</span>:  both,
-);</code></pre>
+                            <pre><code class="hljs language-scss">
+                                <span class="hljs-keyword">@forward</span> <span class="hljs-string">&quot;@kirigami/canva/conf&quot;</span> with (
+                                    <span class="hljs-variable">$bg</span>:     <span class="hljs-number">#faf7f2</span>,
+                                    <span class="hljs-variable">$ink</span>:    <span class="hljs-number">#26221c</span>,
+                                    <span class="hljs-variable">$accent</span>: <span class="hljs-number">#a8562e</span>,
+                                    <span class="hljs-variable">$dark</span>:   true,
+                                    <span class="hljs-variable">$theme</span>:  both,
+                                );
+                            </code></pre>
                             <p><code>$dark: true</code> turns on canva&apos;s built-in dark palette; `$theme: both<code> follows the OS by default but lets </code>data-theme=&quot;dark&quot;` / <code>&quot;light&quot;</code> on <code>&lt;html&gt;</code> force either way.</p>
                         </div>
                     </li>
@@ -151,9 +153,13 @@
                         <h3>Add the toggle — no JS of your own</h3>
                         <div class="prose">
                             <p>In <code>scripts/kirigami.core.js</code>:</p>
-                            <pre><code class="hljs language-js"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;@kirigami/canva/theme&quot;</span>;</code></pre>
+                            <pre><code class="hljs language-js">
+                                <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;@kirigami/canva/theme&quot;</span>;
+                            </code></pre>
                             <p>That import wires every <code>[data-theme-toggle]</code> on the page, persists the choice, and keeps controls in sync with the OS. Drop a button in <code>_layouts/header.php</code>:</p>
-                            <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">data-theme-toggle</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Toggle dark mode&quot;</span>&gt;</span>🌓<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></code></pre>
+                            <pre><code class="hljs language-html">
+                                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">data-theme-toggle</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Toggle dark mode&quot;</span>&gt;</span>🌓<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                            </code></pre>
                             <p>No state to manage by hand — the import is the whole feature.</p>
                         </div>
                     </li>
@@ -161,10 +167,12 @@
                         <h3>Stop wiring the &lt;head&gt; by hand</h3>
                         <div class="prose">
                             <p>Once <code>prepros:</code> is set, <code>_layouts/header.php</code> doesn&apos;t need a <code>&lt;link&gt;</code> for the stylesheet or a <code>&lt;script&gt;</code> for the bundle — Kirigami injects both automatically for every <code>sass</code>/<code>esbuild</code> task, per page, cache-busted. It also injects a small theme/FOUC guard as the very first thing in <code>&lt;head&gt;</code>, so the stored preference applies before first paint. All you write:</p>
-                            <pre><code class="hljs language-php">&lt;head&gt;
-    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;
-    &lt;meta name=<span class="hljs-string">&quot;viewport&quot;</span> content=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;
-&lt;/head&gt;</code></pre>
+                            <pre><code class="hljs language-php">
+                                &lt;head&gt;
+                                    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;
+                                    &lt;meta name=<span class="hljs-string">&quot;viewport&quot;</span> content=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;
+                                &lt;/head&gt;
+                            </code></pre>
                         </div>
                     </li>
                 </ol>
@@ -220,7 +228,7 @@
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="../../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>

@@ -81,7 +81,7 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                         <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                             <circle cx="12" cy="12" r="4"></circle>
@@ -109,15 +109,19 @@
                 <div class="compare">
                     <div class="compare__panel">
                         <span class="compare__label">src/_index.php</span>
-                        <pre><code class="hljs language-php"><span class="hljs-comment">/**
- * <span class="hljs-doctag">@title</span> Home
- */</span>
+                        <pre><code class="hljs language-php">
+                            <span class="hljs-comment">/**
+                             * <span class="hljs-doctag">@title</span> Home
+                             */</span>
 
-<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$tagline</span>);</code></pre>
+                            <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$tagline</span>);
+                        </code></pre>
                     </div>
                     <div class="compare__panel">
                         <span class="compare__label">src/index.html — after `kiri build`</span>
-                        <pre><code class="hljs language-html"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Fold PHP into flat HTML.<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></code></pre>
+                        <pre><code class="hljs language-html">
+                            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Fold PHP into flat HTML.<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+                        </code></pre>
                     </div>
                 </div>
             </section>
@@ -167,9 +171,11 @@
                 <h2>Built with itself, in the open</h2>
                 <div class="prose">
                     <p>This page is a <code>_index.php</code> file, compiled by the same <code>kiri</code> CLI anyone installs from npm. The site is being built in public, phase by phase — <a href="docs/"><code>/docs/</code></a> is the doc-page model, <a href="ecosystem/"><code>/ecosystem/</code></a> pulls its version numbers live from npm at build time, and more lands as each phase ships.</p>
-                    <pre><code class="hljs language-bash">npm install -D @kirigami/kirigami
-npx kiri watch      <span class="hljs-comment"># rebuild on save, no server</span>
-npx kiri <span class="hljs-built_in">export</span>     <span class="hljs-comment"># production build into dist/</span></code></pre>
+                    <pre><code class="hljs language-bash">
+                        npm install -D @kirigami/kirigami
+                        npx kiri watch      <span class="hljs-comment"># rebuild on save, no server</span>
+                        npx kiri <span class="hljs-built_in">export</span>     <span class="hljs-comment"># production build into dist/</span>
+                    </code></pre>
                 </div>
             </section>
         </main>
@@ -207,7 +213,7 @@ npx kiri <span class="hljs-built_in">export</span>     <span class="hljs-comment
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="./scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>

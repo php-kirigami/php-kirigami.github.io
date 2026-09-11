@@ -114,7 +114,7 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                         <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                             <circle cx="12" cy="12" r="4"></circle>
@@ -136,30 +136,36 @@
                     <li>
                         <h3>Scaffold from a template</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">npx kiri create default studio-plie
-<span class="hljs-built_in">cd</span> studio-plie</code></pre>
+                            <pre><code class="hljs language-bash">
+                                npx kiri create default studio-plie
+                                <span class="hljs-built_in">cd</span> studio-plie
+                            </code></pre>
                             <p><code>kiri create</code> clones the <code>default</code> template&apos;s repo, deep-merges its <code>package.json</code>, writes what you type into <code>kirigami.yaml</code>, then runs <code>git init</code> and <code>npm install</code> for you. Run <code>npx kiri create --list</code> any time to see the official templates.</p>
                         </div>
                     </li>
                     <li>
                         <h3>Look at what you got</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">studio-plie/
-├── kirigami.yaml
-├── package.json
-└── src/                 ← kirigami.root
-    ├── _layouts/        ← header.php / footer.php
-    ├── _lib/            ← functions.php (tags/hooks/plugins)
-    ├── _index.php       → index.html
-    ├── styles/
-    └── scripts/</code></pre>
+                            <pre><code class="hljs language-bash">
+                                studio-plie/
+                                ├── kirigami.yaml
+                                ├── package.json
+                                └── src/                 ← kirigami.root
+                                    ├── _layouts/        ← header.php / footer.php
+                                    ├── _lib/            ← functions.php (tags/hooks/plugins)
+                                    ├── _index.php       → index.html
+                                    ├── styles/
+                                    └── scripts/
+                            </code></pre>
                             <p>Two naming rules explain the whole tree: a file <code>_name.php</code> compiles to <code>name.html</code> in the same folder (<code>_index.php</code> → <code>index.html</code>); a folder starting with <code>_</code> is never walked as a page directory — that&apos;s where layouts, includes and data live.</p>
                         </div>
                     </li>
                     <li>
                         <h3>Start watching</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">npx kiri watch</code></pre>
+                            <pre><code class="hljs language-bash">
+                                npx kiri watch
+                            </code></pre>
                             <p>Leave this running. It rebuilds pages, styles and scripts on every save — no server, no browser refresh. Open <code>src/index.html</code> in a browser tab and reload it by hand, or point an editor live-preview extension at <code>src/</code>.</p>
                         </div>
                     </li>
@@ -216,7 +222,7 @@
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="../../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>

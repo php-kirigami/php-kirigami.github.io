@@ -102,7 +102,7 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                         <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                             <circle cx="12" cy="12" r="4"></circle>
@@ -121,9 +121,11 @@
             </section>
             <section class="section wrap">
                 <div class="prose">
-                    <pre><code class="hljs language-bash">npx kiri create          <span class="hljs-comment"># interactive: pick a template, name your project</span>
-npx kiri create default  <span class="hljs-comment"># or name one directly</span>
-npx kiri create --list   <span class="hljs-comment"># see what&#x27;s available</span></code></pre>
+                    <pre><code class="hljs language-bash">
+                        npx kiri create          <span class="hljs-comment"># interactive: pick a template, name your project</span>
+                        npx kiri create default  <span class="hljs-comment"># or name one directly</span>
+                        npx kiri create --list   <span class="hljs-comment"># see what&#x27;s available</span>
+                    </code></pre>
                     <p><code>kiri create</code> clones the template&apos;s repo, deep-merges its <code>package.json</code>, writes your answers into <code>kirigami.yaml</code>, then <code>git init</code>s and <code>npm install</code>s for you.</p>
                 </div>
                 <div class="grid" data-reveal="">
@@ -180,7 +182,7 @@ npx kiri create --list   <span class="hljs-comment"># see what&#x27;s available<
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>

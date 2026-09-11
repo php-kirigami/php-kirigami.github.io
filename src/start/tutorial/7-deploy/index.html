@@ -114,7 +114,7 @@
                     </ul>
                 </nav>
                 <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
-                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
                         <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
                         <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                             <circle cx="12" cy="12" r="4"></circle>
@@ -137,27 +137,29 @@
                         <h3>Add the workflow</h3>
                         <div class="prose">
                             <p><code>.github/workflows/page.yml</code>:</p>
-                            <pre><code class="hljs language-yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Build</span> <span class="hljs-string">&amp;</span> <span class="hljs-string">Deploy</span>
+                            <pre><code class="hljs language-yaml">
+                                <span class="hljs-attr">name:</span> <span class="hljs-string">Build</span> <span class="hljs-string">&amp;</span> <span class="hljs-string">Deploy</span>
 
-<span class="hljs-attr">on:</span>
-  <span class="hljs-attr">push:</span>
-    <span class="hljs-attr">branches:</span> [<span class="hljs-string">&quot;main&quot;</span>]
+                                <span class="hljs-attr">on:</span>
+                                  <span class="hljs-attr">push:</span>
+                                    <span class="hljs-attr">branches:</span> [<span class="hljs-string">&quot;main&quot;</span>]
 
-<span class="hljs-attr">permissions:</span>
-  <span class="hljs-attr">contents:</span> <span class="hljs-string">write</span>
-  <span class="hljs-attr">pages:</span> <span class="hljs-string">write</span>
-  <span class="hljs-attr">id-token:</span> <span class="hljs-string">write</span>
+                                <span class="hljs-attr">permissions:</span>
+                                  <span class="hljs-attr">contents:</span> <span class="hljs-string">write</span>
+                                  <span class="hljs-attr">pages:</span> <span class="hljs-string">write</span>
+                                  <span class="hljs-attr">id-token:</span> <span class="hljs-string">write</span>
 
-<span class="hljs-attr">jobs:</span>
-  <span class="hljs-attr">build-and-deploy:</span>
-    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span>
-    <span class="hljs-attr">steps:</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v7</span>
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">php-kirigami/kiribuild@v2</span>
-        <span class="hljs-attr">with:</span> { <span class="hljs-attr">node-version:</span> <span class="hljs-string">&#x27;24&#x27;</span> }
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/upload-pages-artifact@v5</span>
-        <span class="hljs-attr">with:</span> { <span class="hljs-attr">path:</span> <span class="hljs-string">dist</span> }
-      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/deploy-pages@v5</span></code></pre>
+                                <span class="hljs-attr">jobs:</span>
+                                  <span class="hljs-attr">build-and-deploy:</span>
+                                    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span>
+                                    <span class="hljs-attr">steps:</span>
+                                      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v7</span>
+                                      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">php-kirigami/kiribuild@v2</span>
+                                        <span class="hljs-attr">with:</span> { <span class="hljs-attr">node-version:</span> <span class="hljs-string">&#x27;24&#x27;</span> }
+                                      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/upload-pages-artifact@v5</span>
+                                        <span class="hljs-attr">with:</span> { <span class="hljs-attr">path:</span> <span class="hljs-string">dist</span> }
+                                      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/deploy-pages@v5</span>
+                            </code></pre>
                             <p><code>kiribuild@v2</code> does exactly three things: install Node 24, install the <code>kiri</code> CLI, run <code>kiri export</code>. Checkout, uploading the artifact, and the Pages deploy step are yours to wire — that&apos;s deliberate, so the action stays small and the workflow stays readable.</p>
                         </div>
                     </li>
@@ -170,11 +172,15 @@
                     <li>
                         <h3>Push</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">git add -A
-git commit -m <span class="hljs-string">&quot;Studio Plié: first deploy&quot;</span>
-git push</code></pre>
+                            <pre><code class="hljs language-bash">
+                                git add -A
+                                git commit -m <span class="hljs-string">&quot;Studio Plié: first deploy&quot;</span>
+                                git push
+                            </code></pre>
                             <p>Every push to <code>main</code> re-runs <code>kiri export</code> and republishes <code>dist/</code>. Locally, the same export step is one command:</p>
-                            <pre><code class="hljs language-bash">npx kiri <span class="hljs-built_in">export</span></code></pre>
+                            <pre><code class="hljs language-bash">
+                                npx kiri <span class="hljs-built_in">export</span>
+                            </code></pre>
                         </div>
                     </li>
                 </ol>
@@ -230,7 +236,7 @@ git push</code></pre>
             </div>
         </footer>
         <script>
-            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
         <script src="../../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>
