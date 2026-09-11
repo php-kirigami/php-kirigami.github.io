@@ -56,7 +56,7 @@ plugins:
     active: true
     options:
       languages: [yaml, php, javascript, bash, shell, json, scss, xml]  # xml = highlight.js's module for html/svg/xml too (see todo.md)
-      theme: auto
+      theme: none  # built-in preset clashed with the site's warm palette — own theme in styles/partials/_highlight-theme.scss
       copyButton: true
       tag: true
       embedFont: false  # JetBrains Mono is already embedded site-wide as --font-mono, via $fonts in _conf.scss

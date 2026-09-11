@@ -1,0 +1,40 @@
+// Syntax-highlighting colours, derived from this site's own palette instead
+// of @kirigami/plugin-highlight's built-in preset (a cool slate-blue/red
+// scheme that clashed with the warm paper identity). `theme: none` in
+// kirigami.yaml skips the built-in injection; this mirrors the shape of the
+// plugin's own inject-auto.scss, but calls the parametric `theme()` mixin
+// with _conf.scss's own light/dark values instead.
+@use "@kirigami/plugin-highlight/highlight" as hljs;
+
+$light: (
+    bg:          #f7f5f0,
+    surface:     #ffffff,
+    surface-2:   #f1eee6,
+    border:      #dcd6c8,
+    ink:         #1c1b18,
+    ink-muted:   #6b675c,
+    accent:      #1f6b4a,
+    accent-soft: #e4ede7,
+);
+
+$dark: (
+    bg:          #171613,
+    surface:     #201e1a,
+    surface-2:   #26231e,
+    border:      #37332b,
+    ink:         #ece7db,
+    ink-muted:   #a7a093,
+    accent:      #5cb98c,
+    accent-soft: #1e2a24,
+);
+
+@include hljs.theme($light);
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        @include hljs.theme($dark);
+    }
+}
+[data-theme="dark"] {
+    @include hljs.theme($dark);
+}
