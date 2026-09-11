@@ -103,9 +103,22 @@ Also Phase 3: **`/plugins/`** — the three official plugins
 on the page itself (a real `<extlink>` card, real `<youtube>`/`<vimeo>`
 cards). The site now installs and actually uses `plugin-extlink` +
 `plugin-embed`, not just `plugin-highlight` — `prepros.network: true` was
-already on. "Writing your own" points at `/docs/authoring/#sass-hooks`
-(already covers the `@kirigami/sdk` hook API) rather than a dedicated
-plugin-authoring tutorial, which doesn't exist yet.
+already on.
+
+Plus **`/plugins/authoring/`** — the plugin-authoring tutorial. Builds a real
+toy plugin (`kirigami-plugin-badge`) step by step: package shape/naming
+convention, `on(HOOKS.PREPROS_PHP, …)` registering a tag, shipping default
+styles via `SASS_AFTER`, an options schema, then a full hook reference table
+and a publishing checklist. Found and documented a real gotcha while
+verifying the example: running `npm install` *inside* a plugin's own folder
+(to resolve a "Cannot find @kirigami/sdk" error while testing locally with a
+bare `file:` dependency) leaves it with its own separate copy of
+`@kirigami/sdk` — the hook registry is a module-level `Map`, so two copies
+means two disconnected registries and `on()` in one is invisible to `run()`
+in the other, silently (no error either side). Doesn't affect a normal
+`npm install` of a published plugin (npm dedupes `@kirigami/sdk` to one copy
+in the consuming project in the normal case) — only bites ad-hoc local `file:`
+testing. Worth remembering for future plugin work in the monorepo itself too.
 
 Nav split by design: the header (`_layouts/header.php`) only ever lists pages
 that exist — now Home, Start, Docs, **Plugins**, GitHub; `/examples` joins it
@@ -113,8 +126,7 @@ once that hub exists too. Secondary pages (`/about`, `/templates`,
 `/showcase`, `/ecosystem`) live in the footer grid instead of crowding the
 header.
 
-Not started yet: the plugin-authoring tutorial, `/examples`, `/design`,
-`/roadmap`, `/changelog`.
+Not started yet: `/examples`, `/design`, `/roadmap`, `/changelog`.
 
 ---
 
