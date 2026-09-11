@@ -132,7 +132,18 @@ version jump and 1-2 sentences on what actually matters, linking to that
 package's own README for the full detail. Covers 2026-09-10 and
 2026-09-11 so far; older history stays in each README's own "What's new".
 
-Not started yet: `/examples`, `/design`, `/roadmap`.
+And **`/roadmap/`** — the monorepo's own `todo.md`, translated into public
+language and grouped by theme (this site, plugins, build/authoring, the
+big unscoped `php-wasm-builder` idea), framed honestly as backlog/ordering
+that can shift, not a release schedule. Nothing invented — every item maps
+to something already open in `todo.md`. **Found a real `md.class.php` bug
+writing this page**: a `- ` list item written across multiple *source*
+lines (an indented continuation under the marker) closes the `<li>`/`</ul>`
+after the first line and dumps the rest as a flat `<p>`, then reopens a new
+`<ul>` for the next item — logged in the monorepo's `todo.md`, worked
+around here by keeping every list item on one source line.
+
+Not started yet: `/examples`, `/design`.
 
 ---
 
