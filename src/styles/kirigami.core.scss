@@ -1,0 +1,8 @@
+// Entry compiled by the `css-core` sass task → styles/kirigami.core.min.css
+//
+// `conf` must come first: it forwards @kirigami/canva/conf, which emits the
+// :root custom properties (--bg, --ink, --accent, …) and the base reset.
+// `main` is this site's own styles on top.
+
+@use "partials/conf";
+@use "partials/main";

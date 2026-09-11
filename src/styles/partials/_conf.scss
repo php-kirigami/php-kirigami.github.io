@@ -1,0 +1,50 @@
+// Design tokens — locked in phase 0 of the site's game plan, do not redecide
+// per page. Every value here overrides a `@kirigami/canva` default and
+// cascades to :root as a CSS custom property (--bg, --accent, …).
+// Full list of knobs: node_modules/@kirigami/canva/dist/styles/conf.scss
+//
+// The identity: warm paper, near-black ink, a single deep-green accent — a
+// paper-cutting / fold vocabulary instead of a generic SaaS palette. Type
+// (IBM Plex Serif / Sans / Mono) is loaded from Google Fonts in
+// _layouts/header.php, so $fonts stays empty here — nothing local to embed.
+
+@forward "@kirigami/canva/conf" with (
+
+    // ── Light palette ────────────────────────────────────────────
+    $bg:              #f7f5f0,
+    $surface:         #ffffff,
+    $surface-2:       #f1eee6,
+    $border:          #dcd6c8,
+    $ink:             #1c1b18,
+    $ink-muted:       #6b675c,
+    $accent:          #1f6b4a,
+    $accent-soft:     #e4ede7,
+    $logo-ink:        #1c1b18,
+    $logo-fold-light: #f1eee6,
+    $logo-fold-mid:   #e1dacb,
+
+    // ── Dark palette ─────────────────────────────────────────────
+    // `$dark` as a map = start from canva's built-in dark palette and override
+    // only these keys. `$theme: both` = follow the OS, but let
+    // <html data-theme="…"> force either way (the toggle in the header sets
+    // it, persisted via @kirigami/canva/theme).
+    $theme: both,
+    $dark: (
+        "bg":              #171613,
+        "surface":         #201e1a,
+        "surface-2":       #26231e,
+        "border":          #37332b,
+        "ink":             #ece7db,
+        "ink-muted":       #a7a093,
+        "accent":          #5cb98c,
+        "accent-soft":     #1e2a24,
+        "logo-ink":        #ece7db,
+        "logo-fold-light": #26231e,
+        "logo-fold-mid":   #322d24,
+    ),
+
+    // ── Type ─────────────────────────────────────────────────────
+    $font-base:    19,
+    $font-body:    "IBM Plex Sans",
+    $font-heading: "IBM Plex Serif",
+);

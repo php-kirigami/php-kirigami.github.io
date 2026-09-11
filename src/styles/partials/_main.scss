@@ -1,0 +1,300 @@
+// This site's styles, on top of the tokens + reset from `conf`.
+
+@use "@kirigami/canva/utils" as *;
+@use "@kirigami/canva/prose";   // → `.prose { … }` for Markdown output
+
+:root {
+    // Not a canva token (conf only knows $font-body / $font-heading) — this
+    // site's own third role, for labels, nav numbers, and (as a fallback
+    // before plugin-highlight's embedded font loads) code.
+    --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+// ── Layout primitives ──────────────────────────────────────────────
+.wrap {
+    width: min(100% - 2.5rem, 68rem);
+    margin-inline: auto;
+}
+
+.section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+
+body {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+}
+
+main { flex: 1; }
+
+h1 { font-size: clamp(2.1rem, 5vw, 3.2rem); line-height: 1.08; letter-spacing: -.01em; }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1rem; letter-spacing: -.005em; }
+h3 { font-size: 1.1rem; }
+
+h1, h2, h3 { text-wrap: balance; }
+
+a { color: var(--accent); text-underline-offset: 2px; }
+
+code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.1em 0.4em;
+}
+
+.skip-link {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    z-index: 30;
+    padding: 0.5rem 0.9rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transform: translateY(-150%);
+    transition: transform 0.15s;
+
+    &:focus-visible { transform: none; }
+}
+
+// ── A dashed "fold line" section divider — the site's one recurring motif ──
+.fold {
+    max-width: none;
+    height: 1px;
+    margin-block: clamp(3rem, 7vw, 5rem);
+    background-image: repeating-linear-gradient(90deg, var(--border) 0 7px, transparent 7px 15px);
+}
+
+// ── Header + nav ───────────────────────────────────────────────────
+.site-header {
+    border-bottom: 1px solid var(--border);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    min-height: 3.75rem;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: .55rem;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1.15rem;
+    color: var(--ink);
+    text-decoration: none;
+    margin-right: auto;
+}
+
+// A folded paper corner, drawn in CSS — the brand mark. No inline SVG (sidesteps
+// the known HTML::format() SVG-casing bug entirely) and it's the one shape this
+// whole site is named after.
+.brand__mark {
+    display: block;
+    width: .85rem;
+    height: .85rem;
+    background: var(--accent);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 40% 100%, 0 40%);
+    flex: none;
+}
+
+.site-nav ul {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    list-style: none;
+    font-size: .95rem;
+}
+
+.site-nav a {
+    color: var(--ink-muted);
+    text-decoration: none;
+
+    &:hover { color: var(--ink); }
+    &[aria-current="page"] { color: var(--accent); }
+}
+
+.theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--ink);
+    cursor: pointer;
+
+    .theme-toggle__sun { display: none; }
+}
+
+:root:not([data-theme="light"]) .theme-toggle {
+    @media (prefers-color-scheme: dark) {
+        .theme-toggle__moon { display: none; }
+        .theme-toggle__sun  { display: block; }
+    }
+}
+:root[data-theme="dark"] .theme-toggle {
+    .theme-toggle__moon { display: none; }
+    .theme-toggle__sun  { display: block; }
+}
+
+.nav-toggle { display: none; }
+
+// ── Buttons ────────────────────────────────────────────────────────
+.btn {
+    display: inline-block;
+    padding: 0.65rem 1.2rem;
+    border-radius: 3px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover { filter: brightness(1.08); }
+
+    &--ghost {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--border);
+    }
+}
+
+// ── Home / hero ──────────────────────────────────────────────────────
+.hero {
+    padding-block: clamp(3rem, 9vw, 6rem);
+
+    .eyebrow {
+        font-family: var(--font-mono);
+        font-size: .78rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: .9rem;
+    }
+
+    .lead { margin-block: 1rem 1.6rem; }
+    .btn + .btn { margin-left: 0.6rem; }
+}
+
+.lead {
+    font-size: 1.2rem;
+    color: var(--ink-muted);
+    max-width: 46ch;
+}
+
+.grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    margin-top: 1.5rem;
+}
+
+.card {
+    padding: 1.25rem;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    h3 { margin-bottom: 0.4rem; font-family: var(--font-heading); }
+    p { color: var(--ink-muted); margin: 0; }
+    code { font-size: 0.82em; }
+}
+
+// ── Doc-page model ─────────────────────────────────────────────────
+// The shared shape every /docs/, /start/ and /plugins/ page will reuse:
+// an eyebrow label, an h1, an abstract, then .prose content.
+.doc-head {
+    .eyebrow {
+        font-family: var(--font-mono);
+        font-size: .78rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: .7rem;
+        display: block;
+    }
+
+    .lead { margin-top: .6rem; }
+}
+
+// ── Prose (Markdown output) ────────────────────────────────────────
+// Base typography for rendered Markdown comes from `@kirigami/canva/prose`
+// (`@use`'d above). This site widens the measure a touch and keys code onto
+// the mono role; @kirigami/plugin-highlight's theme layers its colours on top
+// via its own `sass:after` hook, appended after this file.
+.prose {
+    --prose-measure: 44rem;
+
+    code, kbd, samp, pre { font-family: var(--font-mono); }
+}
+
+// ── Footer ─────────────────────────────────────────────────────────
+.site-footer {
+    border-top: 1px solid var(--border);
+    padding-block: 1.75rem;
+    color: var(--ink-muted);
+    font-size: 0.88rem;
+}
+
+.site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+// ── Reveal-on-scroll ───────────────────────────────────────────────
+.js [data-reveal] {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s, transform 0.5s;
+
+    &.is-in { opacity: 1; transform: none; }
+}
+
+// ── Mobile ─────────────────────────────────────────────────────────
+@media (max-width: 40rem) {
+    .nav-toggle {
+        display: grid;
+        place-items: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background: var(--surface-2);
+        cursor: pointer;
+
+        span, span::before, span::after {
+            content: "";
+            display: block;
+            width: 1rem;
+            height: 2px;
+            background: var(--ink);
+        }
+        span { position: relative; }
+        span::before { position: absolute; top: -5px; }
+        span::after  { position: absolute; top: 5px; }
+    }
+
+    .site-nav {
+        position: absolute;
+        inset: 100% 0 auto 0;
+        background: var(--surface-2);
+        border-bottom: 1px solid var(--border);
+        display: none;
+
+        &[data-open] { display: block; }
+
+        ul { flex-direction: column; align-items: flex-start; padding: 1rem 1.25rem; }
+    }
+}

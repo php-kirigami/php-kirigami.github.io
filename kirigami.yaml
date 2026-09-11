@@ -1,0 +1,66 @@
+# yaml-language-server: $schema=https://cdn.jsdelivr.net/gh/php-kirigami/kirigami@main/packages/kirigami/kirigami.schema.json
+
+kirigami:
+  project:     Kirigami
+  baseurl:     https://php-kirigami.github.io
+  root:        src
+  banner:      banner.txt
+
+  # Any other key here is free-form project data: it becomes a PHP variable of
+  # the same name on every page and in the header / footer includes.
+  author:      Maxime Larrivée-Roy
+  email:       mlarriveeroy@gmail.com
+  repo:        https://github.com/php-kirigami/kirigami
+  description: >-
+    A static site generator that turns PHP into fast, dependency-free HTML —
+    no server required. Real PHP templates, compiled to plain HTML by PHP
+    running in WebAssembly, right inside Node.
+  keywords:    [static site generator, php, webassembly, kirigami, zero dependency, github pages]
+  tagline:     Fold PHP into flat HTML.
+
+
+# SEO / social metadata. This block opts @kirigami/php-prepros' META class in;
+# an empty map is enough — <title>, description, keywords, Open Graph, Twitter
+# Card, canonical, favicon and apple-touch-icon are derived from the `kirigami:`
+# keys above and each page's PHPDOC (@title, @description, @image, @robots, …).
+# Any tag _layouts/header.php already writes by hand is detected and skipped.
+meta: {}
+
+
+# schema.org JSON-LD. Opt-in the same way — reads the `kirigami:` keys too.
+jsonld: {}
+
+
+prepros:
+  before:   _layouts/header.php   # prepended to every page
+  after:    _layouts/footer.php   # appended to every page
+  format:   true
+  network:  true                  # build-time npm version lookups (ecosystem/changelog), remote @tag fetches
+  includes: [_lib/functions.php]  # register custom tags / shortcodes / hooks here
+
+
+plugins:
+  # Build-time syntax highlighting — every fenced code block on the site (docs,
+  # tutorials, the config reference) is colored at build time. 0 bytes of
+  # highlight.js reach the browser.
+  - name: "@kirigami/plugin-highlight"
+    active: true
+    options:
+      languages: [yaml, php, javascript, bash, shell, json, scss, xml]  # xml = highlight.js's module for html/svg/xml too (see todo.md)
+      theme: auto
+      copyButton: true
+      tag: true
+
+
+sass:
+  # style: expanded
+
+
+tasks:
+  - name:  css-core
+    type:  sass
+    entry: styles/kirigami.core.scss
+
+  - name:  js-core
+    type:  esbuild
+    entry: scripts/kirigami.core.js

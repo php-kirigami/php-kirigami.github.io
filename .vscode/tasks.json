@@ -1,0 +1,37 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "kiri:watch",
+			"detail": "Rebuild pages, styles and scripts on save (no server).",
+			"type": "shell",
+			"command": "npx kiri watch",
+			"isBackground": true,
+			"runOptions": {
+				"runOn": "folderOpen",
+				"instanceLimit": 1
+			},
+			"presentation": {
+				"panel": "shared",
+				"group": "kiri-watch",
+				"reveal": "always",
+				"showReuseMessage": false
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "kiri:build",
+			"detail": "One-off development build.",
+			"type": "shell",
+			"command": "npx kiri build",
+			"problemMatcher": []
+		},
+		{
+			"label": "kiri:export",
+			"detail": "Production build into dist/.",
+			"type": "shell",
+			"command": "npx kiri export",
+			"problemMatcher": []
+		}
+	]
+}
