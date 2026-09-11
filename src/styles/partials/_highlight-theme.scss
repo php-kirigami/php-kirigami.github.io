@@ -28,7 +28,16 @@ $dark: (
     accent-soft: #1e2a24,
 );
 
-@include hljs.theme($light);
+// Scoped under :root:not([data-theme="dark"]) rather than left bare so the
+// light and dark rules below carry the *same* CSS specificity — otherwise a
+// same-or-lower-specificity competing rule elsewhere (e.g. canva prose's
+// inline-code reset) can beat the bare light block but lose to the
+// [data-theme="dark"]-scoped one, which reads as inline code changing size
+// on every theme toggle. See @kirigami/plugin-highlight's inject-auto.scss
+// for the upstream version of this same fix.
+:root:not([data-theme="dark"]) {
+    @include hljs.theme($light);
+}
 
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
