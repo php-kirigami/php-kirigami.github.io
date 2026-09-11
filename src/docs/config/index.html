@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Serif:wght@600;700&amp;display=swap">
+        <title>Config — Kirigami</title>
+        <meta name="description" content="Everything kirigami.yaml can hold — the kirigami:, meta:, jsonld:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Config — Kirigami">
+        <meta name="twitter:description" content="Everything kirigami.yaml can hold — the kirigami:, meta:, jsonld:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Config — Kirigami">
+        <meta property="og:description" content="Everything kirigami.yaml can hold — the kirigami:, meta:, jsonld:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/config/">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/config/">
+        <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+        <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/config/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Docs",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Config",
+                                "item": "https://php-kirigami.github.io/docs/config/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/config/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/config/",
+                        "name": "Config",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/config/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../">Home</a></li>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
+                        <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                        </g>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <section class="section wrap doc-head">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="../../docs/">Docs</a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">Config</span>
+                </nav>
+                <span class="eyebrow">Documentation</span>
+                <h1>Config</h1>
+                <p class="lead">Everything kirigami.yaml can hold — the kirigami:, meta:, jsonld:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.</p>
+            </section>
+            <section class="section wrap">
+                <div class="prose">
+                    <p>Everything is driven by one file, <code>kirigami.yaml</code>, at the project root. It&apos;s loaded through <code>@kirigami/struct-walker</code> (so nested file references resolve), validated against <code>kirigami.schema.json</code>, then checked imperatively — <code>kiri</code> throws on any unknown key, wrong type, or missing required property. Point your editor at the schema for autocompletion:</p>
+                    <pre><code class="hljs language-yaml"><span class="hljs-comment"># yaml-language-server: $schema=https://cdn.jsdelivr.net/gh/php-kirigami/kirigami@main/packages/kirigami/kirigami.schema.json</span></code></pre>
+                    <h2 id="kirigami">kirigami</h2>
+                    <p>The only required top-level block.</p>
+                    <pre><code class="hljs language-yaml"><span class="hljs-attr">kirigami:</span>
+  <span class="hljs-attr">project:</span>  <span class="hljs-string">My</span> <span class="hljs-string">Website</span>           <span class="hljs-comment"># site name — CLI banner, $project</span>
+  <span class="hljs-attr">baseurl:</span>  <span class="hljs-string">https://example.com</span>   <span class="hljs-comment"># deployed root URL, no trailing slash</span>
+  <span class="hljs-attr">root:</span>     <span class="hljs-string">src</span>                   <span class="hljs-comment"># dir holding _*.php pages</span>
+  <span class="hljs-attr">banner:</span>   <span class="hljs-string">assets/banner.txt</span>     <span class="hljs-comment"># license banner stamped on exported js/css/html</span>
+
+  <span class="hljs-comment"># Any other key here is free-form project data — it becomes a PHP</span>
+  <span class="hljs-comment"># variable of the same name in every page, in before/after, and in</span>
+  <span class="hljs-comment"># prepros.includes files (also readable as PREPROS::$config-&gt;data).</span>
+  <span class="hljs-attr">author:</span>      <span class="hljs-string">Jane</span> <span class="hljs-string">Doe</span>
+  <span class="hljs-attr">email:</span>       <span class="hljs-string">hello@example.com</span>
+  <span class="hljs-attr">description:</span> <span class="hljs-string">A</span> <span class="hljs-string">short</span> <span class="hljs-string">description,</span> <span class="hljs-string">handy</span> <span class="hljs-string">for</span> <span class="hljs-string">&lt;meta</span> <span class="hljs-string">name=&quot;description&quot;&gt;.</span>
+  <span class="hljs-attr">keywords:</span>    [<span class="hljs-string">static</span> <span class="hljs-string">site</span>, <span class="hljs-string">php</span>]</code></pre>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Required</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>project</code></td>
+                                <td>✅</td>
+                                <td>Site name.</td>
+                            </tr>
+                            <tr>
+                                <td><code>baseurl</code></td>
+                                <td>✅</td>
+                                <td>Deployed root URL, no trailing slash. Drives the sitemap and canonical URLs.</td>
+                            </tr>
+                            <tr>
+                                <td><code>root</code></td>
+                                <td>✅</td>
+                                <td>Directory holding <code>_*.php</code> pages; every task&apos;s <code>entry</code> is relative to it.</td>
+                            </tr>
+                            <tr>
+                                <td><code>banner</code></td>
+                                <td>–</td>
+                                <td>A text file, its <code>### ### </code>-tokens filled from this block, stamped on every exported <code>.js</code> / <code>.css</code> / <code>.html</code>. No file set → the bundled default banner is used the same way.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Loose keys are free project data. This site&apos;s own header/footer read <code>$project</code>, <code>$baseurl</code>, <code>$author</code>, <code>$tagline</code>, <code>$description</code> straight out of them — no separate &quot;site config&quot; object to keep in sync.</p>
+                    <h2 id="meta">meta</h2>
+                    <p>Opt-in <code>&lt;head&gt;</code> SEO / social metadata — <code>&lt;title&gt;</code>, description, Open Graph, Twitter Card, canonical, favicon. A <strong>top-level</strong> block, sibling of <code>kirigami:</code>. An empty <code>meta: {}</code> is enough to turn injection on for every page; values are then derived from the <code>kirigami:</code> keys above and each page&apos;s PHPDOC (<code>@title</code>, <code>@description</code>, <code>@image</code>, <code>@robots</code>, …), with a tag your layout already writes by hand detected and skipped.</p>
+                    <pre><code class="hljs language-yaml"><span class="hljs-attr">meta:</span>
+  <span class="hljs-attr">twitter:</span>     <span class="hljs-string">&quot;@myhandle&quot;</span>
+  <span class="hljs-attr">themeColor:</span>  <span class="hljs-string">&quot;#0b7285&quot;</span></code></pre>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>auto</code></td>
+                                <td>bool</td>
+                                <td>Inject automatically. Default <code>true</code> once the block exists; <code>auto: false</code> (or <code>meta: false</code>) keeps the values without injecting — call <code>META::tags()</code> by hand instead.</td>
+                            </tr>
+                            <tr>
+                                <td><code>titleFormat</code> / <code>titleFormatHome</code></td>
+                                <td>string</td>
+                                <td><code>&lt;title&gt;</code> templates. Tokens <code>{title}</code>, <code>{project}</code>, <code>{tagline}</code>. Defaults <code>{title} — {project}</code> / <code>{project} — {tagline}</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>description</code> / <code>keywords</code></td>
+                                <td>string / string[]</td>
+                                <td>Fallback for pages with no <code>@description</code> / <code>@keywords</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>robots</code></td>
+                                <td>string | <code>false</code></td>
+                                <td>Default <code>index, follow</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>language</code></td>
+                                <td>string</td>
+                                <td>BCP-47 tag → <code>&lt;meta name=&quot;language&quot;&gt;</code> + <code>og:locale</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>generator</code></td>
+                                <td>string | <code>false</code></td>
+                                <td>Default <code>Kirigami</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>author</code> / <code>designer</code></td>
+                                <td>string</td>
+                                <td><code>&lt;meta name=&quot;author&quot;&gt;</code> / a <code>designer</code> tag.</td>
+                            </tr>
+                            <tr>
+                                <td><code>themeColor</code></td>
+                                <td>string</td>
+                                <td><code>&lt;meta name=&quot;theme-color&quot;&gt;</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>image</code></td>
+                                <td>string</td>
+                                <td>Default <code>og:image</code> / <code>twitter:image</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>ogType</code></td>
+                                <td>string</td>
+                                <td>Default <code>website</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>twitterCard</code></td>
+                                <td>string</td>
+                                <td>Default <code>summary_large_image</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>twitter</code></td>
+                                <td>string | map</td>
+                                <td>Handle for <code>twitter:site</code> / <code>twitter:creator</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>canonical</code></td>
+                                <td>bool</td>
+                                <td>Emit <code>&lt;link rel=&quot;canonical&quot;&gt;</code>. Default <code>true</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>favicon</code> / <code>appleTouchIcon</code> / <code>humans</code></td>
+                                <td>string | bool</td>
+                                <td>A path sets it; <code>true</code> forces the default file; omitted, the default is auto-detected on disk; <code>false</code> disables it.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Per-page overrides live in the PHPDOC block: <code>@meta false</code> skips a page entirely; <code>@meta_title</code>, <code>@meta_description</code>, <code>@meta_image</code>, <code>@meta_robots</code>, <code>@meta_type</code>, <code>@canonical</code> override the generic tag. See <a href="../php/#meta"><code>META</code></a> for the manual builders.</p>
+                    <h2 id="jsonld">jsonld</h2>
+                    <p>Opt-in schema.org JSON-LD — the companion to <code>meta:</code>. Same switch: a top-level <code>jsonld: {}</code> block turns on an automatic JSON-LD block in the page&apos;s head, derived from the same <code>kirigami:</code> keys.</p>
+                    <pre><code class="hljs language-yaml"><span class="hljs-attr">jsonld:</span>
+  <span class="hljs-attr">type:</span> <span class="hljs-string">ProfessionalService</span>   <span class="hljs-comment"># @type for the main entity</span>
+  <span class="hljs-attr">lang:</span> <span class="hljs-string">en-CA</span>                  <span class="hljs-comment"># inLanguage on WebSite / WebPage</span>
+  <span class="hljs-attr">logo:</span> <span class="hljs-string">assets/logo.png</span>        <span class="hljs-comment"># absolute, or relative to baseurl</span>
+  <span class="hljs-attr">search:</span> <span class="hljs-string">https://example.com/?q={search_term_string}</span></code></pre>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Type</th>
+                                <th>Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>auto</code></td>
+                                <td>bool</td>
+                                <td>Same switch as <code>meta.auto</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>type</code></td>
+                                <td>string</td>
+                                <td><code>Organization</code>, <code>ProfessionalService</code>, <code>LocalBusiness</code>, …</td>
+                            </tr>
+                            <tr>
+                                <td><code>name</code> / <code>url</code> / <code>description</code></td>
+                                <td>string</td>
+                                <td>Default to <code>project</code> / <code>baseurl</code> / <code>description</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>logo</code> / <code>image</code></td>
+                                <td>string</td>
+                                <td><code>image</code> defaults to <code>logo</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>sameAs</code></td>
+                                <td>string[]</td>
+                                <td>Profile URLs.</td>
+                            </tr>
+                            <tr>
+                                <td><code>address</code></td>
+                                <td>map</td>
+                                <td><code>PostalAddress</code> properties.</td>
+                            </tr>
+                            <tr>
+                                <td><code>person</code></td>
+                                <td>string | map</td>
+                                <td>The <code>#person</code> node — a string is just the name.</td>
+                            </tr>
+                            <tr>
+                                <td><code>search</code></td>
+                                <td>string</td>
+                                <td>Sitelinks <code>SearchAction</code> URL template; must contain <code>{search_term_string}</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>For anything schema.org doesn&apos;t cover from config alone, build a node by hand with <a href="../php/#ld"><code>LD</code></a> — <code>LD::article()</code>, <code>LD::faqPage()</code>, <code>LD::breadcrumb()</code>, or any type via <code>LD::typeName([...])</code>.</p>
+                    <h2 id="prepros">prepros</h2>
+                    <p>The PHP → HTML compiler. Present — even empty — forces the <code>prepros</code> task.</p>
+                    <pre><code class="hljs language-yaml"><span class="hljs-attr">prepros:</span>
+  <span class="hljs-attr">before:</span>   <span class="hljs-string">_layouts/header.php</span>   <span class="hljs-comment"># included before every page body</span>
+  <span class="hljs-attr">after:</span>    <span class="hljs-string">_layouts/footer.php</span>   <span class="hljs-comment"># included after every page body</span>
+  <span class="hljs-attr">format:</span>   <span class="hljs-literal">true</span>                  <span class="hljs-comment"># pretty-print HTML output</span>
+  <span class="hljs-attr">head:</span>     <span class="hljs-literal">true</span>                  <span class="hljs-comment"># default true — see &quot;Managed head&quot; below</span>
+  <span class="hljs-attr">network:</span>  <span class="hljs-literal">false</span>                 <span class="hljs-comment"># allow outbound HTTP(S) — remote @tags, CURL, SCRAPER</span>
+  <span class="hljs-attr">mountext:</span> [<span class="hljs-string">.svg</span>, <span class="hljs-string">.webp</span>]          <span class="hljs-comment"># extra extensions auto-mounted into the virtual FS</span>
+  <span class="hljs-attr">includes:</span> [<span class="hljs-string">_lib/functions.php</span>]   <span class="hljs-comment"># PHP include_once&#x27;d before any page renders</span></code></pre>
+                    <p><code>includes</code> is where you register custom tags, Markdown shortcodes and hooks — this site&apos;s own <a href="https://github.com/php-kirigami/php-kirigami.github.io/blob/main/src/_lib/functions.php" target="_blank" rel="noopener noreferrer"><code>_lib/functions.php</code></a> is exactly that. See <a href="../authoring/">Writing pages</a> for the render pipeline these plug into.</p>
+                    <h2 id="image">image</h2>
+                    <p>The image autogenerator&apos;s one config block — see <a href="../php/#img"><code>IMG</code></a> for the three surfaces that call into it (<code>img-asset()</code> in Sass, <code>IMG::asset()</code> in PHP, <code>&lt;img asset&gt;</code> in markup).</p>
+                    <pre><code class="hljs language-yaml"><span class="hljs-attr">image:</span>
+  <span class="hljs-attr">format:</span> <span class="hljs-string">webp</span>        <span class="hljs-comment"># webp | avif        (default webp)</span>
+  <span class="hljs-attr">source:</span> <span class="hljs-string">assets/images</span>   <span class="hljs-comment"># rel. to cwd()       (default assets/images)</span>
+  <span class="hljs-attr">dest:</span>   <span class="hljs-string">images</span>           <span class="hljs-comment"># rel. to kirigami.root (default images)</span></code></pre>
+                    <h2 id="plugins">plugins</h2>
+                    <p>Kirigami plugins, loaded via <code>@kirigami/sdk</code>.</p>
+                    <pre><code class="hljs language-yaml"><span class="hljs-attr">plugins:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;@kirigami/plugin-highlight&quot;</span>
+    <span class="hljs-attr">active:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">options:</span> {}   <span class="hljs-comment"># free-form, validated against the plugin&#x27;s own schema</span></code></pre>
+                    <p>Each <code>name</code> must match <code>@kirigami/plugin-*</code>, <code>&lt;scope&gt;/kirigami-plugin-*</code>, or <code>kirigami-plugin-*</code>. <code>kiri install &lt;plugin&gt;</code> resolves a bare name against those conventions, installs it, and prints the entry to paste here — see <a href="../cli/"><code>kiri install</code></a>.</p>
+                    <h2 id="esbuild-and-sass">esbuild and sass</h2>
+                    <p>Free-form blocks, merged into every task of that type (after Kirigami&apos;s own defaults) — anything the underlying tool accepts.</p>
+                    <pre><code class="hljs language-yaml"><span class="hljs-attr">esbuild:</span>
+  <span class="hljs-comment"># minify: false</span>
+<span class="hljs-attr">sass:</span>
+  <span class="hljs-attr">style:</span> <span class="hljs-string">expanded</span>
+  <span class="hljs-comment"># before / after: extra .scss files compiled before/after the entry</span></code></pre>
+                    <p><code>sass</code> resolves <code>@use</code> / <code>@forward</code> through Sass&apos;s <code>NodePackageImporter</code> plus a custom importer that also accepts an implicit <code>styles/</code> prefix (<code>@use &apos;@kirigami/canva/conf&apos;</code> → <code>@kirigami/canva/styles/conf</code>).</p>
+                    <h2 id="export">export</h2>
+                    <pre><code class="hljs language-yaml"><span class="hljs-attr">export:</span>
+  <span class="hljs-attr">path:</span>   <span class="hljs-string">dist</span>                    <span class="hljs-comment"># output dir for `kiri export`</span>
+  <span class="hljs-attr">ignore:</span> [<span class="hljs-string">&quot;*.psd&quot;</span>, <span class="hljs-string">&quot;notes/&quot;</span>]      <span class="hljs-comment"># extra gitignore-style excludes</span></code></pre>
+                    <p><code>kiri export</code> copies <code>kirigami.root</code> into <code>path</code>, excluding any file/dir starting with <code>_</code> or <code>.</code>, <code>.scss</code> files, <code>.map</code> files, and non-minified <code>.js</code> files, plus every <code>ignore</code> pattern. Token replacements happen during the copy: <code>2026</code> and <code>###TIMESTAMP###</code> in <code>.html</code>, <code>2026-09-11</code> in <code>sitemap.xml</code>.</p>
+                    <h2 id="scripts">scripts</h2>
+                    <p>Named PHP scripts, run with <code>kiri run &lt;name&gt;</code> or on a build trigger.</p>
+                    <pre><code class="hljs language-yaml"><span class="hljs-attr">scripts:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">convert-images</span>
+    <span class="hljs-attr">mount:</span> [<span class="hljs-string">&quot;assets/images/**/*.jpg&quot;</span>]   <span class="hljs-comment"># extra files mounted before it runs</span>
+    <span class="hljs-attr">trigger:</span> <span class="hljs-string">before-build</span>                <span class="hljs-comment"># before-build | before-export | after-export</span></code></pre>
+                    <p>Omit <code>trigger</code> for a script that only ever runs manually. See <code>STD::succeed()</code> / <code>STD::error()</code> in the <a href="../php/#std">PHP class library</a> for ending one early with a custom result.</p>
+                    <h2 id="tasks">tasks</h2>
+                    <p>The ordered build pipeline, on top of the implicit <code>prepros</code> and <code>dist</code> tasks.</p>
+                    <pre><code class="hljs language-yaml"><span class="hljs-attr">tasks:</span>
+  <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">js-core</span>,   <span class="hljs-attr">type:</span> <span class="hljs-string">esbuild</span>, <span class="hljs-attr">entry:</span> <span class="hljs-string">scripts/kirigami.core.js</span> }
+  <span class="hljs-bullet">-</span> { <span class="hljs-attr">name:</span> <span class="hljs-string">scss-core</span>, <span class="hljs-attr">type:</span> <span class="hljs-string">sass</span>,    <span class="hljs-attr">entry:</span> <span class="hljs-string">styles/kirigami.core.scss</span> }</code></pre>
+                    <h3 id="task-types">Task types</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><code>type</code></th>
+                                <th>Purpose</th>
+                                <th>Required</th>
+                                <th>Optional</th>
+                                <th>Output</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>esbuild</code></td>
+                                <td>Bundle + minify a JS/TS entry. Build + watch.</td>
+                                <td><code>name</code>, <code>type</code>, <code>entry</code></td>
+                                <td><code>force</code>, <code>head</code></td>
+                                <td><code>&lt;entry&gt;.min.js</code> (+ <code>.map</code> outside export)</td>
+                            </tr>
+                            <tr>
+                                <td><code>sass</code></td>
+                                <td>Compile a <code>.scss</code>/<code>.sass</code> entry, re-minified with csso on export. Build + watch.</td>
+                                <td><code>name</code>, <code>type</code>, <code>entry</code></td>
+                                <td><code>force</code>, <code>head</code></td>
+                                <td><code>&lt;entry&gt;.min.css</code> (+ <code>.css.map</code> outside export)</td>
+                            </tr>
+                            <tr>
+                                <td><code>prepros</code></td>
+                                <td>Render pages + <code>sitemap.xml</code>. Watch-only unless forced/implicit.</td>
+                                <td><code>name</code>, <code>type</code></td>
+                                <td><code>target</code>, <code>force</code></td>
+                                <td><code>*.html</code>, <code>sitemap.xml</code>, <code>robots.txt</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>dist</code></td>
+                                <td>Copy <code>kirigami.root</code> into <code>path</code>, stamping the banner. Implicit during <code>kiri export</code> only.</td>
+                                <td><code>name</code>, <code>type</code>, <code>path</code></td>
+                                <td><code>ignore</code>, <code>force</code></td>
+                                <td>the exported tree</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 id="managed-head">Managed head</h2>
+                    <p>Unless <code>prepros.head</code> is <code>false</code>, every rendered page&apos;s <code>&lt;head&gt;</code> is auto-wired — no need to hand-write any of it in <code>before</code>:</p>
+                    <ul>
+                        <li>a small theme/FOUC guard as the first child of <code>&lt;head&gt;</code> (adds a</li>
+                    </ul>
+                    <p><code>js</code> class, applies the stored <code>data-theme</code> before first paint);</p>
+                    <ul>
+                        <li>a <code>&lt;link rel=&quot;stylesheet&quot;&gt;</code> for every <code>sass</code> task output;</li>
+                        <li>a <code>&lt;script&gt;</code> (no <code>defer</code>, just before <code>&lt;/body&gt;</code>) for every</li>
+                    </ul>
+                    <p><code>esbuild</code> task output.</p>
+                    <p>Paths are per-page-relative and carry a <code>?&lt;timestamp&gt;</code> cache-bust, left literal at build time and only expanded on <code>kiri export</code> — so rebuilding never rewrites a committed page. A file already referenced in the page is left alone; skip a single task&apos;s tag with <code>head: false</code> on that task.</p>
+                </div>
+            </section>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Site</h3>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Docs</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                            <li><a href="../../about/">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

@@ -13,6 +13,47 @@ register_tag('year', fn() => date('Y'));
 
 
 /**
+ * Site-relative URL to another page's `_index.php` — the shape
+ * FS::getChildren() / FS::getBreadcrumb() results come in. Built from
+ * `PREPROS::$config->root` (same technique FS::getBreadcrumb() itself uses
+ * to find the source root) plus the calling page's own `$relroot`, since
+ * PREPROS::backtraceFile() reports the file that called *this* function —
+ * `_lib/functions.php`, not the page — one frame too shallow to use here.
+ */
+function kirigami_page_href(object $page, string $relroot): string
+{
+    $root = rtrim(str_replace('\\', '/', realpath(PREPROS::$config->root)), '/');
+    $dir  = rtrim(str_replace('\\', '/', dirname($page->file)), '/');
+    $rel  = ltrim(substr($dir, strlen($root)), '/');
+    return $relroot . ($rel !== '' ? $rel . '/' : '');
+}
+
+/**
+ * Renders "Docs / Config" above a /docs/ sub-page, from FS::getBreadcrumb().
+ * Every ancestor in the trail needs its own `@breadcrumb true` tag (that's
+ * what stops the walk at /docs/ instead of reaching all the way to Home) —
+ * see the PHPDOC block on /docs/_index.php and each /docs/ sub-page.
+ */
+function kirigami_breadcrumb_nav(string $currentTitle, string $relroot): string
+{
+    $crumbs = fs_get_breadcrumb();
+    if (!$crumbs) {
+        return '';
+    }
+
+    $links = array_map(
+        fn($c) => '<a href="' . kirigami_page_href($c, $relroot) . '">' . str_htmlesc($c->title ?? '') . '</a>',
+        $crumbs
+    );
+
+    return '<nav class="breadcrumb" aria-label="Breadcrumb">'
+        . implode(' <span aria-hidden="true">/</span> ', $links)
+        . ' <span aria-hidden="true">/</span> <span aria-current="page">' . str_htmlesc($currentTitle) . '</span>'
+        . '</nav>';
+}
+
+
+/**
  * The monorepo's own packages — used by /ecosystem/. One place to edit when a
  * package is added or its role changes; kept as a plain function (not a data
  * file) since `npm_pkg` doubles as the key `kirigami_pkg_version()` fetches.

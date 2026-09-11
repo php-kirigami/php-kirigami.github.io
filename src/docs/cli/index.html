@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Serif:wght@600;700&amp;display=swap">
+        <title>CLI — Kirigami</title>
+        <meta name="description" content="Every kiri command — build, export, watch, serve, run, create, install, phpinfo.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="CLI — Kirigami">
+        <meta name="twitter:description" content="Every kiri command — build, export, watch, serve, run, create, install, phpinfo.">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="CLI — Kirigami">
+        <meta property="og:description" content="Every kiri command — build, export, watch, serve, run, create, install, phpinfo.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/cli/">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/cli/">
+        <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+        <link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/cli/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Docs",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "CLI",
+                                "item": "https://php-kirigami.github.io/docs/cli/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/cli/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/cli/",
+                        "name": "CLI",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/cli/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../">Home</a></li>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
+                        <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                        </g>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <section class="section wrap doc-head">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="../../docs/">Docs</a>
+                    <span aria-hidden="true">/</span>
+                    <span aria-current="page">CLI</span>
+                </nav>
+                <span class="eyebrow">Documentation</span>
+                <h1>CLI</h1>
+                <p class="lead">Every kiri command — build, export, watch, serve, run, create, install, phpinfo.</p>
+            </section>
+            <section class="section wrap">
+                <div class="prose">
+                    <p><code>kiri</code> is provided by the <code>@kirigami/kirigami</code> dev dependency — run it as <code>npx kiri &lt;command&gt;</code>. Every command has <code>--help</code>.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Command</th>
+                                <th>What it does</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>kiri build</code></td>
+                                <td>Run every <code>tasks</code> entry once, in order, for development (no minify/export). If <code>prepros:</code> is set, renders all pages + <code>sitemap.xml</code> first. Fires the <code>before-build</code> trigger.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kiri export</code></td>
+                                <td>Production build. Fires <code>before-export</code> then <code>before-build</code>; forces the <code>prepros</code> task, all <code>tasks</code>, and a <code>dist</code> copy into <code>export.path</code>; stamps the banner; fires <code>after-export</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kiri watch</code></td>
+                                <td>Dev mode: watches files for <code>esbuild</code> / <code>sass</code> / <code>prepros</code> tasks and rebuilds on change (150 ms debounce, batched). <code>node_modules/</code>, <code>.git/</code>, <code>dist/</code> always ignored. No server. <code>Ctrl+C</code> to stop.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kiri serve</code></td>
+                                <td>Everything <code>watch</code> does, plus a static file server over <code>kirigami.root</code> and browser hot-reload (Server-Sent Events — a tab reloads once a batch finishes). <code>--port</code> (default <code>4321</code>) / <code>--host</code> (default <code>127.0.0.1</code>). Zero-dependency: <code>node:http</code> + <code>node:fs</code>, no live-reload framework.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kiri run &lt;script&gt; [args…]</code></td>
+                                <td>Run <code>scripts/&lt;script&gt;.php</code> in the Kirigami PHP runtime — full class library, <code>PREPROS::$config-&gt;data</code> populated. Extra words become <code>$argv</code> entries.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kiri create [template] [dir]</code></td>
+                                <td>Scaffold from an official <code>template-*</code> repo. No args → interactive wizard (template, dir, name / description / author / base URL, <code>--email</code> / <code>--repo</code>) written into <code>package.json</code> + <code>kirigami.yaml</code>. <code>--list</code> / <code>-l</code> to list. Extraction never overwrites — existing files are kept, <code>package.json</code> deep-merged. Then <code>git init</code> + an initial commit (unless already in a repo or <code>--no-git</code>) and <code>npm install</code> (unless <code>--no-install</code>).</td>
+                            </tr>
+                            <tr>
+                                <td><code>kiri install &lt;plugin&gt;</code></td>
+                                <td><code>npm install</code>s a plugin — devDependency by default, <code>--save</code> for a regular one. A bare name (<code>highlight</code>) resolves against the <code>@kirigami/plugin-*</code> / <code>kirigami-plugin-*</code> conventions via the npm registry; a full package name is used as-is. Already installed → checks npm for a newer version and updates. Prints the <code>plugins:</code> entry to paste into <code>kirigami.yaml</code>, built from the plugin&apos;s own option schema — never edits the file itself.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kiri phpinfo</code></td>
+                                <td>Print <code>phpinfo()</code> from the embedded runtime. <code>--md</code> / <code>--json</code> for other formats.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kiri --version</code></td>
+                                <td><code>kiri</code> version + bundled PHP version.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>A typical loop during development is <code>kiri serve</code> in one terminal — edit, save, watch the browser tab reload — then <code>kiri export</code> once, right before a push, to check the production output in <code>dist/</code>.</p>
+                    <pre><code class="hljs language-bash">npx kiri serve --port 4321
+<span class="hljs-comment"># …edit src/**, browser reloads on save…</span>
+npx kiri <span class="hljs-built_in">export</span></code></pre>
+                    <p><code>kiri run</code> is for one-off or triggered scripts that need the full PHP class library but produce no page — image conversion, a data migration, a report. Declare it under <code>scripts:</code> in <a href="../config/#scripts">the config reference</a> to run it on <code>before-build</code> / <code>before-export</code> / <code>after-export</code>, or leave <code>trigger</code> out for manual-only.</p>
+                </div>
+            </section>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Site</h3>
+                        <ul>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Docs</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                            <li><a href="../../about/">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

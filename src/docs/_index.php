@@ -1,11 +1,13 @@
 <?php
 /**
- * @title    Docs
- * @section  docs
- * @abstract The shape every reference and tutorial page on this site will
- *           follow — config reference, CLI, PHP class library, plugin
- *           authoring, all still to come.
+ * @title      Docs
+ * @section    docs
+ * @abstract   The complete reference — config, CLI, writing pages, the PHP
+ *             class library.
+ * @breadcrumb true
  */
+
+$sections = fs_get_children();
 ?>
 
 <section class="section wrap doc-head">
@@ -15,63 +17,37 @@
 </section>
 
 <section class="section wrap">
+    <div class="grid" data-reveal>
+        <?php foreach ($sections as $s): ?>
+            <a class="card" href="<?php echo kirigami_page_href($s, $relroot); ?>">
+                <h3><?php echo str_htmlesc($s->title ?? ''); ?></h3>
+                <p><?php echo str_htmlesc($s->abstract ?? ''); ?></p>
+            </a>
+        <?php endforeach; ?>
+    </div>
+</section>
+
+<hr class="fold">
+
+<section class="section wrap">
     <div class="prose">
         <markdown>
-          This page is the **doc-page model**: an eyebrow label, an `<h1>`, an
-          abstract from the page's own PHPDOC, then plain Markdown wrapped in
-          `.prose`. Every reference page — config, CLI, the PHP class library,
-          plugin authoring — will be built on this same shape, with a sidebar
-          added once there's enough of them to need one.
+          New to Kirigami? These four pages are the reference — precise, but
+          terse. If you want a guided walk instead, start with
+          [Getting started](../start/) — the [tutorial](../start/tutorial/)
+          builds a real small site, one concept per part, and links back here
+          wherever a reference page has the full detail.
 
-          ## A real `kirigami.yaml`
+          Every fenced code block on this site, including every example
+          below, is colored **at build time** by
+          [`@kirigami/plugin-highlight`](https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-highlight) —
+          zero bytes of highlight.js reach your browser. Hover a block for
+          the copy button.
 
-          This is the config that renders the page you're reading right now:
-
-          ```yaml
-          kirigami:
-            project:  Kirigami
-            baseurl:  https://php-kirigami.github.io
-            root:     src
-
-          meta: {}
-          jsonld: {}
-
-          prepros:
-            before: _layouts/header.php
-            after:  _layouts/footer.php
-            format: true
-
-          plugins:
-            - name: "@kirigami/plugin-highlight"
-              active: true
-          ```
-
-          Fenced code blocks like the one above are colored **at build time** by
-          [`@kirigami/plugin-highlight`](https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-highlight)
-          — this page ships zero bytes of highlight.js to your browser. Hover a
-          block for the copy button.
-
-          > [!NOTE]
-          > The full configuration reference, the CLI command list, and the PHP
-          > class library land in a later phase of the site. For now, the
-          > complete reference lives in the monorepo README, linked below.
-
-          The full reference: [github.com/php-kirigami/kirigami](https://github.com/php-kirigami/kirigami#readme).
-
-          And PHP renders normally alongside the Markdown, same as anywhere else
-          on the site — every page opens with a PHPDOC block like this one, then
-          plain PHP:
-
-          ```php
-          /**
-          * @title    Example
-          * @abstract Every page starts with a PHPDOC block like this one.
-          */
-
-          echo str_htmlesc($title);
-          ```
+          The card grid above isn't hand-written: it comes from
+          [`FS::getChildren()`](php/#fs), walking this page's own
+          sub-folders. Add a fifth `_index.php` under `docs/` and it appears
+          here on the next build, no list to maintain.
         </markdown>
-
-        <p><a href="<?php echo $relroot; ?>">&larr; Back home</a></p>
     </div>
 </section>
