@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Serif:wght@600;700&amp;display=swap">
+        <title>Tutorial · Content — Kirigami</title>
+        <meta name="description" content="Markdown in a page, a YAML data file for a listing, and the annotation that renders a page as pure Markdown.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Tutorial · Content — Kirigami">
+        <meta name="twitter:description" content="Markdown in a page, a YAML data file for a listing, and the annotation that renders a page as pure Markdown.">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Tutorial · Content — Kirigami">
+        <meta property="og:description" content="Markdown in a page, a YAML data file for a listing, and the annotation that renders a page as pure Markdown.">
+        <meta property="og:url" content="https://php-kirigami.github.io/start/tutorial/3-content/">
+        <link rel="canonical" href="https://php-kirigami.github.io/start/tutorial/3-content/">
+        <link rel="icon" type="image/x-icon" href="../../../favicon.ico">
+        <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/start/tutorial/3-content/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Start",
+                                "item": "https://php-kirigami.github.io/start/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Tutorial",
+                                "item": "https://php-kirigami.github.io/start/tutorial/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 4,
+                                "name": "Tutorial · Content",
+                                "item": "https://php-kirigami.github.io/start/tutorial/3-content/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/start/tutorial/3-content/#webpage",
+                        "url": "https://php-kirigami.github.io/start/tutorial/3-content/",
+                        "name": "Tutorial · Content",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/start/tutorial/3-content/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-start">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../../">Home</a></li>
+                        <li><a href="../../../start/" aria-current="page">Start</a></li>
+                        <li><a href="../../../docs/">Docs</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewbox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path class="theme-toggle__moon" fill="currentColor" d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36A5.5 5.5 0 0 1 12.36 3.1 9.6 9.6 0 0 0 12 3Z"></path>
+                        <g class="theme-toggle__sun" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+                        </g>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <section class="section wrap doc-head">
+                <span class="eyebrow">Tutorial · Part 3 of 7</span>
+                <h1>Content</h1>
+                <p class="lead">Markdown in a page, a YAML data file for a listing, and the annotation that renders a page as pure Markdown.</p>
+            </section>
+            <section class="section wrap">
+                <ol class="steps">
+                    <li>
+                        <h3>Write prose with the markdown tag</h3>
+                        <div class="prose">
+                            <p>In <code>atelier/_index.php</code>, drop Markdown straight into the page — it&apos;s converted to HTML after PHP runs, so PHP variables and Markdown mix freely. Wrap the paragraph between an opening and a closing tag named <code>markdown</code>, the same way every paragraph on this tutorial page is written — view this page&apos;s source to see the real thing, since showing the tag&apos;s own angle brackets here would trip the very tag it&apos;s demonstrating.</p>
+                            <p>Add a <code>prose</code> attribute on the opening tag to wrap the output in <code>.prose</code> — this site&apos;s own <code>@kirigami/canva</code>-based typography for long-form content.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>List notes from a YAML file</h3>
+                        <div class="prose">
+                            <p><code>notes/_notes.yaml</code>:</p>
+                            <pre><code class="hljs language-yaml"><span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">The</span> <span class="hljs-string">first</span> <span class="hljs-string">pleat</span>
+  <span class="hljs-attr">date:</span> <span class="hljs-number">2026-08-02</span>
+  <span class="hljs-attr">excerpt:</span> <span class="hljs-string">Where</span> <span class="hljs-string">the</span> <span class="hljs-string">studio&#x27;s</span> <span class="hljs-string">name</span> <span class="hljs-string">actually</span> <span class="hljs-string">comes</span> <span class="hljs-string">from.</span>
+<span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">Paper</span> <span class="hljs-string">weights,</span> <span class="hljs-string">compared</span>
+  <span class="hljs-attr">date:</span> <span class="hljs-number">2026-08-19</span>
+  <span class="hljs-attr">excerpt:</span> <span class="hljs-string">80gsm</span> <span class="hljs-string">folds</span> <span class="hljs-string">crisp;</span> <span class="hljs-string">120gsm</span> <span class="hljs-string">holds</span> <span class="hljs-string">a</span> <span class="hljs-string">curve.</span></code></pre>
+                            <p><code>notes/_index.php</code> points a PHPDOC annotation at it, and gets the parsed data back as a plain array of objects — no manual <code>file_get_contents()</code> / <code>yaml_parse()</code>:</p>
+                            <pre><code class="hljs language-php"><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@title</span> Notes
+ * <span class="hljs-doctag">@posts</span> _notes.yaml
+ */</span></code></pre>
+                            <pre><code class="hljs language-php"><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$posts</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$post</span>) {
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h3&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$post</span>-&gt;title) . <span class="hljs-string">&#x27;&lt;/h3&gt;&#x27;</span>;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$post</span>-&gt;excerpt) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;
+}</code></pre>
+                            <p>Any annotation value ending in <code>.yaml</code>, <code>.yml</code>, <code>.json</code> or <code>.md</code> that resolves to a real file is loaded and parsed automatically — the string becomes structured data instead.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>A whole page that&apos;s just Markdown</h3>
+                        <div class="prose">
+                            <p>For a single note that&apos;s pure prose, skip writing PHP at all. <code>notes/premier-pli/_premier-pli.md</code> holds the text; the page file becomes almost nothing:</p>
+                            <pre><code class="hljs language-php"><span class="hljs-comment">/**
+ * <span class="hljs-doctag">@title</span>   The first pleat
+ * <span class="hljs-doctag">@content</span> _premier-pli.md
+ */</span></code></pre>
+                            <p><code>@content</code> renders that file&apos;s contents <strong>as the page body</strong> and skips executing the PHP file entirely — reserved for pages that are pure data or Markdown, wrapped by the same shared header/footer as everything else.</p>
+                        </div>
+                    </li>
+                </ol>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
+                <div class="prose">
+                    <div class="markdown-alert markdown-alert-note">
+                        <p class="markdown-alert-title">NOTE</p>
+                        <p>Three different shapes, same output family: <code>&lt;markdown&gt;</code> for prose mixed with logic, an auto-loaded data file for structured listings, <code>@content</code> for pages that are only ever going to be prose. Pick the one that matches the page, not one convention for the whole site.</p>
+                    </div>
+                </div>
+            </section>
+            <div class="wrap">
+                <nav class="tutorial-nav">
+                    <span class="tutorial-nav__step">Part 3 of 7</span>
+                    <a rel="prev" href="../../../start/tutorial/2-pages-layout/">Part 2 — Pages &amp; layout</a>
+                    <a rel="next" href="../../../start/tutorial/4-styles-scripts/">Part 4 — Styles &amp; scripts</a>
+                </nav>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Site</h3>
+                        <ul>
+                            <li><a href="../../../">Home</a></li>
+                            <li><a href="../../../docs/">Docs</a></li>
+                            <li><a href="../../../templates/">Templates</a></li>
+                            <li><a href="../../../showcase/">Showcase</a></li>
+                            <li><a href="../../../about/">About</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

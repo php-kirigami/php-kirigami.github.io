@@ -5,30 +5,30 @@
         <script>
             (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
         </script>
-        <link rel="stylesheet" href="../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <link rel="stylesheet" href="../../../styles/kirigami.core.min.css?###TIMESTAMP###">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Serif:wght@600;700&amp;display=swap">
-        <title>Showcase — Kirigami</title>
-        <meta name="description" content="Sites actually running on Kirigami — starting with this one.">
+        <title>Tutorial · Setup — Kirigami</title>
+        <meta name="description" content="Scaffold the project and get kiri watching it.">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
         <meta name="generator" content="Kirigami">
         <meta name="author" content="Maxime Larrivée-Roy">
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Showcase — Kirigami">
-        <meta name="twitter:description" content="Sites actually running on Kirigami — starting with this one.">
+        <meta name="twitter:title" content="Tutorial · Setup — Kirigami">
+        <meta name="twitter:description" content="Scaffold the project and get kiri watching it.">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Showcase — Kirigami">
-        <meta property="og:description" content="Sites actually running on Kirigami — starting with this one.">
-        <meta property="og:url" content="https://php-kirigami.github.io/showcase/">
-        <link rel="canonical" href="https://php-kirigami.github.io/showcase/">
-        <link rel="icon" type="image/x-icon" href="../favicon.ico">
-        <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+        <meta property="og:title" content="Tutorial · Setup — Kirigami">
+        <meta property="og:description" content="Scaffold the project and get kiri watching it.">
+        <meta property="og:url" content="https://php-kirigami.github.io/start/tutorial/1-setup/">
+        <link rel="canonical" href="https://php-kirigami.github.io/start/tutorial/1-setup/">
+        <link rel="icon" type="image/x-icon" href="../../../favicon.ico">
+        <link rel="apple-touch-icon" href="../../../apple-touch-icon.png">
         <script type="application/ld+json">
             {
                 "@context": "https://schema.org",
@@ -55,7 +55,7 @@
                     },
                     {
                         "@type": "BreadcrumbList",
-                        "@id": "https://php-kirigami.github.io/showcase/#breadcrumb",
+                        "@id": "https://php-kirigami.github.io/start/tutorial/1-setup/#breadcrumb",
                         "itemListElement": [
                             {
                                 "@type": "ListItem",
@@ -66,16 +66,28 @@
                             {
                                 "@type": "ListItem",
                                 "position": 2,
-                                "name": "Showcase",
-                                "item": "https://php-kirigami.github.io/showcase/"
+                                "name": "Start",
+                                "item": "https://php-kirigami.github.io/start/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Tutorial",
+                                "item": "https://php-kirigami.github.io/start/tutorial/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 4,
+                                "name": "Tutorial · Setup",
+                                "item": "https://php-kirigami.github.io/start/tutorial/1-setup/"
                             }
                         ]
                     },
                     {
                         "@type": "WebPage",
-                        "@id": "https://php-kirigami.github.io/showcase/#webpage",
-                        "url": "https://php-kirigami.github.io/showcase/",
-                        "name": "Showcase",
+                        "@id": "https://php-kirigami.github.io/start/tutorial/1-setup/#webpage",
+                        "url": "https://php-kirigami.github.io/start/tutorial/1-setup/",
+                        "name": "Tutorial · Setup",
                         "isPartOf": {
                             "@id": "https://php-kirigami.github.io/#website"
                         },
@@ -84,23 +96,23 @@
                         },
                         "inLanguage": "en",
                         "breadcrumb": {
-                            "@id": "https://php-kirigami.github.io/showcase/#breadcrumb"
+                            "@id": "https://php-kirigami.github.io/start/tutorial/1-setup/#breadcrumb"
                         }
                     }
                 ]
             }
         </script>
     </head>
-    <body class="page-showcase">
+    <body class="page-start">
         <a class="skip-link" href="#main">Skip to content</a>
         <header class="site-header">
             <div class="wrap site-header__inner">
-                <a class="brand" href="../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <a class="brand" href="../../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
                 <nav class="site-nav" id="site-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="../">Home</a></li>
-                        <li><a href="../start/">Start</a></li>
-                        <li><a href="../docs/">Docs</a></li>
+                        <li><a href="../../../">Home</a></li>
+                        <li><a href="../../../start/" aria-current="page">Start</a></li>
+                        <li><a href="../../../docs/">Docs</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
@@ -118,35 +130,60 @@
         </header>
         <main id="main">
             <section class="section wrap doc-head">
-                <span class="eyebrow">Showcase</span>
-                <h1>Showcase</h1>
-                <p class="lead">Sites actually running on Kirigami — starting with this one.</p>
+                <span class="eyebrow">Tutorial · Part 1 of 7</span>
+                <h1>Setup</h1>
+                <p class="lead">Scaffold the project and get kiri watching it.</p>
             </section>
             <section class="section wrap">
-                <div class="grid" data-reveal="">
-                    <article class="card">
-                        <h3>Kirigami</h3>
-                        <p>This site. Built in the open, phase by phase, with the <code>@kirigami/canva</code> design system and <code>@kirigami/plugin-highlight</code> — the same packages anyone installs from npm.</p>
-                        <p style="margin-top:.8rem"><a href="https://github.com/php-kirigami/php-kirigami.github.io">Source</a></p>
-                    </article>
-                    <article class="card">
-                        <h3>Kirigami Demo</h3>
-                        <p>The <code>demo</code> template, deployed: a guided tour of Markdown, images, syntax highlighting, data files, and the tag/hook extension points — each feature as a real page.</p>
-                        <p style="margin-top:.8rem"><a href="https://php-kirigami.github.io/template-demo/">Live</a> · <a href="https://github.com/php-kirigami/template-demo">Source</a></p>
-                    </article>
-                    <article class="card">
-                        <h3>Kirigami Site (starter)</h3>
-                        <p>The <code>default</code> template, deployed as-is: what <code>npx kiri create default</code> gives you before you&apos;ve changed a single line.</p>
-                        <p style="margin-top:.8rem"><a href="https://php-kirigami.github.io/template-default/">Live</a> · <a href="https://github.com/php-kirigami/template-default">Source</a></p>
-                    </article>
-                </div>
+                <ol class="steps">
+                    <li>
+                        <h3>Scaffold from a template</h3>
+                        <div class="prose">
+                            <pre><code class="hljs language-bash">npx kiri create default studio-plie
+<span class="hljs-built_in">cd</span> studio-plie</code></pre>
+                            <p><code>kiri create</code> clones the <code>default</code> template&apos;s repo, deep-merges its <code>package.json</code>, writes what you type into <code>kirigami.yaml</code>, then runs <code>git init</code> and <code>npm install</code> for you. Run <code>npx kiri create --list</code> any time to see the official templates.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Look at what you got</h3>
+                        <div class="prose">
+                            <pre><code class="hljs language-bash">studio-plie/
+├── kirigami.yaml
+├── package.json
+└── src/                 ← kirigami.root
+    ├── _layouts/        ← header.php / footer.php
+    ├── _lib/            ← functions.php (tags/hooks/plugins)
+    ├── _index.php       → index.html
+    ├── styles/
+    └── scripts/</code></pre>
+                            <p>Two naming rules explain the whole tree: a file <code>_name.php</code> compiles to <code>name.html</code> in the same folder (<code>_index.php</code> → <code>index.html</code>); a folder starting with <code>_</code> is never walked as a page directory — that&apos;s where layouts, includes and data live.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <h3>Start watching</h3>
+                        <div class="prose">
+                            <pre><code class="hljs language-bash">npx kiri watch</code></pre>
+                            <p>Leave this running. It rebuilds pages, styles and scripts on every save — no server, no browser refresh. Open <code>src/index.html</code> in a browser tab and reload it by hand, or point an editor live-preview extension at <code>src/</code>.</p>
+                        </div>
+                    </li>
+                </ol>
             </section>
             <hr class="fold">
             <section class="section wrap">
                 <div class="prose">
-                    <p>Built something with Kirigami you&apos;d like listed here? Open an issue on <a href="https://github.com/php-kirigami/kirigami/issues">the main repo</a> with a link — this list is meant to grow.</p>
+                    <div class="markdown-alert markdown-alert-note">
+                        <p class="markdown-alert-title">NOTE</p>
+                        <p>Nothing was compiled by a server and nothing needs to run again to serve the site — <code>kiri watch</code> only regenerates files on disk. The next part turns the single starter page into the three real pages Studio Plié needs.</p>
+                    </div>
                 </div>
             </section>
+            <div class="wrap">
+                <nav class="tutorial-nav">
+                    <span class="tutorial-nav__step">Part 1 of 7</span>
+                    <a rel="prev" href="../../../start/tutorial/">Overview</a>
+                    <a rel="next" href="../../../start/tutorial/2-pages-layout/">Part 2 — Pages &amp; layout</a>
+                </nav>
+            </div>
         </main>
         <footer class="site-footer">
             <div class="wrap">
@@ -158,17 +195,17 @@
                     <div class="site-footer__col">
                         <h3>Site</h3>
                         <ul>
-                            <li><a href="../">Home</a></li>
-                            <li><a href="../docs/">Docs</a></li>
-                            <li><a href="../templates/">Templates</a></li>
-                            <li><a href="../showcase/">Showcase</a></li>
-                            <li><a href="../about/">About</a></li>
+                            <li><a href="../../../">Home</a></li>
+                            <li><a href="../../../docs/">Docs</a></li>
+                            <li><a href="../../../templates/">Templates</a></li>
+                            <li><a href="../../../showcase/">Showcase</a></li>
+                            <li><a href="../../../about/">About</a></li>
                         </ul>
                     </div>
                     <div class="site-footer__col">
                         <h3>Kirigami</h3>
                         <ul>
-                            <li><a href="../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../../ecosystem/">Ecosystem</a></li>
                             <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
                             <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
                             <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
@@ -177,13 +214,13 @@
                 </div>
                 <div class="site-footer__inner">
                     <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
-                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
                 </div>
             </div>
         </footer>
         <script>
             document.querySelectorAll("pre>code").forEach(function(c){if(c.children.length)return;var L=c.textContent.replace(/^\n+/,"").replace(/\s+$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^\s*/)[0].length)});if(n&&n<1/0)c.textContent=L.map(function(l){return l.slice(n)}).join("\n")});
         </script>
-        <script src="../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+        <script src="../../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
     </body>
 </html>

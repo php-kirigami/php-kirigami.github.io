@@ -60,15 +60,39 @@ IBM Plex Sans for body copy, IBM Plex Mono for labels/nav numbers/code (loaded
 via Google Fonts in `_layouts/header.php`, not through `canva`'s local
 `$fonts` embedding).
 
+**Phase 2 — Getting started** also shipped: `/start/` (hub), `/start/install/`,
+`/start/quickstart/`, and the full **7-part tutorial** at `/start/tutorial/` —
+a single fil-rouge project ("Studio Plié", a paper-folding studio) built one
+concept per part: setup → pages & layout → content (Markdown/YAML/`@content`)
+→ styles & scripts (canva retheme + dark mode + managed head) → images (the
+autogenerator's 3 surfaces) → SEO (`meta:`/`jsonld:`) → deploy (kiribuild v2).
+Shared components: `.steps` (numbered), `.tutorial-nav` (Part N of 7,
+prev/next). Header nav gained **Start** (Home, Start, Docs, GitHub).
+
+Writing the tutorial surfaced two real, confirmed bugs in `@kirigami/php-prepros`
+(both logged in the monorepo's `todo.md`, not silently worked around):
+a PHPDOC continuation line starting with a literal `@word` gets misparsed as a
+new annotation — landed on `@content` specifically, which silently wiped an
+entire rendered page (no error); and nesting a literal `<markdown>` tag example
+inside a real `<markdown>` block breaks the tag's non-greedy pairing. **Two
+authoring rules for every future page on this site, until those land upstream:**
+never start a PHPDOC continuation line with `@`, and never write a literal
+`<markdown>`/`</markdown>` as example text inside a `<markdown>` block — describe
+it in prose or point at "view source" instead (see `/start/tutorial/3-content/`
+for the pattern). Also hit and fixed in myself, not Kirigami: a literal
+`<?php`/`<?=` typed as prose text executes for real — PHP doesn't know it's
+sitting inside a fenced code example. Same rule: never type an opening PHP tag
+as example text; show the body only, or describe it around the tag.
+
 Nav split by design: the header (`_layouts/header.php`) stays minimal (Home,
-Docs, GitHub) and only ever lists pages that exist — `/start`, `/plugins`,
+Start, Docs, GitHub) and only ever lists pages that exist — `/plugins` and
 `/examples` join it once those hubs exist. Secondary pages (`/about`,
 `/templates`, `/showcase`, `/ecosystem`) live in the footer grid instead of
 crowding the header.
 
-Not started yet: `/start` (install, quickstart, the 7-part starter tutorial),
-`/docs` filled out beyond the one model page, `/plugins` (+ the plugin-authoring
-tutorial), `/examples`, `/design`, `/roadmap`, `/changelog`.
+Not started yet: `/docs` filled out beyond the one model page, `/plugins`
+(+ the plugin-authoring tutorial), `/examples`, `/design`, `/roadmap`,
+`/changelog`.
 
 ---
 
