@@ -15,7 +15,7 @@
     "export": "kiri export"
   },
   "devDependencies": {
-    "@kirigami/kirigami": "^1.5.1",
+    "@kirigami/kirigami": "^1.5.3",
     "@kirigami/canva": "^2.5.0",
     "@kirigami/plugin-highlight": "^0.1.3"
   }

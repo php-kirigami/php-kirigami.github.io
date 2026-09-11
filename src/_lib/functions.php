@@ -68,6 +68,8 @@ function kirigami_packages(): array
         ['npm_pkg' => 'sdk',              'role' => 'Plugin hook registry, and the on-disk Cache.',                                  'license' => 'MIT'],
         ['npm_pkg' => 'canva',            'role' => 'Shared Sass/JS design system — this site included.',                            'license' => 'MIT'],
         ['npm_pkg' => 'plugin-highlight', 'role' => 'Build-time syntax highlighting, 0 runtime JS.',                                  'license' => 'MIT'],
+        ['npm_pkg' => 'plugin-extlink',   'role' => 'External link preview cards, SCRAPER-backed, cached to disk.',                   'license' => 'MIT'],
+        ['npm_pkg' => 'plugin-embed',     'role' => 'YouTube / Vimeo oEmbed video cards, resolved client-side.',                      'license' => 'MIT'],
     ];
 }
 

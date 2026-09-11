@@ -187,9 +187,14 @@
           works inside `<markdown>` blocks, `.md` data files, and any
           `MD::toHtml()` call. Kirigami ships a handful by default
           (`md.plugins.php`): `{% callout info|success|warning|danger ["Title"] content %}`,
-          `{% youtube <id> [w h] %}`, `{% codepen <id> [user h] %}`,
+          `{% img-asset path [w [h [cover]]] %}`, `{% codepen <id> [user h] %}`,
           `{% checklist ["Title"] … %}` — inline, or block form with the
-          body on following lines ending in `%}`.
+          body on following lines ending in `%}`. `{% youtube <id> %}` /
+          `{% vimeo <id> %}` moved into
+          [`@kirigami/plugin-embed`](https://www.npmjs.com/package/@kirigami/plugin-embed) —
+          not a default anymore, since resolving the id into a real card
+          (oEmbed lookup, cover thumbnail, play button) needs the plugin's
+          client-side script, not just a Markdown shortcut.
 
           ## Sass hooks
 
