@@ -30,7 +30,7 @@ this repo's own `todo.md` and removed once the upstream fix ships).
 
 ---
 
-## Current work (as of 2026-09-10)
+## Current work (as of 2026-09-11)
 
 **Phase 0 — Foundations** shipped: `kirigami.yaml` on the current schema,
 `package.json` (`@kirigami/kirigami` + `@kirigami/canva` +
@@ -86,15 +86,35 @@ for the pattern). Also hit and fixed in myself, not Kirigami: a literal
 sitting inside a fenced code example. Same rule: never type an opening PHP tag
 as example text; show the body only, or describe it around the tag.
 
-Nav split by design: the header (`_layouts/header.php`) stays minimal (Home,
-Start, Docs, GitHub) and only ever lists pages that exist — `/plugins` and
-`/examples` join it once those hubs exist. Secondary pages (`/about`,
-`/templates`, `/showcase`, `/ecosystem`) live in the footer grid instead of
-crowding the header.
+**Phase 3 — Reference & plugins** shipped: `/docs/` filled out beyond the one
+model page — `/docs/authoring/` (project structure, PHPDOC header, auto-loaded
+data files, `@content`/`@indent`, built-in tags, registering tags/hooks/MD
+plugins, `@kirigami/sdk` Sass/esbuild hooks), `/docs/cli/` (every `kiri`
+command including `serve`/`install`), `/docs/config/` (full `kirigami.yaml`
+reference, `meta:`/`jsonld:`), `/docs/php/` (the PHP class library, with a
+**live** image-autogenerator demo — `<img asset>` at two sizes + `IMG::palette()`
+swatches from one source photo). Typography switched to the
+Quicksand/Roboto Flex/JetBrains Mono trio (see above); syntax-highlight theme
+derived from the site's own palette instead of plugin-highlight's default
+blue-grey preset (`styles/partials/_highlight-theme.scss`).
 
-Not started yet: `/docs` filled out beyond the one model page, `/plugins`
-(+ the plugin-authoring tutorial), `/examples`, `/design`, `/roadmap`,
-`/changelog`.
+Also Phase 3: **`/plugins/`** — the three official plugins
+(`@kirigami/plugin-highlight`/`-extlink`/`-embed`), each with a **live** demo
+on the page itself (a real `<extlink>` card, real `<youtube>`/`<vimeo>`
+cards). The site now installs and actually uses `plugin-extlink` +
+`plugin-embed`, not just `plugin-highlight` — `prepros.network: true` was
+already on. "Writing your own" points at `/docs/authoring/#sass-hooks`
+(already covers the `@kirigami/sdk` hook API) rather than a dedicated
+plugin-authoring tutorial, which doesn't exist yet.
+
+Nav split by design: the header (`_layouts/header.php`) only ever lists pages
+that exist — now Home, Start, Docs, **Plugins**, GitHub; `/examples` joins it
+once that hub exists too. Secondary pages (`/about`, `/templates`,
+`/showcase`, `/ecosystem`) live in the footer grid instead of crowding the
+header.
+
+Not started yet: the plugin-authoring tutorial, `/examples`, `/design`,
+`/roadmap`, `/changelog`.
 
 ---
 
@@ -121,9 +141,11 @@ Not started yet: `/docs` filled out beyond the one model page, `/plugins`
 ```
 .
 ├── kirigami.yaml          # the one config file — see full reference below
-├── package.json           # dev dep: @kirigami/kirigami (+ plugins, if any)
+├── package.json           # dev dep: @kirigami/kirigami + plugin-highlight/-extlink/-embed
+├── _data/extlink/         # plugin-extlink's committed scrape cache (one .json per URL)
 ├── assets/                # source assets NOT served as-is
-│   ├── images/            #   originals for the image autogenerator (not present yet — added with the images phase)
+│   ├── images/            #   originals for the image autogenerator (docs/php's live demo)
+│   ├── extlink/            #   plugin-extlink's archival full-res copy (one .jpg per URL)
 │   └── fonts/             #   font files inlined via canva's $fonts — roboto-flex.woff2, quicksand.woff2, jetbrains-mono.woff2
 ├── scripts/               # named PHP scripts for `kiri run` / triggers (not present yet)
 │   └── <name>.php
@@ -131,14 +153,20 @@ Not started yet: `/docs` filled out beyond the one model page, `/plugins`
     ├── _layouts/          #   header.php / footer.php (prepros before/after)
     ├── _lib/              #   PHP included via prepros.includes (functions, kirigami_pkg_version())
     ├── _index.php         #   → src/index.html — the pitch
-    ├── docs/_index.php    #   → src/docs/index.html — the doc-page model
+    ├── docs/_index.php    #   → src/docs/index.html — hub, auto-lists its children (FS::getChildren())
+    │   ├── authoring/     #   Writing pages
+    │   ├── cli/           #   every `kiri` command
+    │   ├── config/        #   full kirigami.yaml reference
+    │   └── php/           #   PHP class library, + the live image-autogenerator demo
+    ├── plugins/_index.php #   the 3 official plugins, each with a live demo
+    ├── start/_index.php   #   hub + install/ + quickstart/ + the 7-part tutorial/
     ├── about/_index.php
     ├── templates/_index.php
     ├── showcase/_index.php
     ├── ecosystem/_index.php   #   live npm versions via kirigami_pkg_version()
     ├── styles/            #   Sass task entry(ies), compiled to *.min.css
     ├── scripts/           #   esbuild task entry(ies), bundled to *.min.js
-    └── images/            #   = image.dest — generated images land here (not present yet)
+    └── images/            #   = image.dest — generated/published images land here
 ```
 
 Naming rules inside `kirigami.root`:
