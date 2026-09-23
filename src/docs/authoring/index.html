@@ -66,7 +66,7 @@
                             {
                                 "@type": "ListItem",
                                 "position": 2,
-                                "name": "Docs",
+                                "name": "Documentation",
                                 "item": "https://php-kirigami.github.io/docs/"
                             },
                             {
@@ -104,13 +104,10 @@
                 <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
                 <nav class="site-nav" id="site-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="../../">Home</a></li>
                         <li><a href="../../start/">Start</a></li>
                         <li><a href="../../docs/" aria-current="page">Docs</a></li>
                         <li><a href="../../plugins/">Plugins</a></li>
                         <li><a href="../../examples/">Examples</a></li>
-                        <li><a href="../../design/">Design</a></li>
-                        <li><a href="../../roadmap/">Roadmap</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
@@ -123,112 +120,138 @@
             </div>
         </header>
         <main id="main">
-            <section class="section wrap doc-head">
-                <nav class="breadcrumb" aria-label="Breadcrumb">
-                    <a href="../../docs/">Docs</a>
-                    <span aria-hidden="true">/</span>
-                    <span aria-current="page">Writing pages</span>
+            <div class="docs wrap">
+                <nav class="docs-nav" aria-label="Documentation">
+                    <h2>Start here</h2>
+                    <ul>
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ul>
+                    <h2>Build a site</h2>
+                    <ul>
+                        <li><a href="../../docs/authoring/" aria-current="page">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                    </ul>
+                    <h2>Tools</h2>
+                    <ul>
+                        <li><a href="../../docs/cli/">CLI</a></li>
+                        <li><a href="../../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/">JavaScript API</a></li>
+                    </ul>
                 </nav>
-                <span class="eyebrow">Documentation</span>
-                <h1>Writing pages</h1>
-                <p class="lead">The PHPDOC header, auto-loaded data files, built-in tags, and the hooks a plugin registers into.</p>
-            </section>
-            <section class="section wrap">
-                <div class="prose">
-                    <h2 id="project-structure">Project structure</h2>
-                    <p>Inside <code>kirigami.root</code>:</p>
-                    <ul>
-                        <li>A file <code>_name.php</code> is a <strong>page source</strong>; it compiles to <code>name.html</code> in the same directory (leading <code>_</code> stripped). <code>_index.php</code> → <code>index.html</code>, exactly like this page.</li>
-                        <li>A directory whose name starts with <code>_</code> (<code>_layouts/</code>, <code>_lib/</code>) is <strong>skipped</strong> during directory-wide builds — use it for partials, layouts, includes, data.</li>
-                        <li>Data files (<code>.yaml</code>, <code>.yml</code>, <code>.json</code>, <code>.md</code>) are not compiled; they&apos;re loaded by pages via PHPDOC annotations, below.</li>
-                    </ul>
-                    <h2 id="phpdoc-header">PHPDOC header</h2>
-                    <p>Every page starts with a docblock. Each <code>@key value</code> becomes a PHP variable (<code>$key</code>), available in the page <strong>and</strong> in the <code>before</code> / <code>after</code> includes.</p>
-                    <pre><code class="hljs language-php">
-                        <span class="hljs-comment">/**
-                         * <span class="hljs-doctag">@name</span>     about
-                         * <span class="hljs-doctag">@title</span>    About us
-                         * <span class="hljs-doctag">@abstract</span> A short description of this page.
-                         */</span>
-
-                        <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$title</span>) . <span class="hljs-string">&#x27;&lt;/h1&gt;&#x27;</span>;
-                        <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$abstract</span>) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;
-                    </code></pre>
-                    <p>Define any keys you want — <code>before</code> / <code>after</code> typically read <code>$title</code>, <code>$description</code>, etc. to build <code>&lt;head&gt;</code> metas (though with the <code>seo:</code> block on, you rarely need to by hand — see the <a href="../config/#seo">config reference</a>).</p>
-                    <h2 id="auto-loaded-data-files">Auto-loaded data files</h2>
-                    <p>When an annotation value ends in <code>.yaml</code>, <code>.yml</code>, <code>.json</code>, or <code>.md</code> <strong>and</strong> resolves to a file relative to the page&apos;s own directory, it&apos;s parsed and injected as structured data instead of a plain string:</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Extension</th>
-                                <th>Becomes</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>.yaml</code> / <code>.yml</code></td>
-                                <td><code>stdClass</code> (or an array of <code>stdClass</code> for sequences), via <code>YAML::parseFile()</code></td>
-                            </tr>
-                            <tr>
-                                <td><code>.json</code></td>
-                                <td><code>json_decode()</code> result</td>
-                            </tr>
-                            <tr>
-                                <td><code>.md</code></td>
-                                <td>HTML string, via <code>MD::toHtml()</code></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <pre><code class="hljs language-php">
-                        <span class="hljs-comment">/**
-                         * <span class="hljs-doctag">@name</span>     medias
-                         * <span class="hljs-doctag">@articles</span> _articles.yaml
-                         */</span>
-
-                        <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$articles</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$a</span>) {
-                            <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;a href=&quot;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$a</span>-&gt;url) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$a</span>-&gt;title) . <span class="hljs-string">&#x27;&lt;/a&gt;&#x27;</span>;
-                        }
-                    </code></pre>
-                    <p>With <code>prepros.network: true</code>, a value starting with <code>http://</code> / <code>https://</code> is fetched and parsed the same way — this page&apos;s own hub, and <code>/ecosystem/</code>, use exactly that (via <code>curl_get_contents()</code></p>
-                    <ul>
-                        <li><a href="../php/#cache"><code>CACHE</code></a>, not the auto-load shorthand, since they need a TTL).</li>
-                    </ul>
-                    <h2 id="content-and-indent">Content and indent</h2>
-                    <ul>
-                        <li><strong><code>@content</code></strong> — if a <code>content</code> variable resolves to a non-empty value (typically an auto-loaded <code>.md</code> / <code>.yaml</code> / <code>.json</code> annotation), it&apos;s used <strong>as-is</strong> as the page body, and the PHP file is <strong>not executed</strong> for output. Good for pure data/markdown pages wrapped by a shared layout.</li>
-                        <li><strong><code>@indent N</code></strong> — prefixes every line of the rendered body with <code>N</code> spaces before <code>before</code> / <code>after</code> wrap it, keeping generated HTML readable inside an indented layout.</li>
-                    </ul>
-                    <pre><code class="hljs language-php">
-                        <span class="hljs-comment">/**
-                         * <span class="hljs-doctag">@name</span>    changelog
-                         * <span class="hljs-doctag">@title</span>   Changelog
-                         * <span class="hljs-doctag">@content</span> _changelog.md
-                         * <span class="hljs-doctag">@indent</span>  4
-                         */</span>
-                    </code></pre>
-                    <p>One rule worth knowing before you hit it: a PHPDOC continuation line must never start with a literal <code>@</code> — the parser reads it as a new tag. If <code>@content</code> lands on one of those lines, the page it&apos;s attached to silently renders empty.</p>
-                    <h2 id="variables-in-scope">Variables in scope</h2>
-                    <p>Injected by <code>PREPROS::render()</code>: every loose key from the <code>kirigami:</code> block (<code>$project</code>, <code>$baseurl</code>, <code>$author</code>, …), every PHPDOC annotation on the current page, plus <code>$relroot</code> (relative path from the page&apos;s directory back to <code>kirigami.root</code> — use it for any asset URL that has to work at any depth) and <code>$absurl</code> (the page&apos;s absolute URL path, including any subfolder in <code>baseurl</code> — safe as an <code>href</code> / <code>src</code> root).</p>
-                    <p>Render pipeline, per page: resolve PHPDOC + auto-load data → <code>page_info</code> hook → <code>pre_render</code> hook (raw source) → include <code>before</code> + body (or <code>@content</code>) + <code>after</code> → process registered tags → <code>post_render</code> hook → <code>HTML::format()</code> if <code>format: true</code> → write <code>.html</code>.</p>
-                    <h2 id="built-in-tags">Built-in tags</h2>
-                    <p>Processed <strong>after</strong> PHP runs, on the assembled HTML:</p>
-                    <ul>
-                        <li>` …</li>
-                    </ul>
-                    ` — converts its body from Markdown to
-            HTML, stripping common leading indentation first. Every
-            registered MD plugin (below) works inside it. Add `prose`
-            (`
+                <article class="docs-main">
+                    <header class="docs-head">
+                        <span class="eyebrow">Build a site</span>
+                        <h1>Writing pages</h1>
+                        <p class="lead">The PHPDOC header, auto-loaded data files, built-in tags, and the hooks a plugin registers into.</p>
+                    </header>
+                    <nav class="docs-toc" aria-label="On this page">
+                        <h2>On this page</h2>
+                        <ul>
+                            <li><a href="#project-structure">Project structure</a></li>
+                            <li><a href="#phpdoc-header">PHPDOC header</a></li>
+                            <li><a href="#auto-loaded-data-files">Auto-loaded data files</a></li>
+                            <li><a href="#content-and-indent">Content and indent</a></li>
+                            <li><a href="#variables-in-scope">Variables in scope</a></li>
+                            <li><a href="#built-in-tags">Built-in tags</a></li>
+                        </ul>
+                    </nav>
                     <div class="prose">
-                        <p><code>) to wrap the output in </code>.prose<code> (</code>@kirigami/canva<code>&apos;s prose partial) — </code>class<code>/</code>id<code>on the tag land on that wrapper. This whole page is one such block. -</code><img loading="lazy" width="450" height="300"><code>— resolves through the image autogenerator, calling</code>IMG::asset()<code> with the same parameters (</code>asset<code>→</code>$path<code>; </code>width<code>/</code>height<code>optional ints;</code>cover<code>presence =</code>true<code>, crop to fill) and swapping </code>asset<code>for the generated</code>src<code>. Any other attribute (</code>alt<code>, </code>class<code>, </code>loading<code>, …) passes straight through. Empty or missing </code>asset` leaves the tag untouched.</p>
-                        <pre><code class="hljs language-javascript">
-                            <span class="hljs-title class_">One</span> authoring gotcha <span class="hljs-keyword">with</span> <span class="hljs-string">`&lt;markdown&gt;`</span>: nesting a *literal*
-                            <span class="hljs-string">`&lt;markdown&gt;`</span> / <span class="hljs-string">`</span>
+                        <h2 id="project-structure">Project structure</h2>
+                        <p>Inside <code>kirigami.root</code>:</p>
+                        <ul>
+                            <li>A file <code>_name.php</code> is a <strong>page source</strong>; it compiles to <code>name.html</code> in the same directory (leading <code>_</code> stripped). <code>_index.php</code> → <code>index.html</code>, exactly like this page.</li>
+                            <li>A directory whose name starts with <code>_</code> (<code>_layouts/</code>, <code>_lib/</code>) is <strong>skipped</strong> during directory-wide builds — use it for partials, layouts, includes, data.</li>
+                            <li>Data files (<code>.yaml</code>, <code>.yml</code>, <code>.json</code>, <code>.md</code>) are not compiled; they&apos;re loaded by pages via PHPDOC annotations, below.</li>
+                        </ul>
+                        <h2 id="phpdoc-header">PHPDOC header</h2>
+                        <p>Every page starts with a docblock. Each <code>@key value</code> becomes a PHP variable (<code>$key</code>), available in the page <strong>and</strong> in the <code>before</code> / <code>after</code> includes.</p>
+                        <pre><code class="hljs language-php">
+                            <span class="hljs-comment">/**
+                             * <span class="hljs-doctag">@name</span>     about
+                             * <span class="hljs-doctag">@title</span>    About us
+                             * <span class="hljs-doctag">@abstract</span> A short description of this page.
+                             */</span>
+
+                            <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$title</span>) . <span class="hljs-string">&#x27;&lt;/h1&gt;&#x27;</span>;
+                            <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$abstract</span>) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;
                         </code></pre>
-                    </div>
-                    ` example inside a real `
-                    <p>` block breaks the tag&apos;s non-greedy pairing. Describe it in prose or point at &quot;view source&quot; instead — and never type a real PHP opening tag as example text, short-echo form included: PHP doesn&apos;t know it&apos;s sitting inside a fenced code example, and runs it for real. Every snippet on this page is written the way it has to be because of that rule — statements only, no opening tag shown.</p>
-                    <pre><code class="hljs language-bash">
+                        <p>Define any keys you want — <code>before</code> / <code>after</code> typically read <code>$title</code>, <code>$description</code>, etc. to build <code>&lt;head&gt;</code> metas (though with the <code>seo:</code> block on, you rarely need to by hand — see the <a href="../config/#seo">config reference</a>).</p>
+                        <h2 id="auto-loaded-data-files">Auto-loaded data files</h2>
+                        <p>When an annotation value ends in <code>.yaml</code>, <code>.yml</code>, <code>.json</code>, or <code>.md</code> <strong>and</strong> resolves to a file relative to the page&apos;s own directory, it&apos;s parsed and injected as structured data instead of a plain string:</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Extension</th>
+                                    <th>Becomes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>.yaml</code> / <code>.yml</code></td>
+                                    <td><code>stdClass</code> (or an array of <code>stdClass</code> for sequences), via <code>YAML::parseFile()</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>.json</code></td>
+                                    <td><code>json_decode()</code> result</td>
+                                </tr>
+                                <tr>
+                                    <td><code>.md</code></td>
+                                    <td>HTML string, via <code>MD::toHtml()</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pre><code class="hljs language-php">
+                            <span class="hljs-comment">/**
+                             * <span class="hljs-doctag">@name</span>     medias
+                             * <span class="hljs-doctag">@articles</span> _articles.yaml
+                             */</span>
+
+                            <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$articles</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$a</span>) {
+                                <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;a href=&quot;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$a</span>-&gt;url) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$a</span>-&gt;title) . <span class="hljs-string">&#x27;&lt;/a&gt;&#x27;</span>;
+                            }
+                        </code></pre>
+                        <p>With <code>prepros.network: true</code>, a value starting with <code>http://</code> / <code>https://</code> is fetched and parsed the same way — this page&apos;s own hub, and <code>/ecosystem/</code>, use exactly that (via <code>curl_get_contents()</code></p>
+                        <ul>
+                            <li><a href="../php/#cache"><code>CACHE</code></a>, not the auto-load shorthand, since they need a TTL).</li>
+                        </ul>
+                        <h2 id="content-and-indent">Content and indent</h2>
+                        <ul>
+                            <li><strong><code>@content</code></strong> — if a <code>content</code> variable resolves to a non-empty value (typically an auto-loaded <code>.md</code> / <code>.yaml</code> / <code>.json</code> annotation), it&apos;s used <strong>as-is</strong> as the page body, and the PHP file is <strong>not executed</strong> for output. Good for pure data/markdown pages wrapped by a shared layout.</li>
+                            <li><strong><code>@indent N</code></strong> — prefixes every line of the rendered body with <code>N</code> spaces before <code>before</code> / <code>after</code> wrap it, keeping generated HTML readable inside an indented layout.</li>
+                        </ul>
+                        <pre><code class="hljs language-php">
+                            <span class="hljs-comment">/**
+                             * <span class="hljs-doctag">@name</span>    changelog
+                             * <span class="hljs-doctag">@title</span>   Changelog
+                             * <span class="hljs-doctag">@content</span> _changelog.md
+                             * <span class="hljs-doctag">@indent</span>  4
+                             */</span>
+                        </code></pre>
+                        <p>One rule worth knowing before you hit it: a PHPDOC continuation line must never start with a literal <code>@</code> — the parser reads it as a new tag. If <code>@content</code> lands on one of those lines, the page it&apos;s attached to silently renders empty.</p>
+                        <h2 id="variables-in-scope">Variables in scope</h2>
+                        <p>Injected by <code>PREPROS::render()</code>: every loose key from the <code>kirigami:</code> block (<code>$project</code>, <code>$baseurl</code>, <code>$author</code>, …), every PHPDOC annotation on the current page, plus <code>$relroot</code> (relative path from the page&apos;s directory back to <code>kirigami.root</code> — use it for any asset URL that has to work at any depth) and <code>$absurl</code> (the page&apos;s absolute URL path, including any subfolder in <code>baseurl</code> — safe as an <code>href</code> / <code>src</code> root).</p>
+                        <p>Render pipeline, per page: resolve PHPDOC + auto-load data → <code>page_info</code> hook → <code>pre_render</code> hook (raw source) → include <code>before</code> + body (or <code>@content</code>) + <code>after</code> → process registered tags → <code>post_render</code> hook → <code>HTML::format()</code> if <code>format: true</code> → write <code>.html</code>.</p>
+                        <h2 id="built-in-tags">Built-in tags</h2>
+                        <p>Processed <strong>after</strong> PHP runs, on the assembled HTML:</p>
+                        <ul>
+                            <li>` …</li>
+                        </ul>
+                        ` — converts its body from Markdown to
+        HTML, stripping common leading indentation first. Every
+        registered MD plugin (below) works inside it. Add `prose`
+        (`
+                        <div class="prose">
+                            <p><code>) to wrap the output in </code>.prose<code> (</code>@kirigami/canva<code>&apos;s prose partial) — </code>class<code>/</code>id<code>on the tag land on that wrapper. This whole page is one such block. -</code><img loading="lazy" width="450" height="300"><code>— resolves through the image autogenerator, calling</code>IMG::asset()<code> with the same parameters (</code>asset<code>→</code>$path<code>; </code>width<code>/</code>height<code>optional ints;</code>cover<code>presence =</code>true<code>, crop to fill) and swapping </code>asset<code>for the generated</code>src<code>. Any other attribute (</code>alt<code>, </code>class<code>, </code>loading<code>, …) passes straight through. Empty or missing </code>asset` leaves the tag untouched.</p>
+                            <pre><code class="hljs language-javascript">
+                                <span class="hljs-title class_">One</span> authoring gotcha <span class="hljs-keyword">with</span> <span class="hljs-string">`&lt;markdown&gt;`</span>: nesting a *literal*
+                                <span class="hljs-string">`&lt;markdown&gt;`</span> / <span class="hljs-string">`</span>
+                            </code></pre>
+                        </div>
+                        ` example inside a real `
+                        <p>` block breaks the tag&apos;s non-greedy pairing. Describe it in prose or point at &quot;view source&quot; instead — and never type a real PHP opening tag as example text, short-echo form included: PHP doesn&apos;t know it&apos;s sitting inside a fenced code example, and runs it for real. Every snippet on this page is written the way it has to be because of that rule — statements only, no opening tag shown.</p>
+                        <pre><code class="hljs language-bash">
                               <span class="hljs-comment">## Registering tags and hooks</span>
 
                               Register <span class="hljs-keyword">in</span> a `prepros.includes` file — this site<span class="hljs-string">&#x27;s own
@@ -294,10 +317,15 @@
                               bundles, plus `prepros:html` — a waterfall hook transforming each
                               rendered page<span class="hljs-string">&#x27;s HTML (what plugin-highlight&#x27;</span>s own colouring pass
                               runs on).
-                        &lt;/vimeo&gt;&lt;/youtube&gt;
-                    </code></pre>
-                </div>
-            </section>
+                            &lt;/vimeo&gt;&lt;/youtube&gt;
+                        </code></pre>
+                    </div>
+                    <nav class="docs-pager" aria-label="Previous and next">
+                        <a rel="prev" href="../../docs/">Overview</a>
+                        <a rel="next" href="../../docs/config/">Configuration</a>
+                    </nav>
+                </article>
+            </div>
         </main>
         <footer class="site-footer">
             <div class="wrap">
@@ -307,22 +335,24 @@
                         <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
                     </div>
                     <div class="site-footer__col">
-                        <h3>Site</h3>
+                        <h3>Learn</h3>
                         <ul>
-                            <li><a href="../../">Home</a></li>
-                            <li><a href="../../docs/">Docs</a></li>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
                             <li><a href="../../templates/">Templates</a></li>
                             <li><a href="../../showcase/">Showcase</a></li>
-                            <li><a href="../../design/">Design</a></li>
-                            <li><a href="../../about/">About</a></li>
                         </ul>
                     </div>
                     <div class="site-footer__col">
                         <h3>Kirigami</h3>
                         <ul>
+                            <li><a href="../../about/">About</a></li>
                             <li><a href="../../ecosystem/">Ecosystem</a></li>
                             <li><a href="../../changelog/">Changelog</a></li>
                             <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
                             <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
                             <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
                             <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>

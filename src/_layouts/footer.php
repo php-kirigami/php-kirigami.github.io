@@ -8,22 +8,24 @@
                     <p class="site-footer__tagline"><?php echo str_htmlesc($tagline); ?></p>
                 </div>
                 <div class="site-footer__col">
-                    <h3>Site</h3>
+                    <h3>Learn</h3>
                     <ul>
-                        <li><a href="<?php echo $relroot; ?>">Home</a></li>
-                        <li><a href="<?php echo $relroot; ?>docs/">Docs</a></li>
+                        <li><a href="<?php echo $relroot; ?>start/">Getting started</a></li>
+                        <li><a href="<?php echo $relroot; ?>docs/">Documentation</a></li>
+                        <li><a href="<?php echo $relroot; ?>plugins/">Plugins</a></li>
+                        <li><a href="<?php echo $relroot; ?>examples/">Examples</a></li>
                         <li><a href="<?php echo $relroot; ?>templates/">Templates</a></li>
                         <li><a href="<?php echo $relroot; ?>showcase/">Showcase</a></li>
-                        <li><a href="<?php echo $relroot; ?>design/">Design</a></li>
-                        <li><a href="<?php echo $relroot; ?>about/">About</a></li>
                     </ul>
                 </div>
                 <div class="site-footer__col">
                     <h3>Kirigami</h3>
                     <ul>
+                        <li><a href="<?php echo $relroot; ?>about/">About</a></li>
                         <li><a href="<?php echo $relroot; ?>ecosystem/">Ecosystem</a></li>
                         <li><a href="<?php echo $relroot; ?>changelog/">Changelog</a></li>
                         <li><a href="<?php echo $relroot; ?>roadmap/">Roadmap</a></li>
+                        <li><a href="<?php echo $relroot; ?>design/">Design</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
                         <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
                         <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>

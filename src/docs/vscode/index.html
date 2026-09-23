@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VS Code extension — Kirigami</title>
+        <meta name="description" content="Build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="VS Code extension — Kirigami">
+        <meta name="twitter:description" content="Build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="VS Code extension — Kirigami">
+        <meta property="og:description" content="Build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/vscode/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/vscode/">
+        <link rel="author" type="text/plain" href="../../humans.txt">
+        <link rel="icon" type="image/png" href="../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/vscode/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Documentation",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "VS Code extension",
+                                "item": "https://php-kirigami.github.io/docs/vscode/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/vscode/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/vscode/",
+                        "name": "VS Code extension",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/vscode/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <div class="docs wrap">
+                <nav class="docs-nav" aria-label="Documentation">
+                    <h2>Start here</h2>
+                    <ul>
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ul>
+                    <h2>Build a site</h2>
+                    <ul>
+                        <li><a href="../../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                    </ul>
+                    <h2>Tools</h2>
+                    <ul>
+                        <li><a href="../../docs/cli/">CLI</a></li>
+                        <li><a href="../../docs/vscode/" aria-current="page">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/">JavaScript API</a></li>
+                    </ul>
+                </nav>
+                <article class="docs-main">
+                    <header class="docs-head">
+                        <span class="eyebrow">Tools</span>
+                        <h1>VS Code extension</h1>
+                        <p class="lead">Build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.</p>
+                    </header>
+                    <nav class="docs-toc" aria-label="On this page">
+                        <h2>On this page</h2>
+                        <ul>
+                            <li><a href="#overview">Overview</a></li>
+                            <li><a href="#commands">Commands</a></li>
+                            <li><a href="#dev-server-and-preview">Dev server and preview</a></li>
+                            <li><a href="#settings">Settings</a></li>
+                            <li><a href="#requirements">Requirements</a></li>
+                        </ul>
+                    </nav>
+                    <div class="prose">
+                        <h2 id="overview">Overview</h2>
+                        <p>The Kirigami extension for VS Code (<code>php-kirigami.kirigami-vscode</code>) drives the same engine as the <a href="../cli/">CLI</a>. It activates in any workspace whose root holds a <code>kirigami.yaml</code>, and adds a <strong>Kirigami</strong> category to the Command Palette, a status bar item for the dev server, and a <strong>Kirigami</strong> Output channel laid out like the <code>kiri</code> output.</p>
+                        <p>Every official template recommends it in <code>.vscode/extensions.json</code>, so VS Code offers to install it when you open a new project.</p>
+                        <h2 id="commands">Commands</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Command</th>
+                                    <th>What it does</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Kirigami: Create Project…</td>
+                                    <td>Pick a folder, a template and the project&apos;s metadata, then scaffold it, optionally with <code>git init</code> and <code>npm install</code>. Available in any window.</td>
+                                </tr>
+                                <tr>
+                                    <td>Kirigami: Build</td>
+                                    <td>One development build, like <code>kiri build</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Kirigami: Export</td>
+                                    <td>Production build into <code>dist/</code>, like <code>kiri export</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Kirigami: Run Script…</td>
+                                    <td>Pick one of the project&apos;s <code>scripts/*.php</code> and run it, like <code>kiri run</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Kirigami: Validate kirigami.yaml</td>
+                                    <td>Check the configuration against the schema.</td>
+                                </tr>
+                                <tr>
+                                    <td>Kirigami: Toggle Dev Server</td>
+                                    <td>Start or stop the live-reloading dev server, like <code>kiri serve</code>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>The project commands appear once a Kirigami project is loaded. Results show as a notification; the full detail, including every rebuild the watcher runs, goes to the <strong>Kirigami</strong> Output channel.</p>
+                        <h2 id="dev-server-and-preview">Dev server and preview</h2>
+                        <p>The status bar item, bottom right, shows the dev server&apos;s state: idle, running (the tooltip shows its URL), building, or error when the last rebuild failed. Clicking it starts the server, after one initial build, and asks whether to open the preview in VS Code&apos;s Simple Browser or in your default browser. Clicking it again stops the server. Saved changes rebuild and reload the preview on their own.</p>
+                        <h2 id="settings">Settings</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Setting</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>kirigami.nodePath</code></td>
+                                    <td><code>node</code></td>
+                                    <td>Node.js 24+ executable that runs the Kirigami engine. Set it when <code>node</code> is not on your PATH, then restart the extension.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>kirigami.previewPort</code></td>
+                                    <td><code>4321</code></td>
+                                    <td>Port of the dev server; applies the next time it starts.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 id="requirements">Requirements</h2>
+                        <ul>
+                            <li>VS Code 1.90 or later, in a trusted workspace.</li>
+                            <li>Node.js 24 or later with WebAssembly JSPI, installed on the machine: the engine runs in its own Node process, not in VS Code&apos;s.</li>
+                            <li>One project per window: the extension binds to the first workspace folder.</li>
+                        </ul>
+                    </div>
+                    <nav class="docs-pager" aria-label="Previous and next">
+                        <a rel="prev" href="../../docs/cli/">CLI</a>
+                        <a rel="next" href="../../docs/mcp/">MCP server</a>
+                    </nav>
+                </article>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../about/">About</a></li>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../changelog/">Changelog</a></li>
+                            <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

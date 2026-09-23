@@ -1,25 +1,37 @@
 // This site's styles, on top of the tokens + reset from `conf`.
+//
+// The visual idea is Kirigami's own: cut and folded paper. Surfaces are
+// sheets lying on a paper table (soft layered shadows, a folded corner),
+// sections open on a paper tab, dividers are fold lines, and the hero sits
+// in front of layered paper cut-outs. All drawing is CSS, mostly
+// ::before/::after, so the markup stays plain. Sizes are rem/em only.
 
 @use "@kirigami/canva/utils" as *;
 @use "@kirigami/canva/prose";       // → `.prose { … }` for Markdown output
 @use "@kirigami/canva/main";        // → `.breadcrumb` / `.docs-toc` / `.table` / `.badge` / `.palette`
 @use "@kirigami/canva/lightswitch"; // → `.lightswitch` animated theme toggle
 
+// Paper grain: a faint fractal noise tile, laid over the page background.
+$grain: svg-url('<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .45  0 0 0 0 .35  0 0 0 .07 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>');
+
 :root {
-    // Not a canva token (conf only knows $font-body / $font-heading) — this
-    // site's own third role, for labels, nav numbers, and code. JetBrains
-    // Mono is embedded once, site-wide, via $fonts in _conf.scss — plugin-
-    // highlight's own `embedFont` is off (kirigami.yaml) so it isn't
-    // duplicated for highlighted code blocks.
+    // Not a canva token (conf only knows $font-body / $font-heading): this
+    // site's third role, for labels, nav numbers and code. Embedded once via
+    // $fonts in _conf.scss (plugin-highlight's own `embedFont` is off).
     --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
-    // scrollbar-color / scrollbar-width: themed globally by @kirigami/canva/conf's
-    // reset since canva 2.5.0 — no longer needed here.
+    // Paper depth: a sheet lying on the table, and one lifted off it.
+    --sheet-shadow:
+        0 .0625rem .125rem color-mix(in srgb, var(--ink) 10%, transparent),
+        0 .4rem 1rem -.5rem color-mix(in srgb, var(--ink) 22%, transparent);
+    --sheet-shadow-lift:
+        0 .125rem .25rem color-mix(in srgb, var(--ink) 10%, transparent),
+        0 1rem 2rem -.9rem color-mix(in srgb, var(--ink) 35%, transparent);
+    --hairline: .0625rem solid var(--border);
+    --fold: 1.1rem;
 }
 
-// canva/main's components hardcode a generic mono stack; point them at this
-// site's own --font-mono (JetBrains Mono) instead, for consistency with every
-// other mono usage on the page (eyebrows, nav numbers, footer headings, …).
+// canva/main's components use a generic mono stack; point them at --font-mono.
 .breadcrumb,
 .docs-toc a,
 .badge,
@@ -28,67 +40,107 @@
     font-family: var(--font-mono);
 }
 
-// ── Layout primitives ──────────────────────────────────────────────
+// ── Page ─────────────────────────────────────────────────────────────
+body {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.6;
+    background-color: var(--bg);
+    background-image: $grain;
+}
+
+main { flex: 1; }
+
 .wrap {
-    width: min(100% - 2.5rem, 68rem);
+    width: min(100% - 2.5rem, 70rem);
     margin-inline: auto;
 }
 
 .section { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
 
-body {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.6;
-}
-
-main { flex: 1; }
-
-h1 { font-size: clamp(2.1rem, 5vw, 3.2rem); line-height: 1.08; letter-spacing: -.01em; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.3rem); line-height: 1.06; letter-spacing: -.01em; }
 h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1rem; letter-spacing: -.005em; }
 h3 { font-size: 1.1rem; }
 
 h1, h2, h3 { text-wrap: balance; }
 
-a { color: var(--accent); text-underline-offset: 2px; }
+a { color: var(--accent); text-underline-offset: .15em; }
 
 code {
     font-family: var(--font-mono);
-    font-size: 0.88em;
+    font-size: .88em;
     background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 0.1em 0.4em;
+    border: var(--hairline);
+    border-radius: .2rem;
+    padding: .1em .4em;
 }
 
 .skip-link {
     position: absolute;
-    left: 0.5rem;
-    top: 0.5rem;
+    left: .5rem;
+    top: .5rem;
     z-index: 30;
-    padding: 0.5rem 0.9rem;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    padding: .5rem .9rem;
+    background: var(--surface);
+    box-shadow: var(--sheet-shadow);
     transform: translateY(-150%);
-    transition: transform 0.15s;
+    transition: transform .15s;
 
     &:focus-visible { transform: none; }
 }
 
-// ── A dashed "fold line" section divider — the site's one recurring motif ──
-.fold {
-    max-width: none;
-    height: 1px;
-    margin-block: clamp(3rem, 7vw, 5rem);
-    background-image: repeating-linear-gradient(90deg, var(--border) 0 7px, transparent 7px 15px);
+// ── Paper primitives ─────────────────────────────────────────────────
+
+// A sheet: flat paper with depth and a folded top-right corner.
+%sheet {
+    position: relative;
+    background: var(--surface);
+    border-radius: .15rem;
+    box-shadow: var(--sheet-shadow);
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: var(--fold);
+        height: var(--fold);
+        background: linear-gradient(225deg, var(--bg) 50%, var(--surface-2) 50%);
+        box-shadow: -.0625rem .0625rem .15rem color-mix(in srgb, var(--ink) 15%, transparent);
+        border-bottom-left-radius: .15rem;
+    }
 }
 
-// ── Header + nav ───────────────────────────────────────────────────
+// A fold line: the dashed crease between sections.
+.fold {
+    max-width: none;
+    height: .0625rem;
+    border: 0;
+    margin-block: clamp(2.5rem, 6vw, 4rem);
+    background-image: repeating-linear-gradient(90deg, var(--border) 0 .45rem, transparent .45rem .95rem);
+}
+
+// A section title opens on a small paper tab, cut at an angle.
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+
+    &::before {
+        content: "";
+        flex: none;
+        width: 1.6rem;
+        height: .85rem;
+        background: var(--accent);
+        clip-path: polygon(0 0, 100% 0, 78% 50%, 100% 100%, 0 100%);
+    }
+}
+
+// ── Header + nav ─────────────────────────────────────────────────────
 .site-header {
-    border-bottom: 1px solid var(--border);
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
-    backdrop-filter: blur(8px);
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    backdrop-filter: blur(.5rem);
+    box-shadow: 0 .0625rem 0 var(--border), 0 .5rem 1rem -1rem color-mix(in srgb, var(--ink) 40%, transparent);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -113,20 +165,13 @@ code {
     margin-right: auto;
 }
 
-// The official Kirigami mark, via @kirigami/canva's icon system: `conf`
-// recolours the source SVGs to the current palette (light/dark both) and
-// exposes each as a `--icon-<name>` data-URI custom property — a background
-// image, not an inline <svg>, so HTML::format()'s SVG-casing bug never enters
-// into it. `logo-2` is the compact glyph-only mark (viewBox ratio ~1.57:1);
-// `logo` is the full wordmark lockup, used in the footer below.
+// The official mark, through canva's icon system (a recoloured data-URI
+// custom property, not inline SVG). `logo-2` is the compact glyph.
 .brand__mark {
     display: block;
     width: 1.55rem;
     aspect-ratio: 55.9 / 35.6;
-    background-image: var(--icon-logo-2);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
+    background: var(--icon-logo-2) center / contain no-repeat;
     flex: none;
 }
 
@@ -135,10 +180,7 @@ code {
     width: 9rem;
     max-width: 100%;
     aspect-ratio: 2535.4 / 446;
-    background-image: var(--icon-logo);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: left center;
+    background: var(--icon-logo) left center / contain no-repeat;
 }
 
 .site-nav ul {
@@ -150,49 +192,61 @@ code {
 }
 
 .site-nav a {
+    position: relative;
     color: var(--ink-muted);
     text-decoration: none;
 
     &:hover { color: var(--ink); }
-    &[aria-current="page"] { color: var(--accent); }
+
+    // The current section: a paper strip folded under the link.
+    &[aria-current="page"] {
+        color: var(--ink);
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: -.2rem;
+            right: -.2rem;
+            bottom: -.35rem;
+            height: .3rem;
+            background: var(--accent);
+            clip-path: polygon(0 0, 100% 0, 96% 100%, 4% 100%);
+        }
+    }
 }
 
-// `.lightswitch` itself comes from @kirigami/canva/lightswitch — just a
-// header-appropriate size here (default is 1.75rem, meant for a larger target).
-// The nudge corrects an optical mismatch: the nav text's visual centre sits
-// above the geometric middle of its line box (line-height leading), so a
-// box centred via `.site-header__inner`'s `align-items: center` looks a
-// touch low next to it.
+// canva's lightswitch at header size, nudged to the nav text's optical centre.
 .theme-toggle.lightswitch {
     --lightswitch-size: 1.15rem;
-    margin-top: -0.1rem;
+    margin-top: -.1rem;
 }
 
 .nav-toggle { display: none; }
 
-// ── Buttons ────────────────────────────────────────────────────────
+// ── Buttons: paper tabs ──────────────────────────────────────────────
 .btn {
     display: inline-block;
-    padding: 0.65rem 1.2rem;
-    border-radius: 3px;
+    padding: .65rem 1.25rem;
+    border-radius: .15rem;
     background: var(--accent);
     color: #fff;
     font-weight: 600;
     text-decoration: none;
+    box-shadow: 0 .15rem 0 color-mix(in srgb, var(--accent) 60%, var(--ink)), var(--sheet-shadow);
+    transition: transform .15s, box-shadow .15s;
 
-    &:hover { filter: brightness(1.08); }
+    &:hover { transform: translateY(-.1rem); box-shadow: 0 .25rem 0 color-mix(in srgb, var(--accent) 60%, var(--ink)), var(--sheet-shadow-lift); }
 
     &--ghost {
-        background: transparent;
+        background: var(--surface);
         color: var(--ink);
-        border: 1px solid var(--border);
+        box-shadow: 0 .15rem 0 var(--border), var(--sheet-shadow);
+
+        &:hover { box-shadow: 0 .25rem 0 var(--border), var(--sheet-shadow-lift); }
     }
 }
 
 // ── Eyebrow label ────────────────────────────────────────────────────
-// A small-caps mono label used above a heading anywhere on the site — the
-// hero, doc-head, and any standalone card that needs one (e.g. /design/'s
-// type samples). One base rule; only the bottom margin varies by context.
 .eyebrow {
     display: block;
     font-family: var(--font-mono);
@@ -203,70 +257,185 @@ code {
     margin-bottom: .7rem;
 }
 
-// ── Home / hero ──────────────────────────────────────────────────────
-.hero {
-    padding-block: clamp(3rem, 9vw, 6rem);
-
-    .eyebrow { margin-bottom: .9rem; }
-    .lead { margin-block: 1rem 1.6rem; }
-    .btn + .btn { margin-left: 0.6rem; }
-}
-
 .lead {
     font-size: 1.2rem;
     color: var(--ink-muted);
     max-width: 46ch;
 
-    // A closing call-to-action line — same role, quieter size.
     &--sm { font-size: 1rem; }
-
-    // A longer, more technical paragraph that needs the extra width.
     &--wide { max-width: 60ch; }
 }
 
+// ── Hero, in front of layered paper cut-outs ─────────────────────────
+.hero {
+    position: relative;
+    isolation: isolate;
+    padding-block: clamp(3rem, 9vw, 6rem) clamp(1rem, 3vw, 2rem);
+
+    .eyebrow { margin-bottom: .9rem; }
+    .lead { margin-block: 1rem 1.6rem; }
+    .btn + .btn { margin-left: .6rem; }
+
+    // Two sheets cut into folded hills, stacked on the right.
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        right: 0;
+        bottom: 12%;
+        width: min(46%, 30rem);
+        aspect-ratio: 5 / 3;
+    }
+
+    &::before {
+        background: var(--accent-soft);
+        clip-path: polygon(0 100%, 18% 55%, 30% 72%, 52% 22%, 70% 58%, 82% 40%, 100% 78%, 100% 100%);
+        filter: drop-shadow(0 .4rem .5rem color-mix(in srgb, var(--ink) 18%, transparent));
+    }
+
+    &::after {
+        background: var(--surface-2);
+        clip-path: polygon(0 100%, 26% 70%, 42% 84%, 64% 50%, 86% 76%, 100% 62%, 100% 100%);
+    }
+
+    @media (max-width: 48rem) {
+        &::before, &::after { opacity: .45; width: 70%; }
+    }
+}
+
+// ── The four ways in (home) ──────────────────────────────────────────
+.gateways {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
+    margin-top: 1.75rem;
+}
+
+.gateway {
+    @extend %sheet;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+
+    &:hover { transform: translateY(-.2rem) rotate(-.3deg); box-shadow: var(--sheet-shadow-lift); }
+
+    h3 { margin-bottom: .45rem; font-family: var(--font-heading); font-size: 1.35rem; }
+
+    h3 a {
+        color: var(--ink);
+        text-decoration: none;
+
+        // The whole sheet is the link target.
+        &::before { content: ""; position: absolute; inset: 0; z-index: 1; }
+    }
+
+    p { color: var(--ink-muted); margin: 0; }
+}
+
+.gateway__body { padding: 1.25rem 1.4rem 1.5rem; }
+
+// The illustration slot: an <img> once artwork exists, until then a
+// folded-paper placeholder carrying the tool's glyph.
+.gateway__art {
+    display: block;
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    object-fit: cover;
+    background: var(--surface-2);
+    border-bottom: var(--hairline);
+}
+
+span.gateway__art {
+    position: relative;
+    display: grid;
+    place-items: center;
+
+    // A back sheet, slightly turned.
+    &::before {
+        content: "";
+        position: absolute;
+        width: 46%;
+        aspect-ratio: 4 / 3;
+        background: var(--accent-soft);
+        box-shadow: var(--sheet-shadow);
+        transform: rotate(-6deg) translate(-.8rem, .3rem);
+    }
+
+    // The front sheet, with the glyph cut into it.
+    &::after {
+        position: relative;
+        display: grid;
+        place-items: center;
+        width: 46%;
+        aspect-ratio: 4 / 3;
+        background: var(--surface);
+        box-shadow: var(--sheet-shadow-lift);
+        transform: rotate(2deg);
+        font-family: var(--font-mono);
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 600;
+        color: var(--accent);
+    }
+}
+
+.gateway--vscode span.gateway__art::after { content: "{ }"; }
+.gateway--cli    span.gateway__art::after { content: "›_"; }
+.gateway--mcp    span.gateway__art::after { content: "✳"; }
+.gateway--api    span.gateway__art::after { content: "( )"; }
+
+// ── Cards ────────────────────────────────────────────────────────────
 .grid {
     display: grid;
-    gap: 1rem;
+    gap: 1.1rem;
     grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
     margin-top: 1.5rem;
 }
 
 .card {
+    @extend %sheet;
     display: block;
-    padding: 1.25rem;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    border-radius: 5px;
+    padding: 1.25rem 1.35rem;
     color: inherit;
     text-decoration: none;
-    transition: border-color .15s;
+    transition: transform .2s, box-shadow .2s;
 
-    h3 { margin-bottom: 0.4rem; font-family: var(--font-heading); }
+    h3 { margin-bottom: .4rem; font-family: var(--font-heading); }
     p { color: var(--ink-muted); margin: 0; }
-    code { font-size: 0.82em; }
+    code { font-size: .82em; }
 
-    // A purely informational card — not a link, no hover affordance.
+    // A purely informational card: not a link, no hover affordance.
     &--static { cursor: default; }
 }
 
-a.card:hover { border-color: var(--accent); }
+a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-lift); }
+
+.card__kicker {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: .35rem;
+}
 
 .card__thumb {
     display: block;
     width: 100%;
     aspect-ratio: 16 / 9;
     object-fit: cover;
-    border-radius: 4px;
     margin-bottom: .9rem;
-    border: 1px solid var(--border);
+    box-shadow: var(--sheet-shadow);
 }
 
 .card__links { margin-top: .8rem; }
 
-// ── "You write / it compiles to" comparison (home) ──────────────────
+// ── "You write / it compiles to" (home) ──────────────────────────────
 .compare {
     display: grid;
-    gap: 1rem;
+    gap: 1.25rem;
     grid-template-columns: 1fr 1fr;
     margin-top: 1.5rem;
     align-items: start;
@@ -287,19 +456,15 @@ a.card:hover { border-color: var(--accent); }
 
     pre {
         margin: 0;
-        border-radius: 5px;
         max-height: 22rem;
         overflow: auto;
+        box-shadow: var(--sheet-shadow);
     }
 }
 
 // ── Requirements list (home) ─────────────────────────────────────────
-// li isn't a flex container: its content (a <strong> lead-in, sometimes a
-// <code> span, then trailing prose) is mixed inline content that needs to
-// wrap as one continuous paragraph. Flex used to split each of those into
-// its own column — fine-ish at desktop widths, but at mobile width each
-// column had too little room and wrapped into an unreadable narrow strip.
-// The bullet is an absolutely-positioned ::before in the gutter instead.
+// li stays inline content (not flex) so mixed text wraps as one paragraph;
+// the bullet is a small cut paper corner in the gutter.
 .reqs {
     list-style: none;
     display: grid;
@@ -326,18 +491,147 @@ a.card:hover { border-color: var(--accent); }
     strong { color: var(--ink); }
 }
 
-// ── Doc-page model ─────────────────────────────────────────────────
-// The shared shape every /docs/, /start/ and /plugins/ page will reuse:
-// an eyebrow label, an h1, an abstract, then .prose content.
-.doc-head {
-    .lead { margin-top: .6rem; }
-}
+// ── Content-page head (@type doc / guide) ────────────────────────────
+.doc-head .lead { margin-top: .6rem; }
 
-// canva/main's `.breadcrumb` covers the layout; this site just adds spacing
-// below it (docs sub-pages, via FS::getBreadcrumb()).
 .breadcrumb { margin-bottom: .9rem; }
 
-// ── Image autogenerator live demo (/docs/php/#img) ───────────────────
+// ── The /docs/ sub-site (@type docs) ─────────────────────────────────
+.docs {
+    display: grid;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    grid-template-columns: 14rem minmax(0, 1fr);
+    align-items: start;
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+
+    @media (max-width: 52rem) { grid-template-columns: 1fr; }
+}
+
+// The sidebar: an index card pinned to the side of the page.
+.docs-nav {
+    @extend %sheet;
+    position: sticky;
+    top: 5rem;
+    max-height: calc(100vh - 6rem);
+    overflow: auto;
+    padding: 1.1rem 1.1rem 1.3rem;
+    font-size: .92rem;
+
+    h2 {
+        font-family: var(--font-mono);
+        font-size: .7rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--ink-muted);
+        margin: 1.1rem 0 .4rem;
+
+        &:first-child { margin-top: 0; }
+    }
+
+    ul { list-style: none; display: grid; gap: .15rem; padding: 0; margin: 0; }
+
+    a {
+        display: block;
+        padding: .2rem .5rem;
+        margin-inline: -.5rem;
+        color: var(--ink);
+        text-decoration: none;
+        border-radius: .15rem;
+
+        &:hover { background: var(--surface-2); }
+
+        &[aria-current="page"] {
+            background: var(--accent-soft);
+            color: var(--accent);
+            font-weight: 600;
+            box-shadow: inset .2rem 0 0 var(--accent);
+        }
+    }
+
+    @media (max-width: 52rem) { position: static; max-height: none; }
+}
+
+.docs-head {
+    margin-bottom: 1.5rem;
+
+    .lead { margin-top: .6rem; max-width: 60ch; }
+}
+
+// "On this page": a small note on the page, a strip of tape at the top.
+.docs-main .docs-toc {
+    position: relative;
+    display: block;
+    margin-bottom: 2.25rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface-2);
+    box-shadow: var(--sheet-shadow);
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: -.5rem;
+        left: 1.5rem;
+        width: 4rem;
+        height: 1rem;
+        background: color-mix(in srgb, var(--accent-soft) 80%, transparent);
+        transform: rotate(-3deg);
+    }
+
+    h2 {
+        font-family: var(--font-mono);
+        font-size: .7rem;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--ink-muted);
+        margin: 0 0 .5rem;
+    }
+
+    ul {
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .35rem .6rem;
+        padding: 0;
+        margin: 0;
+        font-size: .9rem;
+    }
+}
+
+// Prev / next: two paper tabs at the bottom of the page.
+.docs-pager {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 3rem;
+
+    a {
+        @extend %sheet;
+        display: block;
+        padding: .8rem 1.1rem;
+        color: var(--ink);
+        text-decoration: none;
+        font-weight: 600;
+        transition: transform .2s, box-shadow .2s;
+
+        &:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-lift); }
+    }
+
+    a::before {
+        display: block;
+        font-family: var(--font-mono);
+        font-size: .68rem;
+        font-weight: 400;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: var(--ink-muted);
+    }
+
+    a[rel="prev"]::before { content: "← Previous"; }
+    a[rel="next"] { grid-column: 2; text-align: right; }
+    a[rel="next"]::before { content: "Next →"; }
+}
+
+// ── Image autogenerator live demo (/docs/php/) ───────────────────────
 .img-demo {
     margin: 1.5rem 0 2rem;
 
@@ -354,11 +648,9 @@ a.card:hover { border-color: var(--accent); }
         display: block;
         width: 100%;
         height: auto;
-        border-radius: 5px;
-        border: 1px solid var(--border);
+        box-shadow: var(--sheet-shadow);
     }
 
-    // Swatches use canva/main's `.palette` (see markup) — just needs spacing.
     .palette { margin-top: .75rem; }
 
     figcaption {
@@ -370,21 +662,18 @@ a.card:hover { border-color: var(--accent); }
     }
 }
 
-// canva/main's `.docs-toc` covers the layout; this site just adds spacing
-// below it (long reference pages, e.g. /docs/php/).
+// Pages outside /docs/ with a hand-written table of contents.
 .docs-toc { margin-bottom: 2rem; }
 
-// ── Tutorial series nav (Part N of 7, prev/next) ─────────────────────
+// ── Getting started path nav (Part N of 7, prev/next) ────────────────
 .tutorial-nav {
+    @extend %sheet;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: .75rem 1.5rem;
-    padding: .9rem 1.1rem;
-    border: 1px solid var(--border);
-    border-radius: 5px;
-    background: var(--surface-2);
+    padding: .9rem 1.4rem .9rem 1.1rem;
     font-size: .88rem;
 
     &__step {
@@ -397,7 +686,7 @@ a.card:hover { border-color: var(--accent); }
         order: -1;
     }
 
-    a { text-decoration: none; }
+    a { text-decoration: none; font-weight: 600; }
     a[rel="next"]::after { content: " →"; }
     a[rel="prev"]::before { content: "← "; }
 }
@@ -406,7 +695,7 @@ a.card:hover { border-color: var(--accent); }
     .tutorial-nav__step { flex-basis: auto; order: 0; }
 }
 
-// ── Numbered steps (tutorial pages) ─────────────────────────────────
+// ── Numbered steps (tutorial pages): numbers on folded paper squares ──
 .steps {
     counter-reset: step;
     list-style: none;
@@ -417,11 +706,8 @@ a.card:hover { border-color: var(--accent); }
     > li {
         counter-increment: step;
         position: relative;
-        padding-left: 2.6rem;
-        // Grid items default to min-width: auto (their content's min-content
-        // size) — a code block's min-content is its longest unwrapped line,
-        // so without this the grid track blows out past the viewport instead
-        // of letting the block's own overflow-x: auto contain it.
+        padding-left: 2.8rem;
+        // Let a code block's own overflow contain long lines.
         min-width: 0;
     }
 
@@ -430,34 +716,35 @@ a.card:hover { border-color: var(--accent); }
         position: absolute;
         left: 0;
         top: .05em;
-        width: 1.9rem;
-        height: 1.9rem;
+        width: 1.95rem;
+        height: 1.95rem;
         display: grid;
         place-items: center;
-        border-radius: 50%;
         background: var(--accent-soft);
         color: var(--accent);
         font-family: var(--font-mono);
         font-weight: 600;
         font-size: .85rem;
+        box-shadow: var(--sheet-shadow);
+        clip-path: polygon(0 0, 72% 0, 100% 28%, 100% 100%, 0 100%);
     }
 
     h3 { margin: 0 0 .5rem; }
     pre { margin-top: .7rem; }
 }
 
-// ── Prose (Markdown output) ────────────────────────────────────────
-// Base typography for rendered Markdown comes from `@kirigami/canva/prose`
-// (`@use`'d above). This site widens the measure a touch and keys code onto
-// the mono role; @kirigami/plugin-highlight's theme layers its colours on top
-// via its own `sass:after` hook, appended after this file.
+// ── Prose (Markdown output) ──────────────────────────────────────────
+// Base typography comes from `@kirigami/canva/prose`; plugin-highlight's
+// theme is appended after this file by its `sass:after` hook.
 .prose {
-    --prose-measure: 44rem;
+    --prose-measure: 46rem;
 
     code, kbd, samp, pre { font-family: var(--font-mono); }
 
-    // <shortcut keys="Ctrl+K"> (see /examples/) emits bare adjacent <kbd>s —
-    // the "+" between them is drawn here, not as markup.
+    pre { box-shadow: var(--sheet-shadow); }
+
+    // <shortcut keys="Ctrl+K"> (see /examples/) emits adjacent <kbd>s; the
+    // "+" between them is drawn here, not written as markup.
     kbd + kbd {
         margin-inline-start: .4em;
 
@@ -468,16 +755,12 @@ a.card:hover { border-color: var(--accent); }
         }
     }
 
-    // Breathing room around a live recipe demo dropped straight into prose
-    // (see /examples/), without reaching for a one-off style="".
-    .demo {
-        margin-block: 1.5rem;
-    }
+    // Breathing room around a live recipe demo dropped into prose.
+    .demo { margin-block: 1.5rem; }
 }
 
-// canva/main's `.table`/`.table-wrap`/`.badge` cover the base look; this site
-// adds spacing + the one content-specific rule (/ecosystem/'s package table:
-// nothing wraps except the "Role" column).
+// canva/main's `.table` / `.table-wrap` / `.badge` give the base look; this
+// adds spacing and /ecosystem/'s rule (only the "Role" column wraps).
 .table-wrap { margin-top: 1.5rem; }
 
 .table {
@@ -485,12 +768,13 @@ a.card:hover { border-color: var(--accent); }
     td:nth-child(2) { white-space: normal; color: var(--ink-muted); }
 }
 
-// ── Footer ─────────────────────────────────────────────────────────
+// ── Footer ───────────────────────────────────────────────────────────
 .site-footer {
-    border-top: 1px solid var(--border);
+    background: var(--surface-2);
+    box-shadow: inset 0 .0625rem 0 var(--border);
     padding-block: clamp(2rem, 5vw, 3rem) 1.5rem;
     color: var(--ink-muted);
-    font-size: 0.88rem;
+    font-size: .88rem;
 }
 
 .site-footer__grid {
@@ -527,7 +811,9 @@ a.card:hover { border-color: var(--accent); }
     justify-content: space-between;
     gap: 1rem 1.5rem;
     padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
+    background-image: repeating-linear-gradient(90deg, var(--border) 0 .45rem, transparent .45rem .95rem);
+    background-size: 100% .0625rem;
+    background-repeat: no-repeat;
 }
 
 .site-footer__text p + p { margin-top: .3rem; }
@@ -537,9 +823,8 @@ a.card:hover { border-color: var(--accent); }
 }
 
 // ── /design/ page ────────────────────────────────────────────────────
-// A `.card` with a flush colour swatch on top instead of the usual padded
-// content throughout — one static class per token instead of an inline
-// `style="background: var(--x)"`, since the token list is fixed and small.
+// A card with a flush colour swatch on top; one static class per token
+// instead of an inline style="".
 .token-card {
     padding: 0;
     overflow: hidden;
@@ -547,7 +832,7 @@ a.card:hover { border-color: var(--accent); }
 
 .token-card__swatch {
     height: 4.5rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: var(--hairline);
 
     @each $token in bg, surface, surface-2, border, ink, ink-muted, accent, accent-soft {
         &--#{$token} { background: var(--#{$token}); }
@@ -562,11 +847,8 @@ a.card:hover { border-color: var(--accent); }
     font-size: .88rem;
 }
 
-// A larger heading inside a `.card--static`, for the type-sample cards.
 .type-sample__heading { font-size: 1.8rem; }
 
-// Spacing between successive "one component, demoed" blocks — the doc-head
-// + live markup pairs under /design/'s "Shared components" section.
 .component-demo {
     margin-block: 2rem;
 
@@ -576,48 +858,53 @@ a.card:hover { border-color: var(--accent); }
     }
 }
 
-// ── Reveal-on-scroll ───────────────────────────────────────────────
+// ── Reveal-on-scroll ─────────────────────────────────────────────────
 .js [data-reveal] {
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 0.5s, transform 0.5s;
+    transform: translateY(.75rem);
+    transition: opacity .5s, transform .5s;
 
     &.is-in { opacity: 1; transform: none; }
 }
 
-// ── Mobile ─────────────────────────────────────────────────────────
+// ── Mobile ───────────────────────────────────────────────────────────
 @media (max-width: 40rem) {
     .nav-toggle {
         display: grid;
         place-items: center;
         width: 2.25rem;
         height: 2.25rem;
-        border: 1px solid var(--border);
-        border-radius: 4px;
-        background: var(--surface-2);
+        border: 0;
+        background: var(--surface);
+        box-shadow: var(--sheet-shadow);
         cursor: pointer;
 
         span, span::before, span::after {
             content: "";
             display: block;
             width: 1rem;
-            height: 2px;
+            height: .125rem;
             background: var(--ink);
         }
         span { position: relative; }
-        span::before { position: absolute; top: -5px; }
-        span::after  { position: absolute; top: 5px; }
+        span::before { position: absolute; top: -.3rem; }
+        span::after  { position: absolute; top: .3rem; }
     }
 
     .site-nav {
         position: absolute;
         inset: 100% 0 auto 0;
-        background: var(--surface-2);
-        border-bottom: 1px solid var(--border);
+        background: var(--surface);
+        box-shadow: var(--sheet-shadow);
         display: none;
 
         &[data-open] { display: block; }
 
         ul { flex-direction: column; align-items: flex-start; padding: 1rem 1.25rem; }
     }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .gateway, .card, .btn, .docs-pager a { transition: none; }
+    .gateway:hover, a.card:hover, .btn:hover, .docs-pager a:hover { transform: none; }
 }

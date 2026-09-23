@@ -177,3 +177,125 @@ function kirigami_pkg_version(string $pkg): ?string
     }
     return $version;
 }
+
+
+/* ---------------------------------------------------------------------------
+ * The /docs/ sub-site (@type docs): sidebar, prev/next and "On this page".
+ * ------------------------------------------------------------------------- */
+
+/**
+ * Every docs page in reading order: the /docs/ hub, then its sub-pages by
+ * @group (in first-seen order) and @position. Each entry is the page's PHPDOC
+ * info plus ->file and ->group.
+ */
+function kirigami_docs_pages(): array
+{
+    $root = rtrim(str_replace('\\', '/', realpath(PREPROS::$config->root)), '/');
+    $hub  = FS::phpFileInfo($root . '/docs/_index.php') ?: new stdClass;
+    $hub  = clone $hub;
+    $hub->file  = realpath($root . '/docs/_index.php');
+    $hub->group = 'Start here';
+
+    $groups = [];
+    foreach (FS::getChildren($root . '/docs/_index.php') as $page) {
+        $groups[$page->group ?? 'More'][] = $page;
+    }
+    $pages = [$hub];
+    foreach ($groups as $group => $list) {
+        foreach ($list as $page) {
+            $page->group = $group;
+            $pages[] = $page;
+        }
+    }
+    return $pages;
+}
+
+/** Index of the page being rendered in kirigami_docs_pages(), or null. */
+function kirigami_docs_current(array $pages): ?int
+{
+    $current = realpath(PREPROS::$file);
+    foreach ($pages as $i => $page) {
+        if ($page->file === $current) return $i;
+    }
+    return null;
+}
+
+/** The docs sidebar: one list per @group, the current page marked. */
+function kirigami_docs_nav(string $relroot): string
+{
+    $pages = kirigami_docs_pages();
+    $at    = kirigami_docs_current($pages);
+    $out   = '';
+    $group = null;
+    foreach ($pages as $i => $page) {
+        if ($page->group !== $group) {
+            $out  .= ($group === null ? '' : '</ul>') . '<h2>' . str_htmlesc($page->group) . '</h2><ul>';
+            $group = $page->group;
+        }
+        $label = $page->nav ?? $page->title ?? '';
+        $out  .= '<li><a href="' . kirigami_page_href($page, $relroot) . '"'
+            . ($i === $at ? ' aria-current="page"' : '') . '>' . str_htmlesc($label) . '</a></li>';
+    }
+    return '<nav class="docs-nav" aria-label="Documentation">' . $out . '</ul></nav>';
+}
+
+/** Previous / next docs page links. */
+function kirigami_docs_pager(string $relroot): string
+{
+    $pages = kirigami_docs_pages();
+    $at    = kirigami_docs_current($pages);
+    if ($at === null) return '';
+    $link = fn(?object $page, string $rel) => $page === null ? '' :
+        '<a rel="' . $rel . '" href="' . kirigami_page_href($page, $relroot) . '">'
+        . str_htmlesc($page->nav ?? $page->title ?? '') . '</a>';
+    return '<nav class="docs-pager" aria-label="Previous and next">'
+        . $link($pages[$at - 1] ?? null, 'prev') . $link($pages[$at + 1] ?? null, 'next') . '</nav>';
+}
+
+// "On this page": docs.before.php leaves an empty <nav class="docs-toc" data-auto>;
+// fill it from the page's <h2 id="…"> headings once the page is assembled.
+register_hook('post_render', function (string $html): string {
+    if (!str_contains($html, 'data-auto')) return $html;
+    preg_match_all('#<h2 id="([^"]+)"[^>]*>(.*?)</h2>#s', $html, $m, PREG_SET_ORDER);
+    $items = implode('', array_map(
+        fn($h) => '<li><a href="#' . $h[1] . '">' . trim(strip_tags($h[2])) . '</a></li>',
+        $m
+    ));
+    $toc = $items === '' ? '' : '<nav class="docs-toc" aria-label="On this page"><h2>On this page</h2><ul>' . $items . '</ul></nav>';
+    return preg_replace('#<nav class="docs-toc" data-auto></nav>#', $toc, $html, 1);
+});
+
+
+/* ---------------------------------------------------------------------------
+ * Authoring tags: page markup without the repeated HTML.
+ * ------------------------------------------------------------------------- */
+
+// <card href="…" kicker="…" title="…">Markdown</card> — a paper card; a link
+// when it has an href.
+register_tag('card', function (string $tag, array $attrs, string $body): string {
+    $href   = $attrs['href'] ?? '';
+    $kicker = isset($attrs['kicker']) ? '<span class="card__kicker">' . str_htmlesc($attrs['kicker']) . '</span>' : '';
+    $title  = isset($attrs['title']) ? '<h3>' . str_htmlesc($attrs['title']) . '</h3>' : '';
+    $text   = trim($body) === '' ? '' : md_to_html(str_trim_indent($body));
+    $el     = $href === '' ? 'article' : 'a';
+    return '<' . $el . ' class="card"' . ($href === '' ? '' : ' href="' . str_htmlesc($href) . '"') . '>'
+        . $kicker . $title . $text . '</' . $el . '>';
+});
+
+// <gateway name="cli" href="…" kicker="…" title="…" image="features/cli.png">
+// Markdown</gateway> — one of the home page's four ways in. Without an image,
+// the illustration slot shows a folded-paper placeholder drawn in CSS.
+register_tag('gateway', function (string $tag, array $attrs, string $body): string {
+    $name  = preg_replace('/[^a-z0-9-]/', '', strtolower($attrs['name'] ?? ''));
+    $href  = str_htmlesc($attrs['href'] ?? '');
+    $image = $attrs['image'] ?? '';
+    $art   = $image === ''
+        ? '<span class="gateway__art" aria-hidden="true"></span>'
+        : '<img class="gateway__art" src="' . str_htmlesc(img_asset($image, 800, 500, true)) . '" alt="" loading="lazy">';
+    return '<article class="gateway gateway--' . $name . '">' . $art
+        . '<div class="gateway__body">'
+        . '<span class="eyebrow">' . str_htmlesc($attrs['kicker'] ?? '') . '</span>'
+        . '<h3><a href="' . $href . '">' . str_htmlesc($attrs['title'] ?? '') . '</a></h3>'
+        . md_to_html(str_trim_indent($body))
+        . '</div></article>';
+});

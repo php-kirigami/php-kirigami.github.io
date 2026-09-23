@@ -44,6 +44,9 @@ prepros:
     guide:                        # doc head + prev/next along the Getting started path
       before: _layouts/types/guide.before.php
       after:  _layouts/types/guide.after.php
+    docs:                         # the /docs/ sub-site: sidebar, head, "On this page", prev/next
+      before: _layouts/types/docs.before.php
+      after:  _layouts/types/docs.after.php
 
 
 # The image autogenerator. Source originals in assets/images/ (rel. to cwd),

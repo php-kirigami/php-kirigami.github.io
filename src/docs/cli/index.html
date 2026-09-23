@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CLI — Kirigami</title>
-        <meta name="description" content="Every kiri command, with its flags and real example output — build, export, watch, serve, run, create, install, cache, phpinfo.">
+        <meta name="description" content="Every kiri command, with its flags and real example output — build, export, watch, serve, run, mcp, create, install, cache, phpinfo.">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
@@ -16,13 +16,13 @@
         <meta name="author" content="Maxime Larrivée-Roy">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="CLI — Kirigami">
-        <meta name="twitter:description" content="Every kiri command, with its flags and real example output — build, export, watch, serve, run, create, install, cache, phpinfo.">
+        <meta name="twitter:description" content="Every kiri command, with its flags and real example output — build, export, watch, serve, run, mcp, create, install, cache, phpinfo.">
         <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="CLI — Kirigami">
-        <meta property="og:description" content="Every kiri command, with its flags and real example output — build, export, watch, serve, run, create, install, cache, phpinfo.">
+        <meta property="og:description" content="Every kiri command, with its flags and real example output — build, export, watch, serve, run, mcp, create, install, cache, phpinfo.">
         <meta property="og:url" content="https://php-kirigami.github.io/docs/cli/">
         <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/docs/cli/">
@@ -66,7 +66,7 @@
                             {
                                 "@type": "ListItem",
                                 "position": 2,
-                                "name": "Docs",
+                                "name": "Documentation",
                                 "item": "https://php-kirigami.github.io/docs/"
                             },
                             {
@@ -104,13 +104,10 @@
                 <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
                 <nav class="site-nav" id="site-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="../../">Home</a></li>
                         <li><a href="../../start/">Start</a></li>
                         <li><a href="../../docs/" aria-current="page">Docs</a></li>
                         <li><a href="../../plugins/">Plugins</a></li>
                         <li><a href="../../examples/">Examples</a></li>
-                        <li><a href="../../design/">Design</a></li>
-                        <li><a href="../../roadmap/">Roadmap</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
@@ -123,285 +120,317 @@
             </div>
         </header>
         <main id="main">
-            <section class="section wrap doc-head">
-                <nav class="breadcrumb" aria-label="Breadcrumb">
-                    <a href="../../docs/">Docs</a>
-                    <span aria-hidden="true">/</span>
-                    <span aria-current="page">CLI</span>
+            <div class="docs wrap">
+                <nav class="docs-nav" aria-label="Documentation">
+                    <h2>Start here</h2>
+                    <ul>
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ul>
+                    <h2>Build a site</h2>
+                    <ul>
+                        <li><a href="../../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                    </ul>
+                    <h2>Tools</h2>
+                    <ul>
+                        <li><a href="../../docs/cli/" aria-current="page">CLI</a></li>
+                        <li><a href="../../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/">JavaScript API</a></li>
+                    </ul>
                 </nav>
-                <span class="eyebrow">Documentation</span>
-                <h1>CLI</h1>
-                <p class="lead">Every kiri command, with its flags and real example output — build, export, watch, serve, run, create, install, cache, phpinfo.</p>
-            </section>
-            <section class="section wrap">
-                <ul class="docs-toc">
-                    <li><a href="#overview">Overview</a></li>
-                    <li><a href="#kiri-build">kiri build</a></li>
-                    <li><a href="#kiri-export">kiri export</a></li>
-                    <li><a href="#kiri-watch">kiri watch</a></li>
-                    <li><a href="#kiri-serve">kiri serve</a></li>
-                    <li><a href="#kiri-run">kiri run</a></li>
-                    <li><a href="#kiri-create">kiri create</a></li>
-                    <li><a href="#kiri-install">kiri install</a></li>
-                    <li><a href="#kiri-cache">kiri cache</a></li>
-                    <li><a href="#kiri-phpinfo">kiri phpinfo</a></li>
-                    <li><a href="#typical-workflow">Typical workflow</a></li>
-                </ul>
-                <div class="prose">
-                    <h2 id="overview">Overview</h2>
-                    <p><code>kiri</code> is provided by the <code>@kirigami/kirigami</code> dev dependency — run it as <code>npx kiri &lt;command&gt;</code>, or add scripts to <code>package.json</code> (every official template does: <code>npm run dev</code>, <code>npm run build</code>, …). Every command accepts <code>--help</code>, and so does bare <code>kiri</code>:</p>
-                    <pre><code class="hljs language-bash">
-                        $ npx kiri --<span class="hljs-built_in">help</span>
+                <article class="docs-main">
+                    <header class="docs-head">
+                        <span class="eyebrow">Tools</span>
+                        <h1>CLI</h1>
+                        <p class="lead">Every kiri command, with its flags and real example output — build, export, watch, serve, run, mcp, create, install, cache, phpinfo.</p>
+                    </header>
+                    <nav class="docs-toc" aria-label="On this page">
+                        <h2>On this page</h2>
+                        <ul>
+                            <li><a href="#overview">Overview</a></li>
+                            <li><a href="#kiri-build">kiri build</a></li>
+                            <li><a href="#kiri-export">kiri export</a></li>
+                            <li><a href="#kiri-watch">kiri watch</a></li>
+                            <li><a href="#kiri-serve">kiri serve</a></li>
+                            <li><a href="#kiri-run">kiri run</a></li>
+                            <li><a href="#kiri-create">kiri create</a></li>
+                            <li><a href="#kiri-install">kiri install</a></li>
+                            <li><a href="#kiri-cache">kiri cache</a></li>
+                            <li><a href="#kiri-mcp">kiri mcp</a></li>
+                            <li><a href="#kiri-phpinfo">kiri phpinfo</a></li>
+                            <li><a href="#typical-workflow">Typical workflow</a></li>
+                        </ul>
+                    </nav>
+                    <div class="prose">
+                        <h2 id="overview">Overview</h2>
+                        <p><code>kiri</code> comes from the <code>@kirigami/cli</code> package. Install it as a dev dependency and run it as <code>npx kiri &lt;command&gt;</code>, or through the <code>package.json</code> scripts every official template ships (<code>npm run serve</code>, <code>npm run build</code>, …):</p>
+                        <pre><code class="hljs language-bash">
+                            npm install --save-dev @kirigami/cli
+                        </code></pre>
+                        <p>Every command accepts <code>--help</code>, and so does bare <code>kiri</code>:</p>
+                        <pre><code class="hljs language-javascript">
+                            $ npx kiri --help
 
-                        kiri — Kirigami CLI
+                            kiri — <span class="hljs-title class_">Kirigami</span> <span class="hljs-variable constant_">CLI</span>
 
-                        USAGE
-                          kiri &lt;<span class="hljs-built_in">command</span>&gt; [options]
+                            <span class="hljs-variable constant_">USAGE</span>
+                              kiri &lt;command&gt; [options]
 
-                        COMMANDS
-                          build       Compile project <span class="hljs-keyword">for</span> development
-                          <span class="hljs-built_in">export</span>      Compile and <span class="hljs-built_in">export</span> project <span class="hljs-keyword">for</span> production
-                          watch       Start dev-mode with hot-reload
-                          serve       Dev-mode with hot-reload, served locally <span class="hljs-keyword">in</span> a browser
-                          run         Run a PHP <span class="hljs-built_in">command</span> script from the scripts/ folder
-                          create      Create a new project from an official template
-                          install     Install a plugin and <span class="hljs-built_in">print</span> its kirigami.yaml options
-                          cache       Purge the <span class="hljs-built_in">local</span> caches (.node.db / .cache.db / .cookie.txt)
-                          phpinfo     Print phpinfo() from the embedded PHP-WASM runtime
+                            <span class="hljs-variable constant_">COMMANDS</span>
+                              build       <span class="hljs-title class_">Compile</span> project <span class="hljs-keyword">for</span> development
+                              <span class="hljs-keyword">export</span>      <span class="hljs-title class_">Compile</span> and <span class="hljs-keyword">export</span> project <span class="hljs-keyword">for</span> production
+                              watch       <span class="hljs-title class_">Start</span> dev-mode <span class="hljs-keyword">with</span> hot-reload
+                              serve       <span class="hljs-title class_">Dev</span>-mode <span class="hljs-keyword">with</span> hot-reload, served locally <span class="hljs-keyword">in</span> a browser
+                              run         <span class="hljs-title class_">Run</span> a <span class="hljs-variable constant_">PHP</span> command script <span class="hljs-keyword">from</span> the scripts/ folder
+                              mcp         <span class="hljs-title class_">Serve</span> <span class="hljs-variable language_">this</span> project over <span class="hljs-title function_">MCP</span> (stdio) <span class="hljs-keyword">for</span> an <span class="hljs-variable constant_">AI</span> agent
+                              create      <span class="hljs-title class_">Create</span> a <span class="hljs-keyword">new</span> project <span class="hljs-keyword">from</span> an official template
+                              install     <span class="hljs-title class_">Install</span> a plugin and print its kirigami.<span class="hljs-property">yaml</span> options
+                              cache       <span class="hljs-title class_">Purge</span> the local <span class="hljs-title function_">caches</span> (.<span class="hljs-property">node</span>.<span class="hljs-property">db</span> / .<span class="hljs-property">cache</span>.<span class="hljs-property">db</span> / .<span class="hljs-property">cookie</span>.<span class="hljs-property">txt</span>)
+                              phpinfo     <span class="hljs-title class_">Print</span> <span class="hljs-title function_">phpinfo</span>() <span class="hljs-keyword">from</span> the embedded <span class="hljs-variable constant_">PHP</span>-<span class="hljs-variable constant_">WASM</span> runtime
 
-                        GLOBAL OPTIONS
-                          --<span class="hljs-built_in">help</span>, -h    Show <span class="hljs-built_in">help</span>
-                          --version, -v Show version
+                            <span class="hljs-variable constant_">GLOBAL</span> <span class="hljs-variable constant_">OPTIONS</span>
+                              --help, -h    <span class="hljs-title class_">Show</span> help
+                              --version, -v <span class="hljs-title class_">Show</span> version
+                        </code></pre>
+                        <p><code>kiri --version</code> also prints the bundled PHP version alongside the CLI&apos;s own — useful when filing an issue, since <code>@kirigami/php-wasm</code>&apos;s own version number encodes the PHP build it ships.</p>
+                        <h2 id="kiri-build">kiri build</h2>
+                        <p>Compiles the project for <strong>development</strong>: every entry under <code>tasks:</code> runs once, in order, with no minification and no export step. If a top-level <code>prepros:</code> block is set, every PHP page (plus <code>sitemap.xml</code> / <code>robots.txt</code>) renders first — page-source <code>.html</code> files land right next to their <code>_index.php</code>, so a plain static server can preview <code>src/</code> directly.</p>
+                        <pre><code class="hljs language-bash">
+                            kiri build
+                        </code></pre>
+                        <p>This is the real output from building this very site — the plugin loader banner, every page rendered, then the <code>sass</code> and <code>esbuild</code> tasks:</p>
+                        <pre><code class="hljs language-bash">
+                            kiri — Build Project
 
-                        Type `kiri &lt;<span class="hljs-built_in">command</span>&gt; --<span class="hljs-built_in">help</span>` <span class="hljs-keyword">for</span> detailed <span class="hljs-built_in">help</span> on a <span class="hljs-built_in">command</span>.
-                    </code></pre>
-                    <p><code>kiri --version</code> also prints the bundled PHP version alongside the CLI&apos;s own — useful when filing an issue, since <code>@kirigami/php-wasm</code>&apos;s own version number encodes the PHP build it ships.</p>
-                    <h2 id="kiri-build">kiri build</h2>
-                    <p>Compiles the project for <strong>development</strong>: every entry under <code>tasks:</code> runs once, in order, with no minification and no export step. If a top-level <code>prepros:</code> block is set, every PHP page (plus <code>sitemap.xml</code> / <code>robots.txt</code>) renders first — page-source <code>.html</code> files land right next to their <code>_index.php</code>, so a plain static server can preview <code>src/</code> directly.</p>
-                    <pre><code class="hljs language-bash">
-                        kiri build
-                    </code></pre>
-                    <p>This is the real output from building this very site — the plugin loader banner, every page rendered, then the <code>sass</code> and <code>esbuild</code> tasks:</p>
-                    <pre><code class="hljs language-bash">
-                        kiri — Build Project
+                            › Project   : Kirigami
+                            › Base URL  : https://php-kirigami.github.io
+                            › Root      : /path/to/project/src
 
-                        › Project   : Kirigami
-                        › Base URL  : https://php-kirigami.github.io
-                        › Root      : /path/to/project/src
+                            Plugins:
+                            › ✔ @kirigami/plugin-highlight v0.1.7
+                            › ✔ @kirigami/plugin-extlink v0.1.3
+                            › ✔ @kirigami/plugin-embed v0.1.4
 
-                        Plugins:
-                        › ✔ @kirigami/plugin-highlight v0.1.7
-                        › ✔ @kirigami/plugin-extlink v0.1.3
-                        › ✔ @kirigami/plugin-embed v0.1.4
+                            Tasks:
 
-                        Tasks:
+                            › PREPROS: render-all ✔
+                                src/index.html
+                                src/about/index.html
+                                …
+                                src/sitemap.xml
+                                src/robots.txt
 
-                        › PREPROS: render-all ✔
-                            src/index.html
-                            src/about/index.html
-                            …
-                            src/sitemap.xml
-                            src/robots.txt
+                            › SASS: css-core ✔
+                                (this site<span class="hljs-string">&#x27;s compiled stylesheet + source map)
 
-                        › SASS: css-core ✔
-                            (this site<span class="hljs-string">&#x27;s compiled stylesheet + source map)
+                            › ESBUILD: js-core ✔
+                                (this site&#x27;</span>s compiled bundle + <span class="hljs-built_in">source</span> map)
 
-                        › ESBUILD: js-core ✔
-                            (this site&#x27;</span>s compiled bundle + <span class="hljs-built_in">source</span> map)
-
-                        ✔ Build finished!
-                    </code></pre>
-                    <p>A task with no build step for the current change (nothing to re-run) is skipped, unless it sets <code>force: true</code>. <code>kiri build</code> fires the <code>before-build</code> <a href="#run">trigger</a> first — a <code>scripts:</code> entry can hook into that without any manual <code>kiri run</code> call. For production output (minified, exported to <code>dist/</code>), use <a href="#export"><code>kiri export</code></a> instead.</p>
-                    <h2 id="kiri-export">kiri export</h2>
-                    <p>The production build: <strong>forces</strong> every task to run (even ones <code>kiri build</code> would have skipped), copies the result into <code>export:path</code> (default <code>dist/</code>), and stamps the banner (<code>kirigami:banner</code>, or the bundled ASCII one) into every exported text file with its <code>### ###</code> tokens filled in.</p>
-                    <pre><code class="hljs language-bash">
-                        kiri <span class="hljs-built_in">export</span>
-                    </code></pre>
-                    <p>Trigger order is <code>before-export</code> → <code>before-build</code> → the build itself → <code>after-export</code> (see <a href="#run"><code>kiri run</code></a> for what a trigger actually runs). That means anything a project wires to <code>before-build</code> also runs during export — no need to duplicate a script under both triggers.</p>
-                    <p>Point CI at this command; <a href="https://github.com/php-kirigami/kiribuild" target="_blank" rel="noopener noreferrer"><code>kiribuild</code></a> (the reusable GitHub Action) runs exactly <code>kiri export</code> under the hood. See <a href="../../start/tutorial/7-deploy/">Tutorial → Deploy</a> for the full GitHub Pages setup.</p>
-                    <h2 id="kiri-watch">kiri watch</h2>
-                    <p>Dev mode without a server: watches every file that feeds an <code>esbuild</code> / <code>sass</code> / <code>prepros</code> task and rebuilds on change — 150ms debounced, batched per task so five saves in the same second trigger one rebuild, not five. <code>node_modules/</code>, <code>.git/</code> and <code>dist/</code> are always ignored. <code>Ctrl+C</code> stops cleanly.</p>
-                    <pre><code class="hljs language-bash">
-                        kiri watch
-                    </code></pre>
-                    <p>It only writes files to disk — no server, no browser reload. For that, use <a href="#serve"><code>kiri serve</code></a>, which does everything <code>watch</code> does plus the two things it&apos;s missing.</p>
-                    <h2 id="kiri-serve">kiri serve</h2>
-                    <p>Everything <a href="#watch"><code>kiri watch</code></a> does, plus: serves <code>kirigami.root</code> over plain HTTP and reloads any open browser tab once a rebuild batch finishes (Server-Sent Events — no WebSocket library, no live-reload framework, just <code>node:http</code> + <code>node:fs</code>). A <code>sass</code>-only change hot-swaps the stylesheet in place instead of reloading the page, so scroll position and form state survive.</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Flag</th>
-                                <th>Default</th>
-                                <th>Purpose</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>--port, -p &lt;n&gt;</code></td>
-                                <td><code>4321</code></td>
-                                <td>Port to listen on.</td>
-                            </tr>
-                            <tr>
-                                <td><code>--host &lt;host&gt;</code></td>
-                                <td><code>127.0.0.1</code></td>
-                                <td>Host to bind to.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <pre><code class="hljs language-bash">
-                        kiri serve
-                        kiri serve --port 5000
-                    </code></pre>
-                    <p>If the port is already taken, <code>kiri serve</code> fails with a direct fix instead of a raw Node stack trace:</p>
-                    <pre><code class="hljs language-yaml">
-                        <span class="hljs-attr">Error:</span> <span class="hljs-string">Port</span> <span class="hljs-number">4321 </span><span class="hljs-string">on</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> <span class="hljs-string">is</span> <span class="hljs-string">already</span> <span class="hljs-string">in</span> <span class="hljs-string">use</span> <span class="hljs-string">—</span> <span class="hljs-string">try</span> <span class="hljs-string">a</span> <span class="hljs-string">different</span> <span class="hljs-string">one</span> <span class="hljs-string">with</span> <span class="hljs-string">--port</span> <span class="hljs-number">4322</span><span class="hljs-string">.</span>
-                    </code></pre>
-                    <h2 id="kiri-run">kiri run</h2>
-                    <p>Runs <code>scripts/&lt;name&gt;.php</code> inside the same PHP-WASM runtime and class library every page renders with — <code>PREPROS::$config-&gt;data</code> is populated, every autoloaded class (<code>FS</code>, <code>IMG</code>, <code>CURL</code>, …) is available — but the script produces no page. Use it for anything one-off or triggered that isn&apos;t itself content: image conversion, a data migration, a deploy notification.</p>
-                    <pre><code class="hljs language-bash">
-                        kiri run &lt;name&gt; [args...]
-                    </code></pre>
-                    <p>Every word after <code>&lt;name&gt;</code> becomes a <code>$argv</code> entry inside the PHP script:</p>
-                    <pre><code class="hljs language-bash">
-                        kiri run deploy production --force
-                    </code></pre>
-                    <pre><code class="hljs language-php">
-                        <span class="hljs-comment">// scripts/deploy.php</span>
-                        <span class="hljs-comment">// $argv === [&#x27;production&#x27;, &#x27;--force&#x27;]</span>
-                    </code></pre>
-                    <p>A script isn&apos;t limited to manual invocation — declare it under <code>scripts:</code> in <code>kirigami.yaml</code> with a <code>trigger</code>, and <code>kiri build</code> / <code>kiri export</code> fire it automatically:</p>
-                    <pre><code class="hljs language-yaml">
-                        <span class="hljs-attr">scripts:</span>
-                          <span class="hljs-attr">deploy:</span>
-                            <span class="hljs-attr">trigger:</span> <span class="hljs-string">after-export</span>
-                    </code></pre>
-                    <p>Full reference: <a href="../config/#scripts">Config → scripts</a>.</p>
-                    <h2 id="kiri-create">kiri create</h2>
-                    <p>Scaffolds a new project from an official <code>template-*</code> repo (the <code>php-kirigami</code> org). Running it with no arguments, in an interactive terminal, starts a wizard (template, directory, name / description / author / base URL, <code>--email</code> / <code>--repo</code>); every answer is written into <code>package.json</code> and <code>kirigami.yaml</code> for you.</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Flag</th>
-                                <th>Purpose</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><code>--list, -l</code></td>
-                                <td>List available templates (cached 1h).</td>
-                            </tr>
-                            <tr>
-                                <td><code>--name &lt;name&gt;</code></td>
-                                <td>Project name (<code>package.json</code> name + <code>kirigami.yaml</code> project).</td>
-                            </tr>
-                            <tr>
-                                <td><code>--description &lt;s&gt;</code></td>
-                                <td>Project description.</td>
-                            </tr>
-                            <tr>
-                                <td><code>--author &lt;name&gt;</code></td>
-                                <td>Author.</td>
-                            </tr>
-                            <tr>
-                                <td><code>--email &lt;email&gt;</code></td>
-                                <td>Author email (<code>kirigami.yaml</code> <code>email</code>).</td>
-                            </tr>
-                            <tr>
-                                <td><code>--baseurl &lt;url&gt;</code></td>
-                                <td>Site base URL (<code>kirigami.yaml</code> <code>baseurl</code>).</td>
-                            </tr>
-                            <tr>
-                                <td><code>--repo &lt;url&gt;</code></td>
-                                <td>Git repo URL (<code>kirigami.yaml</code> <code>repo</code>; default: derived from <code>--baseurl</code>).</td>
-                            </tr>
-                            <tr>
-                                <td><code>--yes, -y</code></td>
-                                <td>Non-interactive: take defaults, ask nothing.</td>
-                            </tr>
-                            <tr>
-                                <td><code>--no-git</code></td>
-                                <td>Don&apos;t run <code>git init</code> / the first commit.</td>
-                            </tr>
-                            <tr>
-                                <td><code>--no-install</code></td>
-                                <td>Don&apos;t run <code>npm install</code> afterwards.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <pre><code class="hljs language-bash">
-                        kiri create                  <span class="hljs-comment"># interactive wizard</span>
-                        kiri create --list
-                        kiri create blog my-blog
-                    </code></pre>
-                    <p>Extraction never overwrites: existing files are kept as-is, and <code>package.json</code> is deep-merged (your own dependencies win over the template&apos;s). A missing <code>package.json</code> / <code>banner.txt</code> gets a starter one — the banner keeps its <code>### ###</code> tokens on disk, filled in on every <code>build</code> / <code>export</code> afterward. Unless <code>--no-git</code> / <code>--no-install</code> are passed, <code>create</code> also runs <code>git init</code> plus an initial commit (skipped if already inside a repo) and <code>npm install</code>. Every template ships its own <code>CLAUDE.md</code>, so a freshly created project is Claude Code-ready immediately.</p>
-                    <h2 id="kiri-install">kiri install</h2>
-                    <p>Installs a Kirigami plugin and prints the <code>plugins:</code> block to paste into <code>kirigami.yaml</code> — it never edits the file itself.</p>
-                    <pre><code class="hljs language-bash">
-                        kiri install &lt;plugin...&gt;
-                        kiri install --save &lt;plugin...&gt;   <span class="hljs-comment"># regular dependency, not devDependency</span>
-                    </code></pre>
-                    <p>A bare name expands against the <code>@kirigami/plugin-*</code> / <code>kirigami-plugin-*</code> naming conventions and is checked against npm; a full package name (anyone&apos;s, not just <code>@kirigami/*</code>) is used as-is:</p>
-                    <pre><code class="hljs language-bash">
-                        kiri install highlight                    <span class="hljs-comment"># → @kirigami/plugin-highlight</span>
-                        kiri install @kirigami/plugin-highlight    <span class="hljs-comment"># same thing, spelled out</span>
-                        kiri install highlight @kirigami/plugin-embed   <span class="hljs-comment"># more than one at once</span>
-                    </code></pre>
-                    <p>Already installed? <code>install</code> checks npm for a newer version and updates it. Either way it ends by printing the options block, built straight from the plugin&apos;s own <code>kirigami.optionsSchema</code> — so the flags you see match that exact version:</p>
-                    <pre><code class="hljs language-yaml">
-                        <span class="hljs-attr">plugins:</span>
-                          <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;@kirigami/plugin-highlight&quot;</span>
-                            <span class="hljs-attr">options:</span>
-                              <span class="hljs-attr">languages:</span> [<span class="hljs-string">js</span>, <span class="hljs-string">ts</span>, <span class="hljs-string">php</span>, <span class="hljs-string">bash</span>, <span class="hljs-string">yaml</span>, <span class="hljs-string">json</span>, <span class="hljs-string">html</span>, <span class="hljs-string">css</span>]
-                              <span class="hljs-attr">theme:</span> <span class="hljs-string">auto</span>
-                    </code></pre>
-                    <h2 id="kiri-cache">kiri cache</h2>
-                    <p>Kirigami caches two SQLite stores at the project root — <code>.cache.db</code> (<code>CACHE</code>, used by <code>SCRAPER</code> and the image pipeline) and <code>.node.db</code> (<code>@kirigami/sdk</code>&apos;s <code>Cache</code>, for plugin-side caching) — plus a <code>.cookie.txt</code> jar (<code>CURL</code>). All three are meant to be <code>.gitignore</code>d locally but <em>committed</em> in CI-built projects, so a fresh checkout never needs to re-crawl or re-encode anything a previous run already resolved (see <a href="../../plugins/#extlink"><code>&lt;extlink&gt;</code></a> for a real example).</p>
-                    <pre><code class="hljs language-bash">
-                        kiri cache purge              <span class="hljs-comment"># delete .node.db, .cache.db, .cookie.txt</span>
-                        kiri cache purge meta_*       <span class="hljs-comment"># keep the files, delete only matching keys</span>
-                        kiri cache purge <span class="hljs-string">&quot;colors_*&quot;</span>
-                    </code></pre>
-                    <p><code>&lt;mask&gt;</code> is a glob over the key namespace, not a filename — quote it if your shell would otherwise expand the <code>*</code>. Acts on the current directory.</p>
-                    <h2 id="kiri-phpinfo">kiri phpinfo</h2>
-                    <p>Prints <code>phpinfo()</code> from the embedded PHP-WASM runtime — the exact PHP version and extension set every page actually renders with, not whatever PHP (if any) happens to be on the host machine.</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Flag</th>
-                                <th>Output</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><em>(none)</em></td>
-                                <td>HTML, exactly like a browser-rendered <code>phpinfo()</code>.</td>
-                            </tr>
-                            <tr>
-                                <td><code>--md, -m</code></td>
-                                <td>Markdown table.</td>
-                            </tr>
-                            <tr>
-                                <td><code>--json, -j</code></td>
-                                <td>JSON.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <pre><code class="hljs language-bash">
-                        kiri phpinfo
-                        kiri phpinfo --json &gt; phpinfo.json
-                        kiri phpinfo --md &gt; phpinfo.md
-                    </code></pre>
-                    <p>Writes to stdout either way — redirect it to a file, or pipe it straight into a diff when chasing a version-specific bug.</p>
-                    <h2 id="typical-workflow">Typical workflow</h2>
-                    <p>A normal session runs <code>kiri serve</code> once, in one terminal, and leaves it open through the whole editing session; <code>kiri export</code> is the last step, right before a push, to sanity-check the actual production output in <code>dist/</code>:</p>
-                    <pre><code class="hljs language-bash">
-                        npx kiri serve --port 4321
-                        <span class="hljs-comment"># …edit src/**, save, the open tab reloads on its own…</span>
-                        npx kiri <span class="hljs-built_in">export</span>
-                    </code></pre>
-                    <p><code>kiribuild</code> runs <code>kiri export</code> again in CI on push — so a clean local <code>kiri export</code> is a strong signal the deploy will succeed too. If a build ever behaves differently locally than in CI, <code>kiri cache purge</code> rules out a stale local cache before anything else.</p>
-                </div>
-            </section>
+                            ✔ Build finished!
+                        </code></pre>
+                        <p>A task with no build step for the current change (nothing to re-run) is skipped, unless it sets <code>force: true</code>. <code>kiri build</code> fires the <code>before-build</code> <a href="#run">trigger</a> first — a <code>scripts:</code> entry can hook into that without any manual <code>kiri run</code> call. For production output (minified, exported to <code>dist/</code>), use <a href="#export"><code>kiri export</code></a> instead.</p>
+                        <h2 id="kiri-export">kiri export</h2>
+                        <p>The production build: <strong>forces</strong> every task to run (even ones <code>kiri build</code> would have skipped), copies the result into <code>export:path</code> (default <code>dist/</code>), and stamps the banner (<code>kirigami:banner</code>, or the bundled ASCII one) into every exported text file with its <code>### ###</code> tokens filled in.</p>
+                        <pre><code class="hljs language-bash">
+                            kiri <span class="hljs-built_in">export</span>
+                        </code></pre>
+                        <p>Trigger order is <code>before-export</code> → <code>before-build</code> → the build itself → <code>after-export</code> (see <a href="#run"><code>kiri run</code></a> for what a trigger actually runs). That means anything a project wires to <code>before-build</code> also runs during export — no need to duplicate a script under both triggers.</p>
+                        <p>Point CI at this command; <a href="https://github.com/php-kirigami/kiribuild" target="_blank" rel="noopener noreferrer"><code>kiribuild</code></a> (the reusable GitHub Action) runs exactly <code>kiri export</code> under the hood. See <a href="../../start/tutorial/7-deploy/">Tutorial → Deploy</a> for the full GitHub Pages setup.</p>
+                        <h2 id="kiri-watch">kiri watch</h2>
+                        <p>Dev mode without a server: watches every file that feeds an <code>esbuild</code> / <code>sass</code> / <code>prepros</code> task and rebuilds on change — 150ms debounced, batched per task so five saves in the same second trigger one rebuild, not five. <code>node_modules/</code>, <code>.git/</code> and <code>dist/</code> are always ignored. <code>Ctrl+C</code> stops cleanly.</p>
+                        <pre><code class="hljs language-bash">
+                            kiri watch
+                        </code></pre>
+                        <p>It only writes files to disk — no server, no browser reload. For that, use <a href="#serve"><code>kiri serve</code></a>, which does everything <code>watch</code> does plus the two things it&apos;s missing.</p>
+                        <h2 id="kiri-serve">kiri serve</h2>
+                        <p>Everything <a href="#watch"><code>kiri watch</code></a> does, plus: serves <code>kirigami.root</code> over plain HTTP and reloads any open browser tab once a rebuild batch finishes (Server-Sent Events — no WebSocket library, no live-reload framework, just <code>node:http</code> + <code>node:fs</code>). A <code>sass</code>-only change hot-swaps the stylesheet in place instead of reloading the page, so scroll position and form state survive.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Flag</th>
+                                    <th>Default</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>--port, -p &lt;n&gt;</code></td>
+                                    <td><code>4321</code></td>
+                                    <td>Port to listen on.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--host &lt;host&gt;</code></td>
+                                    <td><code>127.0.0.1</code></td>
+                                    <td>Host to bind to.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pre><code class="hljs language-bash">
+                            kiri serve
+                            kiri serve --port 5000
+                        </code></pre>
+                        <p>If the port is already taken, <code>kiri serve</code> fails with a direct fix instead of a raw Node stack trace:</p>
+                        <pre><code class="hljs language-yaml">
+                            <span class="hljs-attr">Error:</span> <span class="hljs-string">Port</span> <span class="hljs-number">4321 </span><span class="hljs-string">on</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span> <span class="hljs-string">is</span> <span class="hljs-string">already</span> <span class="hljs-string">in</span> <span class="hljs-string">use</span> <span class="hljs-string">—</span> <span class="hljs-string">try</span> <span class="hljs-string">a</span> <span class="hljs-string">different</span> <span class="hljs-string">one</span> <span class="hljs-string">with</span> <span class="hljs-string">--port</span> <span class="hljs-number">4322</span><span class="hljs-string">.</span>
+                        </code></pre>
+                        <h2 id="kiri-run">kiri run</h2>
+                        <p>Runs <code>scripts/&lt;name&gt;.php</code> inside the same PHP-WASM runtime and class library every page renders with — <code>PREPROS::$config-&gt;data</code> is populated, every autoloaded class (<code>FS</code>, <code>IMG</code>, <code>CURL</code>, …) is available — but the script produces no page. Use it for anything one-off or triggered that isn&apos;t itself content: image conversion, a data migration, a deploy notification.</p>
+                        <pre><code class="hljs language-bash">
+                            kiri run &lt;name&gt; [args...]
+                        </code></pre>
+                        <p>Every word after <code>&lt;name&gt;</code> becomes a <code>$argv</code> entry inside the PHP script:</p>
+                        <pre><code class="hljs language-bash">
+                            kiri run deploy production --force
+                        </code></pre>
+                        <pre><code class="hljs language-php">
+                            <span class="hljs-comment">// scripts/deploy.php</span>
+                            <span class="hljs-comment">// $argv === [&#x27;production&#x27;, &#x27;--force&#x27;]</span>
+                        </code></pre>
+                        <p>A script isn&apos;t limited to manual invocation — declare it under <code>scripts:</code> in <code>kirigami.yaml</code> with a <code>trigger</code>, and <code>kiri build</code> / <code>kiri export</code> fire it automatically:</p>
+                        <pre><code class="hljs language-yaml">
+                            <span class="hljs-attr">scripts:</span>
+                              <span class="hljs-attr">deploy:</span>
+                                <span class="hljs-attr">trigger:</span> <span class="hljs-string">after-export</span>
+                        </code></pre>
+                        <p>Full reference: <a href="../config/#scripts">Config → scripts</a>.</p>
+                        <h2 id="kiri-create">kiri create</h2>
+                        <p>Scaffolds a new project from an official <code>template-*</code> repo (the <code>php-kirigami</code> org). Running it with no arguments, in an interactive terminal, starts a wizard (template, directory, name / description / author / base URL, <code>--email</code> / <code>--repo</code>); every answer is written into <code>package.json</code> and <code>kirigami.yaml</code> for you.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Flag</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>--list, -l</code></td>
+                                    <td>List available templates (cached 1h).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--name &lt;name&gt;</code></td>
+                                    <td>Project name (<code>package.json</code> name + <code>kirigami.yaml</code> project).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--description &lt;s&gt;</code></td>
+                                    <td>Project description.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--author &lt;name&gt;</code></td>
+                                    <td>Author.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--email &lt;email&gt;</code></td>
+                                    <td>Author email (<code>kirigami.yaml</code> <code>email</code>).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--baseurl &lt;url&gt;</code></td>
+                                    <td>Site base URL (<code>kirigami.yaml</code> <code>baseurl</code>).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--repo &lt;url&gt;</code></td>
+                                    <td>Git repo URL (<code>kirigami.yaml</code> <code>repo</code>; default: derived from <code>--baseurl</code>).</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--yes, -y</code></td>
+                                    <td>Non-interactive: take defaults, ask nothing.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--no-git</code></td>
+                                    <td>Don&apos;t run <code>git init</code> / the first commit.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--no-install</code></td>
+                                    <td>Don&apos;t run <code>npm install</code> afterwards.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pre><code class="hljs language-bash">
+                            kiri create                  <span class="hljs-comment"># interactive wizard</span>
+                            kiri create --list
+                            kiri create blog my-blog
+                        </code></pre>
+                        <p>Extraction never overwrites: existing files are kept as-is, and <code>package.json</code> is deep-merged (your own dependencies win over the template&apos;s). A missing <code>package.json</code> / <code>banner.txt</code> gets a starter one — the banner keeps its <code>### ###</code> tokens on disk, filled in on every <code>build</code> / <code>export</code> afterward. Unless <code>--no-git</code> / <code>--no-install</code> are passed, <code>create</code> also runs <code>git init</code> plus an initial commit (skipped if already inside a repo) and <code>npm install</code>. Every template ships its own <code>CLAUDE.md</code>, so a freshly created project is Claude Code-ready immediately.</p>
+                        <h2 id="kiri-install">kiri install</h2>
+                        <p>Installs a Kirigami plugin and prints the <code>plugins:</code> block to paste into <code>kirigami.yaml</code> — it never edits the file itself.</p>
+                        <pre><code class="hljs language-bash">
+                            kiri install &lt;plugin...&gt;
+                            kiri install --save &lt;plugin...&gt;   <span class="hljs-comment"># regular dependency, not devDependency</span>
+                        </code></pre>
+                        <p>A bare name expands against the <code>@kirigami/plugin-*</code> / <code>kirigami-plugin-*</code> naming conventions and is checked against npm; a full package name (anyone&apos;s, not just <code>@kirigami/*</code>) is used as-is:</p>
+                        <pre><code class="hljs language-bash">
+                            kiri install highlight                    <span class="hljs-comment"># → @kirigami/plugin-highlight</span>
+                            kiri install @kirigami/plugin-highlight    <span class="hljs-comment"># same thing, spelled out</span>
+                            kiri install highlight @kirigami/plugin-embed   <span class="hljs-comment"># more than one at once</span>
+                        </code></pre>
+                        <p>Already installed? <code>install</code> checks npm for a newer version and updates it. Either way it ends by printing the options block, built straight from the plugin&apos;s own <code>kirigami.optionsSchema</code> — so the flags you see match that exact version:</p>
+                        <pre><code class="hljs language-yaml">
+                            <span class="hljs-attr">plugins:</span>
+                              <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;@kirigami/plugin-highlight&quot;</span>
+                                <span class="hljs-attr">options:</span>
+                                  <span class="hljs-attr">languages:</span> [<span class="hljs-string">js</span>, <span class="hljs-string">ts</span>, <span class="hljs-string">php</span>, <span class="hljs-string">bash</span>, <span class="hljs-string">yaml</span>, <span class="hljs-string">json</span>, <span class="hljs-string">html</span>, <span class="hljs-string">css</span>]
+                                  <span class="hljs-attr">theme:</span> <span class="hljs-string">auto</span>
+                        </code></pre>
+                        <h2 id="kiri-cache">kiri cache</h2>
+                        <p>Kirigami caches two SQLite stores at the project root — <code>.cache.db</code> (<code>CACHE</code>, used by <code>SCRAPER</code> and the image pipeline) and <code>.node.db</code> (<code>@kirigami/sdk</code>&apos;s <code>Cache</code>, for plugin-side caching) — plus a <code>.cookie.txt</code> jar (<code>CURL</code>). All three are meant to be <code>.gitignore</code>d locally but <em>committed</em> in CI-built projects, so a fresh checkout never needs to re-crawl or re-encode anything a previous run already resolved (see <a href="../../plugins/#extlink"><code>&lt;extlink&gt;</code></a> for a real example).</p>
+                        <pre><code class="hljs language-bash">
+                            kiri cache purge              <span class="hljs-comment"># delete .node.db, .cache.db, .cookie.txt</span>
+                            kiri cache purge meta_*       <span class="hljs-comment"># keep the files, delete only matching keys</span>
+                            kiri cache purge <span class="hljs-string">&quot;colors_*&quot;</span>
+                        </code></pre>
+                        <p><code>&lt;mask&gt;</code> is a glob over the key namespace, not a filename — quote it if your shell would otherwise expand the <code>*</code>. Acts on the current directory.</p>
+                        <h2 id="kiri-mcp">kiri mcp</h2>
+                        <p>Starts the Kirigami <a href="../mcp/">MCP server</a> on stdio, bound to the current directory, so an AI assistant can build, validate, export and scaffold the project. It is meant to be launched by an MCP client, not typed by hand:</p>
+                        <pre><code class="hljs language-bash">
+                            npx kiri mcp
+                        </code></pre>
+                        <h2 id="kiri-phpinfo">kiri phpinfo</h2>
+                        <p>Prints <code>phpinfo()</code> from the embedded PHP-WASM runtime — the exact PHP version and extension set every page actually renders with, not whatever PHP (if any) happens to be on the host machine.</p>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Flag</th>
+                                    <th>Output</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><em>(none)</em></td>
+                                    <td>HTML, exactly like a browser-rendered <code>phpinfo()</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--md, -m</code></td>
+                                    <td>Markdown table.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>--json, -j</code></td>
+                                    <td>JSON.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pre><code class="hljs language-bash">
+                            kiri phpinfo
+                            kiri phpinfo --json &gt; phpinfo.json
+                            kiri phpinfo --md &gt; phpinfo.md
+                        </code></pre>
+                        <p>Writes to stdout either way — redirect it to a file, or pipe it straight into a diff when chasing a version-specific bug.</p>
+                        <h2 id="typical-workflow">Typical workflow</h2>
+                        <p>A normal session runs <code>kiri serve</code> once, in one terminal, and leaves it open through the whole editing session; <code>kiri export</code> is the last step, right before a push, to sanity-check the actual production output in <code>dist/</code>:</p>
+                        <pre><code class="hljs language-bash">
+                            npx kiri serve --port 4321
+                            <span class="hljs-comment"># …edit src/**, save, the open tab reloads on its own…</span>
+                            npx kiri <span class="hljs-built_in">export</span>
+                        </code></pre>
+                        <p><code>kiribuild</code> runs <code>kiri export</code> again in CI on push — so a clean local <code>kiri export</code> is a strong signal the deploy will succeed too. If a build ever behaves differently locally than in CI, <code>kiri cache purge</code> rules out a stale local cache before anything else.</p>
+                    </div>
+                    <nav class="docs-pager" aria-label="Previous and next">
+                        <a rel="prev" href="../../docs/php/">PHP class library</a>
+                        <a rel="next" href="../../docs/vscode/">VS Code extension</a>
+                    </nav>
+                </article>
+            </div>
         </main>
         <footer class="site-footer">
             <div class="wrap">
@@ -411,22 +440,24 @@
                         <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
                     </div>
                     <div class="site-footer__col">
-                        <h3>Site</h3>
+                        <h3>Learn</h3>
                         <ul>
-                            <li><a href="../../">Home</a></li>
-                            <li><a href="../../docs/">Docs</a></li>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
                             <li><a href="../../templates/">Templates</a></li>
                             <li><a href="../../showcase/">Showcase</a></li>
-                            <li><a href="../../design/">Design</a></li>
-                            <li><a href="../../about/">About</a></li>
                         </ul>
                     </div>
                     <div class="site-footer__col">
                         <h3>Kirigami</h3>
                         <ul>
+                            <li><a href="../../about/">About</a></li>
                             <li><a href="../../ecosystem/">Ecosystem</a></li>
                             <li><a href="../../changelog/">Changelog</a></li>
                             <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
                             <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
                             <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
                             <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>

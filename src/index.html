@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="./styles/kirigami.core.min.css?###TIMESTAMP###">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Kirigami — Fold PHP into flat HTML.</title>
-        <meta name="description" content="A static site generator that turns PHP into fast, dependency-free HTML — no server required.">
+        <meta name="description" content="A static site generator that turns PHP into fast, dependency-free HTML, no server required.">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
@@ -16,13 +16,13 @@
         <meta name="author" content="Maxime Larrivée-Roy">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Kirigami — Fold PHP into flat HTML.">
-        <meta name="twitter:description" content="A static site generator that turns PHP into fast, dependency-free HTML — no server required.">
+        <meta name="twitter:description" content="A static site generator that turns PHP into fast, dependency-free HTML, no server required.">
         <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Kirigami — Fold PHP into flat HTML.">
-        <meta property="og:description" content="A static site generator that turns PHP into fast, dependency-free HTML — no server required.">
+        <meta property="og:description" content="A static site generator that turns PHP into fast, dependency-free HTML, no server required.">
         <meta property="og:url" content="https://php-kirigami.github.io/">
         <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/">
@@ -77,13 +77,10 @@
                 <a class="brand" href="./"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
                 <nav class="site-nav" id="site-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="./" aria-current="page">Home</a></li>
                         <li><a href="./start/">Start</a></li>
                         <li><a href="./docs/">Docs</a></li>
                         <li><a href="./plugins/">Plugins</a></li>
                         <li><a href="./examples/">Examples</a></li>
-                        <li><a href="./design/">Design</a></li>
-                        <li><a href="./roadmap/">Roadmap</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
@@ -101,27 +98,65 @@
                 <h1>Fold PHP into flat HTML.</h1>
                 <p class="lead">A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.</p>
                 <p>
-                    <a class="btn" href="./docs/">Read the docs</a>
-                    <a class="btn btn--ghost" href="https://github.com/php-kirigami/kirigami">Kirigami on GitHub</a>
+                    <a class="btn" href="./start/">Get started</a>
+                    <a class="btn btn--ghost" href="./docs/">Read the docs</a>
                 </p>
+            </section>
+            <section class="section wrap">
+                <h2 class="section-title">Four ways in, one engine</h2>
+                <div class="gateways">
+                    <article class="gateway gateway--vscode">
+                        <span class="gateway__art" aria-hidden="true"></span>
+                        <div class="gateway__body">
+                            <span class="eyebrow">In your editor</span>
+                            <h3><a href="./docs/vscode/">VS Code extension</a></h3>
+                            <p>Create a project, build, export and preview from the Command Palette. The status bar runs the dev server; saves rebuild and reload the preview.</p>
+                        </div>
+                    </article>
+                    <article class="gateway gateway--cli">
+                        <span class="gateway__art" aria-hidden="true"></span>
+                        <div class="gateway__body">
+                            <span class="eyebrow">In your terminal</span>
+                            <h3><a href="./docs/cli/">Command line</a></h3>
+                            <p><code>kiri serve</code> while you write, <code>kiri export</code> when you ship. One <code>npm install</code>, no PHP on the machine.</p>
+                        </div>
+                    </article>
+                    <article class="gateway gateway--mcp">
+                        <span class="gateway__art" aria-hidden="true"></span>
+                        <div class="gateway__body">
+                            <span class="eyebrow">With your AI assistant</span>
+                            <h3><a href="./docs/mcp/">MCP server</a></h3>
+                            <p><code>kiri mcp</code> hands your assistant the project: it scaffolds, builds, validates and reads the results as structured data.</p>
+                        </div>
+                    </article>
+                    <article class="gateway gateway--api">
+                        <span class="gateway__art" aria-hidden="true"></span>
+                        <div class="gateway__body">
+                            <span class="eyebrow">In your own code</span>
+                            <h3><a href="./docs/api/">JavaScript API</a></h3>
+                            <p><code>load()</code> a project and call <code>build()</code>, <code>export()</code> or <code>serve()</code> from any Node script: the engine the other three are built on.</p>
+                        </div>
+                    </article>
+                </div>
             </section>
             <hr class="fold">
             <section class="section wrap">
-                <h2>You write PHP. It compiles to flat HTML.</h2>
-                <p class="lead lead--wide">A page is a real PHP file — includes, loops, a PHPDOC block that becomes your variables. Kirigami runs a PHP 8.5 runtime entirely in WebAssembly, inside Node, and compiles every page straight to plain HTML at build time. Nothing runs on your server, because there is no server.</p>
+                <h2 class="section-title">You write PHP. It compiles to flat HTML.</h2>
+                <p class="lead lead--wide">A page is a real PHP file: includes, loops, a PHPDOC block that becomes your variables. Kirigami runs PHP 8.5 entirely in WebAssembly, inside Node, and compiles every page to plain HTML at build time. Nothing runs on your server, because there is no server.</p>
                 <div class="compare">
                     <div class="compare__panel">
                         <span class="compare__label">src/_index.php</span>
                         <pre><code class="hljs language-php">
                             <span class="hljs-comment">/**
                              * <span class="hljs-doctag">@title</span> Home
+                             * <span class="hljs-doctag">@type</span>  page
                              */</span>
 
                             <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$tagline</span>);
                         </code></pre>
                     </div>
                     <div class="compare__panel">
-                        <span class="compare__label">src/index.html — after `kiri build`</span>
+                        <span class="compare__label">src/index.html, after kiri build</span>
                         <pre><code class="hljs language-html">
                             <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Fold PHP into flat HTML.<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
                         </code></pre>
@@ -130,54 +165,54 @@
             </section>
             <hr class="fold">
             <section class="section wrap">
-                <h2>What you get</h2>
+                <h2 class="section-title">What you get</h2>
                 <div class="grid" data-reveal="">
                     <article class="card">
                         <h3>Real PHP templating</h3>
-                        <p>Includes, loops, Markdown, YAML — compiled to clean HTML at build time, not served at runtime.</p>
+                        <p>Includes, loops, Markdown, YAML and page types, compiled to clean HTML at build time, not served at runtime.</p>
                     </article>
                     <article class="card">
-                        <h3>Integrated asset pipeline</h3>
-                        <p>esbuild for JavaScript, Sass for styles, wired in from a single <code>kirigami.yaml</code>.</p>
+                        <h3>An asset pipeline</h3>
+                        <p>esbuild for JavaScript, Sass for styles, an image autogenerator, all wired from one <code>kirigami.yaml</code>.</p>
+                    </article>
+                    <article class="card">
+                        <h3>SEO without the boilerplate</h3>
+                        <p>Title, description, Open Graph, canonical links and a schema.org graph, generated from one <code>seo:</code> block.</p>
                     </article>
                     <article class="card">
                         <h3>One-command export</h3>
-                        <p><code>kiri export</code> ships a fully static site, ready for GitHub Pages or any static host — banner and sitemap included.</p>
+                        <p><code>kiri export</code> ships a static site for GitHub Pages or any static host, sitemap included.</p>
                     </article>
-                    <article class="card">
+                    <a class="card" href="./templates/">
                         <h3>Instant scaffolding</h3>
-                        <p><code>kiri create</code> clones an <a href="./templates/">official template</a> so a new project starts from something real.</p>
-                    </article>
-                    <article class="card">
-                        <h3>A managed &lt;head&gt;</h3>
-                        <p>Stylesheet, bundle, theme guard, SEO metadata and JSON-LD — injected automatically, nothing to hand-wire per page.</p>
-                    </article>
+                        <p><code>kiri create</code> starts from an official template, so a new project begins with something real.</p>
+                    </a>
                     <article class="card">
                         <h3>Zero native dependencies</h3>
-                        <p>Images, the cache, tar extraction — all built on WASM and Node&apos;s own standard library, not a compiled binding.</p>
+                        <p>PHP, images and the cache run on WebAssembly and Node&apos;s standard library: no compiler, no binding to install.</p>
                     </article>
                 </div>
             </section>
             <hr class="fold">
             <section class="section wrap">
-                <h2>What it needs — and doesn&apos;t</h2>
+                <h2 class="section-title">What it needs, and what it doesn&apos;t</h2>
                 <ul class="reqs">
-                    <li><strong>Node.js ≥ 24</strong> and npm — that&apos;s the whole install.</li>
+                    <li><strong>Node.js ≥ 24</strong> and npm: that&apos;s the whole install.</li>
                     <li><strong>No PHP install.</strong> The runtime is bundled, compiled to WebAssembly.</li>
-                    <li><strong>No server process</strong> at any point, dev or production — <code>kiri watch</code> rebuilds files, it doesn&apos;t serve them.</li>
+                    <li><strong>No server</strong> in production: the output is plain files.</li>
                     <li><strong>No headless browser</strong> anywhere in the toolchain.</li>
-                    <li>Everything is MIT, except the bundled PHP runtime itself (<code>@kirigami/php-wasm</code>, GPL-2.0-or-later) — see <a href="./about/">About</a>.</li>
+                    <li>Open source: Kirigami&apos;s packages are GPL-3.0-or-later, the bundled PHP runtime GPL-2.0-or-later. Your site&apos;s own license is yours to choose; see <a href="./about/">About</a>.</li>
                 </ul>
             </section>
             <hr class="fold">
             <section class="section wrap">
-                <h2>Built with itself, in the open</h2>
+                <h2 class="section-title">Built with itself</h2>
                 <div class="prose">
-                    <p>This page is a <code>_index.php</code> file, compiled by the same <code>kiri</code> CLI anyone installs from npm. The site is being built in public, phase by phase — <a href="docs/"><code>/docs/</code></a> is the doc-page model, <a href="ecosystem/"><code>/ecosystem/</code></a> pulls its version numbers live from npm at build time, and more lands as each phase ships.</p>
+                    <p>This site is a Kirigami project: every page is an <code>_index.php</code>, the documentation uses a page type for its sidebar, and <a href="ecosystem/">Ecosystem</a> fetches its version numbers from npm at build time. Its source is <a href="https://github.com/php-kirigami/php-kirigami.github.io" target="_blank" rel="noopener noreferrer">on GitHub</a>.</p>
                     <pre><code class="hljs language-bash">
-                        npm install -D @kirigami/kirigami
-                        npx kiri watch      <span class="hljs-comment"># rebuild on save, no server</span>
-                        npx kiri <span class="hljs-built_in">export</span>     <span class="hljs-comment"># production build into dist/</span>
+                        npm install --save-dev @kirigami/cli
+                        npx kiri create     <span class="hljs-comment"># pick a template</span>
+                        npx kiri serve      <span class="hljs-comment"># build, then live-reload while you edit</span>
                     </code></pre>
                 </div>
             </section>
@@ -190,22 +225,24 @@
                         <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
                     </div>
                     <div class="site-footer__col">
-                        <h3>Site</h3>
+                        <h3>Learn</h3>
                         <ul>
-                            <li><a href="./">Home</a></li>
-                            <li><a href="./docs/">Docs</a></li>
+                            <li><a href="./start/">Getting started</a></li>
+                            <li><a href="./docs/">Documentation</a></li>
+                            <li><a href="./plugins/">Plugins</a></li>
+                            <li><a href="./examples/">Examples</a></li>
                             <li><a href="./templates/">Templates</a></li>
                             <li><a href="./showcase/">Showcase</a></li>
-                            <li><a href="./design/">Design</a></li>
-                            <li><a href="./about/">About</a></li>
                         </ul>
                     </div>
                     <div class="site-footer__col">
                         <h3>Kirigami</h3>
                         <ul>
+                            <li><a href="./about/">About</a></li>
                             <li><a href="./ecosystem/">Ecosystem</a></li>
                             <li><a href="./changelog/">Changelog</a></li>
                             <li><a href="./roadmap/">Roadmap</a></li>
+                            <li><a href="./design/">Design</a></li>
                             <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
                             <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
                             <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>

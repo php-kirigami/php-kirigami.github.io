@@ -32,13 +32,10 @@ PREPROS::$config->image->format = $__format;
 // path (relative to the site root) => [label, section key]. Only list pages
 // that actually exist — grow this as each phase of the site lands.
 $nav = [
-    ''          => ['Home',     'home'],
     'start/'    => ['Start',    'start'],
     'docs/'     => ['Docs',     'docs'],
     'plugins/'  => ['Plugins',  'plugins'],
     'examples/' => ['Examples', 'examples'],
-    'design/'   => ['Design',   'design'],
-    'roadmap/'  => ['Roadmap',  'roadmap'],
 ];
 ?>
 <!DOCTYPE html>

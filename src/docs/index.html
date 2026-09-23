@@ -7,22 +7,22 @@
         </script>
         <link rel="stylesheet" href="../styles/kirigami.core.min.css?###TIMESTAMP###">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Docs — Kirigami</title>
-        <meta name="description" content="The complete reference — config, CLI, writing pages, the PHP class library.">
+        <title>Documentation — Kirigami</title>
+        <meta name="description" content="The reference for building a site with Kirigami, and for the four ways to drive it: the VS Code extension, the command line, the MCP server and the JavaScript API.">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
         <meta name="generator" content="Kirigami">
         <meta name="author" content="Maxime Larrivée-Roy">
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Docs — Kirigami">
-        <meta name="twitter:description" content="The complete reference — config, CLI, writing pages, the PHP class library.">
+        <meta name="twitter:title" content="Documentation — Kirigami">
+        <meta name="twitter:description" content="The reference for building a site with Kirigami, and for the four ways to drive it: the VS Code extension, the command line, the MCP server and the JavaScript API.">
         <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Docs — Kirigami">
-        <meta property="og:description" content="The complete reference — config, CLI, writing pages, the PHP class library.">
+        <meta property="og:title" content="Documentation — Kirigami">
+        <meta property="og:description" content="The reference for building a site with Kirigami, and for the four ways to drive it: the VS Code extension, the command line, the MCP server and the JavaScript API.">
         <meta property="og:url" content="https://php-kirigami.github.io/docs/">
         <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/docs/">
@@ -66,7 +66,7 @@
                             {
                                 "@type": "ListItem",
                                 "position": 2,
-                                "name": "Docs",
+                                "name": "Documentation",
                                 "item": "https://php-kirigami.github.io/docs/"
                             }
                         ]
@@ -75,7 +75,7 @@
                         "@type": "WebPage",
                         "@id": "https://php-kirigami.github.io/docs/#webpage",
                         "url": "https://php-kirigami.github.io/docs/",
-                        "name": "Docs",
+                        "name": "Documentation",
                         "isPartOf": {
                             "@id": "https://php-kirigami.github.io/#website"
                         },
@@ -98,13 +98,10 @@
                 <a class="brand" href="../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
                 <nav class="site-nav" id="site-nav" aria-label="Primary">
                     <ul>
-                        <li><a href="../">Home</a></li>
                         <li><a href="../start/">Start</a></li>
                         <li><a href="../docs/" aria-current="page">Docs</a></li>
                         <li><a href="../plugins/">Plugins</a></li>
                         <li><a href="../examples/">Examples</a></li>
-                        <li><a href="../design/">Design</a></li>
-                        <li><a href="../roadmap/">Roadmap</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
                 </nav>
@@ -117,39 +114,60 @@
             </div>
         </header>
         <main id="main">
-            <section class="section wrap doc-head">
-                <span class="eyebrow">Documentation</span>
-                <h1>Docs</h1>
-                <p class="lead">The complete reference — config, CLI, writing pages, the PHP class library.</p>
-            </section>
-            <section class="section wrap">
-                <div class="grid" data-reveal="">
-                    <a class="card" href="../docs/config/">
-                        <h3>Config</h3>
-                        <p>Everything kirigami.yaml can hold — the kirigami:, seo:, prepros:, image:, plugins:, esbuild:, sass:, export:, scripts: and tasks: blocks.</p>
-                    </a>
-                    <a class="card" href="../docs/cli/">
-                        <h3>CLI</h3>
-                        <p>Every kiri command, with its flags and real example output — build, export, watch, serve, run, create, install, cache, phpinfo.</p>
-                    </a>
-                    <a class="card" href="../docs/authoring/">
-                        <h3>Writing pages</h3>
-                        <p>The PHPDOC header, auto-loaded data files, built-in tags, and the hooks a plugin registers into.</p>
-                    </a>
-                    <a class="card" href="../docs/php/">
-                        <h3>PHP class library</h3>
-                        <p>Every autoloaded class available in pages, before/after includes, prepros.includes, and kiri run scripts.</p>
-                    </a>
-                </div>
-            </section>
-            <hr class="fold">
-            <section class="section wrap">
-                <div class="prose">
-                    <p>New to Kirigami? These four pages are the reference — precise, but terse. If you want a guided walk instead, start with <a href="../start/">Getting started</a> — the <a href="../start/tutorial/">tutorial</a> builds a real small site, one concept per part, and links back here wherever a reference page has the full detail.</p>
-                    <p>Every fenced code block on this site, including every example below, is colored <strong>at build time</strong> by <a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-highlight" target="_blank" rel="noopener noreferrer"><code>@kirigami/plugin-highlight</code></a> — zero bytes of highlight.js reach your browser. Hover a block for the copy button.</p>
-                    <p>The card grid above isn&apos;t hand-written: it comes from <a href="php/#fs"><code>FS::getChildren()</code></a>, walking this page&apos;s own sub-folders. Add a fifth <code>_index.php</code> under <code>docs/</code> and it appears here on the next build, no list to maintain.</p>
-                </div>
-            </section>
+            <div class="docs wrap">
+                <nav class="docs-nav" aria-label="Documentation">
+                    <h2>Start here</h2>
+                    <ul>
+                        <li><a href="../docs/" aria-current="page">Overview</a></li>
+                    </ul>
+                    <h2>Build a site</h2>
+                    <ul>
+                        <li><a href="../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../docs/config/">Configuration</a></li>
+                        <li><a href="../docs/php/">PHP class library</a></li>
+                    </ul>
+                    <h2>Tools</h2>
+                    <ul>
+                        <li><a href="../docs/cli/">CLI</a></li>
+                        <li><a href="../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../docs/mcp/">MCP server</a></li>
+                        <li><a href="../docs/api/">JavaScript API</a></li>
+                    </ul>
+                </nav>
+                <article class="docs-main">
+                    <header class="docs-head">
+                        <span class="eyebrow">Documentation</span>
+                        <h1>Documentation</h1>
+                        <p class="lead">The reference for building a site with Kirigami, and for the four ways to drive it: the VS Code extension, the command line, the MCP server and the JavaScript API.</p>
+                    </header>
+                    <nav class="docs-toc" aria-label="On this page">
+                        <h2>On this page</h2>
+                        <ul>
+                            <li><a href="#build-a-site">Build a site</a></li>
+                            <li><a href="#tools">Tools</a></li>
+                        </ul>
+                    </nav>
+                    <div class="prose">
+                        <p>New to Kirigami? The <a href="../start/">Getting started</a> path walks you from an empty folder to a deployed site. These pages are the reference: precise and complete, one topic per page, with the full detail the tutorial links back to.</p>
+                        <h2 id="build-a-site">Build a site</h2>
+                        <ul>
+                            <li><a href="authoring/">Writing pages</a>: the PHPDOC header, data files, page types, built-in tags, and registering your own tags and hooks.</li>
+                            <li><a href="config/">Configuration</a>: every key of <code>kirigami.yaml</code>.</li>
+                            <li><a href="php/">PHP class library</a>: Markdown, YAML, images, caching, SEO and the other classes every page can call.</li>
+                        </ul>
+                        <h2 id="tools">Tools</h2>
+                        <p>The same engine behind four front doors. Pick the one that fits how you work; they build the same site.</p>
+                        <ul>
+                            <li><a href="cli/">CLI</a>: <code>kiri build</code>, <code>serve</code>, <code>export</code> and the rest, from any terminal.</li>
+                            <li><a href="vscode/">VS Code extension</a>: build, export and preview from the editor&apos;s Command Palette and status bar.</li>
+                            <li><a href="mcp/">MCP server</a>: let an AI assistant build, validate and scaffold a project through the Model Context Protocol.</li>
+                            <li><a href="api/">JavaScript API</a>: load a project in your own Node code and call <code>build()</code>, <code>export()</code> or <code>serve()</code>.</li>
+                        </ul>
+                        <p>Every code block on this site is colored at build time by <a href="../plugins/"><code>@kirigami/plugin-highlight</code></a>: no highlighter reaches your browser.</p>
+                    </div>
+                    <nav class="docs-pager" aria-label="Previous and next"><a rel="next" href="../docs/authoring/">Writing pages</a></nav>
+                </article>
+            </div>
         </main>
         <footer class="site-footer">
             <div class="wrap">
@@ -159,22 +177,24 @@
                         <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
                     </div>
                     <div class="site-footer__col">
-                        <h3>Site</h3>
+                        <h3>Learn</h3>
                         <ul>
-                            <li><a href="../">Home</a></li>
-                            <li><a href="../docs/">Docs</a></li>
+                            <li><a href="../start/">Getting started</a></li>
+                            <li><a href="../docs/">Documentation</a></li>
+                            <li><a href="../plugins/">Plugins</a></li>
+                            <li><a href="../examples/">Examples</a></li>
                             <li><a href="../templates/">Templates</a></li>
                             <li><a href="../showcase/">Showcase</a></li>
-                            <li><a href="../design/">Design</a></li>
-                            <li><a href="../about/">About</a></li>
                         </ul>
                     </div>
                     <div class="site-footer__col">
                         <h3>Kirigami</h3>
                         <ul>
+                            <li><a href="../about/">About</a></li>
                             <li><a href="../ecosystem/">Ecosystem</a></li>
                             <li><a href="../changelog/">Changelog</a></li>
                             <li><a href="../roadmap/">Roadmap</a></li>
+                            <li><a href="../design/">Design</a></li>
                             <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
                             <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
                             <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>

@@ -1,48 +1,44 @@
 <?php
 /**
- * @title      Docs
- * @section    docs
- * @type       doc
- * @abstract   The complete reference — config, CLI, writing pages, the PHP
- *             class library.
- * @breadcrumb true
+ * @title    Documentation
+ * @nav      Overview
+ * @section  docs
+ * @type     docs
+ * @abstract The reference for building a site with Kirigami, and for the four
+ *           ways to drive it: the VS Code extension, the command line, the
+ *           MCP server and the JavaScript API.
  */
-
-$sections = fs_get_children();
 ?>
 
-<section class="section wrap">
-    <div class="grid" data-reveal>
-        <?php foreach ($sections as $s): ?>
-            <a class="card" href="<?php echo kirigami_page_href($s, $relroot); ?>">
-                <h3><?php echo str_htmlesc($s->title ?? ''); ?></h3>
-                <p><?php echo str_htmlesc($s->abstract ?? ''); ?></p>
-            </a>
-        <?php endforeach; ?>
-    </div>
-</section>
+<markdown>
+  New to Kirigami? The [Getting started](../start/) path walks you from an
+  empty folder to a deployed site. These pages are the reference: precise
+  and complete, one topic per page, with the full detail the tutorial links
+  back to.
 
-<hr class="fold">
+  ## Build a site
 
-<section class="section wrap">
-    <div class="prose">
-        <markdown>
-          New to Kirigami? These four pages are the reference — precise, but
-          terse. If you want a guided walk instead, start with
-          [Getting started](../start/) — the [tutorial](../start/tutorial/)
-          builds a real small site, one concept per part, and links back here
-          wherever a reference page has the full detail.
+  - [Writing pages](authoring/): the PHPDOC header, data files, page types,
+    built-in tags, and registering your own tags and hooks.
+  - [Configuration](config/): every key of `kirigami.yaml`.
+  - [PHP class library](php/): Markdown, YAML, images, caching, SEO and the
+    other classes every page can call.
 
-          Every fenced code block on this site, including every example
-          below, is colored **at build time** by
-          [`@kirigami/plugin-highlight`](https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-highlight) —
-          zero bytes of highlight.js reach your browser. Hover a block for
-          the copy button.
+  ## Tools
 
-          The card grid above isn't hand-written: it comes from
-          [`FS::getChildren()`](php/#fs), walking this page's own
-          sub-folders. Add a fifth `_index.php` under `docs/` and it appears
-          here on the next build, no list to maintain.
-        </markdown>
-    </div>
-</section>
+  The same engine behind four front doors. Pick the one that fits how you
+  work; they build the same site.
+
+  - [CLI](cli/): `kiri build`, `serve`, `export` and the rest, from any
+    terminal.
+  - [VS Code extension](vscode/): build, export and preview from the
+    editor's Command Palette and status bar.
+  - [MCP server](mcp/): let an AI assistant build, validate and scaffold a
+    project through the Model Context Protocol.
+  - [JavaScript API](api/): load a project in your own Node code and call
+    `build()`, `export()` or `serve()`.
+
+  Every code block on this site is colored at build time by
+  [`@kirigami/plugin-highlight`](../plugins/): no highlighter reaches your
+  browser.
+</markdown>

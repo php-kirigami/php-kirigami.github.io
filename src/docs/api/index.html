@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>JavaScript API — Kirigami</title>
+        <meta name="description" content="Load a Kirigami project in your own Node code and build, export, serve or run it: the engine behind the CLI, the VS Code extension and the MCP server.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="JavaScript API — Kirigami">
+        <meta name="twitter:description" content="Load a Kirigami project in your own Node code and build, export, serve or run it: the engine behind the CLI, the VS Code extension and the MCP server.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="JavaScript API — Kirigami">
+        <meta property="og:description" content="Load a Kirigami project in your own Node code and build, export, serve or run it: the engine behind the CLI, the VS Code extension and the MCP server.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/api/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/api/">
+        <link rel="author" type="text/plain" href="../../humans.txt">
+        <link rel="icon" type="image/png" href="../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/api/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Documentation",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "JavaScript API",
+                                "item": "https://php-kirigami.github.io/docs/api/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/api/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/api/",
+                        "name": "JavaScript API",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/api/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <div class="docs wrap">
+                <nav class="docs-nav" aria-label="Documentation">
+                    <h2>Start here</h2>
+                    <ul>
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ul>
+                    <h2>Build a site</h2>
+                    <ul>
+                        <li><a href="../../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                    </ul>
+                    <h2>Tools</h2>
+                    <ul>
+                        <li><a href="../../docs/cli/">CLI</a></li>
+                        <li><a href="../../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/" aria-current="page">JavaScript API</a></li>
+                    </ul>
+                </nav>
+                <article class="docs-main">
+                    <header class="docs-head">
+                        <span class="eyebrow">Tools</span>
+                        <h1>JavaScript API</h1>
+                        <p class="lead">Load a Kirigami project in your own Node code and build, export, serve or run it: the engine behind the CLI, the VS Code extension and the MCP server.</p>
+                    </header>
+                    <nav class="docs-toc" aria-label="On this page">
+                        <h2>On this page</h2>
+                        <ul>
+                            <li><a href="#overview">Overview</a></li>
+                            <li><a href="#load-and-build">Load and build</a></li>
+                            <li><a href="#the-project-api">The Project API</a></li>
+                            <li><a href="#a-dev-server-in-a-few-lines">A dev server in a few lines</a></li>
+                            <li><a href="#scaffolding">Scaffolding</a></li>
+                            <li><a href="#limits">Limits</a></li>
+                        </ul>
+                    </nav>
+                    <div class="prose">
+                        <h2 id="overview">Overview</h2>
+                        <p><code>@kirigami/kirigami</code> is the engine. The <a href="../cli/">CLI</a>, the <a href="../vscode/">VS Code extension</a> and the <a href="../mcp/">MCP server</a> are thin front ends over its <code>Project</code> API, and your own tools can use it the same way: a build step in another pipeline, a custom dev server, a test that renders a fixture site.</p>
+                        <pre><code class="hljs language-bash">
+                            npm install --save-dev @kirigami/kirigami
+                        </code></pre>
+                        <h2 id="load-and-build">Load and build</h2>
+                        <pre><code class="hljs language-js">
+                            <span class="hljs-keyword">import</span> { load } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/kirigami&#x27;</span>;
+
+                            <span class="hljs-comment">// Run this process from the directory that holds kirigami.yaml.</span>
+                            <span class="hljs-keyword">const</span> project = <span class="hljs-keyword">await</span> <span class="hljs-title function_">load</span>();
+
+                            <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> project.<span class="hljs-title function_">build</span>();
+                            <span class="hljs-keyword">if</span> (!result.<span class="hljs-property">success</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(result));
+                        </code></pre>
+                        <p>A resolved promise is not necessarily a successful build: check <code>success</code>, which is <code>false</code> when a task failed, and read the task <code>results</code> for the diagnostics.</p>
+                        <h2 id="the-project-api">The Project API</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Member</th>
+                                    <th>What it does</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>build()</code></td>
+                                    <td>Run the <code>before-build</code> trigger, the page rendering and every buildable task. Returns <code>{ success, trigger, results }</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>export({ path }?)</code></td>
+                                    <td>Production build into <code>export.path</code> (or <code>path</code>). Returns <code>success</code>, <code>dist</code> and the trigger and task results.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>serve({ port, host, onBuildResult }?)</code></td>
+                                    <td>Build once, then watch and serve. Returns <code>{ address, port, url, close() }</code>. Port <code>0</code> picks a free port.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>watch()</code></td>
+                                    <td>Build once, then rebuild on change. Returns <code>{ close() }</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>run(name, argv?)</code></td>
+                                    <td>Run <code>scripts/&lt;name&gt;.php</code> and return its result.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>runTask(name)</code></td>
+                                    <td>Run one task by name, without triggers or other tasks.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>validate()</code></td>
+                                    <td>Re-read and validate <code>kirigami.yaml</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>reload()</code></td>
+                                    <td>Reload the configuration and plugins.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>config</code>, <code>plugins</code>, <code>tasks</code>, <code>scripts</code></td>
+                                    <td>The resolved configuration, active plugins, and the discovered tasks and scripts.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <h2 id="a-dev-server-in-a-few-lines">A dev server in a few lines</h2>
+                        <pre><code class="hljs language-js">
+                            <span class="hljs-keyword">import</span> { load } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/kirigami&#x27;</span>;
+
+                            <span class="hljs-keyword">const</span> project = <span class="hljs-keyword">await</span> <span class="hljs-title function_">load</span>();
+                            <span class="hljs-keyword">const</span> server = <span class="hljs-keyword">await</span> project.<span class="hljs-title function_">serve</span>({
+                                <span class="hljs-attr">port</span>: <span class="hljs-number">0</span>,
+                                <span class="hljs-attr">onBuildResult</span>: <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+                                    <span class="hljs-keyword">if</span> (event.<span class="hljs-property">status</span> === <span class="hljs-string">&#x27;done&#x27;</span>) <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(event.<span class="hljs-property">success</span> ? <span class="hljs-string">&#x27;rebuilt&#x27;</span> : <span class="hljs-string">&#x27;build failed&#x27;</span>);
+                                },
+                            });
+                            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Preview at <span class="hljs-subst">${server.url}</span>`</span>);
+                            <span class="hljs-comment">// later: await server.close();</span>
+                        </code></pre>
+                        <h2 id="scaffolding">Scaffolding</h2>
+                        <p>Project creation, the code behind <code>kiri create</code>, needs no loaded project: import <code>listTemplates()</code> and <code>createProject()</code> from <code>@kirigami/kirigami/create</code>.</p>
+                        <h2 id="limits">Limits</h2>
+                        <ul>
+                            <li>One project per process, and the working directory must be the project folder <strong>before</strong> the engine is imported.</li>
+                            <li>Run project operations one after another; don&apos;t start a build while another one is running.</li>
+                            <li>Plugin JavaScript is cached by Node: restart the process after changing a plugin&apos;s code.</li>
+                        </ul>
+                    </div>
+                    <nav class="docs-pager" aria-label="Previous and next"><a rel="prev" href="../../docs/mcp/">MCP server</a></nav>
+                </article>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../about/">About</a></li>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../changelog/">Changelog</a></li>
+                            <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>
