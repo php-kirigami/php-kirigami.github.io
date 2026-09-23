@@ -96,10 +96,43 @@
        */
       ```
 
-      One rule worth knowing before you hit it: a PHPDOC continuation
-      line must never start with a literal `@` — the parser reads it as
-      a new tag. If `@content` lands on one of those lines, the page
-      it's attached to silently renders empty.
+      ## Page types
+
+      When several pages share the same chrome (a page head, a sidebar,
+      prev/next links), put it in a **page type** instead of copying it
+      into each page. Declare the type under `prepros.types`, with a
+      `before` and/or `after` file:
+
+      ```yaml
+      prepros:
+        before: _layouts/header.php
+        after:  _layouts/footer.php
+        types:
+          article:
+            before: _layouts/types/article.before.php
+            after:  _layouts/types/article.after.php
+      ```
+
+      A page opts in with `@type`, and then only writes its own content:
+
+      ```php
+      /**
+       * @title    Folding a crane
+       * @abstract Thirty folds, one sheet, no cuts.
+       * @type     article
+       */
+      ```
+
+      The page is assembled as global `before` → type `before` → body →
+      type `after` → global `after`. The type's files see the same
+      variables as the page (`$title`, `$abstract`, `$relroot`, …), so
+      they can print the heading, a breadcrumb or navigation built from
+      them. A page has one type at most; a page without `@type`, or with
+      an unknown one, gets the global wrap only.
+
+      This documentation is an example: every page here is `@type docs`,
+      whose layout draws the sidebar, the page head and the "On this page"
+      box, so a docs page is just its Markdown.
 
       ## Variables in scope
 

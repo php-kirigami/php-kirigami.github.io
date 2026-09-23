@@ -158,7 +158,7 @@ $palette = img_palette('male-african-bush-elephant.jpg', 5);
             <table class="table">
                 <thead><tr><th>Package</th><th>Version</th><th>License</th></tr></thead>
                 <tbody>
-                    <tr><td><code>@kirigami/kirigami</code></td><td class="table__num">v1.5.7</td><td><span class="badge">MIT</span></td></tr>
+                    <tr><td><code>@kirigami/kirigami</code></td><td class="table__num">v3.0.0</td><td><span class="badge">GPL-3.0-or-later</span></td></tr>
                     <tr><td><code>@kirigami/php-wasm</code></td><td class="table__num">v8.5.10-5</td><td><span class="badge badge--muted">GPL-2.0-or-later</span></td></tr>
                 </tbody>
             </table>

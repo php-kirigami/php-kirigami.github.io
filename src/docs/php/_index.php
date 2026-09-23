@@ -73,16 +73,16 @@
       YAML::loadFile(string $path, bool $assoc = false): mixed;   // parseFile + recursively inline nested .yaml/.yml/.json refs
       ```
 
-      A zero-dependency parser: scalars, quoted strings + escapes, block
-      scalars (`|`, `>`, with chomping), multi-line plain scalars,
-      nested maps/sequences, inline `[a, b]` / `{k: v}`, comments,
-      multi-doc `---`. Mappings are `stdClass` unless `$assoc = true`.
-      `loadFile()` throws on a circular reference.
+      Backed by the native `yaml` extension (LibYAML), compiled into the
+      runtime. Mappings are `stdClass` unless `$assoc = true`; `loadFile()`
+      throws on a circular reference. LibYAML follows YAML 1.1: unquoted
+      `yes`, `no`, `on`, `off`, `y` and `n` are booleans, keys included,
+      so quote them when you mean the word (`"NO": Norway`).
 
       ## SCHEMA
 
-      A pure-PHP JSON Schema validator — no `ajv`, same as every other
-      "stay lite" call in the toolchain.
+      A JSON Schema validator backed by the native `jsonk` extension
+      (draft 2020-12).
 
       ```php
       $v = new SCHEMA(array $schema);
@@ -90,16 +90,15 @@
       $v->getErrors(): string[];           // "path: message" from the last run
       ```
 
-      Draft-7-ish: `type`, `required`, `properties`, `patternProperties`,
-      `additionalProperties`, `items`, `min/maxItems`, `uniqueItems`,
-      `min/maxLength`, `pattern`, `minimum`/`maximum` (+ `exclusive*`),
-      `min/maxProperties`, `enum`, `const`, `anyOf`/`allOf`/`oneOf`/`not`,
-      `format`, local `$ref`.
+      It covers draft 2020-12, including `if`/`then`/`else`, `contains`,
+      `propertyNames`, `prefixItems`, `dependentRequired` and `$ref` to
+      local or `$id`-relative schemas. The previous pure-PHP validator stays
+      available as `SCHEMA_LEGACY`.
 
       ## LD
 
-      A schema.org JSON-LD graph builder — the engine behind the
-      [`seo.jsonld`](../config/#seojsonld) sub-block.
+      A schema.org JSON-LD graph builder, injected automatically from the
+      [`seo`](../config/#seo) block (`seo.jsonld: false` turns it off).
 
       ```php
       LD::add(string|array $type, array $props = [], ?string $id = null): array   // build + register a node
@@ -334,11 +333,11 @@
       md_register_plugin() md_register_emoji()
       ```
 
-      ## Bundled polyfill
+      ## Normalizer
 
-      `ext-intl` isn't in the WASM build, so a `Normalizer` polyfill is
-      autoloaded (`Normalizer::normalize()` / `isNormalized()` +
-      `NFC`/`NFD`/`NFKC`/`NFKD` constants) — prefer `STR::normalize()`
-      in your own code; the polyfill exists for third-party snippets
-      that expect the real extension.
+      PHP's `Normalizer` class (`Normalizer::normalize()` /
+      `isNormalized()`, `NFC`/`NFD`/`NFKC`/`NFKD`) comes from the native
+      `norm` extension, compiled into the runtime. Installing the optional
+      `@kirigami/phpext-intl` package replaces it with ICU's. The previous
+      pure-PHP polyfill stays available as `NORMALIZER_LEGACY`.
     </markdown>

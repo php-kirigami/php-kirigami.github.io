@@ -14,7 +14,7 @@
             <div class="prose">
                 <markdown>
                 ```bash
-                npm install -D @kirigami/kirigami
+                npm install -D @kirigami/cli
                 ```
                 </markdown>
             </div>

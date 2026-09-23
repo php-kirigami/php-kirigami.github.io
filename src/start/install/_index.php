@@ -22,10 +22,15 @@
         Add it as a dev dependency to your project:
 
         ```bash
-        npm install -D @kirigami/kirigami
+        npm install -D @kirigami/cli
         ```
 
         The `kiri` command is now available through `npx`, or as an npm script.
+        It brings the engine, `@kirigami/kirigami`, along with it.
+
+        Prefer your editor? The [VS Code extension](../../docs/vscode/) runs
+        the same commands from the Command Palette, and its **Create
+        Project** command scaffolds a new site without a terminal.
 
         ## Verify it
 

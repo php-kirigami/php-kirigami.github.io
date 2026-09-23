@@ -57,70 +57,53 @@
 
       ## seo
 
-      The unified SEO surface — opt-in `<head>` metadata (`<title>`,
-      description, Open Graph, Twitter Card, canonical, favicon) plus a
-      nested `jsonld` sub-block for schema.org JSON-LD. A **top-level**
-      block, sibling of `kirigami:`, replacing what used to be two
-      separate blocks (`meta:` and `jsonld:`) — one place for a
-      project's whole SEO setup. An empty `seo: {}` is enough to turn
-      the `<head>` tags on for every page; values are then derived from
-      the `kirigami:` keys above and each page's PHPDOC (`@title`,
-      `@description`, `@image`, `@robots`, …), with a tag your layout
-      already writes by hand detected and skipped. JSON-LD is a
-      **separate, independent** opt-in nested inside the same block —
-      a project can have one without the other.
+      The SEO surface: `<head>` metadata (`<title>`, description, Open
+      Graph, Twitter Card, canonical, favicon) and a schema.org JSON-LD
+      graph, both configured by this one **top-level** block, sibling of
+      `kirigami:`. An empty `seo: {}` turns both on for every page; values
+      are derived from the `kirigami:` keys above and each page's PHPDOC
+      (`@title`, `@description`, `@image`, `@robots`, …). A tag your
+      layout already writes by hand is detected and skipped.
 
       ```yaml
       seo:
         twitter:    "@myhandle"
         themeColor: "#0b7285"
-
-        jsonld:
-          type:   ProfessionalService   # @type for the main entity
-          lang:   en-CA                  # inLanguage on WebSite / WebPage
-          logo:   assets/logo.png        # absolute, or relative to baseurl
-          search: https://example.com/?q={search_term_string}
+        lang:       en-CA                  # <meta name="language">, og:locale, JSON-LD inLanguage
+        type:       ProfessionalService    # JSON-LD main entity
+        logo:       assets/logo.png        # absolute, or relative to baseurl
+        search:     https://example.com/?q={search_term_string}
       ```
 
       | Key | Type | Notes |
       |---|---|---|
-      | `auto` | bool | Inject the `<head>` tags automatically. Default `true` once the block exists; `auto: false` (or `seo: false`) keeps the values without injecting — call `META::tags()` by hand instead. Independent of `jsonld.auto`. |
+      | `auto` | bool | Inject the `<head>` tags. Default `true` once the block exists; `false` keeps the values without injecting (call `META::tags()` by hand). |
+      | `jsonld` | bool | Inject the JSON-LD graph. Default `true` once the block exists; `false` turns only the JSON-LD off. |
       | `titleFormat` / `titleFormatHome` | string | `<title>` templates. Tokens `{title}`, `{project}`, `{tagline}`. Defaults `{title} — {project}` / `{project} — {tagline}`. |
-      | `description` / `keywords` | string / string[] | Fallback for pages with no `@description` / `@keywords`. Also feed `jsonld`'s own description/keywords when those aren't set separately. |
-      | `robots` | string \| `false` | Default `index, follow`. |
-      | `language` | string | BCP-47 tag → `<meta name="language">` + `og:locale`. |
-      | `generator` | string \| `false` | Default `Kirigami`. |
+      | `description` / `keywords` | string / string[] | Fallback for pages with no `@description` / `@keywords`, and the JSON-LD site description and keywords. |
+      | `robots` | string | `false` | Default `index, follow`. |
+      | `lang` | string | BCP-47 tag → `<meta name="language">`, `og:locale` and JSON-LD `inLanguage`. Default `en`. |
+      | `generator` | string | `false` | Default `Kirigami`. |
       | `author` / `designer` | string | `<meta name="author">` / a `designer` tag. |
       | `themeColor` | string | `<meta name="theme-color">`. |
-      | `image` | string | Default `og:image` / `twitter:image`. Unset here, it falls back to `jsonld.image` / `jsonld.logo`, then the `kirigami:` block's own loose `image` / `ogimage` key. |
-      | `ogType` | string | Default `website`. |
-      | `twitterCard` | string | Default `summary_large_image`. |
-      | `twitter` | string \| map | Handle for `twitter:site` / `twitter:creator`. |
+      | `image` | string | Default `og:image` / `twitter:image` and JSON-LD image. Falls back to `logo`, then the `kirigami:` block's `image` / `ogimage`. |
+      | `logo` | string | The organization logo (JSON-LD). |
+      | `ogType` / `twitterCard` | string | Defaults `website` / `summary_large_image`. |
+      | `twitter` | string | map | Handle for `twitter:site` / `twitter:creator`. |
       | `canonical` | bool | Emit `<link rel="canonical">`. Default `true`. |
-      | `favicon` / `appleTouchIcon` / `humans` | string \| bool | A path sets it; `true` forces the default file; omitted, the default is auto-detected on disk; `false` disables it. |
-      | `jsonld` | object \| bool | Nested sub-block for schema.org JSON-LD, own independent opt-in — see below. |
+      | `favicon` / `appleTouchIcon` / `humans` | string | bool | A path sets it; `true` forces the default file; omitted, the default is auto-detected on disk; `false` disables it. |
+      | `type` | string | JSON-LD main entity: `Organization` (default), `ProfessionalService`, `LocalBusiness`, … |
+      | `name` / `url` | string | JSON-LD main entity name and URL. Default to `project` / `baseurl`. |
+      | `sameAs` | string[] | Profile URLs, merged with social links found in `kirigami:` (`github`, `facebook`, …). |
+      | `email` / `telephone` / `address` | string / map | Contact details of the main entity. |
+      | `person` | string | map | The `#person` node; a string is just the name. |
+      | `search` | string | Sitelinks `SearchAction` URL template; must contain `{search_term_string}`. |
 
       Per-page overrides live in the PHPDOC block: `@meta false` skips a
-      page entirely; `@meta_title`, `@meta_description`, `@meta_image`,
-      `@meta_robots`, `@meta_type`, `@canonical` override the generic
-      tag. See [`META`](../php/#meta) for the manual builders.
-
-      ### seo.jsonld
-
-      `jsonld` inside the `seo:` block turns on an automatic JSON-LD
-      `<script>` in the page's `<head>`, derived from the same
-      `kirigami:` keys — an empty `seo: { jsonld: {} }` is enough.
-
-      | Key | Type | Notes |
-      |---|---|---|
-      | `auto` | bool | Same idea as `seo.auto`, but independent — controls JSON-LD only. |
-      | `type` | string | `Organization`, `ProfessionalService`, `LocalBusiness`, … |
-      | `name` / `url` / `description` | string | Default to `project` / `baseurl` / `description`. |
-      | `logo` / `image` | string | `image` defaults to `logo`. |
-      | `sameAs` | string[] | Profile URLs. |
-      | `address` | map | `PostalAddress` properties. |
-      | `person` | string \| map | The `#person` node — a string is just the name. |
-      | `search` | string | Sitelinks `SearchAction` URL template; must contain `{search_term_string}`. |
+      page's tags, `@ld false` its JSON-LD; `@meta_title`,
+      `@meta_description`, `@meta_image`, `@meta_robots`, `@meta_type`,
+      `@canonical` and `@ld_type` override the generic values. See
+      [`META`](../php/#meta) for the manual builders.
 
       For anything schema.org doesn't cover from config alone, build a
       node by hand with [`LD`](../php/#ld) — `LD::article()`,
@@ -141,12 +124,21 @@
         network:  false                 # allow outbound HTTP(S) — remote @tags, CURL, SCRAPER
         mountext: [.svg, .webp]          # extra extensions auto-mounted into the virtual FS
         includes: [_lib/functions.php]   # PHP include_once'd before any page renders
+        types:                           # page types, picked per page with @type <name>
+          doc:
+            before: _layouts/types/doc.before.php
+            after:  _layouts/types/doc.after.php
       ```
 
       `includes` is where you register custom tags, Markdown shortcodes
       and hooks — this site's own [`_lib/functions.php`](https://github.com/php-kirigami/php-kirigami.github.io/blob/main/src/_lib/functions.php)
       is exactly that. See [Writing pages](../authoring/) for the render
       pipeline these plug into.
+
+      `types` declares [page types](../authoring/#page-types): each name
+      maps to a `before` and/or `after` file (relative to `kirigami.root`)
+      that wraps the body of every page declaring `@type <name>`, inside
+      the global `before`/`after`.
 
       ## image
 

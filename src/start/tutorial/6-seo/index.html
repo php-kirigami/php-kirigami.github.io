@@ -65,10 +65,9 @@
                         <div class="prose">
                             <p>One block in <code>kirigami.yaml</code>, fine empty:</p>
                             <pre><code class="hljs language-yaml">
-                                <span class="hljs-attr">seo:</span>
-                                  <span class="hljs-attr">jsonld:</span> {}
+                                <span class="hljs-attr">seo:</span> {}
                             </code></pre>
-                            <p><code>seo:</code> derives <code>&lt;title&gt;</code>, the description, Open Graph, Twitter Card, the canonical link, and the favicon tags from the <code>kirigami:</code> block plus each page&apos;s PHPDOC — nothing to write by hand in <code>header.php</code>. The nested <code>jsonld:</code> does the same for a schema.org <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code> block — its own independent opt-in, so a project can skip it and keep just the <code>&lt;head&gt;</code> tags. Drop <code>favicon.ico</code> and <code>apple-touch-icon.png</code> in <code>src/</code> and they&apos;re picked up automatically.</p>
+                            <p><code>seo:</code> derives <code>&lt;title&gt;</code>, the description, Open Graph, Twitter Card, the canonical link, and the favicon tags from the <code>kirigami:</code> block plus each page&apos;s PHPDOC — nothing to write by hand in <code>header.php</code>. From the same values it adds a schema.org <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code> graph for search engines; <code>jsonld: false</code> in the block turns just that part off. Drop <code>favicon.ico</code> and <code>apple-touch-icon.png</code> in <code>src/</code> and they&apos;re picked up automatically.</p>
                         </div>
                     </li>
                     <li>
@@ -143,7 +142,7 @@
                     </div>
                 </div>
                 <div class="site-footer__inner">
-                    <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
                     <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
                 </div>
             </div>

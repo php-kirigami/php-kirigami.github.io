@@ -131,12 +131,11 @@
                     <h2>SEO and social cards, in two lines</h2>
                 </div>
                 <div class="prose">
-                    <p>No <code>&lt;title&gt;</code>, no Open Graph tags to hand-write. One block in <code>kirigami.yaml</code> — the unified <code>seo:</code> surface — opts every page into <code>&lt;title&gt;</code>, description, keywords, Open Graph, Twitter Card, canonical link, and (nested inside it, its own independent opt-in) JSON-LD — derived from the <code>kirigami:</code> block plus each page&apos;s own PHPDOC:</p>
+                    <p>No <code>&lt;title&gt;</code>, no Open Graph tags to hand-write. One block in <code>kirigami.yaml</code> opts every page into <code>&lt;title&gt;</code>, description, keywords, Open Graph, Twitter Card, canonical link and a schema.org JSON-LD graph, derived from the <code>kirigami:</code> block plus each page&apos;s own PHPDOC:</p>
                     <pre><code class="hljs language-yaml">
-                        <span class="hljs-attr">seo:</span>
-                          <span class="hljs-attr">jsonld:</span> {}
+                        <span class="hljs-attr">seo:</span> {}
                     </code></pre>
-                    <p>A page overrides just what it needs from its own header — <code>@meta_description</code>, <code>@meta_image</code>, <code>@og_type</code>, … — without touching the other pages. Full reference: <a href="../docs/config/#seo"><code>seo</code></a> / <a href="../docs/config/#seojsonld"><code>seo.jsonld</code></a>. This site runs on exactly this, nothing hand-written in <code>_layouts/header.php</code>.</p>
+                    <p>A page overrides just what it needs from its own header — <code>@meta_description</code>, <code>@meta_image</code>, <code>@og_type</code>, … — without touching the other pages. Full reference: <a href="../docs/config/#seo"><code>seo</code></a>. This site runs on exactly this, nothing hand-written in <code>_layouts/header.php</code>.</p>
                 </div>
             </section>
             <hr class="fold">
@@ -323,7 +322,7 @@ install):
                     </div>
                 </div>
                 <div class="site-footer__inner">
-                    <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
                     <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
                 </div>
             </div>

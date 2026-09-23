@@ -153,6 +153,7 @@
                             <li><a href="#phpdoc-header">PHPDOC header</a></li>
                             <li><a href="#auto-loaded-data-files">Auto-loaded data files</a></li>
                             <li><a href="#content-and-indent">Content and indent</a></li>
+                            <li><a href="#page-types">Page types</a></li>
                             <li><a href="#variables-in-scope">Variables in scope</a></li>
                             <li><a href="#built-in-tags">Built-in tags</a></li>
                         </ul>
@@ -229,7 +230,27 @@
                              * <span class="hljs-doctag">@indent</span>  4
                              */</span>
                         </code></pre>
-                        <p>One rule worth knowing before you hit it: a PHPDOC continuation line must never start with a literal <code>@</code> — the parser reads it as a new tag. If <code>@content</code> lands on one of those lines, the page it&apos;s attached to silently renders empty.</p>
+                        <h2 id="page-types">Page types</h2>
+                        <p>When several pages share the same chrome (a page head, a sidebar, prev/next links), put it in a <strong>page type</strong> instead of copying it into each page. Declare the type under <code>prepros.types</code>, with a <code>before</code> and/or <code>after</code> file:</p>
+                        <pre><code class="hljs language-yaml">
+                            <span class="hljs-attr">prepros:</span>
+                              <span class="hljs-attr">before:</span> <span class="hljs-string">_layouts/header.php</span>
+                              <span class="hljs-attr">after:</span>  <span class="hljs-string">_layouts/footer.php</span>
+                              <span class="hljs-attr">types:</span>
+                                <span class="hljs-attr">article:</span>
+                                  <span class="hljs-attr">before:</span> <span class="hljs-string">_layouts/types/article.before.php</span>
+                                  <span class="hljs-attr">after:</span>  <span class="hljs-string">_layouts/types/article.after.php</span>
+                        </code></pre>
+                        <p>A page opts in with <code>@type</code>, and then only writes its own content:</p>
+                        <pre><code class="hljs language-php">
+                            <span class="hljs-comment">/**
+                             * <span class="hljs-doctag">@title</span>    Folding a crane
+                             * <span class="hljs-doctag">@abstract</span> Thirty folds, one sheet, no cuts.
+                             * <span class="hljs-doctag">@type</span>     article
+                             */</span>
+                        </code></pre>
+                        <p>The page is assembled as global <code>before</code> → type <code>before</code> → body → type <code>after</code> → global <code>after</code>. The type&apos;s files see the same variables as the page (<code>$title</code>, <code>$abstract</code>, <code>$relroot</code>, …), so they can print the heading, a breadcrumb or navigation built from them. A page has one type at most; a page without <code>@type</code>, or with an unknown one, gets the global wrap only.</p>
+                        <p>This documentation is an example: every page here is <code>@type docs</code>, whose layout draws the sidebar, the page head and the &quot;On this page&quot; box, so a docs page is just its Markdown.</p>
                         <h2 id="variables-in-scope">Variables in scope</h2>
                         <p>Injected by <code>PREPROS::render()</code>: every loose key from the <code>kirigami:</code> block (<code>$project</code>, <code>$baseurl</code>, <code>$author</code>, …), every PHPDOC annotation on the current page, plus <code>$relroot</code> (relative path from the page&apos;s directory back to <code>kirigami.root</code> — use it for any asset URL that has to work at any depth) and <code>$absurl</code> (the page&apos;s absolute URL path, including any subfolder in <code>baseurl</code> — safe as an <code>href</code> / <code>src</code> root).</p>
                         <p>Render pipeline, per page: resolve PHPDOC + auto-load data → <code>page_info</code> hook → <code>pre_render</code> hook (raw source) → include <code>before</code> + body (or <code>@content</code>) + <code>after</code> → process registered tags → <code>post_render</code> hook → <code>HTML::format()</code> if <code>format: true</code> → write <code>.html</code>.</p>
@@ -360,7 +381,7 @@
                     </div>
                 </div>
                 <div class="site-footer__inner">
-                    <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
                     <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
                 </div>
             </div>

@@ -166,7 +166,7 @@
                             <li><a href="#obf">OBF</a></li>
                             <li><a href="#std">STD</a></li>
                             <li><a href="#aliases">Aliases</a></li>
-                            <li><a href="#bundled-polyfill">Bundled polyfill</a></li>
+                            <li><a href="#normalizer">Normalizer</a></li>
                         </ul>
                     </nav>
                     <div class="prose">
@@ -205,17 +205,17 @@
                             YAML::<span class="hljs-title function_ invoke__">parseFile</span>(<span class="hljs-keyword">string</span> <span class="hljs-variable">$path</span>, <span class="hljs-keyword">bool</span> <span class="hljs-variable">$assoc</span> = <span class="hljs-literal">false</span>): <span class="hljs-keyword">mixed</span>;
                             YAML::<span class="hljs-title function_ invoke__">loadFile</span>(<span class="hljs-keyword">string</span> <span class="hljs-variable">$path</span>, <span class="hljs-keyword">bool</span> <span class="hljs-variable">$assoc</span> = <span class="hljs-literal">false</span>): <span class="hljs-keyword">mixed</span>;   <span class="hljs-comment">// parseFile + recursively inline nested .yaml/.yml/.json refs</span>
                         </code></pre>
-                        <p>A zero-dependency parser: scalars, quoted strings + escapes, block scalars (<code>|</code>, <code>&gt;</code>, with chomping), multi-line plain scalars, nested maps/sequences, inline <code>[a, b]</code> / <code>{k: v}</code>, comments, multi-doc <code>---</code>. Mappings are <code>stdClass</code> unless <code>$assoc = true</code>. <code>loadFile()</code> throws on a circular reference.</p>
+                        <p>Backed by the native <code>yaml</code> extension (LibYAML), compiled into the runtime. Mappings are <code>stdClass</code> unless <code>$assoc = true</code>; <code>loadFile()</code> throws on a circular reference. LibYAML follows YAML 1.1: unquoted <code>yes</code>, <code>no</code>, <code>on</code>, <code>off</code>, <code>y</code> and <code>n</code> are booleans, keys included, so quote them when you mean the word (<code>&quot;NO&quot;: Norway</code>).</p>
                         <h2 id="schema">SCHEMA</h2>
-                        <p>A pure-PHP JSON Schema validator — no <code>ajv</code>, same as every other &quot;stay lite&quot; call in the toolchain.</p>
+                        <p>A JSON Schema validator backed by the native <code>jsonk</code> extension (draft 2020-12).</p>
                         <pre><code class="hljs language-php">
                             <span class="hljs-variable">$v</span> = <span class="hljs-keyword">new</span> <span class="hljs-title function_ invoke__">SCHEMA</span>(<span class="hljs-keyword">array</span> <span class="hljs-variable">$schema</span>);
                             <span class="hljs-variable">$v</span>-&gt;<span class="hljs-title function_ invoke__">isValid</span>(<span class="hljs-keyword">mixed</span> <span class="hljs-variable">$data</span>): <span class="hljs-keyword">bool</span>;      <span class="hljs-comment">// alias: validate()</span>
                             <span class="hljs-variable">$v</span>-&gt;<span class="hljs-title function_ invoke__">getErrors</span>(): <span class="hljs-keyword">string</span>[];           <span class="hljs-comment">// &quot;path: message&quot; from the last run</span>
                         </code></pre>
-                        <p>Draft-7-ish: <code>type</code>, <code>required</code>, <code>properties</code>, <code>patternProperties</code>, <code>additionalProperties</code>, <code>items</code>, <code>min/maxItems</code>, <code>uniqueItems</code>, <code>min/maxLength</code>, <code>pattern</code>, <code>minimum</code>/<code>maximum</code> (+ <code>exclusive*</code>), <code>min/maxProperties</code>, <code>enum</code>, <code>const</code>, <code>anyOf</code>/<code>allOf</code>/<code>oneOf</code>/<code>not</code>, <code>format</code>, local <code>$ref</code>.</p>
+                        <p>It covers draft 2020-12, including <code>if</code>/<code>then</code>/<code>else</code>, <code>contains</code>, <code>propertyNames</code>, <code>prefixItems</code>, <code>dependentRequired</code> and <code>$ref</code> to local or <code>$id</code>-relative schemas. The previous pure-PHP validator stays available as <code>SCHEMA_LEGACY</code>.</p>
                         <h2 id="ld">LD</h2>
-                        <p>A schema.org JSON-LD graph builder — the engine behind the <a href="../config/#seojsonld"><code>seo.jsonld</code></a> sub-block.</p>
+                        <p>A schema.org JSON-LD graph builder, injected automatically from the <a href="../config/#seo"><code>seo</code></a> block (<code>seo.jsonld: false</code> turns it off).</p>
                         <pre><code class="hljs language-php">
                             LD::<span class="hljs-title function_ invoke__">add</span>(<span class="hljs-keyword">string</span>|<span class="hljs-keyword">array</span> <span class="hljs-variable">$type</span>, <span class="hljs-keyword">array</span> <span class="hljs-variable">$props</span> = [], ?<span class="hljs-keyword">string</span> <span class="hljs-variable">$id</span> = <span class="hljs-literal">null</span>): <span class="hljs-keyword">array</span>   <span class="hljs-comment">// build + register a node</span>
                             LD::<span class="hljs-title function_ invoke__">node</span>(<span class="hljs-keyword">string</span>|<span class="hljs-keyword">array</span> <span class="hljs-variable">$type</span>, <span class="hljs-keyword">array</span> <span class="hljs-variable">$props</span> = []): <span class="hljs-keyword">array</span>                       <span class="hljs-comment">// build only, no register</span>
@@ -373,8 +373,8 @@
                             <span class="hljs-title function_ invoke__">register_tag</span>() / <span class="hljs-title function_ invoke__">register_hook</span>()   <span class="hljs-comment">// = prepros_register_tag / prepros_register_hook</span>
                             <span class="hljs-title function_ invoke__">md_register_plugin</span>() <span class="hljs-title function_ invoke__">md_register_emoji</span>()
                         </code></pre>
-                        <h2 id="bundled-polyfill">Bundled polyfill</h2>
-                        <p><code>ext-intl</code> isn&apos;t in the WASM build, so a <code>Normalizer</code> polyfill is autoloaded (<code>Normalizer::normalize()</code> / <code>isNormalized()</code> + <code>NFC</code>/<code>NFD</code>/<code>NFKC</code>/<code>NFKD</code> constants) — prefer <code>STR::normalize()</code> in your own code; the polyfill exists for third-party snippets that expect the real extension.</p>
+                        <h2 id="normalizer">Normalizer</h2>
+                        <p>PHP&apos;s <code>Normalizer</code> class (<code>Normalizer::normalize()</code> / <code>isNormalized()</code>, <code>NFC</code>/<code>NFD</code>/<code>NFKC</code>/<code>NFKD</code>) comes from the native <code>norm</code> extension, compiled into the runtime. Installing the optional <code>@kirigami/phpext-intl</code> package replaces it with ICU&apos;s. The previous pure-PHP polyfill stays available as <code>NORMALIZER_LEGACY</code>.</p>
                     </div>
                     <nav class="docs-pager" aria-label="Previous and next">
                         <a rel="prev" href="../../docs/config/">Configuration</a>
@@ -416,7 +416,7 @@
                     </div>
                 </div>
                 <div class="site-footer__inner">
-                    <p>© 2026 Maxime Larrivée-Roy. MIT licensed.</p>
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
                     <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
                 </div>
             </div>

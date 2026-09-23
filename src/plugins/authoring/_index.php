@@ -336,7 +336,7 @@
           [`plugin-highlight`](https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-highlight),
           [`plugin-extlink`](https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-extlink)
           and [`plugin-embed`](https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-embed)
-          are real, MIT-licensed packages built exactly this way — worth
+          are real, open-source packages built exactly this way — worth
           reading end to end once this page's toy example makes sense.
         </markdown>
     </div>

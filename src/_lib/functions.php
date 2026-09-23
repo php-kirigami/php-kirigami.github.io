@@ -139,15 +139,17 @@ function kirigami_doc_head(string $eyebrow, string $heading, string $lead, strin
 function kirigami_packages(): array
 {
     return [
-        ['npm_pkg' => 'kirigami',         'role' => 'The kiri CLI — build / export / watch / serve / run / create / install / cache / phpinfo.', 'license' => 'MIT'],
-        ['npm_pkg' => 'php-prepros',      'role' => 'The PHP → HTML compiler and PHP class library.',                                'license' => 'MIT'],
-        ['npm_pkg' => 'php-wasm',         'role' => 'PHP 8.5 compiled to WebAssembly for Node (JSPI, no browser support).',          'license' => 'GPL-2.0-or-later'],
-        ['npm_pkg' => 'struct-walker',    'role' => 'Recursive YAML/JSON walker — file refs, data URIs.',                            'license' => 'MIT'],
-        ['npm_pkg' => 'sdk',              'role' => 'Plugin hook registry, and the on-disk Cache.',                                  'license' => 'MIT'],
-        ['npm_pkg' => 'canva',            'role' => 'Shared Sass/JS design system — this site included.',                            'license' => 'MIT'],
-        ['npm_pkg' => 'plugin-highlight', 'role' => 'Build-time syntax highlighting, 0 runtime JS.',                                  'license' => 'MIT'],
-        ['npm_pkg' => 'plugin-extlink',   'role' => 'External link preview cards, SCRAPER-backed, cached to disk.',                   'license' => 'MIT'],
-        ['npm_pkg' => 'plugin-embed',     'role' => 'YouTube / Vimeo oEmbed video cards, resolved client-side.',                      'license' => 'MIT'],
+        ['npm_pkg' => 'cli', 'role' => 'The kiri command: build / export / watch / serve / run / mcp / create / install / cache / phpinfo.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'kirigami', 'role' => 'The engine: the Project API behind the CLI, the VS Code extension and the MCP server.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'mcp', 'role' => 'Model Context Protocol server, for AI assistants.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'php-prepros', 'role' => 'The PHP → HTML compiler and PHP class library.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'php-wasm', 'role' => 'PHP 8.5 compiled to WebAssembly for Node (JSPI, no browser support).', 'license' => 'GPL-2.0-or-later'],
+        ['npm_pkg' => 'struct-walker', 'role' => 'Recursive YAML/JSON walker: file refs, data URIs.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'sdk', 'role' => 'Plugin hook registry, and the on-disk Cache.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'canva', 'role' => 'Shared Sass/JS design system, this site included.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'plugin-highlight', 'role' => 'Build-time syntax highlighting, 0 runtime JS.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'plugin-extlink', 'role' => 'External link preview cards, SCRAPER-backed, cached to disk.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'plugin-embed', 'role' => 'YouTube / Vimeo oEmbed video cards, resolved client-side.', 'license' => 'GPL-3.0-or-later'],
     ];
 }
 

@@ -17,17 +17,16 @@
                 One block in `kirigami.yaml`, fine empty:
 
                 ```yaml
-                seo:
-                  jsonld: {}
+                seo: {}
                 ```
 
                 `seo:` derives `<title>`, the description, Open Graph,
                 Twitter Card, the canonical link, and the favicon tags from
                 the `kirigami:` block plus each page's PHPDOC — nothing to
-                write by hand in `header.php`. The nested `jsonld:` does the
-                same for a schema.org `<script type="application/ld+json">`
-                block — its own independent opt-in, so a project can skip it
-                and keep just the `<head>` tags. Drop `favicon.ico` and
+                write by hand in `header.php`. From the same values it adds
+                a schema.org `<script type="application/ld+json">` graph for
+                search engines; `jsonld: false` in the block turns just that
+                part off. Drop `favicon.ico` and
                 `apple-touch-icon.png` in `src/` and they're picked up
                 automatically.
                 </markdown>

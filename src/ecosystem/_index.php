@@ -45,11 +45,7 @@ $packages = kirigami_packages();
                             <?php echo $version ? 'v' . str_htmlesc($version) : '—'; ?>
                         </td>
                         <td>
-                            <?php if ($pkg['license'] === 'GPL-2.0-or-later'): ?>
-                                <span class="badge badge--muted">GPL-2.0-or-later</span>
-                            <?php else: ?>
-                                <span class="badge">MIT</span>
-                            <?php endif; ?>
+                            <span class="badge<?php echo $pkg['license'] === 'GPL-3.0-or-later' ? '' : ' badge--muted'; ?>"><?php echo str_htmlesc($pkg['license']); ?></span>
                         </td>
                     </tr>
                 <?php endforeach; ?>

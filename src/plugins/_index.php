@@ -121,7 +121,7 @@
           one from scratch — package shape, registering a tag, shipping
           default styles, the options schema, and a couple of gotchas that
           only show up once you actually try it. The three plugins above
-          are real, MIT-licensed, source-linked examples to read alongside
+          are real, open-source, source-linked examples to read alongside
           it — `plugin-highlight`'s `index.js` is the shortest complete one.
         </markdown>
     </div>

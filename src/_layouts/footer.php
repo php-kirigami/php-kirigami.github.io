@@ -34,7 +34,7 @@
             </div>
 
             <div class="site-footer__inner">
-                <p>&copy; <year> <?php echo str_htmlesc($author); ?>. MIT licensed.</p>
+                <p>&copy; <year> <?php echo str_htmlesc($author); ?>. This site is MIT licensed.</p>
                 <p>
                     Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a>
                     &middot; <a href="<?php echo $relroot; ?>sitemap.xml">Sitemap</a>

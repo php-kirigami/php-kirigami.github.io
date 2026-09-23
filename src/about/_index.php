@@ -36,13 +36,15 @@
 
         ## License
 
-        Everything is **MIT**, with one exception:
-        [`@kirigami/php-wasm`](https://www.npmjs.com/package/@kirigami/php-wasm) —
-        the compiled PHP runtime itself — is **GPL-2.0-or-later**, inherited
-        from its [WordPress Playground](https://github.com/WordPress/wordpress-playground)
-        upstream. Nothing else in the toolchain is affected: a site built with
-        Kirigami ships plain HTML/CSS/JS, with no license obligation of its
-        own from the build tooling.
+        Kirigami's packages are **GPL-3.0-or-later**, with two exceptions:
+        [`@kirigami/php-wasm`](https://www.npmjs.com/package/@kirigami/php-wasm),
+        the compiled PHP runtime, is **GPL-2.0-or-later**, inherited from its
+        [WordPress Playground](https://github.com/WordPress/wordpress-playground)
+        upstream, and `@kirigami/bestframe` is **LGPL-2.1-or-later**.
+
+        The license covers the tools, not what you build with them: a site
+        built with Kirigami is plain HTML/CSS/JS of your own, under whatever
+        license you choose. This site, for instance, is MIT.
 
         See the full [package-by-package breakdown](<?php echo $relroot; ?>ecosystem/)
         for versions and licenses at a glance.
