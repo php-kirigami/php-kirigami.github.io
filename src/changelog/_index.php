@@ -2,15 +2,10 @@
 /**
  * @title      Changelog
  * @section    changelog
+ * @type       doc
  * @abstract   What shipped, and when — across the whole ecosystem.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Changelog</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">

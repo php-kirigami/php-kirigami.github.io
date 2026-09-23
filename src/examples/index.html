@@ -26,6 +26,7 @@
         <meta property="og:url" content="https://php-kirigami.github.io/examples/">
         <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/examples/">
+        <link rel="author" type="text/plain" href="../humans.txt">
         <link rel="icon" type="image/png" href="../images/meta/favicon-48x48.png">
         <link rel="apple-touch-icon" href="../images/meta/favicon-180x180.png">
         <script type="application/ld+json">
@@ -163,8 +164,10 @@
                         {% badge <span class="hljs-keyword">default</span> Stable %} {% badge muted <span class="hljs-string">&quot;Coming soon&quot;</span> %}
                     </code></pre>
                     <div class="demo">
-                        <span class="badge">Stable</span>
-                        <span class="badge badge--muted">Coming soon</span>
+                        <p>
+                            <span class="badge">Stable</span>
+                            <span class="badge badge--muted">Coming soon</span>
+                        </p>
                     </div>
                     <p><code>{% %}</code> plugins work inside <code>&lt;markdown&gt;</code> blocks, <code>.md</code> data files, and anywhere else <code>MD::toHtml()</code> runs. Full mechanics, including the default shortcodes Kirigami ships: <a href="../docs/authoring/#md-plugins">Writing pages → MD plugins</a>.</p>
                 </div>
@@ -254,7 +257,17 @@
                     <h2>The same thing, one line, inside Markdown</h2>
                 </div>
                 <div class="prose">
-                    <p>For a single image dropped straight into prose — no PHPDOC annotation, no loop — <code>{% img-asset %}</code> is the same <code>IMG::asset()</code> call as a Markdown shortcode, shipped by default (no plugin to install):</p>
+                    <p>
+                        For a single image dropped straight into prose — no PHPDOC
+annotation, no loop —
+                        <code>
+                            <!-- img-asset: missing path -->
+                        </code>
+                        is the same
+                        <code>IMG::asset()</code>
+                        call as a Markdown shortcode, shipped by default (no plugin to
+install):
+                    </p>
                     <pre><code class="hljs">
                         {% img-asset male-african-bush-elephant.jpg 320 180 cover %}
                     </code></pre>

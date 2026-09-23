@@ -2,15 +2,10 @@
 /**
  * @title    Showcase
  * @section  showcase
+ * @type     doc
  * @abstract Sites actually running on Kirigami — starting with this one.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Showcase</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="grid" data-reveal>

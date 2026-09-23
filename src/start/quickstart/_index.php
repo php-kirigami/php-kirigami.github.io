@@ -2,15 +2,10 @@
 /**
  * @title    Quickstart
  * @section  start
+ * @type     guide
  * @abstract One page, one config file, two commands. Five minutes.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Getting started</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <ol class="steps">
@@ -107,11 +102,3 @@
         </p>
     </div>
 </section>
-
-<div class="wrap">
-    <nav class="tutorial-nav">
-        <span class="tutorial-nav__step">Getting started</span>
-        <a rel="prev" href="<?php echo $relroot; ?>start/install/">Install</a>
-        <a rel="next" href="<?php echo $relroot; ?>start/tutorial/">Full tutorial</a>
-    </nav>
-</div>

@@ -2,15 +2,10 @@
 /**
  * @title    Install
  * @section  start
+ * @type     guide
  * @abstract One dependency, no PHP install, no server.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Getting started</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">
@@ -49,11 +44,3 @@
 </section>
 
 <hr class="fold">
-
-<div class="wrap">
-    <nav class="tutorial-nav">
-        <span class="tutorial-nav__step">Getting started</span>
-        <a rel="prev" href="<?php echo $relroot; ?>start/">Start</a>
-        <a rel="next" href="<?php echo $relroot; ?>start/quickstart/">Quickstart</a>
-    </nav>
-</div>

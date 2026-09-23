@@ -2,6 +2,7 @@
 /**
  * @title      Design
  * @section    design
+ * @type       doc
  * @abstract   The palette, type and shared components this site itself is
  *             built from — a reference, not something to reverse-engineer
  *             from the CSS.
@@ -20,12 +21,6 @@ $tokens = [
 
 $palette = img_palette('male-african-bush-elephant.jpg', 5);
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Design</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">

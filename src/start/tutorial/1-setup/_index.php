@@ -2,15 +2,10 @@
 /**
  * @title    Tutorial · Setup
  * @section  start
+ * @type     guide
  * @abstract Scaffold the project and get kiri serving it.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Tutorial &middot; Part 1 of 7</span>
-    <h1>Setup</h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <ol class="steps">
@@ -85,11 +80,3 @@
         </markdown>
     </div>
 </section>
-
-<div class="wrap">
-    <nav class="tutorial-nav">
-        <span class="tutorial-nav__step">Part 1 of 7</span>
-        <a rel="prev" href="<?php echo $relroot; ?>start/tutorial/">Overview</a>
-        <a rel="next" href="<?php echo $relroot; ?>start/tutorial/2-pages-layout/">Part 2 — Pages &amp; layout</a>
-    </nav>
-</div>

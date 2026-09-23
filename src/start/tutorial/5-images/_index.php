@@ -2,15 +2,10 @@
 /**
  * @title    Tutorial · Images
  * @section  start
+ * @type     guide
  * @abstract One image config, three surfaces, no native dependency.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Tutorial &middot; Part 5 of 7</span>
-    <h1>Images</h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <ol class="steps">
@@ -91,11 +86,3 @@
         </markdown>
     </div>
 </section>
-
-<div class="wrap">
-    <nav class="tutorial-nav">
-        <span class="tutorial-nav__step">Part 5 of 7</span>
-        <a rel="prev" href="<?php echo $relroot; ?>start/tutorial/4-styles-scripts/">Part 4 — Styles &amp; scripts</a>
-        <a rel="next" href="<?php echo $relroot; ?>start/tutorial/6-seo/">Part 6 — SEO</a>
-    </nav>
-</div>

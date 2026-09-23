@@ -2,16 +2,11 @@
 /**
  * @title    Tutorial · Pages & layout
  * @section  start
+ * @type     guide
  * @abstract Three real pages, one shared header and footer, and the PHPDOC
  *           block that drives them.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Tutorial &middot; Part 2 of 7</span>
-    <h1>Pages &amp; layout</h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <ol class="steps">
@@ -109,11 +104,3 @@
         </markdown>
     </div>
 </section>
-
-<div class="wrap">
-    <nav class="tutorial-nav">
-        <span class="tutorial-nav__step">Part 2 of 7</span>
-        <a rel="prev" href="<?php echo $relroot; ?>start/tutorial/1-setup/">Part 1 — Setup</a>
-        <a rel="next" href="<?php echo $relroot; ?>start/tutorial/3-content/">Part 3 — Content</a>
-    </nav>
-</div>

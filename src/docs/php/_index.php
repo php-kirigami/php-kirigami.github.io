@@ -2,19 +2,13 @@
 /**
  * @title      PHP class library
  * @section    docs
+ * @type       doc
  * @position   4
  * @abstract   Every autoloaded class available in pages, before/after
  *             includes, prepros.includes, and kiri run scripts.
  * @breadcrumb true
  */
 ?>
-
-<section class="section wrap doc-head">
-    <?php echo kirigami_breadcrumb_nav($title, $relroot); ?>
-    <span class="eyebrow">Documentation</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <ul class="docs-toc">

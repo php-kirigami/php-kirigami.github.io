@@ -2,6 +2,7 @@
 /**
  * @title    Tutorial
  * @section  start
+ * @type     guide
  * @abstract Build a small real site end to end — one concept per part.
  */
 
@@ -15,12 +16,6 @@ $parts = [
     ['7-deploy',         'Deploy',             'kiribuild, GitHub Pages, kiri export.'],
 ];
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Getting started</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">
@@ -43,11 +38,3 @@ $parts = [
         <?php endforeach; ?>
     </ol>
 </section>
-
-<div class="wrap">
-    <nav class="tutorial-nav">
-        <span class="tutorial-nav__step">Part 0 of 7</span>
-        <a rel="prev" href="<?php echo $relroot; ?>start/quickstart/">Quickstart</a>
-        <a rel="next" href="<?php echo $relroot; ?>start/tutorial/1-setup/">Part 1 — Setup</a>
-    </nav>
-</div>

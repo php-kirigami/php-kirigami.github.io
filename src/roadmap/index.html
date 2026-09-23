@@ -26,6 +26,7 @@
         <meta property="og:url" content="https://php-kirigami.github.io/roadmap/">
         <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/roadmap/">
+        <link rel="author" type="text/plain" href="../humans.txt">
         <link rel="icon" type="image/png" href="../images/meta/favicon-48x48.png">
         <link rel="apple-touch-icon" href="../images/meta/favicon-180x180.png">
         <script type="application/ld+json">
@@ -130,7 +131,7 @@
                         <li><strong>Line numbers for <code>plugin-highlight</code>.</strong> No option today to show a <code>#</code> gutter next to a highlighted block.</li>
                         <li><strong>A <code>class=&quot;&quot;</code> attribute on <code>&lt;extlink&gt;</code></strong>, so the generated preview card can be styled per-instance without a global override.</li>
                     </ul>
-                    <h2 id="build-amp-authoring">Build &amp; authoring</h2>
+                    <h2 id="build-authoring">Build &amp; authoring</h2>
                     <ul>
                         <li><strong><code>kiri deploy</code>, with a plugin system for the deploy mechanism</strong> (FTP, a push to a Git branch, …) — takes the exported <code>dist/</code> and ships it, for hosting outside GitHub Pages. Complements <code>kiribuild</code> (already GitHub Pages via Actions) rather than replacing it.</li>
                         <li><strong>A local, gitignored env file that mirrors GitHub Actions&apos;</strong>, so a build can be tested locally under close-to-CI conditions (the same env var names) without needing a real GitHub run.</li>

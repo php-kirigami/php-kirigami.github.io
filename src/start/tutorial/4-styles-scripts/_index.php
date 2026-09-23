@@ -2,16 +2,11 @@
 /**
  * @title    Tutorial · Styles & scripts
  * @section  start
+ * @type     guide
  * @abstract Retheme with canva, wire up dark mode, and let the managed head
  *           handle the rest.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Tutorial &middot; Part 4 of 7</span>
-    <h1>Styles &amp; scripts</h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <ol class="steps">
@@ -97,11 +92,3 @@
         </markdown>
     </div>
 </section>
-
-<div class="wrap">
-    <nav class="tutorial-nav">
-        <span class="tutorial-nav__step">Part 4 of 7</span>
-        <a rel="prev" href="<?php echo $relroot; ?>start/tutorial/3-content/">Part 3 — Content</a>
-        <a rel="next" href="<?php echo $relroot; ?>start/tutorial/5-images/">Part 5 — Images</a>
-    </nav>
-</div>

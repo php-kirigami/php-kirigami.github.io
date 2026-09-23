@@ -2,18 +2,12 @@
 /**
  * @title      Writing a plugin
  * @section    plugins
+ * @type       doc
  * @abstract   Package a tag/hook registration as an installable plugin —
  *             from an empty folder to something `kiri install` can find.
  * @breadcrumb true
  */
 ?>
-
-<section class="section wrap doc-head">
-    <?php echo kirigami_breadcrumb_nav($title, $relroot); ?>
-    <span class="eyebrow">Plugins</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">

@@ -2,6 +2,7 @@
 /**
  * @title      CLI
  * @section    docs
+ * @type       doc
  * @position   2
  * @abstract   Every kiri command, with its flags and real example output —
  *             build, export, watch, serve, run, create, install, cache,
@@ -9,13 +10,6 @@
  * @breadcrumb true
  */
 ?>
-
-<section class="section wrap doc-head">
-    <?php echo kirigami_breadcrumb_nav($title, $relroot); ?>
-    <span class="eyebrow">Documentation</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <ul class="docs-toc">

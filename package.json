@@ -10,12 +10,14 @@
     "npm": ">=10.2.3"
   },
   "scripts": {
+    "serve": "kiri serve",
     "build": "kiri build",
     "watch": "kiri watch",
     "export": "kiri export"
   },
   "devDependencies": {
-    "@kirigami/kirigami": "^2.0.0",
+    "@kirigami/cli": "^0.1.0",
+    "@kirigami/kirigami": "^3.0.0",
     "@kirigami/canva": "^2.6.0",
     "@kirigami/plugin-embed": "^0.1.5",
     "@kirigami/plugin-extlink": "^0.1.3",

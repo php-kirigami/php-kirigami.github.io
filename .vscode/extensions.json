@@ -1,12 +1,13 @@
 {
 	"recommendations": [
-		"ritwickdey.LiveServer",
+		"php-kirigami.kirigami-vscode",
 		"VisbyDev.folder-path-color",
 		"yzhang.markdown-all-in-one",
 		"bmewburn.vscode-intelephense-client",
 		"redhat.vscode-yaml"
 	],
 	"unwantedRecommendations": [
+		"ritwickdey.LiveServer",
 		"glenn2223.live-sass",
 		"josee9988.minifyall"
 	]

@@ -2,16 +2,11 @@
 /**
  * @title      Roadmap
  * @section    roadmap
+ * @type       doc
  * @abstract   What's actually being considered next — not a promise, not a
  *             release schedule.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Roadmap</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">

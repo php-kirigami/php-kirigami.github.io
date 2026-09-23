@@ -2,19 +2,13 @@
 /**
  * @title      Writing pages
  * @section    docs
+ * @type       doc
  * @position   3
  * @abstract   The PHPDOC header, auto-loaded data files, built-in tags,
  *             and the hooks a plugin registers into.
  * @breadcrumb true
  */
 ?>
-
-<section class="section wrap doc-head">
-    <?php echo kirigami_breadcrumb_nav($title, $relroot); ?>
-    <span class="eyebrow">Documentation</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">

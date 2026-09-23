@@ -2,6 +2,7 @@
 /**
  * @title      Config
  * @section    docs
+ * @type       doc
  * @position   1
  * @abstract   Everything kirigami.yaml can hold — the kirigami:, seo:,
  *             prepros:, image:, plugins:, esbuild:, sass:, export:,
@@ -9,13 +10,6 @@
  * @breadcrumb true
  */
 ?>
-
-<section class="section wrap doc-head">
-    <?php echo kirigami_breadcrumb_nav($title, $relroot); ?>
-    <span class="eyebrow">Documentation</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">

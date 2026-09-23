@@ -2,16 +2,11 @@
 /**
  * @title    Tutorial · Content
  * @section  start
+ * @type     guide
  * @abstract Markdown in a page, a YAML data file for a listing, and the
  *           annotation that renders a page as pure Markdown.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Tutorial &middot; Part 3 of 7</span>
-    <h1>Content</h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <ol class="steps">
@@ -110,11 +105,3 @@
         </markdown>
     </div>
 </section>
-
-<div class="wrap">
-    <nav class="tutorial-nav">
-        <span class="tutorial-nav__step">Part 3 of 7</span>
-        <a rel="prev" href="<?php echo $relroot; ?>start/tutorial/2-pages-layout/">Part 2 — Pages &amp; layout</a>
-        <a rel="next" href="<?php echo $relroot; ?>start/tutorial/4-styles-scripts/">Part 4 — Styles &amp; scripts</a>
-    </nav>
-</div>

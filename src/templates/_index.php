@@ -2,16 +2,11 @@
 /**
  * @title    Templates
  * @section  templates
+ * @type     doc
  * @abstract Official starting points for `kiri create` — clone one instead
  *           of starting from a blank folder.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Templates</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">

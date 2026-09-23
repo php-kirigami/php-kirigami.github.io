@@ -2,16 +2,11 @@
 /**
  * @title      Plugins
  * @section    plugins
+ * @type       doc
  * @abstract   Official Kirigami plugins — install one, or write your own.
  * @breadcrumb true
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Plugins</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">

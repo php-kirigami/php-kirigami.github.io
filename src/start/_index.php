@@ -2,15 +2,10 @@
 /**
  * @title    Start
  * @section  start
+ * @type     doc
  * @abstract Three ways in, depending on how much time you've got.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Getting started</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="grid" data-reveal>

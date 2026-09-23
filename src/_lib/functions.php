@@ -73,6 +73,65 @@ function kirigami_breadcrumb_nav(string $currentTitle, string $relroot): string
 
 
 /**
+ * Eyebrow label above a page heading, from its @section (@eyebrow overrides it).
+ */
+function kirigami_eyebrow(string $section): string
+{
+    return ['docs' => 'Documentation', 'start' => 'Getting started'][$section] ?? ucfirst($section);
+}
+
+
+/**
+ * The "Getting started" path, in reading order: path (relative to the site
+ * root) => [link label, step label, heading, eyebrow]. The tutorial parts are
+ * read from start/tutorial/<n>-<slug>/, whose @title is "Tutorial · <Heading>".
+ * Used by the `guide` page type for its heading and its prev/next links.
+ */
+function kirigami_guide_steps(): array
+{
+    $steps = [
+        'start/'            => ['Start',             null,              null, null],
+        'start/install/'    => ['Install',           'Getting started', null, null],
+        'start/quickstart/' => ['Quickstart',        'Getting started', null, null],
+        'start/tutorial/'   => ['Tutorial overview', null,              null, null],
+    ];
+
+    $root  = rtrim(str_replace('\\', '/', realpath(PREPROS::$config->root)), '/');
+    $parts = glob($root . '/start/tutorial/*/_index.php');
+    natsort($parts);
+    $total = count($parts);
+    $steps['start/tutorial/'][1] = "Part 0 of {$total}";
+
+    $n = 0;
+    foreach ($parts as $file) {
+        $n++;
+        $info    = FS::phpFileInfo($file) ?: new stdClass;
+        $heading = preg_replace('/^Tutorial\s*·\s*/u', '', $info->title ?? '');
+        $path    = 'start/tutorial/' . basename(dirname($file)) . '/';
+        $steps[$path] = ["Part {$n} — {$heading}", "Part {$n} of {$total}", $heading, "Tutorial · Part {$n} of {$total}"];
+    }
+
+    $steps['docs/'] = ['Explore the docs', null, null, null];
+    return $steps;
+}
+
+
+/**
+ * The shared page head of the `doc` and `guide` types: breadcrumb (pages with
+ * @breadcrumb true), eyebrow, heading and lead.
+ */
+function kirigami_doc_head(string $eyebrow, string $heading, string $lead, string $title, string $relroot): string
+{
+    return '<section class="section wrap doc-head">'
+        . kirigami_breadcrumb_nav($title, $relroot)
+        . '<span class="eyebrow">' . str_htmlesc($eyebrow) . '</span>'
+        . '<h1>' . str_htmlesc($heading) . '</h1>'
+        . ($lead !== '' ? '<p class="lead">' . str_htmlesc($lead) . '</p>' : '')
+        . '</section>';
+}
+
+
+/**
  * The monorepo's own packages — used by /ecosystem/. One place to edit when a
  * package is added or its role changes; kept as a plain function (not a data
  * file) since `npm_pkg` doubles as the key `kirigami_pkg_version()` fetches.

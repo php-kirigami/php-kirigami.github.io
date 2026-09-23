@@ -2,15 +2,10 @@
 /**
  * @title    About
  * @section  about
+ * @type     doc
  * @abstract Why Kirigami exists, who maintains it, and how it's licensed.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">About</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">

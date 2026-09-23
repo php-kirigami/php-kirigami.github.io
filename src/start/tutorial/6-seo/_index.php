@@ -2,16 +2,11 @@
 /**
  * @title    Tutorial · SEO
  * @section  start
+ * @type     guide
  * @abstract One config block and a per-page override, and the whole head
  *           is handled.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Tutorial &middot; Part 6 of 7</span>
-    <h1>SEO</h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <ol class="steps">
@@ -88,11 +83,3 @@
         </markdown>
     </div>
 </section>
-
-<div class="wrap">
-    <nav class="tutorial-nav">
-        <span class="tutorial-nav__step">Part 6 of 7</span>
-        <a rel="prev" href="<?php echo $relroot; ?>start/tutorial/5-images/">Part 5 — Images</a>
-        <a rel="next" href="<?php echo $relroot; ?>start/tutorial/7-deploy/">Part 7 — Deploy</a>
-    </nav>
-</div>

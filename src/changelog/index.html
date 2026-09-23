@@ -26,6 +26,7 @@
         <meta property="og:url" content="https://php-kirigami.github.io/changelog/">
         <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/changelog/">
+        <link rel="author" type="text/plain" href="../humans.txt">
         <link rel="icon" type="image/png" href="../images/meta/favicon-48x48.png">
         <link rel="apple-touch-icon" href="../images/meta/favicon-180x180.png">
         <script type="application/ld+json">
@@ -128,14 +129,53 @@
                     <p><strong><a href="https://www.npmjs.com/package/@kirigami/php-prepros" target="_blank" rel="noopener noreferrer">@kirigami/php-prepros</a></strong> <code>1.9.3</code> → <code>2.0.0</code> — <strong>breaking:</strong> the separate <code>meta:</code> / <code>jsonld:</code> top-level blocks are merged into one unified <code>seo:</code> block, <code>jsonld</code> nested inside it — one place, one mental model for a project&apos;s whole SEO/social surface, still independently toggleable (a project can have META&apos;s tags without JSON-LD, or vice versa). Migration is a rename: <code>meta:</code> → <code>seo:</code>, and <code>jsonld:</code>&apos;s content moves under it as <code>seo.jsonld:</code>. This site&apos;s own <code>kirigami.yaml</code> made the same move, <a href="../docs/config/#seo">Docs → Config</a> is updated, and the <a href="../start/tutorial/6-seo/">SEO tutorial step</a> reflects it. <strong><a href="https://www.npmjs.com/package/@kirigami/kirigami" target="_blank" rel="noopener noreferrer">@kirigami/kirigami</a></strong> <code>1.5.7</code> → <code>2.0.0</code> alongside it — also breaking, since the bundled <code>kirigami.schema.json</code> now rejects the old <code>meta:</code>/<code>jsonld:</code> keys outright.</p>
                     <p><strong><a href="https://www.npmjs.com/package/@kirigami/plugin-embed" target="_blank" rel="noopener noreferrer">@kirigami/plugin-embed</a></strong> <code>0.1.0</code> → <code>0.1.1</code> — new plugin: <code>&lt;youtube id=&quot;…&quot;&gt;</code> / <code>&lt;vimeo id=&quot;…&quot;&gt;</code> turn into a real video card (cover thumbnail, title, play button), resolved entirely in the visitor&apos;s browser — no build-time network call, the oEmbed lookup is cached in <code>localStorage</code>. <code>0.1.1</code> floors the card&apos;s aspect-ratio at 16∶9, so a narrower source video (4∶3, portrait, a Short) no longer produces a card that dominates the page next to normal widescreen ones — the real player still shows at its true ratio once clicked, pillarboxed rather than stretched. Live demo on <a href="../plugins/#embed">Plugins</a>.</p>
                     <p><strong><a href="https://www.npmjs.com/package/@kirigami/plugin-extlink" target="_blank" rel="noopener noreferrer">@kirigami/plugin-extlink</a></strong> <code>0.1.0</code> → <code>0.1.1</code> — new plugin: <code>&lt;extlink src=&quot;…&quot;&gt;</code> external link preview cards, scraped once at build time and cached to disk (<code>_data/extlink/</code>, <code>assets/images/extlink/</code>) so a rebuild — CI included — never re-crawls a URL it has already resolved. <code>0.1.1</code> also archives the untouched, full-resolution download to <code>assets/extlink/</code>. Live demo on <a href="../plugins/#extlink">Plugins</a>.</p>
-                    <p><strong><a href="https://www.npmjs.com/package/@kirigami/php-prepros" target="_blank" rel="noopener noreferrer">@kirigami/php-prepros</a></strong> <code>1.7.2</code> → <code>1.9.1</code> — the default Markdown plugin <code>{% img-asset %}</code> (same pipeline as <code>&lt;img asset&gt;</code>); <code>{% youtube %}</code> removed (its job — a real oEmbed-backed card instead of a plain iframe — moved to <code>plugin-embed</code>, above); a build-crashing bug fixed where <code>{% img-asset %}</code> on an unresolvable path threw instead of degrading gracefully, discovered while writing this site&apos;s own <a href="../plugins/authoring/">plugin-authoring tutorial</a>.</p>
+                    <p>
+                        <strong><a href="https://www.npmjs.com/package/@kirigami/php-prepros" target="_blank" rel="noopener noreferrer">@kirigami/php-prepros</a></strong>
+                        <code>1.7.2</code>
+                        →
+                        <code>1.9.1</code>
+                        — the default Markdown plugin
+                        <code>
+                            <!-- img-asset: missing path -->
+                        </code>
+                        (same pipeline as
+                        <code>&lt;img asset&gt;</code>
+                        );
+                        <code>
+                            <!-- youtube: missing id -->
+                        </code>
+                        removed (its
+job — a real oEmbed-backed card instead of a plain iframe — moved
+to
+                        <code>plugin-embed</code>
+                        , above); a build-crashing bug fixed where
+                        <code>
+                            <!-- img-asset: missing path -->
+                        </code>
+                        on an unresolvable path threw instead of
+degrading gracefully, discovered while writing this site&apos;s own
+                        <a href="../plugins/authoring/">plugin-authoring tutorial</a>
+                        .
+                    </p>
                     <p><strong><a href="https://www.npmjs.com/package/@kirigami/kirigami" target="_blank" rel="noopener noreferrer">@kirigami/kirigami</a></strong> <code>1.5.0</code> → <code>1.5.3</code> — dependency bumps tracking the <code>php-prepros</code> fixes above; its own README brought current (<code>kiri install</code> was completely undocumented; the CI example still showed <code>kiribuild@v1</code>).</p>
                     <p><strong><a href="https://www.npmjs.com/package/@kirigami/canva" target="_blank" rel="noopener noreferrer">@kirigami/canva</a></strong> <code>2.5.0</code> — <code>styles/main</code> is no longer a stub: <code>.breadcrumb</code>, <code>.docs-toc</code>, <code>.table</code>, <code>.badge</code>, <code>.palette</code> — five small components every Kirigami site kept re-implementing from scratch, lifted into one place. Plus themed native scrollbars, following the palette in dark mode instead of defaulting to white.</p>
                     <p><strong><a href="https://www.npmjs.com/package/@kirigami/kirigami" target="_blank" rel="noopener noreferrer">@kirigami/kirigami</a></strong> <code>1.5.3</code> → <code>1.5.6</code> — two commands that hadn&apos;t been called out here yet: <strong><code>kiri serve</code></strong>, everything <code>kiri watch</code> does plus a local dev server with browser hot-reload (a <code>sass</code>-only change hot-swaps the stylesheet in place instead of a full page reload), and <strong><code>kiri install &lt;plugin&gt;</code></strong>, which installs a plugin and prints the exact <code>plugins:</code> block to paste into <code>kirigami.yaml</code>, built from the plugin&apos;s own option schema. <code>1.5.6</code> also replaces a raw <code>EADDRINUSE</code> crash with a direct &quot;try a different port&quot; message. Full reference: <a href="../docs/cli/">Docs → CLI</a>.</p>
                     <p><strong><a href="https://www.npmjs.com/package/@kirigami/php-prepros" target="_blank" rel="noopener noreferrer">@kirigami/php-prepros</a></strong> <code>1.9.1</code> → <code>1.9.3</code> — fixed a real Markdown bug: a soft-wrapped continuation line inside a list item (no marker of its own) closed the list early instead of extending the item — the same fix that let <a href="../roadmap/">Roadmap</a> go back to natural wrapped prose instead of one line per bullet.</p>
                     <p><strong><a href="https://www.npmjs.com/package/@kirigami/plugin-highlight" target="_blank" rel="noopener noreferrer">@kirigami/plugin-highlight</a></strong> <code>0.1.1</code> → <code>0.1.6</code> — two real bugs fixed: an unknown <code>languages:</code> name now fails the build immediately instead of warning once and silently leaving that language unhighlighted forever; <code>copyButton</code> no longer renders a real, styled, non-functional button on a project with no <code>esbuild</code> task available to bundle its click handler. Also fixed, alongside <strong><a href="https://www.npmjs.com/package/@kirigami/canva" target="_blank" rel="noopener noreferrer">@kirigami/canva</a></strong> <code>2.5.0</code> → <code>2.5.2</code>: a CSS specificity bug where <code>styles/prose</code>&apos;s own code resets could out-rank plugin-highlight&apos;s theme in light mode, visible as a highlighted block&apos;s font/size reflowing on every theme toggle.</p>
                     <p><strong><a href="https://www.npmjs.com/package/@kirigami/plugin-embed" target="_blank" rel="noopener noreferrer">@kirigami/plugin-embed</a></strong> <code>0.1.1</code> → <code>0.1.2</code> — replaced the 16∶9 aspect-ratio floor with a <code>maxWidth</code> cap (default <code>40rem</code>) plus the video&apos;s real aspect ratio, and a <code>forcedAspectRatio</code> option to pin every card in a grid to one uniform shape.</p>
-                    <p><strong><a href="https://www.npmjs.com/package/@kirigami/plugin-extlink" target="_blank" rel="noopener noreferrer">@kirigami/plugin-extlink</a></strong> <code>0.1.1</code> → <code>0.1.2</code> — added the <code>{% extlink URL [&quot;title&quot;] %}</code> Markdown shortcut, alongside the existing <code>&lt;extlink src=&quot;…&quot;&gt;</code> tag.</p>
+                    <p>
+                        <strong><a href="https://www.npmjs.com/package/@kirigami/plugin-extlink" target="_blank" rel="noopener noreferrer">@kirigami/plugin-extlink</a></strong>
+                        <code>0.1.1</code>
+                        →
+                        <code>0.1.2</code>
+                        — added the
+                        <code>
+                            <!-- extlink: missing or invalid src -->
+                        </code>
+                        Markdown shortcut, alongside the existing
+                        <code>&lt;extlink src=&quot;…&quot;&gt;</code>
+                        tag.
+                    </p>
                     <p>New on this site: <a href="../plugins/">Plugins</a>, with a live demo of all three official plugins, <a href="../plugins/authoring/">Writing a plugin</a>, a hands-on tutorial, this page, and a real <code>og:image</code> — set once, sitewide, via the <code>kirigami:</code> block&apos;s <code>image</code> key rather than a per-page afterthought (a page still overrides it with its own <code>@meta_image</code>).</p>
                     <h2 id="september-10-2026">September 10, 2026</h2>
                     <p><strong><a href="https://www.npmjs.com/package/@kirigami/sdk" target="_blank" rel="noopener noreferrer">@kirigami/sdk</a></strong> <code>0.2.0</code>, <strong><a href="https://www.npmjs.com/package/@kirigami/canva" target="_blank" rel="noopener noreferrer">@kirigami/canva</a></strong> <code>2.4.0</code>, <strong><a href="https://www.npmjs.com/package/@kirigami/php-prepros" target="_blank" rel="noopener noreferrer">@kirigami/php-prepros</a></strong> <code>1.7.0</code> → <code>1.7.1</code>, <strong><a href="https://www.npmjs.com/package/@kirigami/kirigami" target="_blank" rel="noopener noreferrer">@kirigami/kirigami</a></strong> <code>1.4.0</code> → <code>1.4.1</code>, <strong><a href="https://www.npmjs.com/package/@kirigami/plugin-highlight" target="_blank" rel="noopener noreferrer">@kirigami/plugin-highlight</a></strong> <code>0.1.1</code> — the <code>META</code> class (<code>&lt;head&gt;</code> SEO/social metadata, opt-in via a <code>meta:</code> block, companion to <code>LD</code>&apos;s JSON-LD); canva <code>styles/prose</code> and the <code>reveal</code> script, both lifting code every starter template carried inline; and the <code>###TIMESTAMP###</code> fix that had been quietly rewriting every committed preview page on every CI run. Second same-day release fixed <code>kiri build</code>/<code>export</code>/ <code>run --help</code> crashing &quot;Config file not found&quot; outside a real project, and trimmed every CLI command&apos;s help text to one-liners.</p>

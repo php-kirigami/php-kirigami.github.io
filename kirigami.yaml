@@ -19,22 +19,17 @@ kirigami:
   tagline:     Fold PHP into flat HTML.
 
 
-# The unified SEO surface (@kirigami/php-prepros' META + LD classes) — replaces
-# the old separate meta:/jsonld: blocks. An empty map is enough — <title>,
-# description, keywords, Open Graph, Twitter Card, canonical, favicon and
-# apple-touch-icon are derived from the `kirigami:` keys above and each page's
-# PHPDOC (@title, @description, @image, @robots, …). Any tag _layouts/header.php
-# already writes by hand is detected and skipped. favicon / appleTouchIcon
-# point at the generated PNGs, image at the generated og:image webp (see
-# _layouts/header.php, where the three IMG::asset() calls that produce them
-# live). jsonld is its own opt-in, nested here rather than a sibling block —
-# same on/off independence as before (a project can have one without the
-# other), just one place to find both.
+# SEO: <title>, description, keywords, Open Graph, Twitter Card, canonical,
+# favicon and a schema.org JSON-LD graph, all from this one block, the
+# `kirigami:` keys above and each page's PHPDOC (@title, @description, @image,
+# @robots, …). Tags _layouts/header.php already writes by hand are skipped.
+# favicon / appleTouchIcon / image point at the PNGs and og:image webp that the
+# IMG::asset() calls in _layouts/header.php generate. `jsonld: false` would
+# drop the JSON-LD.
 seo:
   favicon:        images/meta/favicon-48x48.png
   appleTouchIcon: images/meta/favicon-180x180.png
   image:          images/meta/ogimage-1200x630-cover.webp
-  jsonld: {}
 
 
 prepros:
@@ -43,6 +38,12 @@ prepros:
   format:   true
   network:  true                  # build-time npm version lookups (ecosystem/changelog), remote @tag fetches
   includes: [_lib/functions.php]  # register custom tags / shortcodes / hooks here
+  types:                          # a page opts in with @type <name>
+    doc:                          # page head: breadcrumb, eyebrow, title, lead
+      before: _layouts/types/doc.before.php
+    guide:                        # doc head + prev/next along the Getting started path
+      before: _layouts/types/guide.before.php
+      after:  _layouts/types/guide.after.php
 
 
 # The image autogenerator. Source originals in assets/images/ (rel. to cwd),

@@ -2,18 +2,13 @@
 /**
  * @title    Ecosystem
  * @section  ecosystem
+ * @type     doc
  * @abstract Every package in the monorepo, its role, and its license — plus
  *           the satellite repos around it.
  */
 
 $packages = kirigami_packages();
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Ecosystem</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">

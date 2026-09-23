@@ -2,6 +2,7 @@
 /**
  * @title      Docs
  * @section    docs
+ * @type       doc
  * @abstract   The complete reference — config, CLI, writing pages, the PHP
  *             class library.
  * @breadcrumb true
@@ -9,12 +10,6 @@
 
 $sections = fs_get_children();
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Documentation</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="grid" data-reveal>

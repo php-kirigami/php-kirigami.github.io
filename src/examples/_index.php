@@ -2,16 +2,11 @@
 /**
  * @title      Examples
  * @section    examples
+ * @type       doc
  * @abstract   A cookbook — short, copy-pasteable recipes for things a real
  *             project needs, not a repeat of the reference.
  */
 ?>
-
-<section class="section wrap doc-head">
-    <span class="eyebrow">Examples</span>
-    <h1><?php echo str_htmlesc($title); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($abstract); ?></p>
-</section>
 
 <section class="section wrap">
     <div class="prose">
