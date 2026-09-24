@@ -36,10 +36,12 @@ silently worked around here. How the site was built: [docs/HISTORY.md](docs/HIST
   (authoring, cli, config, php), `plugins/` (+ authoring), `examples/`,
   `design/`, `roadmap/`, `changelog/`, `ecosystem/` (live npm versions via
   `kirigami_pkg_version()` in `_lib/functions.php`).
-- **Authoring pitfalls:** never write a literal `<markdown>` / `</markdown>`
-  as example text inside a `<markdown>` block (it closes the real one); never
-  type an opening PHP tag as example text (it executes). Describe them in
-  prose instead.
+- **Authoring pitfalls:** a tag shown as example text (`<markdown>`,
+  `<img asset>`, a plugin tag) goes in a code span or a fenced block, never
+  as bare text or in an indented code block (it runs, and a bare
+  `</markdown>` closes the real block); needs `@kirigami/php-prepros`
+  >= 3.0.1. Never type an opening PHP tag as example text (it executes):
+  describe it in prose instead.
 
 ---
 
