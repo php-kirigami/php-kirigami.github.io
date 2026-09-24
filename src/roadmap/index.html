@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../styles/kirigami.core.min.css?###TIMESTAMP###">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Roadmap — Kirigami</title>
-        <meta name="description" content="What&apos;s actually being considered next — not a promise, not a release schedule.">
+        <meta name="description" content="Directions being considered for Kirigami — not a promise, not a release schedule.">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
@@ -16,13 +16,13 @@
         <meta name="author" content="Maxime Larrivée-Roy">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="Roadmap — Kirigami">
-        <meta name="twitter:description" content="What&apos;s actually being considered next — not a promise, not a release schedule.">
+        <meta name="twitter:description" content="Directions being considered for Kirigami — not a promise, not a release schedule.">
         <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="Roadmap — Kirigami">
-        <meta property="og:description" content="What&apos;s actually being considered next — not a promise, not a release schedule.">
+        <meta property="og:description" content="Directions being considered for Kirigami — not a promise, not a release schedule.">
         <meta property="og:url" content="https://php-kirigami.github.io/roadmap/">
         <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/roadmap/">
@@ -117,39 +117,55 @@
             <section class="section wrap doc-head">
                 <span class="eyebrow">Roadmap</span>
                 <h1>Roadmap</h1>
-                <p class="lead">What&apos;s actually being considered next — not a promise, not a release schedule.</p>
+                <p class="lead">Directions being considered for Kirigami — not a promise, not a release schedule.</p>
             </section>
             <section class="section wrap">
                 <div class="prose">
-                    <p>Kirigami has one maintainer and no release schedule. This page is the honest version of that: the open backlog, grouped by theme, in roughly the order it&apos;s likely to get picked up — not a commitment, and the order shifts whenever something more useful shows up first. See the <a href="../changelog/">Changelog</a> for what&apos;s already shipped — recently, exactly two items that used to live on this page: <code>/examples</code> and <code>/design</code>.</p>
-                    <h2 id="plugins">Plugins</h2>
+                    <p>Kirigami has one maintainer and no release schedule. Everything below is an open direction, grouped by theme, not a commitment: the order shifts whenever something more useful shows up first. What already shipped lives in the <a href="../changelog/">Changelog</a>.</p>
+                    <p>One rule shapes all of it: the CLI, the MCP server, the VS Code extension and any future interface drive the same <code>Project</code> engine from <code>@kirigami/kirigami</code>. A new interface extends that engine; it never re-implements a build, an export or a watcher of its own.</p>
+                    <h2 id="project-and-build-extensibility">Project and build extensibility</h2>
                     <ul>
-                        <li><strong>Plugin-declared tasks and commands.</strong> <code>kirigami.type: &quot;plugin&quot;</code> exists; a plugin contributing its own <strong>task type</strong> (beyond <code>esbuild</code>/<code>sass</code>/<code>prepros</code>/<code>dist</code>) or its own <code>kiri</code> subcommand doesn&apos;t yet. Related: right now a plugin that needs to bundle its own client-side script (<code>plugin-highlight</code>&apos;s copy button, <code>plugin-embed</code>&apos;s observer script) just requires the <em>project</em> to already have an <code>esbuild</code> task — it&apos;d be nicer if a plugin could supply that bundling itself when the project has none.</li>
-                        <li><strong>Line numbers for <code>plugin-highlight</code>.</strong> No option today to show a <code>#</code> gutter next to a highlighted block.</li>
-                        <li><strong>A <code>class=&quot;&quot;</code> attribute on <code>&lt;extlink&gt;</code></strong>, so the generated preview card can be styled per-instance without a global override.</li>
+                        <li><strong>A <code>prepros:before-render</code> hook.</strong> <code>prepros:html</code> already lets a JavaScript hook rewrite the generated HTML; a symmetric hook would run before PHP renders the page.</li>
+                        <li><strong>Composer support.</strong> Mount a project&apos;s <code>vendor/</code> tree and load <code>vendor/autoload.php</code>, with clear limits on what can run in the WebAssembly environment.</li>
+                        <li><strong>Inherited page metadata.</strong> Let an <code>_index.php</code> pass its PHPDOC fields down to the pages of its section, so section-wide defaults stop being repeated on every page.</li>
+                        <li><strong>Package resolution for <code>esbuild</code>.</strong> The <code>sass</code> task already resolves Node-style package imports (npm, pnpm, workspaces, <code>npm link</code>); <code>esbuild</code> would get the same, once a hook hands it a package name rather than an absolute path.</li>
+                        <li><strong>A local CI environment file.</strong> A gitignored file using the same variable names as GitHub Actions, so a build can be reproduced locally under close-to-CI conditions.</li>
                     </ul>
-                    <h2 id="build-authoring">Build &amp; authoring</h2>
+                    <h2 id="content-and-data">Content and data</h2>
+                    <p>The common thread: feeding a page or a <code>_data/</code> file from something other than a hand-written YAML or Markdown file.</p>
                     <ul>
-                        <li><strong><code>kiri deploy</code>, with a plugin system for the deploy mechanism</strong> (FTP, a push to a Git branch, …) — takes the exported <code>dist/</code> and ships it, for hosting outside GitHub Pages. Complements <code>kiribuild</code> (already GitHub Pages via Actions) rather than replacing it.</li>
-                        <li><strong>A local, gitignored env file that mirrors GitHub Actions&apos;</strong>, so a build can be tested locally under close-to-CI conditions (the same env var names) without needing a real GitHub run.</li>
-                        <li><strong>A <code>humans.txt</code> generator</strong> from <code>kirigami.yaml</code>&apos;s dev info (<code>author</code> / <code>email</code>), generated alongside <code>sitemap.xml</code> / <code>robots.txt</code> — the same spirit as <code>fillBanner()</code> already filling <code>###AUTHOR###</code> / <code>###EMAIL###</code> from that block.</li>
-                        <li><strong>A <code>favicon.ico</code> / <code>apple-touch-icon.png</code> generator</strong> from one source image, alongside the existing image autogenerator (<code>image.source</code> / <code>image.dest</code>) — multi-resolution <code>.ico</code> needs Imagick, not just GD.</li>
-                        <li><strong>Submitting <code>kirigami.schema.json</code> to <a href="https://www.schemastore.org/" target="_blank" rel="noopener noreferrer">SchemaStore</a></strong> so editor autocompletion works without a <code># yaml-language-server: $schema=...</code> comment in every project&apos;s <code>kirigami.yaml</code>.</li>
-                        <li><strong>A build-free theme toggle.</strong> The managed <code>&lt;head&gt;</code> already injects a small FOUC guard; extending it to also drop in the full toggle runtime when a page has <code>data-theme-toggle</code> would mean zero JS/import/task needed for a working light/dark switch — <code>@kirigami/canva/theme</code> stays the option for anyone who wants the JS API (<code>setTheme()</code>, events) instead.</li>
-                        <li><strong>A <code>prepros:before-render</code> hook</strong> — <code>prepros:html</code> (after render) already exists; a symmetric before-render one is being weighed.</li>
-                        <li>Smaller: the <code>sass</code> task&apos;s package importer (Node-style resolution, <code>npm link</code>/pnpm/workspaces included) doing the same for <code>esbuild</code>&apos;s imports, if a real case for it ever shows up.</li>
+                        <li><strong>Internationalization.</strong> Externalize strings first, then settle language routing, project layout and <code>hreflang</code> output.</li>
+                        <li><strong>A WordPress REST client.</strong> A PHP helper in the spirit of <code>SCRAPER</code> for posts and other <code>/wp-json/</code> resources.</li>
+                        <li><strong>A database bridge.</strong> Expose the bundled <code>navicat</code> extension through a PHP API for MySQL, PostgreSQL and SQLite queries over an HTTP tunnel: live data instead of a static export.</li>
+                        <li><strong>Native JSON Schema validation.</strong> The native <code>jsonk</code> extension already replaces JSON encoding and decoding; it may also replace the pure-PHP validator behind <code>SCHEMA</code>, but only once it proves compatible with Kirigami&apos;s and the plugins&apos; schemas.</li>
                     </ul>
-                    <h2 id="data-integrations">Data integrations</h2>
-                    <p>Further out, and less scoped than the rest of this page — the common thread is feeding a page or a <code>_data/</code> file from something other than a hand-written YAML/Markdown file:</p>
+                    <h2 id="upcoming-plugins">Upcoming plugins</h2>
+                    <p>Each one does its heavy lifting at build time, so the generated page ships only the result. The two media players rest on native code compiled to WebAssembly.</p>
                     <ul>
-                        <li>A <strong><code>kiri run</code>-friendly class for querying a database over an HTTP tunnel</strong>, in the spirit of Navicat&apos;s HTTP-tunnel mechanism (the concept, not borrowed code) — live data instead of a static export.</li>
-                        <li>A <strong>PHP class for WordPress&apos; REST API</strong> (<code>/wp-json/wp/v2/posts</code>, …), the same spirit as <code>SCRAPER</code>, for pulling real WordPress content into a page or <code>_data/</code>.</li>
-                        <li>Official <strong>Google Docs → Markdown</strong> and <strong>Excel → JSON</strong> conversion scripts/actions, for feeding a <code>_data/</code> file from a source non-developers can actually edit.</li>
+                        <li><strong><code>plugin-player</code>: an audio player.</strong> A player card with a SoundCloud-style waveform under the seek bar. The waveform peaks come from <a href="https://github.com/bbc/audiowaveform" target="_blank" rel="noopener noreferrer">BBC&apos;s <code>audiowaveform</code></a> compiled to WebAssembly: MP3, WAV, FLAC, Ogg (Vorbis and Opus), M4A/AAC and WebM audio.</li>
+                        <li><strong><code>plugin-clip</code>: a video player.</strong> A video card whose cover image is picked automatically by <a href="https://www.npmjs.com/package/@kirigami/bestframe" target="_blank" rel="noopener noreferrer"><code>@kirigami/bestframe</code></a>, a WebAssembly module: it samples frames across the video, discards the unusable ones and lets a small embedded aesthetic model choose the best one. H.264, VP9, HEVC and AV1, in MP4, Matroska and WebM.</li>
+                        <li><strong><code>plugin-gdrive</code>: build a site from Google Drive.</strong> Write pages in Google Docs and keep data in Google Sheets; the build turns each Doc into a Markdown page and each Sheet into a <code>_data/</code> file your templates already know how to read. Editors never touch the repository. Fetched documents are cached on disk, like <code>plugin-extlink</code>&apos;s previews, so a rebuild only downloads what changed.</li>
                     </ul>
-                    <h2 id="bigger-picture">Bigger picture</h2>
+                    <h2 id="generated-site-features">Generated site features</h2>
                     <ul>
-                        <li><strong><code>template-react</code></strong> — a new official template with a real JSX/TSX pipeline (esbuild already supports it natively). Not scoped yet: build-time-only static rendering vs. client hydration, and how it sits alongside the existing PHP pages, both need deciding first.</li>
-                        <li><strong>A Kirigami-maintained fork of the PHP→WebAssembly build</strong>, instead of tracking the upstream WordPress Playground fork as-is — for more control over which PHP version and extensions ship. Not scoped yet: this is a real undertaking (reproducing the build pipeline, deciding what to keep), and it&apos;ll get its own planning pass before any code moves.</li>
+                        <li><strong>Analytics.</strong> Inject Google Analytics&apos; <code>gtag.js</code> from a measurement ID in the <code>seo:</code> block.</li>
+                        <li><strong>A build-free theme toggle.</strong> When a page has <code>data-theme-toggle</code>, inject canva&apos;s small theme runtime, so a working light/dark switch needs no JavaScript, import or task. <code>@kirigami/canva/theme</code> stays the source of truth for its storage, events and attributes.</li>
+                        <li><strong>Icon generation.</strong> <code>favicon.ico</code> and <code>apple-touch-icon.png</code> from one source image, through Imagick and the existing <code>image:</code> configuration.</li>
+                        <li><strong>Line numbers for <code>plugin-highlight</code>.</strong> An option, with the matching markup and styles, for a numbered gutter on code blocks.</li>
+                        <li><strong>A React template.</strong> An official JSX/TSX template (esbuild already compiles both). Not scoped yet: build-time static HTML, client hydration or both, and how it sits next to PHP pages, need deciding first.</li>
+                    </ul>
+                    <h2 id="interfaces-and-delivery">Interfaces and delivery</h2>
+                    <ul>
+                        <li><strong>MCP discovery for more AI clients.</strong> Today <code>kiri mcp</code> is found automatically by Claude Code (through the project&apos;s <code>.mcp.json</code>) and by VS Code agents when the Kirigami extension is installed. New projects would also get the file each other client reads: <code>.vscode/mcp.json</code> for VS Code without the extension, <code>.cursor/mcp.json</code> for Cursor, <code>.gemini/settings.json</code> for Gemini CLI, <code>.codex/config.toml</code> for Codex and <code>.zed/settings.json</code> for Zed. Clients with only a global configuration, such as Windsurf and Claude Desktop, get a documented snippet instead. Undecided: written by default, or only on request, since each one adds a tool-specific file to every project.</li>
+                        <li><strong>MCP background operations.</strong> <code>serve</code> and <code>watch</code> over MCP, with explicit start, status and stop, so an agent always knows who owns the long-lived server.</li>
+                        <li><strong>More from the VS Code extension.</strong> Editor diagnostics, task integration and multi-root workspaces.</li>
+                        <li><strong><code>kiri deploy</code>, with provider plugins.</strong> Ship an exported <code>dist/</code> over FTP, to a Git branch or elsewhere, for hosting outside GitHub Pages. It complements <a href="https://github.com/php-kirigami/kiribuild" target="_blank" rel="noopener noreferrer">kiribuild</a> rather than replacing it.</li>
+                        <li><strong>A desktop app.</strong> An Electron interface for people who don&apos;t work in an editor, driving the same <code>Project</code> engine.</li>
+                        <li><strong>SchemaStore registration.</strong> Submit <code>kirigami.schema.json</code> to <a href="https://www.schemastore.org/" target="_blank" rel="noopener noreferrer">SchemaStore</a>, so YAML tooling completes <code>kirigami.yaml</code> without a schema comment at the top of the file.</li>
+                    </ul>
+                    <h2 id="runtime-and-toolchain">Runtime and toolchain</h2>
+                    <ul>
+                        <li><strong>A reproducible PHP → WebAssembly build.</strong> Grow the current compiler, derived from upstream, into a build pipeline Kirigami clearly owns for PHP, its libraries and the bundled extensions. The supported extension matrix and the reproducibility checks get scoped before anything replaces today&apos;s process.</li>
                     </ul>
                 </div>
             </section>
