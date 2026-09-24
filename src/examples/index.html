@@ -253,17 +253,7 @@
                     <h2>The same thing, one line, inside Markdown</h2>
                 </div>
                 <div class="prose">
-                    <p>
-                        For a single image dropped straight into prose — no PHPDOC
-annotation, no loop —
-                        <code>
-                            <!-- img-asset: missing path -->
-                        </code>
-                        is the same
-                        <code>IMG::asset()</code>
-                        call as a Markdown shortcode, shipped by default (no plugin to
-install):
-                    </p>
+                    <p>For a single image dropped straight into prose — no PHPDOC annotation, no loop — <code>{% img-asset %}</code> is the same <code>IMG::asset()</code> call as a Markdown shortcode, shipped by default (no plugin to install):</p>
                     <pre><code class="hljs">
                         {% img-asset male-african-bush-elephant.jpg 320 180 cover %}
                     </code></pre>
