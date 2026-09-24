@@ -168,11 +168,13 @@
         (`alt`, `class`, `loading`, …) passes straight through. Empty or
         missing `asset` leaves the tag untouched.
 
-      One authoring gotcha with `<markdown>`: nesting a *literal*
-      `<markdown>` / `</markdown>` example inside a real `<markdown>`
-      block breaks the tag's non-greedy pairing. Describe it in prose or
-      point at "view source" instead — and never type a real PHP opening
-      tag as example text, short-echo form included: PHP doesn't know
+      One authoring gotcha with tags: a tag shown as an example
+      (`<markdown>`, `<img asset>`, a plugin tag) must sit in a code span
+      or a fenced block, which the tag pass leaves alone. Written as bare
+      text it runs for real, and a bare `</markdown>` closes the block
+      around it. An indented code block doesn't count, since `<markdown>`
+      bodies are indented themselves: use a fence. And never type a real
+      PHP opening tag as example text, short-echo form included: PHP doesn't know
       it's sitting inside a fenced code example, and runs it for real.
       Every snippet on this page is written the way it has to be
       because of that rule — statements only, no opening tag shown.

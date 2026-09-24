@@ -156,6 +156,9 @@
                             <li><a href="#page-types">Page types</a></li>
                             <li><a href="#variables-in-scope">Variables in scope</a></li>
                             <li><a href="#built-in-tags">Built-in tags</a></li>
+                            <li><a href="#registering-tags-and-hooks">Registering tags and hooks</a></li>
+                            <li><a href="#md-plugins">MD plugins</a></li>
+                            <li><a href="#sass-hooks">Sass hooks</a></li>
                         </ul>
                     </nav>
                     <div class="prose">
@@ -257,88 +260,63 @@
                         <h2 id="built-in-tags">Built-in tags</h2>
                         <p>Processed <strong>after</strong> PHP runs, on the assembled HTML:</p>
                         <ul>
-                            <li>` …</li>
+                            <li><code>&lt;markdown&gt; … &lt;/markdown&gt;</code> — converts its body from Markdown to HTML, stripping common leading indentation first. Every registered MD plugin (below) works inside it. Add <code>prose</code> (<code>&lt;markdown prose&gt;</code>) to wrap the output in <code>.prose</code> (<code>@kirigami/canva</code>&apos;s prose partial) — <code>class</code> / <code>id</code> on the tag land on that wrapper. This whole page is one such block.</li>
+                            <li><code>&lt;img asset=&quot;path/in/assets-images.jpg&quot; width=&quot;450&quot; height=&quot;300&quot; cover&gt;</code> — resolves through the image autogenerator, calling <code>IMG::asset()</code> with the same parameters (<code>asset</code> → <code>$path</code>; <code>width</code> / <code>height</code> optional ints; <code>cover</code> presence = <code>true</code>, crop to fill) and swapping <code>asset</code> for the generated <code>src</code>. Any other attribute (<code>alt</code>, <code>class</code>, <code>loading</code>, …) passes straight through. Empty or missing <code>asset</code> leaves the tag untouched.</li>
                         </ul>
-                        ` — converts its body from Markdown to
-        HTML, stripping common leading indentation first. Every
-        registered MD plugin (below) works inside it. Add `prose`
-        (`
-                        <div class="prose">
-                            <p><code>) to wrap the output in </code>.prose<code> (</code>@kirigami/canva<code>&apos;s prose partial) — </code>class<code>/</code>id<code>on the tag land on that wrapper. This whole page is one such block. -</code><img loading="lazy" width="450" height="300"><code>— resolves through the image autogenerator, calling</code>IMG::asset()<code> with the same parameters (</code>asset<code>→</code>$path<code>; </code>width<code>/</code>height<code>optional ints;</code>cover<code>presence =</code>true<code>, crop to fill) and swapping </code>asset<code>for the generated</code>src<code>. Any other attribute (</code>alt<code>, </code>class<code>, </code>loading<code>, …) passes straight through. Empty or missing </code>asset` leaves the tag untouched.</p>
-                            <pre><code class="hljs language-javascript">
-                                <span class="hljs-title class_">One</span> authoring gotcha <span class="hljs-keyword">with</span> <span class="hljs-string">`&lt;markdown&gt;`</span>: nesting a *literal*
-                                <span class="hljs-string">`&lt;markdown&gt;`</span> / <span class="hljs-string">`</span>
-                            </code></pre>
-                        </div>
-                        ` example inside a real `
-                        <p>` block breaks the tag&apos;s non-greedy pairing. Describe it in prose or point at &quot;view source&quot; instead — and never type a real PHP opening tag as example text, short-echo form included: PHP doesn&apos;t know it&apos;s sitting inside a fenced code example, and runs it for real. Every snippet on this page is written the way it has to be because of that rule — statements only, no opening tag shown.</p>
-                        <pre><code class="hljs language-bash">
-                            <span class="hljs-comment">## Registering tags and hooks</span>
-
-                            Register <span class="hljs-keyword">in</span> a `prepros.includes` file — this site<span class="hljs-string">&#x27;s own
-                            [`_lib/functions.php`](https://github.com/php-kirigami/php-kirigami.github.io/blob/main/src/_lib/functions.php)
-                            is exactly that; it&#x27;</span>s <span class="hljs-built_in">where</span> `kirigami_page_href()` and
-                            `kirigami_breadcrumb_nav()`, used across this `/docs/` section,
-                            live.
-
-                            ```php
-                            PREPROS::registerTag(<span class="hljs-string">&#x27;gallery&#x27;</span>, <span class="hljs-keyword">function</span> (string <span class="hljs-variable">$tag</span>, array <span class="hljs-variable">$attrs</span>, string <span class="hljs-variable">$body</span>): string {
-                                // ... <span class="hljs-built_in">return</span> HTML
+                        <p>One authoring gotcha with tags: a tag shown as an example (<code>&lt;markdown&gt;</code>, <code>&lt;img asset&gt;</code>, a plugin tag) must sit in a code span or a fenced block, which the tag pass leaves alone. Written as bare text it runs for real, and a bare <code>&lt;/markdown&gt;</code> closes the block around it. An indented code block doesn&apos;t count, since <code>&lt;markdown&gt;</code> bodies are indented themselves: use a fence. And never type a real PHP opening tag as example text, short-echo form included: PHP doesn&apos;t know it&apos;s sitting inside a fenced code example, and runs it for real. Every snippet on this page is written the way it has to be because of that rule — statements only, no opening tag shown.</p>
+                        <h2 id="registering-tags-and-hooks">Registering tags and hooks</h2>
+                        <p>Register in a <code>prepros.includes</code> file — this site&apos;s own <a href="https://github.com/php-kirigami/php-kirigami.github.io/blob/main/src/_lib/functions.php" target="_blank" rel="noopener noreferrer"><code>_lib/functions.php</code></a> is exactly that; it&apos;s where <code>kirigami_page_href()</code> and <code>kirigami_breadcrumb_nav()</code>, used across this <code>/docs/</code> section, live.</p>
+                        <pre><code class="hljs language-php">
+                            PREPROS::<span class="hljs-title function_ invoke__">registerTag</span>(<span class="hljs-string">&#x27;gallery&#x27;</span>, function (<span class="hljs-keyword">string</span> <span class="hljs-variable">$tag</span>, <span class="hljs-keyword">array</span> <span class="hljs-variable">$attrs</span>, <span class="hljs-keyword">string</span> <span class="hljs-variable">$body</span>): <span class="hljs-keyword">string</span> {
+                                <span class="hljs-comment">// ... return HTML</span>
                             });
 
-                            PREPROS::registerHook(<span class="hljs-string">&#x27;post_render&#x27;</span>, <span class="hljs-keyword">function</span> (string <span class="hljs-variable">$html</span>): string {
-                                <span class="hljs-built_in">return</span> str_replace(<span class="hljs-string">&#x27;{{build_date}}&#x27;</span>, <span class="hljs-built_in">date</span>(<span class="hljs-string">&#x27;Y-m-d&#x27;</span>), <span class="hljs-variable">$html</span>);
+                            PREPROS::<span class="hljs-title function_ invoke__">registerHook</span>(<span class="hljs-string">&#x27;post_render&#x27;</span>, function (<span class="hljs-keyword">string</span> <span class="hljs-variable">$html</span>): <span class="hljs-keyword">string</span> {
+                                <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;{{build_date}}&#x27;</span>, <span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&#x27;Y-m-d&#x27;</span>), <span class="hljs-variable">$html</span>);
                             });
-                            ```
-
-                            | Hook | Fires | `<span class="hljs-variable">$data</span>` | Return |
-                            |---|---|---|---|
-                            | `page_info` | after PHPDOC parse, before render | `[<span class="hljs-variable">$filePath</span>, <span class="hljs-variable">$pageObject</span>]` | `<span class="hljs-variable">$pageObject</span>` |
-                            | `pre_render` | before PHP execution | raw <span class="hljs-built_in">source</span> `string` | `string` |
-                            | `post_render` | after tag processing, before `HTML::format()` | assembled HTML `string` | `string` |
-
-                            Multiple callbacks per hook run <span class="hljs-keyword">in</span> registration order, chained.
-                            The full `PREPROS` API — `mount()`, `exportFile()`, `fstat()`,
-                            `backtraceFile()`, `<span class="hljs-variable">$config</span>` — is <span class="hljs-keyword">in</span> the
-                            [PHP class library](../php/#prepros).
-
-                            <span class="hljs-comment">## MD plugins</span>
-
-                            `MD::registerPlugin(<span class="hljs-string">&#x27;video&#x27;</span>, fn(array <span class="hljs-variable">$args</span>, string <span class="hljs-variable">$body</span>): string =&gt; …)` —
-                            works inside `&lt;markdown&gt;` blocks, `.md` data files, and any
-                            `MD::toHtml()` call. Kirigami ships a handful by default
-                            (`md.plugins.php`): `{% callout info|success|warning|danger [<span class="hljs-string">&quot;Title&quot;</span>] content %}`,
-                            `{% img-asset path [w [h [cover]]] %}`, `{% codepen &lt;<span class="hljs-built_in">id</span>&gt; [user h] %}`,
-                            `{% checklist [<span class="hljs-string">&quot;Title&quot;</span>] … %}` — inline, or block form with the
-                            body on following lines ending <span class="hljs-keyword">in</span> `%}`. `{% youtube &lt;<span class="hljs-built_in">id</span>&gt; %}` /
-                            `{% vimeo &lt;<span class="hljs-built_in">id</span>&gt; %}` moved into
-                            [`@kirigami/plugin-embed`](https://www.npmjs.com/package/@kirigami/plugin-embed) —
-                            not a default anymore, since resolving the <span class="hljs-built_in">id</span> into a real card
-                            (oEmbed lookup, cover thumbnail, play button) needs the plugin<span class="hljs-string">&#x27;s
-                            client-side script, not just a Markdown shortcut.
-
-                            ## Sass hooks
-
-                            A plugin **package**, listed under `plugins:` in
-                            `kirigami.yaml`, can contribute to `sass` tasks via
-                            `@kirigami/sdk`:
-
-                            ```js
-                            import { on, HOOKS } from &#x27;</span>@kirigami/sdk<span class="hljs-string">&#x27;;
-                            on(HOOKS.SASS_BEFORE,    (ctx) =&gt; &#x27;</span>/abs/path/to/before.scss<span class="hljs-string">&#x27;);
-                            on(HOOKS.SASS_AFTER,     (ctx) =&gt; &#x27;</span>/abs/path/to/after.scss<span class="hljs-string">&#x27;);
-                            on(HOOKS.SASS_FUNCTIONS, (ctx) =&gt; ({ &#x27;</span>my-fn(<span class="hljs-variable">$x</span>)<span class="hljs-string">&#x27;: (args) =&gt; /* SassValue */ }));
-                            ```
-
-                            `ctx` is `{ __root, task, exportPath, config }`. On a signature
-                            collision with a native Sass function, the native one wins. This
-                            is exactly how `@kirigami/plugin-highlight` appends its code
-                            theme after every project&#x27;</span>s own styles, and how `esbuild:before` /
-                            `esbuild:after` / `esbuild:plugins` mirror the same idea <span class="hljs-keyword">for</span> JS
-                            bundles, plus `prepros:html` — a waterfall hook transforming each
-                            rendered page<span class="hljs-string">&#x27;s HTML (what plugin-highlight&#x27;</span>s own colouring pass
-                            runs on).
                         </code></pre>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Hook</th>
+                                    <th>Fires</th>
+                                    <th><code>$data</code></th>
+                                    <th>Return</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>page_info</code></td>
+                                    <td>after PHPDOC parse, before render</td>
+                                    <td><code>[$filePath, $pageObject]</code></td>
+                                    <td><code>$pageObject</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>pre_render</code></td>
+                                    <td>before PHP execution</td>
+                                    <td>raw source <code>string</code></td>
+                                    <td><code>string</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>post_render</code></td>
+                                    <td>after tag processing, before <code>HTML::format()</code></td>
+                                    <td>assembled HTML <code>string</code></td>
+                                    <td><code>string</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Multiple callbacks per hook run in registration order, chained. The full <code>PREPROS</code> API — <code>mount()</code>, <code>exportFile()</code>, <code>fstat()</code>, <code>backtraceFile()</code>, <code>$config</code> — is in the <a href="../php/#prepros">PHP class library</a>.</p>
+                        <h2 id="md-plugins">MD plugins</h2>
+                        <p><code>MD::registerPlugin(&apos;video&apos;, fn(array $args, string $body): string =&gt; …)</code> — works inside <code>&lt;markdown&gt;</code> blocks, <code>.md</code> data files, and any <code>MD::toHtml()</code> call. Kirigami ships a handful by default (<code>md.plugins.php</code>): <code>{% callout info|success|warning|danger [&quot;Title&quot;] content %}</code>, <code>{% img-asset path [w [h [cover]]] %}</code>, <code>{% codepen &lt;id&gt; [user h] %}</code>, <code>{% checklist [&quot;Title&quot;] … %}</code> — inline, or block form with the body on following lines ending in <code>%}</code>. <code>{% youtube &lt;id&gt; %}</code> / <code>{% vimeo &lt;id&gt; %}</code> moved into <a href="https://www.npmjs.com/package/@kirigami/plugin-embed" target="_blank" rel="noopener noreferrer"><code>@kirigami/plugin-embed</code></a> — not a default anymore, since resolving the id into a real card (oEmbed lookup, cover thumbnail, play button) needs the plugin&apos;s client-side script, not just a Markdown shortcut.</p>
+                        <h2 id="sass-hooks">Sass hooks</h2>
+                        <p>A plugin <strong>package</strong>, listed under <code>plugins:</code> in <code>kirigami.yaml</code>, can contribute to <code>sass</code> tasks via <code>@kirigami/sdk</code>:</p>
+                        <pre><code class="hljs language-js">
+                            <span class="hljs-keyword">import</span> { on, <span class="hljs-variable constant_">HOOKS</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/sdk&#x27;</span>;
+                            <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_BEFORE</span>,    <span class="hljs-function">(<span class="hljs-params">ctx</span>) =&gt;</span> <span class="hljs-string">&#x27;/abs/path/to/before.scss&#x27;</span>);
+                            <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>,     <span class="hljs-function">(<span class="hljs-params">ctx</span>) =&gt;</span> <span class="hljs-string">&#x27;/abs/path/to/after.scss&#x27;</span>);
+                            <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_FUNCTIONS</span>, <span class="hljs-function">(<span class="hljs-params">ctx</span>) =&gt;</span> ({ <span class="hljs-string">&#x27;my-fn($x)&#x27;</span>: <span class="hljs-function">(<span class="hljs-params">args</span>) =&gt;</span> <span class="hljs-comment">/* SassValue */</span> }));
+                        </code></pre>
+                        <p><code>ctx</code> is <code>{ __root, task, exportPath, config }</code>. On a signature collision with a native Sass function, the native one wins. This is exactly how <code>@kirigami/plugin-highlight</code> appends its code theme after every project&apos;s own styles, and how <code>esbuild:before</code> / <code>esbuild:after</code> / <code>esbuild:plugins</code> mirror the same idea for JS bundles, plus <code>prepros:html</code> — a waterfall hook transforming each rendered page&apos;s HTML (what plugin-highlight&apos;s own colouring pass runs on).</p>
                     </div>
                     <nav class="docs-pager" aria-label="Previous and next">
                         <a rel="prev" href="../../docs/">Overview</a>
