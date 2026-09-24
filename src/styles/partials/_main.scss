@@ -11,6 +11,14 @@
 @use "@kirigami/canva/main";        // → `.breadcrumb` / `.docs-toc` / `.table` / `.badge` / `.palette`
 @use "@kirigami/canva/lightswitch"; // → `.lightswitch` animated theme toggle
 
+// canva eases the palette swap on a theme change with a `transition` on every
+// element. A rule that sets its own `transition` replaces that one, so the
+// rules below start from this same list to keep fading with the theme.
+$theme-transition:
+    background-color var(--transition-duration) ease,
+    background-image var(--transition-duration) ease,
+    color var(--transition-duration) ease;
+
 // Paper grain: a faint fractal noise tile, laid over the page background.
 $grain: svg-url('<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .45  0 0 0 0 .35  0 0 0 .07 0"/></filter><rect width="100%" height="100%" filter="url(#n)"/></svg>');
 
@@ -84,7 +92,7 @@ code {
     background: var(--surface);
     box-shadow: var(--sheet-shadow);
     transform: translateY(-150%);
-    transition: transform .15s;
+    transition: $theme-transition, transform .15s;
 
     &:focus-visible { transform: none; }
 }
@@ -233,7 +241,7 @@ code {
     font-weight: 600;
     text-decoration: none;
     box-shadow: 0 .15rem 0 color-mix(in srgb, var(--accent) 60%, var(--ink)), var(--sheet-shadow);
-    transition: transform .15s, box-shadow .15s;
+    transition: $theme-transition, transform .15s, box-shadow .15s;
 
     &:hover { transform: translateY(-.1rem); box-shadow: 0 .25rem 0 color-mix(in srgb, var(--accent) 60%, var(--ink)), var(--sheet-shadow-lift); }
 
@@ -317,7 +325,7 @@ code {
     display: grid;
     grid-template-rows: auto 1fr;
     overflow: hidden;
-    transition: transform .2s, box-shadow .2s;
+    transition: $theme-transition, transform .2s, box-shadow .2s;
 
     &:hover { transform: translateY(-.2rem) rotate(-.3deg); box-shadow: var(--sheet-shadow-lift); }
 
@@ -399,7 +407,7 @@ span.gateway__art {
     padding: 1.25rem 1.35rem;
     color: inherit;
     text-decoration: none;
-    transition: transform .2s, box-shadow .2s;
+    transition: $theme-transition, transform .2s, box-shadow .2s;
 
     h3 { margin-bottom: .4rem; font-family: var(--font-heading); }
     p { color: var(--ink-muted); margin: 0; }
@@ -611,7 +619,7 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
         color: var(--ink);
         text-decoration: none;
         font-weight: 600;
-        transition: transform .2s, box-shadow .2s;
+        transition: $theme-transition, transform .2s, box-shadow .2s;
 
         &:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-lift); }
     }
@@ -862,7 +870,7 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
 .js [data-reveal] {
     opacity: 0;
     transform: translateY(.75rem);
-    transition: opacity .5s, transform .5s;
+    transition: $theme-transition, opacity .5s, transform .5s;
 
     &.is-in { opacity: 1; transform: none; }
 }
