@@ -187,10 +187,11 @@
       $img->width; $img->height;
       $img->resize(int $w, int $h = 0, bool $cover = false): self;   // contain by default; cover crops+fills
       $img->save(string $dest): self;                                // format from extension: jpg png gif webp avif
-      $img->getRepresentativeColors(int $count = 5): string[];       // ['#rrggbb', …]
+      $img->getRepresentativeColors(int $count = 5): string[];       // ['#rrggbb', …] (median cut)
+      $img->getAuraColors(int $count = 5): string[];                 // ['#rrggbb', …] (Aura, max 6)
 
       IMG::asset(string $path, int $w = 0, int $h = 0, bool $cover = false): string;  // → generated file URL, relative to caller
-      IMG::palette(string $path, int $colors = 5): string[];                          // CACHE-backed
+      IMG::palette(string $path, int $colors = 5): string[];                          // CACHE-backed, Aura (max 6)
       ```
 
       `asset()` resolves `$path` against `image.source`, writes into
@@ -198,6 +199,14 @@
       `<name>-<W>w` / `-<H>h` / `-<W>x<H>[-cover].<format>`. The same
       call is reachable from Sass (`img-asset()`) and from markup
       (`<img asset>`) — see [config → image](../config/#image).
+
+      `palette()` extracts colours with Aura, an extension built into the PHP
+      runtime. Aura picks up to six named swatches (vibrant and muted, each
+      in a dark and a light variant) instead of clustering an arbitrary
+      number of colours, so it returns at most six, the most present first,
+      and asking for more just returns what it found. Swatches Aura had to
+      invent because the image has no such colour are dropped. The same
+      list feeds Sass's `colors()`.
     </markdown>
 
 <?php $palette = img_palette('male-african-bush-elephant.jpg', 5); ?>

@@ -136,7 +136,7 @@
             <div class="prose">
                 <markdown>
                 The same `on()` call, a different hook — `SASS_AFTER`
-                appends a file to every `sass` task, after the project's own
+                appends a file to the first `sass` task, after the project's own
                 entry (so the project's tokens are already defined when it
                 compiles):
 
@@ -277,25 +277,25 @@
                     <td><code>SASS_BEFORE</code> / <code>SASS_AFTER</code></td>
                     <td>collect</td>
                     <td><code>{ __root, task, exportPath, config }</code></td>
-                    <td>a `.scss` path, or an array of them</td>
+                    <td>a `.scss` path, or an array of them — added to the <strong>first</strong> sass task only</td>
                 </tr>
                 <tr>
                     <td><code>SASS_FUNCTIONS</code></td>
                     <td>collect</td>
                     <td>same as above</td>
-                    <td><code>{ 'my-fn($x)': (args) => SassValue }</code></td>
+                    <td><code>{ 'my-fn($x)': (args) => SassValue }</code> — applies to every sass task</td>
                 </tr>
                 <tr>
                     <td><code>ESBUILD_BEFORE</code> / <code>ESBUILD_AFTER</code></td>
                     <td>collect</td>
                     <td><code>{ __root, task, exportPath, config }</code></td>
-                    <td>a `.js`/`.ts` path, or an array — bundled as a side-effect import</td>
+                    <td>a `.js`/`.ts` path, or an array — bundled as a side-effect import into the <strong>first</strong> esbuild task only</td>
                 </tr>
                 <tr>
                     <td><code>ESBUILD_PLUGINS</code></td>
                     <td>collect</td>
                     <td>same as above</td>
-                    <td>an esbuild plugin object, or an array</td>
+                    <td>an esbuild plugin object, or an array — applies to every esbuild task</td>
                 </tr>
                 <tr>
                     <td><code>PREPROS_PHP</code></td>

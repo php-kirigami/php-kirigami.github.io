@@ -224,7 +224,7 @@
                     <li>
                         <h3>Ship default styles</h3>
                         <div class="prose">
-                            <p>The same <code>on()</code> call, a different hook — <code>SASS_AFTER</code> appends a file to every <code>sass</code> task, after the project&apos;s own entry (so the project&apos;s tokens are already defined when it compiles):</p>
+                            <p>The same <code>on()</code> call, a different hook — <code>SASS_AFTER</code> appends a file to the first <code>sass</code> task, after the project&apos;s own entry (so the project&apos;s tokens are already defined when it compiles):</p>
                             <pre><code class="hljs language-js">
                                 <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;badge.scss&#x27;</span>));
                             </code></pre>
@@ -308,25 +308,25 @@
                                 <td><code>SASS_BEFORE</code> / <code>SASS_AFTER</code></td>
                                 <td>collect</td>
                                 <td><code>{ __root, task, exportPath, config }</code></td>
-                                <td>a `.scss` path, or an array of them</td>
+                                <td>a `.scss` path, or an array of them — added to the <strong>first</strong> sass task only</td>
                             </tr>
                             <tr>
                                 <td><code>SASS_FUNCTIONS</code></td>
                                 <td>collect</td>
                                 <td>same as above</td>
-                                <td><code>{ &apos;my-fn($x)&apos;: (args) =&gt; SassValue }</code></td>
+                                <td><code>{ &apos;my-fn($x)&apos;: (args) =&gt; SassValue }</code> — applies to every sass task</td>
                             </tr>
                             <tr>
                                 <td><code>ESBUILD_BEFORE</code> / <code>ESBUILD_AFTER</code></td>
                                 <td>collect</td>
                                 <td><code>{ __root, task, exportPath, config }</code></td>
-                                <td>a `.js`/`.ts` path, or an array — bundled as a side-effect import</td>
+                                <td>a `.js`/`.ts` path, or an array — bundled as a side-effect import into the <strong>first</strong> esbuild task only</td>
                             </tr>
                             <tr>
                                 <td><code>ESBUILD_PLUGINS</code></td>
                                 <td>collect</td>
                                 <td>same as above</td>
-                                <td>an esbuild plugin object, or an array</td>
+                                <td>an esbuild plugin object, or an array — applies to every esbuild task</td>
                             </tr>
                             <tr>
                                 <td><code>PREPROS_PHP</code></td>

@@ -15,6 +15,33 @@
           README, linked below each entry; [Ecosystem](../ecosystem/) always
           shows the current version of everything, fetched live from npm.
 
+          ## September 29, 2026
+
+          **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**
+          `3.0.2` → `3.1.1` — the new [`studio:` block](../docs/config/#studio)
+          for [Kiri Studio](https://github.com/php-kirigami/kiri-studio), the
+          desktop app that lets a client edit their own site; a watched data
+          file now re-renders the pages that load it, not the whole
+          directory; and the files plugins inject with `sass:before` /
+          `sass:after` and `esbuild:before` / `esbuild:after` go into the
+          **first** task of each type only, instead of being repeated in
+          every stylesheet and bundle of a site with several.
+
+          **[@kirigami/php-prepros](https://www.npmjs.com/package/@kirigami/php-prepros)**
+          `3.0.1` → `3.1.1` — `IMG::palette()` (and Sass's `colors()`) now
+          extract colours with Aura, built into the PHP runtime: up to six
+          swatches (vibrant and muted, dark and light), most present first,
+          instead of an arbitrary number. See [Docs → PHP](../docs/php/#img).
+
+          **[@kirigami/php-wasm](https://www.npmjs.com/package/@kirigami/php-wasm)**
+          `8.5.11` → `8.5.11-1` — a rebuild of PHP 8.5.11 with the `aura` and
+          `translit` extensions linked in.
+
+          **[@kirigami/cli](https://www.npmjs.com/package/@kirigami/cli)**
+          `0.1.2` → `0.1.4` — `kiri export` says why it refused to export
+          (for example an existing `dist/` it did not create), instead of
+          exiting silently. **VS Code extension** `0.1.2` bundles all of it.
+
           ## September 11, 2026
 
           **[@kirigami/php-prepros](https://www.npmjs.com/package/@kirigami/php-prepros)**
