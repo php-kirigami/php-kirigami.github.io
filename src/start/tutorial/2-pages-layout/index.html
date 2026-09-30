@@ -137,22 +137,22 @@
                         <h3>Add two more pages</h3>
                         <div class="prose">
                             <p>Studio Plié needs a home page (already there), a notes section, and a gallery:</p>
-                            <pre><code class="hljs language-bash">
-                                src/
-                                ├── _index.php          → /
-                                ├── notes/_index.php    → /notes/
-                                └── atelier/_index.php  → /atelier/
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">src/</span>
+                                <span class="hljs-line">├── _index.php          → /</span>
+                                <span class="hljs-line">├── notes/_index.php    → /notes/</span>
+                                <span class="hljs-line">└── atelier/_index.php  → /atelier/</span>
                             </code></pre>
                             <p>Each starts the same way — a PHPDOC block, then markup:</p>
-                            <pre><code class="hljs language-php">
-                                <span class="hljs-comment">/**
-                                 * <span class="hljs-doctag">@title</span>    Atelier
-                                 * <span class="hljs-doctag">@section</span>  atelier
-                                 * <span class="hljs-doctag">@abstract</span> Where the folding happens.
-                                 */</span>
-
-                                <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$title</span>) . <span class="hljs-string">&#x27;&lt;/h1&gt;&#x27;</span>;
-                                <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$abstract</span>) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;
+                            <pre><code class="hljs language-php hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span>    Atelier</span></span>
+                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@section</span>  atelier</span></span>
+                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@abstract</span> Where the folding happens.</span></span>
+                                <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line"><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$title</span>) . <span class="hljs-string">&#x27;&lt;/h1&gt;&#x27;</span>;</span>
+                                <span class="hljs-line"><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$abstract</span>) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;</span>
                             </code></pre>
                             <p>Every <code>@key value</code> in that docblock becomes a <code>$key</code> variable — in the page itself, <strong>and</strong> in <code>before</code>/<code>after</code>. Define whatever keys make sense; <code>@title</code>, <code>@section</code> and <code>@abstract</code> are just this project&apos;s own convention, not reserved words.</p>
                         </div>
@@ -161,20 +161,20 @@
                         <h3>Wire up navigation in the header</h3>
                         <div class="prose">
                             <p><code>src/_layouts/header.php</code> runs before every page (it&apos;s <code>prepros.before</code> in <code>kirigami.yaml</code>), so it&apos;s the natural place for a nav built from a plain PHP array:</p>
-                            <pre><code class="hljs language-php">
-                                <span class="hljs-variable">$nav</span> = [
-                                    <span class="hljs-string">&#x27;&#x27;</span>         =&gt; [<span class="hljs-string">&#x27;Home&#x27;</span>,   <span class="hljs-string">&#x27;home&#x27;</span>],
-                                    <span class="hljs-string">&#x27;notes/&#x27;</span>   =&gt; [<span class="hljs-string">&#x27;Notes&#x27;</span>,  <span class="hljs-string">&#x27;notes&#x27;</span>],
-                                    <span class="hljs-string">&#x27;atelier/&#x27;</span> =&gt; [<span class="hljs-string">&#x27;Atelier&#x27;</span>,<span class="hljs-string">&#x27;atelier&#x27;</span>],
-                                ];
+                            <pre><code class="hljs language-php hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-variable">$nav</span> = [</span>
+                                <span class="hljs-line">    <span class="hljs-string">&#x27;&#x27;</span>         =&gt; [<span class="hljs-string">&#x27;Home&#x27;</span>,   <span class="hljs-string">&#x27;home&#x27;</span>],</span>
+                                <span class="hljs-line">    <span class="hljs-string">&#x27;notes/&#x27;</span>   =&gt; [<span class="hljs-string">&#x27;Notes&#x27;</span>,  <span class="hljs-string">&#x27;notes&#x27;</span>],</span>
+                                <span class="hljs-line">    <span class="hljs-string">&#x27;atelier/&#x27;</span> =&gt; [<span class="hljs-string">&#x27;Atelier&#x27;</span>,<span class="hljs-string">&#x27;atelier&#x27;</span>],</span>
+                                <span class="hljs-line">];</span>
                             </code></pre>
-                            <pre><code class="hljs language-php">
-                                <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$nav</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$path</span> =&gt; [<span class="hljs-variable">$label</span>, <span class="hljs-variable">$key</span>]) {
-                                    <span class="hljs-variable">$current</span> = (<span class="hljs-variable">$section</span> ?: <span class="hljs-string">&#x27;home&#x27;</span>) === <span class="hljs-variable">$key</span>;
-                                    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;a href=&quot;&#x27;</span> . <span class="hljs-variable">$relroot</span> . <span class="hljs-variable">$path</span> . <span class="hljs-string">&#x27;&quot;&#x27;</span>
-                                       . (<span class="hljs-variable">$current</span> ? <span class="hljs-string">&#x27; aria-current=&quot;page&quot;&#x27;</span> : <span class="hljs-string">&#x27;&#x27;</span>)
-                                       . <span class="hljs-string">&#x27;&gt;&#x27;</span> . <span class="hljs-variable">$label</span> . <span class="hljs-string">&#x27;&lt;/a&gt;&#x27;</span>;
-                                }
+                            <pre><code class="hljs language-php hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$nav</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$path</span> =&gt; [<span class="hljs-variable">$label</span>, <span class="hljs-variable">$key</span>]) {</span>
+                                <span class="hljs-line">    <span class="hljs-variable">$current</span> = (<span class="hljs-variable">$section</span> ?: <span class="hljs-string">&#x27;home&#x27;</span>) === <span class="hljs-variable">$key</span>;</span>
+                                <span class="hljs-line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;a href=&quot;&#x27;</span> . <span class="hljs-variable">$relroot</span> . <span class="hljs-variable">$path</span> . <span class="hljs-string">&#x27;&quot;&#x27;</span></span>
+                                <span class="hljs-line">       . (<span class="hljs-variable">$current</span> ? <span class="hljs-string">&#x27; aria-current=&quot;page&quot;&#x27;</span> : <span class="hljs-string">&#x27;&#x27;</span>)</span>
+                                <span class="hljs-line">       . <span class="hljs-string">&#x27;&gt;&#x27;</span> . <span class="hljs-variable">$label</span> . <span class="hljs-string">&#x27;&lt;/a&gt;&#x27;</span>;</span>
+                                <span class="hljs-line">}</span>
                             </code></pre>
                             <p><code>$relroot</code> is injected by Kirigami on every render — the relative path from the current page back to <code>kirigami.root</code> — so these links work whether the current page is <code>/</code> or three folders deep.</p>
                         </div>

@@ -203,13 +203,13 @@
                             <tr>
                                 <td><a href="https://www.npmjs.com/package/@kirigami/plugin-player"> <code>@kirigami/plugin-player</code> </a></td>
                                 <td>Audio players and playlists, waveform baked at build time.</td>
-                                <td class="table__num">v0.1.0</td>
+                                <td class="table__num">v0.1.1</td>
                                 <td><span class="badge">GPL-3.0-or-later</span></td>
                             </tr>
                             <tr>
                                 <td><a href="https://www.npmjs.com/package/@kirigami/plugin-clip"> <code>@kirigami/plugin-clip</code> </a></td>
                                 <td>Local video players and silent loops, poster picked at build time.</td>
-                                <td class="table__num">v0.1.0</td>
+                                <td class="table__num">v0.1.1</td>
                                 <td><span class="badge">GPL-3.0-or-later</span></td>
                             </tr>
                             <tr>
@@ -233,11 +233,11 @@
                 <h2>Release order</h2>
                 <div class="prose">
                     <p>Every internal <code>@kirigami/*</code> dependency is pinned to an <strong>exact</strong> version — bumping <code>canva</code>, say, means also bumping the dep range of every package that depends on it (<code>kirigami</code>, <code>plugin-highlight</code>, <code>plugin-embed</code>, …), even if nothing else about them changed. The release script topologically sorts the graph and walks it in that order, skipping a package outright if that exact version is already published:</p>
-                    <pre><code class="hljs language-scss">
-                        sdk → canva → struct-walker → php-prepros → kirigami
-                            → plugin-highlight → plugin-extlink → plugin-embed
-                        audiowaveform-wasm → plugin-player
-                        bestframe → plugin-<span class="hljs-attribute">clip</span>
+                    <pre><code class="hljs language-scss hljs-numbered">
+                        <span class="hljs-line">sdk → canva → struct-walker → php-prepros → kirigami</span>
+                        <span class="hljs-line">    → plugin-highlight → plugin-extlink → plugin-embed</span>
+                        <span class="hljs-line">audiowaveform-wasm → plugin-player</span>
+                        <span class="hljs-line">bestframe → plugin-<span class="hljs-attribute">clip</span></span>
                     </code></pre>
                     <p>For each one still needing a release: run its <code>build</code> script, <code>npm pack</code> it into <code>packs/</code>, <code>npm publish</code>, then move to the next. Once everything is out, it purges the jsDelivr cache for <code>kirigami.schema.json</code> and every plugin&apos;s <code>kirigami.optionsSchema</code> — both are served from GitHub <code>@main</code>, and an editor would otherwise keep the stale copy for up to 12h after a schema change.</p>
                 </div>

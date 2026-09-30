@@ -143,21 +143,21 @@
                         <h3 id="step-1">The package shape</h3>
                         <div class="prose">
                             <p>A plugin is an ordinary npm package with one extra block in its <code>package.json</code>:</p>
-                            <pre><code class="hljs language-json">
-                                <span class="hljs-punctuation">{</span>
-                                  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;kirigami-plugin-badge&quot;</span><span class="hljs-punctuation">,</span>
-                                  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.1.0&quot;</span><span class="hljs-punctuation">,</span>
-                                  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;module&quot;</span><span class="hljs-punctuation">,</span>
-                                  <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index.js&quot;</span><span class="hljs-punctuation">,</span>
-                                  <span class="hljs-attr">&quot;kirigami&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                                    <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;plugin&quot;</span><span class="hljs-punctuation">,</span>
-                                    <span class="hljs-attr">&quot;minVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.5.0&quot;</span><span class="hljs-punctuation">,</span>
-                                    <span class="hljs-attr">&quot;optionsSchema&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./options.schema.json&quot;</span>
-                                  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
-                                  <span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                                    <span class="hljs-attr">&quot;@kirigami/sdk&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.2.0&quot;</span>
-                                  <span class="hljs-punctuation">}</span>
-                                <span class="hljs-punctuation">}</span>
+                            <pre><code class="hljs language-json hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-punctuation">{</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;kirigami-plugin-badge&quot;</span><span class="hljs-punctuation">,</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.1.0&quot;</span><span class="hljs-punctuation">,</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;module&quot;</span><span class="hljs-punctuation">,</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">&quot;main&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;index.js&quot;</span><span class="hljs-punctuation">,</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">&quot;kirigami&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;plugin&quot;</span><span class="hljs-punctuation">,</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">&quot;minVersion&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.5.0&quot;</span><span class="hljs-punctuation">,</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">&quot;optionsSchema&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./options.schema.json&quot;</span></span>
+                                <span class="hljs-line">  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">&quot;dependencies&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">&quot;@kirigami/sdk&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;^0.2.0&quot;</span></span>
+                                <span class="hljs-line">  <span class="hljs-punctuation">}</span></span>
+                                <span class="hljs-line"><span class="hljs-punctuation">}</span></span>
                             </code></pre>
                             <p><code>kiri</code> only accepts three naming shapes for the <code>name</code> field — this is how it tells a plugin apart from an unrelated dependency in <code>plugins:</code>:</p>
                             <table>
@@ -189,17 +189,17 @@
                         <h3>Register on load</h3>
                         <div class="prose">
                             <p><code>main</code> exports a default function. <code>kiri</code> calls it once, at the top of every <code>build</code>/<code>export</code>/<code>watch</code>, with the <code>options:</code> this project gave it in <code>kirigami.yaml</code>:</p>
-                            <pre><code class="hljs language-js">
-                                <span class="hljs-comment">// index.js</span>
-                                <span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:path&#x27;</span>;
-                                <span class="hljs-keyword">import</span> { fileURLToPath } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:url&#x27;</span>;
-                                <span class="hljs-keyword">import</span> { on, <span class="hljs-variable constant_">HOOKS</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/sdk&#x27;</span>;
-
-                                <span class="hljs-keyword">const</span> dir = path.<span class="hljs-title function_">dirname</span>(<span class="hljs-title function_">fileURLToPath</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>));
-
-                                <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">register</span>(<span class="hljs-params">options = {}</span>) {
-                                    <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">PREPROS_PHP</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;php&#x27;</span>, <span class="hljs-string">&#x27;badge.php&#x27;</span>));
-                                }
+                            <pre><code class="hljs language-js hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-comment">// index.js</span></span>
+                                <span class="hljs-line"><span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:path&#x27;</span>;</span>
+                                <span class="hljs-line"><span class="hljs-keyword">import</span> { fileURLToPath } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:url&#x27;</span>;</span>
+                                <span class="hljs-line"><span class="hljs-keyword">import</span> { on, <span class="hljs-variable constant_">HOOKS</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/sdk&#x27;</span>;</span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line"><span class="hljs-keyword">const</span> dir = path.<span class="hljs-title function_">dirname</span>(<span class="hljs-title function_">fileURLToPath</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>));</span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">register</span>(<span class="hljs-params">options = {}</span>) {</span>
+                                <span class="hljs-line">    <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">PREPROS_PHP</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;php&#x27;</span>, <span class="hljs-string">&#x27;badge.php&#x27;</span>));</span>
+                                <span class="hljs-line">}</span>
                             </code></pre>
                             <p><code>on(hook, fn)</code> is <a href="https://www.npmjs.com/package/@kirigami/sdk" target="_blank" rel="noopener noreferrer"><code>@kirigami/sdk</code></a>&apos;s whole API surface, shared by every task and every plugin in the process. <code>PREPROS_PHP</code> tells <code>kiri</code> &quot;mount this absolute PHP path and <code>include_once</code> it before any page renders&quot; — the seam that lets a plugin call <code>PREPROS::registerTag()</code> from real PHP, the same call a project&apos;s own <code>_lib/functions.php</code> would make.</p>
                         </div>
@@ -208,15 +208,15 @@
                         <h3>The tag itself</h3>
                         <div class="prose">
                             <p>Ordinary <code>@kirigami/php-prepros</code> PHP — nothing plugin-specific about this file at all:</p>
-                            <pre><code class="hljs language-php">
-                                <span class="hljs-comment">// php/badge.php</span>
-                                PREPROS::<span class="hljs-title function_ invoke__">registerTag</span>(<span class="hljs-string">&#x27;badge&#x27;</span>, function (<span class="hljs-variable">$tag</span>, <span class="hljs-variable">$attrs</span>, <span class="hljs-variable">$body</span>) {
-                                    <span class="hljs-variable">$text</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$body</span>) ?: (<span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;text&#x27;</span>] ?? <span class="hljs-string">&#x27;&#x27;</span>);
-                                    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$text</span> === <span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>;
-                                    <span class="hljs-variable">$tone</span> = <span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;tone&#x27;</span>] ?? <span class="hljs-string">&#x27;accent&#x27;</span>;
-                                    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;span class=&quot;pg-badge pg-badge--&#x27;</span> . <span class="hljs-title function_ invoke__">htmlspecialchars</span>(<span class="hljs-variable">$tone</span>, ENT_QUOTES) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span>
-                                         . <span class="hljs-title function_ invoke__">htmlspecialchars</span>(<span class="hljs-variable">$text</span>, ENT_QUOTES) . <span class="hljs-string">&#x27;&lt;/span&gt;&#x27;</span>;
-                                });
+                            <pre><code class="hljs language-php hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-comment">// php/badge.php</span></span>
+                                <span class="hljs-line">PREPROS::<span class="hljs-title function_ invoke__">registerTag</span>(<span class="hljs-string">&#x27;badge&#x27;</span>, function (<span class="hljs-variable">$tag</span>, <span class="hljs-variable">$attrs</span>, <span class="hljs-variable">$body</span>) {</span>
+                                <span class="hljs-line">    <span class="hljs-variable">$text</span> = <span class="hljs-title function_ invoke__">trim</span>(<span class="hljs-variable">$body</span>) ?: (<span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;text&#x27;</span>] ?? <span class="hljs-string">&#x27;&#x27;</span>);</span>
+                                <span class="hljs-line">    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$text</span> === <span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>;</span>
+                                <span class="hljs-line">    <span class="hljs-variable">$tone</span> = <span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;tone&#x27;</span>] ?? <span class="hljs-string">&#x27;accent&#x27;</span>;</span>
+                                <span class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;span class=&quot;pg-badge pg-badge--&#x27;</span> . <span class="hljs-title function_ invoke__">htmlspecialchars</span>(<span class="hljs-variable">$tone</span>, ENT_QUOTES) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span></span>
+                                <span class="hljs-line">         . <span class="hljs-title function_ invoke__">htmlspecialchars</span>(<span class="hljs-variable">$text</span>, ENT_QUOTES) . <span class="hljs-string">&#x27;&lt;/span&gt;&#x27;</span>;</span>
+                                <span class="hljs-line">});</span>
                             </code></pre>
                             <p><code>&lt;badge&gt;New&lt;/badge&gt;</code> and <code>&lt;badge text=&quot;Beta&quot; tone=&quot;accent&quot;&gt;</code> both work — <code>STR::replaceTags()</code> (what <code>registerTag()</code> runs on under the hood) accepts a tag with a body, self-closing, or bare. Full signature and the rest of the <code>PREPROS</code> API — <code>mount()</code>, <code>exportFile()</code>, <code>fstat()</code>, <code>$config</code> — is in the <a href="../../docs/php/#prepros">PHP class library</a>.</p>
                         </div>
@@ -225,20 +225,20 @@
                         <h3>Ship default styles</h3>
                         <div class="prose">
                             <p>The same <code>on()</code> call, a different hook — <code>SASS_AFTER</code> appends a file to the first <code>sass</code> task, after the project&apos;s own entry (so the project&apos;s tokens are already defined when it compiles):</p>
-                            <pre><code class="hljs language-js">
-                                <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;badge.scss&#x27;</span>));
+                            <pre><code class="hljs language-js hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;badge.scss&#x27;</span>));</span>
                             </code></pre>
-                            <pre><code class="hljs language-scss">
-                                <span class="hljs-comment">// badge.scss</span>
-                                <span class="hljs-selector-class">.pg-badge</span> {
-                                    <span class="hljs-attribute">display</span>: inline-block;
-                                    <span class="hljs-attribute">padding</span>: .<span class="hljs-number">15em</span> .<span class="hljs-number">6em</span>;
-                                    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">3px</span>;
-                                    <span class="hljs-attribute">font-size</span>: .<span class="hljs-number">78em</span>;
-
-                                    &amp;<span class="hljs-attr">--accent</span> { <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--accent-soft); <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--accent); }
-                                    &amp;<span class="hljs-attr">--muted</span>  { <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--surface-<span class="hljs-number">2</span>);   <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--ink-muted); }
-                                }
+                            <pre><code class="hljs language-scss hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-comment">// badge.scss</span></span>
+                                <span class="hljs-line"><span class="hljs-selector-class">.pg-badge</span> {</span>
+                                <span class="hljs-line">    <span class="hljs-attribute">display</span>: inline-block;</span>
+                                <span class="hljs-line">    <span class="hljs-attribute">padding</span>: .<span class="hljs-number">15em</span> .<span class="hljs-number">6em</span>;</span>
+                                <span class="hljs-line">    <span class="hljs-attribute">border-radius</span>: <span class="hljs-number">3px</span>;</span>
+                                <span class="hljs-line">    <span class="hljs-attribute">font-size</span>: .<span class="hljs-number">78em</span>;</span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line">    &amp;<span class="hljs-attr">--accent</span> { <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--accent-soft); <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--accent); }</span>
+                                <span class="hljs-line">    &amp;<span class="hljs-attr">--muted</span>  { <span class="hljs-attribute">background</span>: <span class="hljs-built_in">var</span>(--surface-<span class="hljs-number">2</span>);   <span class="hljs-attribute">color</span>: <span class="hljs-built_in">var</span>(--ink-muted); }</span>
+                                <span class="hljs-line">}</span>
                             </code></pre>
                             <p>Reading <code>var(--accent)</code> instead of a hard-coded color is what lets this render correctly in <strong>any</strong> project&apos;s own palette, light or dark, with nothing to configure — <code>@kirigami/canva</code>&apos;s <code>conf</code> is what defines those tokens; see <a href="../#embed">plugin-embed</a>&apos;s play button for a slightly fancier version of the same idea.</p>
                             <p><code>ESBUILD_BEFORE</code>/<code>ESBUILD_AFTER</code> work identically for client-side JS — see <code>plugin-embed</code>&apos;s <code>src/embed.js</code> for a real one, and <code>PREPROS_HTML</code> if what you need is to transform each page&apos;s <em>rendered</em> HTML rather than contribute a tag (<code>plugin-highlight</code>&apos;s whole job runs on that hook).</p>
@@ -248,24 +248,24 @@
                         <h3 id="step-5">Make it configurable</h3>
                         <div class="prose">
                             <p><code>register(options)</code> receives whatever this project wrote under this plugin&apos;s <code>options:</code> in <code>kirigami.yaml</code> — but that value only exists on the <strong>JS</strong> side. There&apos;s no built-in channel from a JS-side option into the PHP file <code>PREPROS_PHP</code> mounts; if a tag&apos;s PHP-side behavior needs to vary, either hard-code the default in the PHP file itself (simplest — every official plugin here does exactly that for anything PHP-side), or gate a whole <em>hook</em> on an option, which <em>is</em> a normal JS-side decision:</p>
-                            <pre><code class="hljs language-js">
-                                <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">register</span>(<span class="hljs-params">options = {}</span>) {
-                                    <span class="hljs-keyword">const</span> opts = { <span class="hljs-attr">style</span>: <span class="hljs-literal">true</span>, ...options };
-                                    <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">PREPROS_PHP</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;php&#x27;</span>, <span class="hljs-string">&#x27;badge.php&#x27;</span>));
-                                    <span class="hljs-keyword">if</span> (opts.<span class="hljs-property">style</span>) <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;badge.scss&#x27;</span>));
-                                }
+                            <pre><code class="hljs language-js hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">register</span>(<span class="hljs-params">options = {}</span>) {</span>
+                                <span class="hljs-line">    <span class="hljs-keyword">const</span> opts = { <span class="hljs-attr">style</span>: <span class="hljs-literal">true</span>, ...options };</span>
+                                <span class="hljs-line">    <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">PREPROS_PHP</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;php&#x27;</span>, <span class="hljs-string">&#x27;badge.php&#x27;</span>));</span>
+                                <span class="hljs-line">    <span class="hljs-keyword">if</span> (opts.<span class="hljs-property">style</span>) <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(dir, <span class="hljs-string">&#x27;badge.scss&#x27;</span>));</span>
+                                <span class="hljs-line">}</span>
                             </code></pre>
                             <p><code>kiri</code> validates <code>options:</code> against <code>optionsSchema</code> before calling <code>register()</code> — point it at a small JSON Schema:</p>
-                            <pre><code class="hljs language-json">
-                                <span class="hljs-comment">// options.schema.json</span>
-                                <span class="hljs-punctuation">{</span>
-                                  <span class="hljs-attr">&quot;$schema&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="hljs-punctuation">,</span>
-                                  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object&quot;</span><span class="hljs-punctuation">,</span>
-                                  <span class="hljs-attr">&quot;additionalProperties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
-                                  <span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                                    <span class="hljs-attr">&quot;style&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;boolean&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span> <span class="hljs-punctuation">}</span>
-                                  <span class="hljs-punctuation">}</span>
-                                <span class="hljs-punctuation">}</span>
+                            <pre><code class="hljs language-json hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-comment">// options.schema.json</span></span>
+                                <span class="hljs-line"><span class="hljs-punctuation">{</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">&quot;$schema&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span class="hljs-punctuation">,</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;object&quot;</span><span class="hljs-punctuation">,</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">&quot;additionalProperties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">&quot;properties&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">&quot;style&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;boolean&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span> <span class="hljs-punctuation">}</span></span>
+                                <span class="hljs-line">  <span class="hljs-punctuation">}</span></span>
+                                <span class="hljs-line"><span class="hljs-punctuation">}</span></span>
                             </code></pre>
                             <p>This is also what makes <code>plugins[].options</code> autocomplete in an editor once <code>kirigami.schema.json</code> <code>$ref</code>s it — see how the official plugins wire that in their own repo if you&apos;re publishing under <code>@kirigami/</code>; a third-party plugin&apos;s options are still validated at build time either way.</p>
                         </div>
@@ -273,12 +273,12 @@
                     <li>
                         <h3>Try it</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-yaml">
-                                <span class="hljs-attr">plugins:</span>
-                                  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;kirigami-plugin-badge&quot;</span>
-                                    <span class="hljs-attr">active:</span> <span class="hljs-literal">true</span>
-                                    <span class="hljs-attr">options:</span>
-                                      <span class="hljs-attr">style:</span> <span class="hljs-literal">true</span>
+                            <pre><code class="hljs language-yaml hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-attr">plugins:</span></span>
+                                <span class="hljs-line">  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;kirigami-plugin-badge&quot;</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">active:</span> <span class="hljs-literal">true</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">options:</span></span>
+                                <span class="hljs-line">      <span class="hljs-attr">style:</span> <span class="hljs-literal">true</span></span>
                             </code></pre>
                             <p>For local development before publishing, point at the folder with a <code>file:</code> dependency and <code>npm install</code> — exactly what every plugin on this site was verified with before it shipped.</p>
                             <div class="markdown-alert markdown-alert-note">

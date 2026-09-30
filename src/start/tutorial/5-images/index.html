@@ -137,11 +137,11 @@
                         <h3>Point Kirigami at your originals</h3>
                         <div class="prose">
                             <p>Drop full-resolution source photos in <code>assets/images/</code> (kept out of <code>src/</code>, never served as-is), then add a small block to <code>kirigami.yaml</code>:</p>
-                            <pre><code class="hljs language-yaml">
-                                <span class="hljs-attr">image:</span>
-                                  <span class="hljs-attr">format:</span> <span class="hljs-string">webp</span>
-                                  <span class="hljs-attr">source:</span> <span class="hljs-string">assets/images</span>
-                                  <span class="hljs-attr">dest:</span>   <span class="hljs-string">images</span>
+                            <pre><code class="hljs language-yaml hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-attr">image:</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">format:</span> <span class="hljs-string">webp</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">source:</span> <span class="hljs-string">assets/images</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">dest:</span>   <span class="hljs-string">images</span></span>
                             </code></pre>
                             <p><code>dest</code> is relative to <code>kirigami.root</code> — generated files land in <code>src/images/</code> and get exported like any other page asset. Never hand-edit that folder; it&apos;s regenerated from <code>source</code>.</p>
                         </div>
@@ -150,10 +150,10 @@
                         <h3>A hero background, from Sass</h3>
                         <div class="prose">
                             <p><code>img-asset()</code> resizes, registers the source for the build, and returns the generated URL — one function, used like any other Sass value:</p>
-                            <pre><code class="hljs language-scss">
-                                <span class="hljs-selector-class">.hero</span> {
-                                    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">img-asset</span>(<span class="hljs-string">&quot;atelier-hero.jpg&quot;</span>, <span class="hljs-number">1600</span>, <span class="hljs-number">700</span>, true);
-                                }
+                            <pre><code class="hljs language-scss hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-selector-class">.hero</span> {</span>
+                                <span class="hljs-line">    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">img-asset</span>(<span class="hljs-string">&quot;atelier-hero.jpg&quot;</span>, <span class="hljs-number">1600</span>, <span class="hljs-number">700</span>, true);</span>
+                                <span class="hljs-line">}</span>
                             </code></pre>
                             <p>The three trailing arguments are width, height, and <code>cover</code> (crop to fill instead of contain) — the exact same shape every surface below takes.</p>
                         </div>
@@ -162,9 +162,9 @@
                         <h3>A gallery, from a page template</h3>
                         <div class="prose">
                             <p><code>atelier/_index.php</code> gets a plain <code>&lt;img asset&gt;</code> tag per photo — no PHP call needed for the common case:</p>
-                            <pre><code class="hljs language-html">
-                                <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">asset</span>=<span class="hljs-string">&quot;fold-01.jpg&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;480&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;320&quot;</span> <span class="hljs-attr">cover</span>
-                                     <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;A box-pleat in progress&quot;</span>&gt;</span>
+                            <pre><code class="hljs language-html hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">asset</span>=<span class="hljs-string">&quot;fold-01.jpg&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;480&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;320&quot;</span> <span class="hljs-attr">cover</span></span></span>
+                                <span class="hljs-line"><span class="hljs-tag">     <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;A box-pleat in progress&quot;</span>&gt;</span></span>
                             </code></pre>
                             <p>Any other attribute (<code>alt</code>, <code>class</code>, <code>loading</code>) passes through untouched. Need the URL itself instead — for a <code>srcset</code>, say — call <code>IMG::asset()</code> directly from PHP with the same <code>(path, width, height, cover)</code> shape.</p>
                         </div>

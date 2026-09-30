@@ -146,19 +146,19 @@
                 <div class="compare">
                     <div class="compare__panel">
                         <span class="compare__label">src/_index.php</span>
-                        <pre><code class="hljs language-php">
-                            <span class="hljs-comment">/**
-                             * <span class="hljs-doctag">@title</span> Home
-                             * <span class="hljs-doctag">@type</span>  page
-                             */</span>
-
-                            <span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$tagline</span>);
+                        <pre><code class="hljs language-php hljs-numbered">
+                            <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span> Home</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@type</span>  page</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                            <span class="hljs-line"></span>
+                            <span class="hljs-line"><span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$tagline</span>);</span>
                         </code></pre>
                     </div>
                     <div class="compare__panel">
                         <span class="compare__label">src/index.html, after kiri build</span>
-                        <pre><code class="hljs language-html">
-                            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Fold PHP into flat HTML.<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+                        <pre><code class="hljs language-html hljs-numbered">
+                            <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Fold PHP into flat HTML.<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>
                         </code></pre>
                     </div>
                 </div>
@@ -209,10 +209,10 @@
                 <h2 class="section-title">Built with itself</h2>
                 <div class="prose">
                     <p>This site is a Kirigami project: every page is an <code>_index.php</code>, the documentation uses a page type for its sidebar, and <a href="ecosystem/">Ecosystem</a> fetches its version numbers from npm at build time. Its source is <a href="https://github.com/php-kirigami/php-kirigami.github.io" target="_blank" rel="noopener noreferrer">on GitHub</a>.</p>
-                    <pre><code class="hljs language-bash">
-                        npm install --save-dev @kirigami/cli
-                        npx kiri create     <span class="hljs-comment"># pick a template</span>
-                        npx kiri serve      <span class="hljs-comment"># build, then live-reload while you edit</span>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">npm install --save-dev @kirigami/cli</span>
+                        <span class="hljs-line">npx kiri create     <span class="hljs-comment"># pick a template</span></span>
+                        <span class="hljs-line">npx kiri serve      <span class="hljs-comment"># build, then live-reload while you edit</span></span>
                     </code></pre>
                 </div>
             </section>

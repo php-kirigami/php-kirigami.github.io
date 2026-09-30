@@ -135,14 +135,14 @@
                     <p>That&apos;s the whole list. No PHP to install, no database, no headless browser.</p>
                     <h2 id="install-the-cli">Install the CLI</h2>
                     <p>Add it as a dev dependency to your project:</p>
-                    <pre><code class="hljs language-bash">
-                        npm install -D @kirigami/cli
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">npm install -D @kirigami/cli</span>
                     </code></pre>
                     <p>The <code>kiri</code> command is now available through <code>npx</code>, or as an npm script. It brings the engine, <code>@kirigami/kirigami</code>, along with it.</p>
                     <p>Prefer your editor? The <a href="../../docs/vscode/">VS Code extension</a> runs the same commands from the Command Palette, and its <strong>Create Project</strong> command scaffolds a new site without a terminal.</p>
                     <h2 id="verify-it">Verify it</h2>
-                    <pre><code class="hljs language-bash">
-                        npx kiri --version
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">npx kiri --version</span>
                     </code></pre>
                     <p>Prints the <code>kiri</code> version alongside the bundled PHP version — the WASM runtime ships with the CLI, so this also confirms PHP itself is there.</p>
                     <div class="markdown-alert markdown-alert-tip">

@@ -136,9 +136,9 @@
                     <li>
                         <h3>Scaffold from a template</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">
-                                npx kiri create default studio-plie
-                                <span class="hljs-built_in">cd</span> studio-plie
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">npx kiri create default studio-plie</span>
+                                <span class="hljs-line"><span class="hljs-built_in">cd</span> studio-plie</span>
                             </code></pre>
                             <p><code>kiri create</code> clones the <code>default</code> template&apos;s repo, deep-merges its <code>package.json</code>, writes what you type into <code>kirigami.yaml</code>, then runs <code>git init</code> and <code>npm install</code> for you. Run <code>npx kiri create --list</code> any time to see the official templates.</p>
                         </div>
@@ -146,16 +146,16 @@
                     <li>
                         <h3>Look at what you got</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">
-                                studio-plie/
-                                ├── kirigami.yaml
-                                ├── package.json
-                                └── src/                 ← kirigami.root
-                                    ├── _layouts/        ← header.php / footer.php
-                                    ├── _lib/            ← functions.php (tags/hooks/plugins)
-                                    ├── _index.php       → index.html
-                                    ├── styles/
-                                    └── scripts/
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">studio-plie/</span>
+                                <span class="hljs-line">├── kirigami.yaml</span>
+                                <span class="hljs-line">├── package.json</span>
+                                <span class="hljs-line">└── src/                 ← kirigami.root</span>
+                                <span class="hljs-line">    ├── _layouts/        ← header.php / footer.php</span>
+                                <span class="hljs-line">    ├── _lib/            ← functions.php (tags/hooks/plugins)</span>
+                                <span class="hljs-line">    ├── _index.php       → index.html</span>
+                                <span class="hljs-line">    ├── styles/</span>
+                                <span class="hljs-line">    └── scripts/</span>
                             </code></pre>
                             <p>Two naming rules explain the whole tree: a file <code>_name.php</code> compiles to <code>name.html</code> in the same folder (<code>_index.php</code> → <code>index.html</code>); a folder starting with <code>_</code> is never walked as a page directory — that&apos;s where layouts, includes and data live.</p>
                         </div>
@@ -163,8 +163,8 @@
                     <li>
                         <h3>Start the dev server</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">
-                                npx kiri serve
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">npx kiri serve</span>
                             </code></pre>
                             <p>Leave this running. It rebuilds pages, styles and scripts on every save, serves <code>src/</code> at <code>http://127.0.0.1:4321</code>, and reloads the open tab once a rebuild finishes — a <code>sass</code>-only change even hot-swaps the stylesheet without a full reload. Open that URL and leave it be for the rest of this tutorial.</p>
                         </div>
