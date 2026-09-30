@@ -15,6 +15,39 @@
           README, linked below each entry; [Ecosystem](../ecosystem/) always
           shows the current version of everything, fetched live from npm.
 
+          ## September 30, 2026
+
+          **[@kirigami/plugin-player](https://www.npmjs.com/package/@kirigami/plugin-player)**
+          `0.1.0` — new plugin: `<player src="…">` and `<playlist src="….m3u">`
+          (or `{% player %}` / `{% playlist %}` in Markdown) — a SoundCloud-style
+          audio player. The waveform, duration, ID3 tags and cover art are baked
+          at build time and cached in `src/_data/player/`; the cover goes
+          through the image pipeline. Live demo on [Plugins](../plugins/#player).
+
+          **[@kirigami/plugin-clip](https://www.npmjs.com/package/@kirigami/plugin-clip)**
+          `0.1.0` — new plugin: `<clip src="…">` plays a local video with a
+          poster chosen at build time by `@kirigami/bestframe`, and
+          `<inline-clip src="…">` is a silent, looping, autoplaying `<video>`
+          for decoration. Live demo on [Plugins](../plugins/#clip).
+
+          **[@kirigami/audiowaveform-wasm](https://www.npmjs.com/package/@kirigami/audiowaveform-wasm)**
+          `1.1.1` → `1.2.0` — `resamplePeaks()` (resize to a fixed number of
+          points), `peaksToSvg()` and `getAudioPackage()`: the metadata (format,
+          size, duration, bitrate, ID3, cover) and a waveform SVG in one call.
+
+          **[@kirigami/bestframe](https://www.npmjs.com/package/@kirigami/bestframe)**
+          `0.1.1` → `0.2.0` — decodes more videos: MPEG-4 part 2 (DivX/Xvid),
+          VP8, Theora, MPEG-2 and MPEG-1, in AVI, Ogg and MPEG program and
+          transport streams. FFmpeg no longer prints its own warnings to the
+          console.
+
+          **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**
+          `3.1.1` → `3.1.2` — the dev server (`kiri serve`) answers HTTP Range
+          requests and knows the audio and video types, so a browser can seek
+          inside an `<audio>` or `<video>`. **[@kirigami/cli](https://www.npmjs.com/package/@kirigami/cli)**
+          and **[@kirigami/mcp](https://www.npmjs.com/package/@kirigami/mcp)**
+          `0.1.5` follow.
+
           ## September 29, 2026
 
           **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**

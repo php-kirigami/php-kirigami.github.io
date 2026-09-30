@@ -22,7 +22,7 @@
 
           This page builds one from scratch: a `<badge>` tag that renders a
           small colored pill, `{% badge %}`-style but packaged. It's small
-          on purpose — the three [official plugins](../) do the same thing
+          on purpose — the [official plugins](../) do the same thing
           at real scale, and are worth reading alongside this.
         </markdown>
     </div>
@@ -211,7 +211,7 @@
 
                 This is also what makes `plugins[].options` autocomplete in
                 an editor once `kirigami.schema.json` `$ref`s it — see how
-                the three official plugins wire that in their own repo if
+                the official plugins wire that in their own repo if
                 you're publishing under `@kirigami/`; a third-party plugin's
                 options are still validated at build time either way.
                 </markdown>
@@ -316,7 +316,7 @@
           On a signature collision with a native Sass function, the native
           one always wins. Multiple listeners on the same hook all run, in
           registration order — a project's own `prepros.includes` file and
-          three plugins can all hook `PREPROS_HTML` without stepping on
+          several plugins can all hook `PREPROS_HTML` without stepping on
           each other.
 
           ## Publishing

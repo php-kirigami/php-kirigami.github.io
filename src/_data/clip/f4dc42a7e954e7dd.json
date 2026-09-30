@@ -1,0 +1,20 @@
+{
+	"version": 1,
+	"posterWidth": 960,
+	"samples": 24,
+	"poster": "clip/f4dc42a7e954e7dd.jpg",
+	"width": 960,
+	"height": 540,
+	"timestamp": 9.4,
+	"score": 0.6427437663078308,
+	"duration": 10,
+	"sourceWidth": 640,
+	"sourceHeight": 360,
+	"metadata": {
+		"major_brand": "isom",
+		"minor_version": "512",
+		"compatible_brands": "isomiso2avc1mp41",
+		"title": "Mandelbrot zoom",
+		"encoder": "Lavf63.7.101"
+	}
+}

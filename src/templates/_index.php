@@ -43,7 +43,7 @@
             <h3>demo</h3>
             <p>
                 A guided tour of every feature — Markdown, images, code
-                highlighting, data files, tags &amp; hooks, three official
+                highlighting, data files, tags &amp; hooks, audio, video and five official
                 plugins — each as a real page with its source alongside.
                 Start here to see what Kirigami can do before committing to
                 a shape for your own site.

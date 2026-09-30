@@ -133,7 +133,7 @@
             <section class="section wrap">
                 <div class="prose">
                     <p>If you&apos;ve registered a tag or a hook in a project&apos;s own <code>prepros.includes</code> file (see <a href="../../docs/authoring/#registering-tags-and-hooks">Writing pages</a>), you already know most of this — a plugin is exactly that, moved into its own npm package so it can be versioned, published, and reused across projects instead of copy-pasted. <code>kiri</code> loads it, calls one function, and the rest is the same tag/hook registry.</p>
-                    <p>This page builds one from scratch: a <code>&lt;badge&gt;</code> tag that renders a small colored pill, <code>{% badge %}</code>-style but packaged. It&apos;s small on purpose — the three <a href="../">official plugins</a> do the same thing at real scale, and are worth reading alongside this.</p>
+                    <p>This page builds one from scratch: a <code>&lt;badge&gt;</code> tag that renders a small colored pill, <code>{% badge %}</code>-style but packaged. It&apos;s small on purpose — the <a href="../">official plugins</a> do the same thing at real scale, and are worth reading alongside this.</p>
                 </div>
             </section>
             <hr class="fold">
@@ -267,7 +267,7 @@
                                   <span class="hljs-punctuation">}</span>
                                 <span class="hljs-punctuation">}</span>
                             </code></pre>
-                            <p>This is also what makes <code>plugins[].options</code> autocomplete in an editor once <code>kirigami.schema.json</code> <code>$ref</code>s it — see how the three official plugins wire that in their own repo if you&apos;re publishing under <code>@kirigami/</code>; a third-party plugin&apos;s options are still validated at build time either way.</p>
+                            <p>This is also what makes <code>plugins[].options</code> autocomplete in an editor once <code>kirigami.schema.json</code> <code>$ref</code>s it — see how the official plugins wire that in their own repo if you&apos;re publishing under <code>@kirigami/</code>; a third-party plugin&apos;s options are still validated at build time either way.</p>
                         </div>
                     </li>
                     <li>
@@ -342,7 +342,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p>On a signature collision with a native Sass function, the native one always wins. Multiple listeners on the same hook all run, in registration order — a project&apos;s own <code>prepros.includes</code> file and three plugins can all hook <code>PREPROS_HTML</code> without stepping on each other.</p>
+                    <p>On a signature collision with a native Sass function, the native one always wins. Multiple listeners on the same hook all run, in registration order — a project&apos;s own <code>prepros.includes</code> file and several plugins can all hook <code>PREPROS_HTML</code> without stepping on each other.</p>
                     <h2 id="publishing">Publishing</h2>
                     <ul>
                         <li>Package name matches one of the three conventions in <a href="#step-1">step 1</a> — anything else, <code>kiri</code> won&apos;t load it from <code>plugins:</code> at all.</li>

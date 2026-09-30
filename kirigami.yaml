@@ -79,6 +79,16 @@ plugins:
   - name: "@kirigami/plugin-embed"
     active: true
 
+  # <player> / <playlist> audio players, waveform baked at build time — live
+  # demo on /plugins/. Cache: src/_data/player/ (committed).
+  - name: "@kirigami/plugin-player"
+    active: true
+
+  # <clip> / <inline-clip> local video, poster picked by bestframe — live demo
+  # on /plugins/. Cache: src/_data/clip/ (committed).
+  - name: "@kirigami/plugin-clip"
+    active: true
+
 
 sass:
   # style: expanded
