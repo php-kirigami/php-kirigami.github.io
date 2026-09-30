@@ -171,15 +171,15 @@
                         </ul>
                         <h2 id="phpdoc-header">PHPDOC header</h2>
                         <p>Every page starts with a docblock. Each <code>@key value</code> becomes a PHP variable (<code>$key</code>), available in the page <strong>and</strong> in the <code>before</code> / <code>after</code> includes.</p>
-                        <pre><code class="hljs language-php">
-                            <span class="hljs-comment">/**
-                             * <span class="hljs-doctag">@name</span>     about
-                             * <span class="hljs-doctag">@title</span>    About us
-                             * <span class="hljs-doctag">@abstract</span> A short description of this page.
-                             */</span>
-
-                            <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$title</span>) . <span class="hljs-string">&#x27;&lt;/h1&gt;&#x27;</span>;
-                            <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$abstract</span>) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;
+                        <pre><code class="hljs language-php hljs-numbered">
+                            <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@name</span>     about</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span>    About us</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@abstract</span> A short description of this page.</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                            <span class="hljs-line"></span>
+                            <span class="hljs-line"><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$title</span>) . <span class="hljs-string">&#x27;&lt;/h1&gt;&#x27;</span>;</span>
+                            <span class="hljs-line"><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$abstract</span>) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;</span>
                         </code></pre>
                         <p>Define any keys you want — <code>before</code> / <code>after</code> typically read <code>$title</code>, <code>$description</code>, etc. to build <code>&lt;head&gt;</code> metas (though with the <code>seo:</code> block on, you rarely need to by hand — see the <a href="../config/#seo">config reference</a>).</p>
                         <h2 id="auto-loaded-data-files">Auto-loaded data files</h2>
@@ -206,15 +206,15 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <pre><code class="hljs language-php">
-                            <span class="hljs-comment">/**
-                             * <span class="hljs-doctag">@name</span>     medias
-                             * <span class="hljs-doctag">@articles</span> _articles.yaml
-                             */</span>
-
-                            <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$articles</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$a</span>) {
-                                <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;a href=&quot;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$a</span>-&gt;url) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$a</span>-&gt;title) . <span class="hljs-string">&#x27;&lt;/a&gt;&#x27;</span>;
-                            }
+                        <pre><code class="hljs language-php hljs-numbered">
+                            <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@name</span>     medias</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@articles</span> _articles.yaml</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                            <span class="hljs-line"></span>
+                            <span class="hljs-line"><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$articles</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$a</span>) {</span>
+                            <span class="hljs-line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;a href=&quot;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$a</span>-&gt;url) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$a</span>-&gt;title) . <span class="hljs-string">&#x27;&lt;/a&gt;&#x27;</span>;</span>
+                            <span class="hljs-line">}</span>
                         </code></pre>
                         <p>With <code>prepros.network: true</code>, a value starting with <code>http://</code> / <code>https://</code> is fetched and parsed the same way — this page&apos;s own hub, and <code>/ecosystem/</code>, use exactly that (via <code>curl_get_contents()</code></p>
                         <ul>
@@ -225,32 +225,32 @@
                             <li><strong><code>@content</code></strong> — if a <code>content</code> variable resolves to a non-empty value (typically an auto-loaded <code>.md</code> / <code>.yaml</code> / <code>.json</code> annotation), it&apos;s used <strong>as-is</strong> as the page body, and the PHP file is <strong>not executed</strong> for output. Good for pure data/markdown pages wrapped by a shared layout.</li>
                             <li><strong><code>@indent N</code></strong> — prefixes every line of the rendered body with <code>N</code> spaces before <code>before</code> / <code>after</code> wrap it, keeping generated HTML readable inside an indented layout.</li>
                         </ul>
-                        <pre><code class="hljs language-php">
-                            <span class="hljs-comment">/**
-                             * <span class="hljs-doctag">@name</span>    changelog
-                             * <span class="hljs-doctag">@title</span>   Changelog
-                             * <span class="hljs-doctag">@content</span> _changelog.md
-                             * <span class="hljs-doctag">@indent</span>  4
-                             */</span>
+                        <pre><code class="hljs language-php hljs-numbered">
+                            <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@name</span>    changelog</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span>   Changelog</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@content</span> _changelog.md</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@indent</span>  4</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> */</span></span>
                         </code></pre>
                         <h2 id="page-types">Page types</h2>
                         <p>When several pages share the same chrome (a page head, a sidebar, prev/next links), put it in a <strong>page type</strong> instead of copying it into each page. Declare the type under <code>prepros.types</code>, with a <code>before</code> and/or <code>after</code> file:</p>
-                        <pre><code class="hljs language-yaml">
-                            <span class="hljs-attr">prepros:</span>
-                              <span class="hljs-attr">before:</span> <span class="hljs-string">_layouts/header.php</span>
-                              <span class="hljs-attr">after:</span>  <span class="hljs-string">_layouts/footer.php</span>
-                              <span class="hljs-attr">types:</span>
-                                <span class="hljs-attr">article:</span>
-                                  <span class="hljs-attr">before:</span> <span class="hljs-string">_layouts/types/article.before.php</span>
-                                  <span class="hljs-attr">after:</span>  <span class="hljs-string">_layouts/types/article.after.php</span>
+                        <pre><code class="hljs language-yaml hljs-numbered">
+                            <span class="hljs-line"><span class="hljs-attr">prepros:</span></span>
+                            <span class="hljs-line">  <span class="hljs-attr">before:</span> <span class="hljs-string">_layouts/header.php</span></span>
+                            <span class="hljs-line">  <span class="hljs-attr">after:</span>  <span class="hljs-string">_layouts/footer.php</span></span>
+                            <span class="hljs-line">  <span class="hljs-attr">types:</span></span>
+                            <span class="hljs-line">    <span class="hljs-attr">article:</span></span>
+                            <span class="hljs-line">      <span class="hljs-attr">before:</span> <span class="hljs-string">_layouts/types/article.before.php</span></span>
+                            <span class="hljs-line">      <span class="hljs-attr">after:</span>  <span class="hljs-string">_layouts/types/article.after.php</span></span>
                         </code></pre>
                         <p>A page opts in with <code>@type</code>, and then only writes its own content:</p>
-                        <pre><code class="hljs language-php">
-                            <span class="hljs-comment">/**
-                             * <span class="hljs-doctag">@title</span>    Folding a crane
-                             * <span class="hljs-doctag">@abstract</span> Thirty folds, one sheet, no cuts.
-                             * <span class="hljs-doctag">@type</span>     article
-                             */</span>
+                        <pre><code class="hljs language-php hljs-numbered">
+                            <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span>    Folding a crane</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@abstract</span> Thirty folds, one sheet, no cuts.</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@type</span>     article</span></span>
+                            <span class="hljs-line"><span class="hljs-comment"> */</span></span>
                         </code></pre>
                         <p>The page is assembled as global <code>before</code> → type <code>before</code> → body → type <code>after</code> → global <code>after</code>. The type&apos;s files see the same variables as the page (<code>$title</code>, <code>$abstract</code>, <code>$relroot</code>, …), so they can print the heading, a breadcrumb or navigation built from them. A page has one type at most; a page without <code>@type</code>, or with an unknown one, gets the global wrap only.</p>
                         <p>This documentation is an example: every page here is <code>@type docs</code>, whose layout draws the sidebar, the page head and the &quot;On this page&quot; box, so a docs page is just its Markdown.</p>
@@ -266,14 +266,14 @@
                         <p>One authoring gotcha with tags: a tag shown as an example (<code>&lt;markdown&gt;</code>, <code>&lt;img asset&gt;</code>, a plugin tag) must sit in a code span or a fenced block, which the tag pass leaves alone. Written as bare text it runs for real, and a bare <code>&lt;/markdown&gt;</code> closes the block around it. An indented code block doesn&apos;t count, since <code>&lt;markdown&gt;</code> bodies are indented themselves: use a fence. And never type a real PHP opening tag as example text, short-echo form included: PHP doesn&apos;t know it&apos;s sitting inside a fenced code example, and runs it for real. Every snippet on this page is written the way it has to be because of that rule — statements only, no opening tag shown.</p>
                         <h2 id="registering-tags-and-hooks">Registering tags and hooks</h2>
                         <p>Register in a <code>prepros.includes</code> file — this site&apos;s own <a href="https://github.com/php-kirigami/php-kirigami.github.io/blob/main/src/_lib/functions.php" target="_blank" rel="noopener noreferrer"><code>_lib/functions.php</code></a> is exactly that; it&apos;s where <code>kirigami_page_href()</code> and <code>kirigami_breadcrumb_nav()</code>, used across this <code>/docs/</code> section, live.</p>
-                        <pre><code class="hljs language-php">
-                            PREPROS::<span class="hljs-title function_ invoke__">registerTag</span>(<span class="hljs-string">&#x27;gallery&#x27;</span>, function (<span class="hljs-keyword">string</span> <span class="hljs-variable">$tag</span>, <span class="hljs-keyword">array</span> <span class="hljs-variable">$attrs</span>, <span class="hljs-keyword">string</span> <span class="hljs-variable">$body</span>): <span class="hljs-keyword">string</span> {
-                                <span class="hljs-comment">// ... return HTML</span>
-                            });
-
-                            PREPROS::<span class="hljs-title function_ invoke__">registerHook</span>(<span class="hljs-string">&#x27;post_render&#x27;</span>, function (<span class="hljs-keyword">string</span> <span class="hljs-variable">$html</span>): <span class="hljs-keyword">string</span> {
-                                <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;{{build_date}}&#x27;</span>, <span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&#x27;Y-m-d&#x27;</span>), <span class="hljs-variable">$html</span>);
-                            });
+                        <pre><code class="hljs language-php hljs-numbered">
+                            <span class="hljs-line">PREPROS::<span class="hljs-title function_ invoke__">registerTag</span>(<span class="hljs-string">&#x27;gallery&#x27;</span>, function (<span class="hljs-keyword">string</span> <span class="hljs-variable">$tag</span>, <span class="hljs-keyword">array</span> <span class="hljs-variable">$attrs</span>, <span class="hljs-keyword">string</span> <span class="hljs-variable">$body</span>): <span class="hljs-keyword">string</span> {</span>
+                            <span class="hljs-line">    <span class="hljs-comment">// ... return HTML</span></span>
+                            <span class="hljs-line">});</span>
+                            <span class="hljs-line"></span>
+                            <span class="hljs-line">PREPROS::<span class="hljs-title function_ invoke__">registerHook</span>(<span class="hljs-string">&#x27;post_render&#x27;</span>, function (<span class="hljs-keyword">string</span> <span class="hljs-variable">$html</span>): <span class="hljs-keyword">string</span> {</span>
+                            <span class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">str_replace</span>(<span class="hljs-string">&#x27;{{build_date}}&#x27;</span>, <span class="hljs-title function_ invoke__">date</span>(<span class="hljs-string">&#x27;Y-m-d&#x27;</span>), <span class="hljs-variable">$html</span>);</span>
+                            <span class="hljs-line">});</span>
                         </code></pre>
                         <table>
                             <thead>
@@ -310,11 +310,11 @@
                         <p><code>MD::registerPlugin(&apos;video&apos;, fn(array $args, string $body): string =&gt; …)</code> — works inside <code>&lt;markdown&gt;</code> blocks, <code>.md</code> data files, and any <code>MD::toHtml()</code> call. Kirigami ships a handful by default (<code>md.plugins.php</code>): <code>{% callout info|success|warning|danger [&quot;Title&quot;] content %}</code>, <code>{% img-asset path [w [h [cover]]] %}</code>, <code>{% codepen &lt;id&gt; [user h] %}</code>, <code>{% checklist [&quot;Title&quot;] … %}</code> — inline, or block form with the body on following lines ending in <code>%}</code>. <code>{% youtube &lt;id&gt; %}</code> / <code>{% vimeo &lt;id&gt; %}</code> moved into <a href="https://www.npmjs.com/package/@kirigami/plugin-embed" target="_blank" rel="noopener noreferrer"><code>@kirigami/plugin-embed</code></a> — not a default anymore, since resolving the id into a real card (oEmbed lookup, cover thumbnail, play button) needs the plugin&apos;s client-side script, not just a Markdown shortcut.</p>
                         <h2 id="sass-hooks">Sass hooks</h2>
                         <p>A plugin <strong>package</strong>, listed under <code>plugins:</code> in <code>kirigami.yaml</code>, can contribute to <code>sass</code> tasks via <code>@kirigami/sdk</code>:</p>
-                        <pre><code class="hljs language-js">
-                            <span class="hljs-keyword">import</span> { on, <span class="hljs-variable constant_">HOOKS</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/sdk&#x27;</span>;
-                            <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_BEFORE</span>,    <span class="hljs-function">(<span class="hljs-params">ctx</span>) =&gt;</span> <span class="hljs-string">&#x27;/abs/path/to/before.scss&#x27;</span>);
-                            <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>,     <span class="hljs-function">(<span class="hljs-params">ctx</span>) =&gt;</span> <span class="hljs-string">&#x27;/abs/path/to/after.scss&#x27;</span>);
-                            <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_FUNCTIONS</span>, <span class="hljs-function">(<span class="hljs-params">ctx</span>) =&gt;</span> ({ <span class="hljs-string">&#x27;my-fn($x)&#x27;</span>: <span class="hljs-function">(<span class="hljs-params">args</span>) =&gt;</span> <span class="hljs-comment">/* SassValue */</span> }));
+                        <pre><code class="hljs language-js hljs-numbered">
+                            <span class="hljs-line"><span class="hljs-keyword">import</span> { on, <span class="hljs-variable constant_">HOOKS</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/sdk&#x27;</span>;</span>
+                            <span class="hljs-line"><span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_BEFORE</span>,    <span class="hljs-function">(<span class="hljs-params">ctx</span>) =&gt;</span> <span class="hljs-string">&#x27;/abs/path/to/before.scss&#x27;</span>);</span>
+                            <span class="hljs-line"><span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>,     <span class="hljs-function">(<span class="hljs-params">ctx</span>) =&gt;</span> <span class="hljs-string">&#x27;/abs/path/to/after.scss&#x27;</span>);</span>
+                            <span class="hljs-line"><span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_FUNCTIONS</span>, <span class="hljs-function">(<span class="hljs-params">ctx</span>) =&gt;</span> ({ <span class="hljs-string">&#x27;my-fn($x)&#x27;</span>: <span class="hljs-function">(<span class="hljs-params">args</span>) =&gt;</span> <span class="hljs-comment">/* SassValue */</span> }));</span>
                         </code></pre>
                         <p><code>ctx</code> is <code>{ __root, task, exportPath, config }</code>. On a signature collision with a native Sass function, the native one wins. This is exactly how <code>@kirigami/plugin-highlight</code> appends its code theme after every project&apos;s own styles, and how <code>esbuild:before</code> / <code>esbuild:after</code> / <code>esbuild:plugins</code> mirror the same idea for JS bundles, plus <code>prepros:html</code> — a waterfall hook transforming each rendered page&apos;s HTML (what plugin-highlight&apos;s own colouring pass runs on).</p>
                     </div>

@@ -130,8 +130,8 @@
                     <li>
                         <h3>Install</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">
-                                npm install -D @kirigami/cli
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">npm install -D @kirigami/cli</span>
                             </code></pre>
                         </div>
                     </li>
@@ -139,13 +139,13 @@
                         <h3>Add a <code>kirigami.yaml</code></h3>
                         <div class="prose">
                             <p>At the root of your project:</p>
-                            <pre><code class="hljs language-yaml">
-                                <span class="hljs-attr">kirigami:</span>
-                                  <span class="hljs-attr">project:</span>  <span class="hljs-string">My</span> <span class="hljs-string">Site</span>
-                                  <span class="hljs-attr">baseurl:</span>  <span class="hljs-string">https://example.com</span>
-                                  <span class="hljs-attr">root:</span>     <span class="hljs-string">src</span>
-
-                                <span class="hljs-attr">prepros:</span> {}
+                            <pre><code class="hljs language-yaml hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-attr">kirigami:</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">project:</span>  <span class="hljs-string">My</span> <span class="hljs-string">Site</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">baseurl:</span>  <span class="hljs-string">https://example.com</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">root:</span>     <span class="hljs-string">src</span></span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line"><span class="hljs-attr">prepros:</span> {}</span>
                             </code></pre>
                             <p><code>prepros: {}</code> — even empty — is what turns on the PHP → HTML compiler for every <code>_*.php</code> file under <code>root</code>.</p>
                         </div>
@@ -154,12 +154,12 @@
                         <h3>Write a page</h3>
                         <div class="prose">
                             <p><code>src/_index.php</code>:</p>
-                            <pre><code class="hljs language-php">
-                                <span class="hljs-comment">/**
-                                 * <span class="hljs-doctag">@title</span> Home
-                                 */</span>
-
-                                <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;Hello, Kirigami.&lt;/h1&gt;&#x27;</span>;
+                            <pre><code class="hljs language-php hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span> Home</span></span>
+                                <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line"><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;Hello, Kirigami.&lt;/h1&gt;&#x27;</span>;</span>
                             </code></pre>
                             <p>A file named <code>_name.php</code> compiles to <code>name.html</code> in the same folder — <code>_index.php</code> becomes <code>index.html</code>.</p>
                         </div>
@@ -167,8 +167,8 @@
                     <li>
                         <h3>Serve it</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">
-                                npx kiri serve
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">npx kiri serve</span>
                             </code></pre>
                             <p>Rebuilds <code>src/index.html</code> every time you save, serves <code>src/</code> at <code>http://127.0.0.1:4321</code>, and reloads the open tab once the rebuild finishes — nothing to open by hand. (<code>kiri watch</code> does the same rebuild with no server, if that&apos;s all you need.)</p>
                         </div>
@@ -176,8 +176,8 @@
                     <li>
                         <h3>Ship it</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">
-                                npx kiri <span class="hljs-built_in">export</span>
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">npx kiri <span class="hljs-built_in">export</span></span>
                             </code></pre>
                             <p>Writes a fully static, dependency-free site into <code>dist/</code> — ready for GitHub Pages or any static host.</p>
                         </div>

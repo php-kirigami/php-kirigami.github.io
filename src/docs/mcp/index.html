@@ -161,20 +161,20 @@
                         <p>The server talks over stdio and works on the directory it is started in, exactly like <code>kiri</code>.</p>
                         <h2 id="setup">Setup</h2>
                         <p>With the <a href="../cli/">CLI</a> installed in the project, no separate install is needed: point your MCP client at <code>kiri mcp</code>, started from the project folder.</p>
-                        <pre><code class="hljs language-bash">
-                            npx kiri mcp
+                        <pre><code class="hljs language-bash hljs-numbered">
+                            <span class="hljs-line">npx kiri mcp</span>
                         </code></pre>
                         <p>Or run the package directly from the client&apos;s configuration:</p>
-                        <pre><code class="hljs language-json">
-                            <span class="hljs-punctuation">{</span>
-                              <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                                <span class="hljs-attr">&quot;kirigami&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-                                  <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx&quot;</span><span class="hljs-punctuation">,</span>
-                                  <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;-y&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;@kirigami/mcp&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
-                                  <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/path/to/your/kirigami/project&quot;</span>
-                                <span class="hljs-punctuation">}</span>
-                              <span class="hljs-punctuation">}</span>
-                            <span class="hljs-punctuation">}</span>
+                        <pre><code class="hljs language-json hljs-numbered">
+                            <span class="hljs-line"><span class="hljs-punctuation">{</span></span>
+                            <span class="hljs-line">  <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></span>
+                            <span class="hljs-line">    <span class="hljs-attr">&quot;kirigami&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></span>
+                            <span class="hljs-line">      <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx&quot;</span><span class="hljs-punctuation">,</span></span>
+                            <span class="hljs-line">      <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;-y&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;@kirigami/mcp&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></span>
+                            <span class="hljs-line">      <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/path/to/your/kirigami/project&quot;</span></span>
+                            <span class="hljs-line">    <span class="hljs-punctuation">}</span></span>
+                            <span class="hljs-line">  <span class="hljs-punctuation">}</span></span>
+                            <span class="hljs-line"><span class="hljs-punctuation">}</span></span>
                         </code></pre>
                         <p>The working-directory key depends on the client; what matters is that the server starts in the folder that holds <code>kirigami.yaml</code>. It also starts in an empty folder, where the assistant can scaffold a new project first.</p>
                         <h2 id="tools">Tools</h2>

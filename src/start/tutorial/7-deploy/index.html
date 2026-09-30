@@ -137,52 +137,52 @@
                         <h3>Add the workflow</h3>
                         <div class="prose">
                             <p><code>.github/workflows/page.yml</code> — this is the exact file both official templates ship, and what this site itself runs on:</p>
-                            <pre><code class="hljs language-yaml">
-                                <span class="hljs-attr">name:</span> <span class="hljs-string">Build</span> <span class="hljs-string">&amp;</span> <span class="hljs-string">Deploy</span>
-
-                                <span class="hljs-attr">on:</span>
-                                  <span class="hljs-attr">push:</span>
-                                    <span class="hljs-attr">branches:</span> [<span class="hljs-string">&quot;main&quot;</span>]
-
-                                <span class="hljs-attr">permissions:</span>
-                                  <span class="hljs-attr">contents:</span> <span class="hljs-string">write</span>      <span class="hljs-comment"># commit files the build regenerated</span>
-                                  <span class="hljs-attr">pages:</span> <span class="hljs-string">write</span>
-                                  <span class="hljs-attr">id-token:</span> <span class="hljs-string">write</span>
-
-                                <span class="hljs-attr">jobs:</span>
-                                  <span class="hljs-attr">build-and-deploy:</span>
-                                    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span>
-                                    <span class="hljs-attr">environment:</span>
-                                      <span class="hljs-attr">name:</span> <span class="hljs-string">github-pages</span>
-                                      <span class="hljs-attr">url:</span> <span class="hljs-string">${{</span> <span class="hljs-string">steps.deployment.outputs.page_url</span> <span class="hljs-string">}}</span>
-                                    <span class="hljs-attr">steps:</span>
-                                      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span>
-                                        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v7</span>
-
-                                      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">KiriBuild</span>
-                                        <span class="hljs-attr">uses:</span> <span class="hljs-string">php-kirigami/kiribuild@v2</span>
-                                        <span class="hljs-attr">with:</span> { <span class="hljs-attr">node-version:</span> <span class="hljs-string">&#x27;24&#x27;</span> }
-
-                                      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Commit</span> <span class="hljs-string">regenerated</span> <span class="hljs-string">files</span>
-                                        <span class="hljs-attr">shell:</span> <span class="hljs-string">bash</span>
-                                        <span class="hljs-attr">run:</span> <span class="hljs-string">|
-                                          if [ -n &quot;$(git status --porcelain)&quot; ]; then
-                                            git config user.name  &quot;kirigami[bot]&quot;
-                                            git config user.email &quot;kirigami-bot@users.noreply.github.com&quot;
-                                            git add -A
-                                            git commit -m &quot;chore: update generated files [skip ci]&quot;
-                                            git push
-                                          else
-                                            echo &quot;Nothing to commit.&quot;
-                                          fi
-                                </span>
-                                      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Upload</span> <span class="hljs-string">artifact</span>
-                                        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/upload-pages-artifact@v5</span>
-                                        <span class="hljs-attr">with:</span> { <span class="hljs-attr">path:</span> <span class="hljs-string">dist</span> }
-
-                                      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">to</span> <span class="hljs-string">GitHub</span> <span class="hljs-string">Pages</span>
-                                        <span class="hljs-attr">id:</span> <span class="hljs-string">deployment</span>
-                                        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/deploy-pages@v5</span>
+                            <pre><code class="hljs language-yaml hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-attr">name:</span> <span class="hljs-string">Build</span> <span class="hljs-string">&amp;</span> <span class="hljs-string">Deploy</span></span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line"><span class="hljs-attr">on:</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">push:</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">branches:</span> [<span class="hljs-string">&quot;main&quot;</span>]</span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line"><span class="hljs-attr">permissions:</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">contents:</span> <span class="hljs-string">write</span>      <span class="hljs-comment"># commit files the build regenerated</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">pages:</span> <span class="hljs-string">write</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">id-token:</span> <span class="hljs-string">write</span></span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line"><span class="hljs-attr">jobs:</span></span>
+                                <span class="hljs-line">  <span class="hljs-attr">build-and-deploy:</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">environment:</span></span>
+                                <span class="hljs-line">      <span class="hljs-attr">name:</span> <span class="hljs-string">github-pages</span></span>
+                                <span class="hljs-line">      <span class="hljs-attr">url:</span> <span class="hljs-string">${{</span> <span class="hljs-string">steps.deployment.outputs.page_url</span> <span class="hljs-string">}}</span></span>
+                                <span class="hljs-line">    <span class="hljs-attr">steps:</span></span>
+                                <span class="hljs-line">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Checkout</span></span>
+                                <span class="hljs-line">        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v7</span></span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">KiriBuild</span></span>
+                                <span class="hljs-line">        <span class="hljs-attr">uses:</span> <span class="hljs-string">php-kirigami/kiribuild@v2</span></span>
+                                <span class="hljs-line">        <span class="hljs-attr">with:</span> { <span class="hljs-attr">node-version:</span> <span class="hljs-string">&#x27;24&#x27;</span> }</span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Commit</span> <span class="hljs-string">regenerated</span> <span class="hljs-string">files</span></span>
+                                <span class="hljs-line">        <span class="hljs-attr">shell:</span> <span class="hljs-string">bash</span></span>
+                                <span class="hljs-line">        <span class="hljs-attr">run:</span> <span class="hljs-string">|</span></span>
+                                <span class="hljs-line"><span class="hljs-string">          if [ -n &quot;$(git status --porcelain)&quot; ]; then</span></span>
+                                <span class="hljs-line"><span class="hljs-string">            git config user.name  &quot;kirigami[bot]&quot;</span></span>
+                                <span class="hljs-line"><span class="hljs-string">            git config user.email &quot;kirigami-bot@users.noreply.github.com&quot;</span></span>
+                                <span class="hljs-line"><span class="hljs-string">            git add -A</span></span>
+                                <span class="hljs-line"><span class="hljs-string">            git commit -m &quot;chore: update generated files [skip ci]&quot;</span></span>
+                                <span class="hljs-line"><span class="hljs-string">            git push</span></span>
+                                <span class="hljs-line"><span class="hljs-string">          else</span></span>
+                                <span class="hljs-line"><span class="hljs-string">            echo &quot;Nothing to commit.&quot;</span></span>
+                                <span class="hljs-line"><span class="hljs-string">          fi</span></span>
+                                <span class="hljs-line"><span class="hljs-string"></span></span>
+                                <span class="hljs-line">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Upload</span> <span class="hljs-string">artifact</span></span>
+                                <span class="hljs-line">        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/upload-pages-artifact@v5</span></span>
+                                <span class="hljs-line">        <span class="hljs-attr">with:</span> { <span class="hljs-attr">path:</span> <span class="hljs-string">dist</span> }</span>
+                                <span class="hljs-line"></span>
+                                <span class="hljs-line">      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Deploy</span> <span class="hljs-string">to</span> <span class="hljs-string">GitHub</span> <span class="hljs-string">Pages</span></span>
+                                <span class="hljs-line">        <span class="hljs-attr">id:</span> <span class="hljs-string">deployment</span></span>
+                                <span class="hljs-line">        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/deploy-pages@v5</span></span>
                             </code></pre>
                             <p><code>kiribuild@v2</code> does exactly three things: install Node 24, install the <code>kiri</code> CLI, run <code>kiri export</code>. Checkout, the commit-back, uploading the artifact, and the Pages deploy step are yours to wire — that&apos;s deliberate, so the action stays small and the workflow stays readable. It&apos;s a real published action — listed on the <a href="https://github.com/marketplace/actions/kiribuild" target="_blank" rel="noopener noreferrer">GitHub Marketplace</a>, findable straight from a workflow file&apos;s Actions sidebar, not just a repo you happen to reference.</p>
                             <p>The <strong>commit-back step matters</strong> the moment a project uses the <a href="../5-images/">image pipeline</a>: <code>kiri export</code> can write new resized derivatives into <code>src/images/</code> as a side effect, and those are meant to be committed — otherwise every future CI run regenerates them from scratch instead of finding them already there. <code>[skip ci]</code> in the commit message stops that commit from triggering an infinite rebuild loop. A project with no <code>image:</code> block has nothing to regenerate, so the step just logs &quot;Nothing to commit.&quot; and moves on — harmless either way, so it&apos;s simpler to always include it than to decide per-project whether it&apos;s needed.</p>
@@ -197,14 +197,14 @@
                     <li>
                         <h3>Push</h3>
                         <div class="prose">
-                            <pre><code class="hljs language-bash">
-                                git add -A
-                                git commit -m <span class="hljs-string">&quot;Studio Plié: first deploy&quot;</span>
-                                git push
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">git add -A</span>
+                                <span class="hljs-line">git commit -m <span class="hljs-string">&quot;Studio Plié: first deploy&quot;</span></span>
+                                <span class="hljs-line">git push</span>
                             </code></pre>
                             <p>Every push to <code>main</code> re-runs <code>kiri export</code> and republishes <code>dist/</code>. Locally, the same export step is one command:</p>
-                            <pre><code class="hljs language-bash">
-                                npx kiri <span class="hljs-built_in">export</span>
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">npx kiri <span class="hljs-built_in">export</span></span>
                             </code></pre>
                         </div>
                     </li>

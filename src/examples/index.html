@@ -132,8 +132,8 @@
                 </div>
                 <div class="prose">
                     <p>No <code>&lt;title&gt;</code>, no Open Graph tags to hand-write. One block in <code>kirigami.yaml</code> opts every page into <code>&lt;title&gt;</code>, description, keywords, Open Graph, Twitter Card, canonical link and a schema.org JSON-LD graph, derived from the <code>kirigami:</code> block plus each page&apos;s own PHPDOC:</p>
-                    <pre><code class="hljs language-yaml">
-                        <span class="hljs-attr">seo:</span> {}
+                    <pre><code class="hljs language-yaml hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-attr">seo:</span> {}</span>
                     </code></pre>
                     <p>A page overrides just what it needs from its own header — <code>@meta_description</code>, <code>@meta_image</code>, <code>@og_type</code>, … — without touching the other pages. Full reference: <a href="../docs/config/#seo"><code>seo</code></a>. This site runs on exactly this, nothing hand-written in <code>_layouts/header.php</code>.</p>
                 </div>
@@ -146,18 +146,18 @@
                 </div>
                 <div class="prose">
                     <p>A project doesn&apos;t need a published plugin for a shortcode it only uses itself — <code>MD::registerPlugin()</code> straight from <code>prepros.includes</code> is enough. This one wraps <a href="../design/#shared-components">canva&apos;s <code>.badge</code></a>:</p>
-                    <pre><code class="hljs language-php">
-                        <span class="hljs-comment">// _lib/functions.php</span>
-                        <span class="hljs-title function_ invoke__">md_register_plugin</span>(<span class="hljs-string">&#x27;badge&#x27;</span>, function (<span class="hljs-keyword">array</span> <span class="hljs-variable">$args</span>, <span class="hljs-keyword">string</span> <span class="hljs-variable">$body</span>): <span class="hljs-keyword">string</span> {
-                            <span class="hljs-variable">$tone</span> = (<span class="hljs-variable">$args</span>[<span class="hljs-number">0</span>] ?? <span class="hljs-string">&#x27;default&#x27;</span>) === <span class="hljs-string">&#x27;muted&#x27;</span> ? <span class="hljs-string">&#x27; badge--muted&#x27;</span> : <span class="hljs-string">&#x27;&#x27;</span>;
-                            <span class="hljs-variable">$text</span> = <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$args</span>, <span class="hljs-number">1</span>));
-                            <span class="hljs-keyword">if</span> (<span class="hljs-variable">$text</span> === <span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;!-- badge: missing text --&gt;&#x27;</span>;
-                            <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;span class=&quot;badge&#x27;</span> . <span class="hljs-variable">$tone</span> . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$text</span>) . <span class="hljs-string">&#x27;&lt;/span&gt;&#x27;</span>;
-                        });
+                    <pre><code class="hljs language-php hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-comment">// _lib/functions.php</span></span>
+                        <span class="hljs-line"><span class="hljs-title function_ invoke__">md_register_plugin</span>(<span class="hljs-string">&#x27;badge&#x27;</span>, function (<span class="hljs-keyword">array</span> <span class="hljs-variable">$args</span>, <span class="hljs-keyword">string</span> <span class="hljs-variable">$body</span>): <span class="hljs-keyword">string</span> {</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$tone</span> = (<span class="hljs-variable">$args</span>[<span class="hljs-number">0</span>] ?? <span class="hljs-string">&#x27;default&#x27;</span>) === <span class="hljs-string">&#x27;muted&#x27;</span> ? <span class="hljs-string">&#x27; badge--muted&#x27;</span> : <span class="hljs-string">&#x27;&#x27;</span>;</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$text</span> = <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27; &#x27;</span>, <span class="hljs-title function_ invoke__">array_slice</span>(<span class="hljs-variable">$args</span>, <span class="hljs-number">1</span>));</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">if</span> (<span class="hljs-variable">$text</span> === <span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;!-- badge: missing text --&gt;&#x27;</span>;</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;span class=&quot;badge&#x27;</span> . <span class="hljs-variable">$tone</span> . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$text</span>) . <span class="hljs-string">&#x27;&lt;/span&gt;&#x27;</span>;</span>
+                        <span class="hljs-line">});</span>
                     </code></pre>
                     <p>Used right here, in this page&apos;s own Markdown:</p>
-                    <pre><code class="hljs language-php">
-                        {% badge <span class="hljs-keyword">default</span> Stable %} {% badge muted <span class="hljs-string">&quot;Coming soon&quot;</span> %}
+                    <pre><code class="hljs language-php hljs-numbered">
+                        <span class="hljs-line">{% badge <span class="hljs-keyword">default</span> Stable %} {% badge muted <span class="hljs-string">&quot;Coming soon&quot;</span> %}</span>
                     </code></pre>
                     <div class="demo">
                         <p>
@@ -176,17 +176,17 @@
                 </div>
                 <div class="prose">
                     <p>Same idea via <code>PREPROS::registerTag()</code> — an authoring tag that expands at render time, for markup instead of <code>{% %}</code> shortcodes. This one turns a <code>+</code>-separated key combo into a row of <code>&lt;kbd&gt;</code>:</p>
-                    <pre><code class="hljs language-php">
-                        <span class="hljs-comment">// _lib/functions.php</span>
-                        <span class="hljs-title function_ invoke__">register_tag</span>(<span class="hljs-string">&#x27;shortcut&#x27;</span>, function (<span class="hljs-keyword">string</span> <span class="hljs-variable">$tag</span>, <span class="hljs-keyword">array</span> <span class="hljs-variable">$attrs</span>, <span class="hljs-keyword">string</span> <span class="hljs-variable">$body</span>): <span class="hljs-keyword">string</span> {
-                            <span class="hljs-variable">$keys</span> = <span class="hljs-title function_ invoke__">array_filter</span>(<span class="hljs-title function_ invoke__">array_map</span>(<span class="hljs-string">&#x27;trim&#x27;</span>, <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&#x27;+&#x27;</span>, <span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;keys&#x27;</span>] ?? <span class="hljs-string">&#x27;&#x27;</span>)));
-                            <span class="hljs-keyword">if</span> (!<span class="hljs-variable">$keys</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;!-- shortcut: missing keys attribute --&gt;&#x27;</span>;
-                            <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-title function_ invoke__">array_map</span>(fn(<span class="hljs-variable">$k</span>) =&gt; <span class="hljs-string">&#x27;&lt;kbd&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$k</span>) . <span class="hljs-string">&#x27;&lt;/kbd&gt;&#x27;</span>, <span class="hljs-variable">$keys</span>));
-                        });
+                    <pre><code class="hljs language-php hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-comment">// _lib/functions.php</span></span>
+                        <span class="hljs-line"><span class="hljs-title function_ invoke__">register_tag</span>(<span class="hljs-string">&#x27;shortcut&#x27;</span>, function (<span class="hljs-keyword">string</span> <span class="hljs-variable">$tag</span>, <span class="hljs-keyword">array</span> <span class="hljs-variable">$attrs</span>, <span class="hljs-keyword">string</span> <span class="hljs-variable">$body</span>): <span class="hljs-keyword">string</span> {</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$keys</span> = <span class="hljs-title function_ invoke__">array_filter</span>(<span class="hljs-title function_ invoke__">array_map</span>(<span class="hljs-string">&#x27;trim&#x27;</span>, <span class="hljs-title function_ invoke__">explode</span>(<span class="hljs-string">&#x27;+&#x27;</span>, <span class="hljs-variable">$attrs</span>[<span class="hljs-string">&#x27;keys&#x27;</span>] ?? <span class="hljs-string">&#x27;&#x27;</span>)));</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">if</span> (!<span class="hljs-variable">$keys</span>) <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&lt;!-- shortcut: missing keys attribute --&gt;&#x27;</span>;</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">return</span> <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-string">&#x27;&#x27;</span>, <span class="hljs-title function_ invoke__">array_map</span>(fn(<span class="hljs-variable">$k</span>) =&gt; <span class="hljs-string">&#x27;&lt;kbd&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$k</span>) . <span class="hljs-string">&#x27;&lt;/kbd&gt;&#x27;</span>, <span class="hljs-variable">$keys</span>));</span>
+                        <span class="hljs-line">});</span>
                     </code></pre>
                     <p>Used right here:</p>
-                    <pre><code class="hljs language-html">
-                        <span class="hljs-tag">&lt;<span class="hljs-name">shortcut</span> <span class="hljs-attr">keys</span>=<span class="hljs-string">&quot;Ctrl+K&quot;</span>&gt;</span>
+                    <pre><code class="hljs language-html hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">shortcut</span> <span class="hljs-attr">keys</span>=<span class="hljs-string">&quot;Ctrl+K&quot;</span>&gt;</span></span>
                     </code></pre>
                     <p class="demo">
                         <kbd>Ctrl</kbd>
@@ -203,16 +203,16 @@
                 </div>
                 <div class="prose">
                     <p>A hub page that auto-lists its own sub-pages, in <code>@position</code> order, straight from their PHPDOC — no array to keep in sync when a page is added or removed. This is exactly how <a href="../docs/">Docs</a> builds its own card grid:</p>
-                    <pre><code class="hljs language-php">
-                        <span class="hljs-variable">$sections</span> = <span class="hljs-title function_ invoke__">fs_get_children</span>();
-
-                        <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$sections</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$s</span>) {
-                            <span class="hljs-variable">$href</span> = <span class="hljs-title function_ invoke__">kirigami_page_href</span>(<span class="hljs-variable">$s</span>, <span class="hljs-variable">$relroot</span>);
-                            <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;a class=&quot;card&quot; href=&quot;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$href</span>) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span>
-                               . <span class="hljs-string">&#x27;&lt;h3&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$s</span>-&gt;title ?? <span class="hljs-string">&#x27;&#x27;</span>) . <span class="hljs-string">&#x27;&lt;/h3&gt;&#x27;</span>
-                               . <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$s</span>-&gt;<span class="hljs-keyword">abstract</span> ?? <span class="hljs-string">&#x27;&#x27;</span>) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>
-                               . <span class="hljs-string">&#x27;&lt;/a&gt;&#x27;</span>;
-                        }
+                    <pre><code class="hljs language-php hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-variable">$sections</span> = <span class="hljs-title function_ invoke__">fs_get_children</span>();</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$sections</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$s</span>) {</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$href</span> = <span class="hljs-title function_ invoke__">kirigami_page_href</span>(<span class="hljs-variable">$s</span>, <span class="hljs-variable">$relroot</span>);</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;a class=&quot;card&quot; href=&quot;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$href</span>) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span></span>
+                        <span class="hljs-line">       . <span class="hljs-string">&#x27;&lt;h3&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$s</span>-&gt;title ?? <span class="hljs-string">&#x27;&#x27;</span>) . <span class="hljs-string">&#x27;&lt;/h3&gt;&#x27;</span></span>
+                        <span class="hljs-line">       . <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$s</span>-&gt;<span class="hljs-keyword">abstract</span> ?? <span class="hljs-string">&#x27;&#x27;</span>) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span></span>
+                        <span class="hljs-line">       . <span class="hljs-string">&#x27;&lt;/a&gt;&#x27;</span>;</span>
+                        <span class="hljs-line">}</span>
                     </code></pre>
                     <p><code>kirigami_page_href()</code> is this site&apos;s own two-line helper turning a child&apos;s <code>-&gt;file</code> into a relative URL — see it in <a href="https://github.com/php-kirigami/php-kirigami.github.io/blob/main/src/_lib/functions.php" target="_blank" rel="noopener noreferrer"><code>_lib/functions.php</code></a>. Full signature: <a href="../docs/php/#fs"><code>FS</code></a>.</p>
                 </div>
@@ -225,23 +225,23 @@
                 </div>
                 <div class="prose">
                     <p>Auto-loaded data files turn a PHPDOC annotation into structured data — see <a href="../docs/authoring/#auto-loaded-data-files">Auto-loaded data files</a>. Pair one with <code>IMG::asset()</code> for a gallery with no hand-written <code>&lt;img&gt;</code> tags:</p>
-                    <pre><code class="hljs language-yaml">
-                        <span class="hljs-comment"># _photos.yaml</span>
-                        <span class="hljs-bullet">-</span> <span class="hljs-attr">file:</span>    <span class="hljs-string">elephant.jpg</span>
-                          <span class="hljs-attr">caption:</span> <span class="hljs-string">An</span> <span class="hljs-string">elephant,</span> <span class="hljs-string">cropped</span> <span class="hljs-string">square</span>
-                        <span class="hljs-bullet">-</span> <span class="hljs-attr">file:</span>    <span class="hljs-string">another.jpg</span>
-                          <span class="hljs-attr">caption:</span> <span class="hljs-string">Another</span> <span class="hljs-string">shot,</span> <span class="hljs-string">same</span> <span class="hljs-string">treatment</span>
+                    <pre><code class="hljs language-yaml hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-comment"># _photos.yaml</span></span>
+                        <span class="hljs-line"><span class="hljs-bullet">-</span> <span class="hljs-attr">file:</span>    <span class="hljs-string">elephant.jpg</span></span>
+                        <span class="hljs-line">  <span class="hljs-attr">caption:</span> <span class="hljs-string">An</span> <span class="hljs-string">elephant,</span> <span class="hljs-string">cropped</span> <span class="hljs-string">square</span></span>
+                        <span class="hljs-line"><span class="hljs-bullet">-</span> <span class="hljs-attr">file:</span>    <span class="hljs-string">another.jpg</span></span>
+                        <span class="hljs-line">  <span class="hljs-attr">caption:</span> <span class="hljs-string">Another</span> <span class="hljs-string">shot,</span> <span class="hljs-string">same</span> <span class="hljs-string">treatment</span></span>
                     </code></pre>
-                    <pre><code class="hljs language-php">
-                        <span class="hljs-comment">/**
-                         * <span class="hljs-doctag">@photos</span> _photos.yaml
-                         */</span>
-
-                        <span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$photos</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$p</span>) {
-                            <span class="hljs-variable">$src</span> = IMG::<span class="hljs-title function_ invoke__">asset</span>(<span class="hljs-variable">$p</span>-&gt;file, <span class="hljs-number">400</span>, <span class="hljs-number">400</span>, <span class="hljs-literal">true</span>);
-                            <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;figure&gt;&lt;img src=&quot;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$src</span>) . <span class="hljs-string">&#x27;&quot; alt=&quot;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$p</span>-&gt;caption) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span>
-                               . <span class="hljs-string">&#x27;&lt;figcaption&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$p</span>-&gt;caption) . <span class="hljs-string">&#x27;&lt;/figcaption&gt;&lt;/figure&gt;&#x27;</span>;
-                        }
+                    <pre><code class="hljs language-php hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                        <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@photos</span> _photos.yaml</span></span>
+                        <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$photos</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$p</span>) {</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$src</span> = IMG::<span class="hljs-title function_ invoke__">asset</span>(<span class="hljs-variable">$p</span>-&gt;file, <span class="hljs-number">400</span>, <span class="hljs-number">400</span>, <span class="hljs-literal">true</span>);</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;figure&gt;&lt;img src=&quot;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$src</span>) . <span class="hljs-string">&#x27;&quot; alt=&quot;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$p</span>-&gt;caption) . <span class="hljs-string">&#x27;&quot;&gt;&#x27;</span></span>
+                        <span class="hljs-line">       . <span class="hljs-string">&#x27;&lt;figcaption&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$p</span>-&gt;caption) . <span class="hljs-string">&#x27;&lt;/figcaption&gt;&lt;/figure&gt;&#x27;</span>;</span>
+                        <span class="hljs-line">}</span>
                     </code></pre>
                     <p>Same <code>IMG::asset()</code> call this site&apos;s own live demo uses — two sizes cropped from one source photo, plus <code>IMG::palette()</code> swatches from it: <a href="../docs/php/#img">Docs → PHP → IMG</a>.</p>
                 </div>
@@ -254,8 +254,8 @@
                 </div>
                 <div class="prose">
                     <p>For a single image dropped straight into prose — no PHPDOC annotation, no loop — <code>{% img-asset %}</code> is the same <code>IMG::asset()</code> call as a Markdown shortcode, shipped by default (no plugin to install):</p>
-                    <pre><code class="hljs">
-                        {% img-asset male-african-bush-elephant.jpg 320 180 cover %}
+                    <pre><code class="hljs hljs-numbered">
+                        <span class="hljs-line">{% img-asset male-african-bush-elephant.jpg 320 180 cover %}</span>
                     </code></pre>
                     <div class="demo"><img src="../images/male-african-bush-elephant-320x180-cover.webp" alt=""></div>
                     <p>Positional args: <code>path [width [height [cover]]]</code> — a missing or unresolvable path degrades to an HTML comment instead of failing the build. Full mechanics: <a href="../docs/authoring/#md-plugins">Writing pages → MD plugins</a>.</p>
@@ -269,11 +269,11 @@
                 </div>
                 <div class="prose">
                     <p>Link previews and video embeds both look like small scraping projects until you actually need caching, image cropping, and an oEmbed lookup that doesn&apos;t block the build. Two plugins do the work:</p>
-                    <pre><code class="hljs language-html">
-                        <span class="hljs-tag">&lt;<span class="hljs-name">extlink</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://github.com/php-kirigami/kirigami&quot;</span>&gt;</span>
-
-                        <span class="hljs-tag">&lt;<span class="hljs-name">youtube</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;jNQXAC9IVRw&quot;</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-name">vimeo</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;1084537&quot;</span>&gt;</span>
+                    <pre><code class="hljs language-html hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">extlink</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://github.com/php-kirigami/kirigami&quot;</span>&gt;</span></span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">youtube</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;jNQXAC9IVRw&quot;</span>&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">vimeo</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;1084537&quot;</span>&gt;</span></span>
                     </code></pre>
                     <p><code>&lt;extlink&gt;</code> scrapes once at build time and caches to disk — <code>&lt;youtube&gt;</code>/<code>&lt;vimeo&gt;</code> resolve client-side, cached in <code>localStorage</code>, nothing fetched until the visitor clicks play. Both are demoed live, with the real cards, on <a href="../plugins/#extlink">Plugins</a>.</p>
                 </div>

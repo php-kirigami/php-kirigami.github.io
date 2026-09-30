@@ -122,8 +122,8 @@
             <section class="section wrap">
                 <div class="prose">
                     <p>A plugin is an npm package — <code>@kirigami/plugin-*</code>, or your own under the same convention — declared under <code>plugins:</code> in <code>kirigami.yaml</code>. It taps into the same tag/hook registry a project&apos;s own <code>prepros.includes</code> file does (see <a href="../docs/authoring/#registering-tags-and-hooks">Writing pages</a>), just packaged and versioned for reuse across projects.</p>
-                    <pre><code class="hljs language-bash">
-                        kiri install highlight
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">kiri install highlight</span>
                     </code></pre>
                     <p>resolves a bare name against the <code>@kirigami/plugin-*</code> convention, installs it, and prints the <code>plugins:</code> block to paste into <code>kirigami.yaml</code> — see the <a href="../docs/cli/">CLI reference</a> for the full command. Five official plugins ship today; this page demos each one live. The complete list, with versions fetched live from npm, is on <a href="../ecosystem/">Ecosystem</a>.</p>
                 </div>

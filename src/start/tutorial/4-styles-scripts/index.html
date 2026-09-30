@@ -137,14 +137,14 @@
                         <h3>Retheme with a few tokens</h3>
                         <div class="prose">
                             <p><code>styles/partials/_conf.scss</code> forwards <code>@kirigami/canva</code>&apos;s token layer — override a handful of variables and every component built on them (buttons, cards, the toggle) follows:</p>
-                            <pre><code class="hljs language-scss">
-                                <span class="hljs-keyword">@forward</span> <span class="hljs-string">&quot;@kirigami/canva/conf&quot;</span> with (
-                                    <span class="hljs-variable">$bg</span>:     <span class="hljs-number">#faf7f2</span>,
-                                    <span class="hljs-variable">$ink</span>:    <span class="hljs-number">#26221c</span>,
-                                    <span class="hljs-variable">$accent</span>: <span class="hljs-number">#a8562e</span>,
-                                    <span class="hljs-variable">$dark</span>:   true,
-                                    <span class="hljs-variable">$theme</span>:  both,
-                                );
+                            <pre><code class="hljs language-scss hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-keyword">@forward</span> <span class="hljs-string">&quot;@kirigami/canva/conf&quot;</span> with (</span>
+                                <span class="hljs-line">    <span class="hljs-variable">$bg</span>:     <span class="hljs-number">#faf7f2</span>,</span>
+                                <span class="hljs-line">    <span class="hljs-variable">$ink</span>:    <span class="hljs-number">#26221c</span>,</span>
+                                <span class="hljs-line">    <span class="hljs-variable">$accent</span>: <span class="hljs-number">#a8562e</span>,</span>
+                                <span class="hljs-line">    <span class="hljs-variable">$dark</span>:   true,</span>
+                                <span class="hljs-line">    <span class="hljs-variable">$theme</span>:  both,</span>
+                                <span class="hljs-line">);</span>
                             </code></pre>
                             <p><code>$dark: true</code> turns on canva&apos;s built-in dark palette; <code>$theme: both</code> follows the OS by default but lets <code>data-theme=&quot;dark&quot;</code> / <code>&quot;light&quot;</code> on <code>&lt;html&gt;</code> force either way.</p>
                         </div>
@@ -153,12 +153,12 @@
                         <h3>Add the toggle — no JS of your own</h3>
                         <div class="prose">
                             <p>In <code>scripts/kirigami.core.js</code>:</p>
-                            <pre><code class="hljs language-js">
-                                <span class="hljs-keyword">import</span> <span class="hljs-string">&quot;@kirigami/canva/theme&quot;</span>;
+                            <pre><code class="hljs language-js hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;@kirigami/canva/theme&quot;</span>;</span>
                             </code></pre>
                             <p>That import wires every <code>[data-theme-toggle]</code> on the page, persists the choice, and keeps controls in sync with the OS. Drop a button in <code>_layouts/header.php</code>:</p>
-                            <pre><code class="hljs language-html">
-                                <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">data-theme-toggle</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Toggle dark mode&quot;</span>&gt;</span>🌓<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+                            <pre><code class="hljs language-html hljs-numbered">
+                                <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">data-theme-toggle</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Toggle dark mode&quot;</span>&gt;</span>🌓<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
                             </code></pre>
                             <p>No state to manage by hand — the import is the whole feature.</p>
                         </div>
@@ -167,11 +167,11 @@
                         <h3>Stop wiring the &lt;head&gt; by hand</h3>
                         <div class="prose">
                             <p>Once <code>prepros:</code> is set, <code>_layouts/header.php</code> doesn&apos;t need a <code>&lt;link&gt;</code> for the stylesheet or a <code>&lt;script&gt;</code> for the bundle — Kirigami injects both automatically for every <code>sass</code>/<code>esbuild</code> task, per page, cache-busted. It also injects a small theme/FOUC guard as the very first thing in <code>&lt;head&gt;</code>, so the stored preference applies before first paint. All you write:</p>
-                            <pre><code class="hljs language-php">
-                                &lt;head&gt;
-                                    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;
-                                    &lt;meta name=<span class="hljs-string">&quot;viewport&quot;</span> content=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;
-                                &lt;/head&gt;
+                            <pre><code class="hljs language-php hljs-numbered">
+                                <span class="hljs-line">&lt;head&gt;</span>
+                                <span class="hljs-line">    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+                                <span class="hljs-line">    &lt;meta name=<span class="hljs-string">&quot;viewport&quot;</span> content=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span>
+                                <span class="hljs-line">&lt;/head&gt;</span>
                             </code></pre>
                         </div>
                     </li>
