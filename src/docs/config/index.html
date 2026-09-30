@@ -153,6 +153,7 @@
                             <li><a href="#seo">seo</a></li>
                             <li><a href="#prepros">prepros</a></li>
                             <li><a href="#image">image</a></li>
+                            <li><a href="#studio">studio</a></li>
                             <li><a href="#plugins">plugins</a></li>
                             <li><a href="#esbuild-and-sass">esbuild and sass</a></li>
                             <li><a href="#export">export</a></li>
@@ -370,6 +371,69 @@
                               <span class="hljs-attr">source:</span> <span class="hljs-string">assets/images</span>   <span class="hljs-comment"># rel. to cwd()       (default assets/images)</span>
                               <span class="hljs-attr">dest:</span>   <span class="hljs-string">images</span>           <span class="hljs-comment"># rel. to kirigami.root (default images)</span>
                         </code></pre>
+                        <h2 id="studio">studio</h2>
+                        <p>What <a href="https://github.com/php-kirigami/kiri-studio" target="_blank" rel="noopener noreferrer">Kiri Studio</a>, the desktop app for site owners, lets a client edit. The build ignores this block. <code>studio: {}</code> is enough: every <code>.md</code> / <code>.yaml</code> / <code>.yml</code> / <code>.json</code> file a page loads through a PHPDOC annotation (<code>@content _about.md</code>, <code>@articles _articles.yaml</code>) becomes editable, grouped under the page&apos;s <code>@title</code>. Paths are relative to <code>cwd()</code> and are never replaced by the content of the file they name.</p>
+                        <pre><code class="hljs language-yaml">
+                            <span class="hljs-attr">studio:</span>
+                              <span class="hljs-attr">files:</span> <span class="hljs-string">src/documents</span>          <span class="hljs-comment"># document manager (PDF, …); omit to hide</span>
+                              <span class="hljs-attr">exclude:</span> [<span class="hljs-string">src/features/data/_stats.json</span>]
+                              <span class="hljs-attr">labels:</span>
+                                <span class="hljs-attr">src/features/data/_articles.yaml:</span> <span class="hljs-string">Articles</span>
+                              <span class="hljs-attr">schemas:</span>                      <span class="hljs-comment"># same format as VS Code&#x27;s yaml.schemas</span>
+                                <span class="hljs-attr">assets/schemas/articles.schema.json:</span> <span class="hljs-string">_articles.yaml</span>
+                        </code></pre>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Default</th>
+                                    <th>What it does</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>branch</code></td>
+                                    <td>repo default</td>
+                                    <td>Branch synced from and published to.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>images</code></td>
+                                    <td><code>image.source</code></td>
+                                    <td>Image manager folder; <code>false</code> hides it.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>imageWidth</code></td>
+                                    <td><code>800</code></td>
+                                    <td>Width in the <code>{% img-asset %}</code> code Kiri Studio copies for an image.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>files</code></td>
+                                    <td>–</td>
+                                    <td>Document folder, under <code>kirigami.root</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>include</code></td>
+                                    <td><code>[]</code></td>
+                                    <td>Extra editable paths or globs; <code>{ path, label, create }</code> lets clients add and delete files matching a glob.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>exclude</code></td>
+                                    <td><code>[]</code></td>
+                                    <td>Paths or globs hidden from clients.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>labels</code></td>
+                                    <td><code>{}</code></td>
+                                    <td>Names shown to clients, by path.</td>
+                                </tr>
+                                <tr>
+                                    <td><code>schemas</code></td>
+                                    <td><code>{}</code></td>
+                                    <td>JSON Schemas for data files: schema path or URL → file glob(s).</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p>Data files are edited as text and checked against a JSON Schema as the client types. A file&apos;s schema is found the way VS Code&apos;s YAML extension finds it, so a site already set up for VS Code needs no <code>schemas</code> entry: a <code># yaml-language-server: $schema=</code> line in the file, then <code>studio.schemas</code>, then <code>yaml.schemas</code> in <code>.vscode/settings.json</code>.</p>
                         <h2 id="plugins">plugins</h2>
                         <p>Kirigami plugins, loaded via <code>@kirigami/sdk</code>.</p>
                         <pre><code class="hljs language-yaml">
@@ -395,7 +459,7 @@
                               <span class="hljs-attr">path:</span>   <span class="hljs-string">dist</span>                    <span class="hljs-comment"># output dir for `kiri export`</span>
                               <span class="hljs-attr">ignore:</span> [<span class="hljs-string">&quot;*.psd&quot;</span>, <span class="hljs-string">&quot;notes/&quot;</span>]      <span class="hljs-comment"># extra gitignore-style excludes</span>
                         </code></pre>
-                        <p><code>kiri export</code> copies <code>kirigami.root</code> into <code>path</code>, excluding any file/dir starting with <code>_</code> or <code>.</code>, <code>.scss</code> files, <code>.map</code> files, and non-minified <code>.js</code> files, plus every <code>ignore</code> pattern. Token replacements happen during the copy: <code>2026</code> and <code>###TIMESTAMP###</code> in <code>.html</code>, <code>2026-09-24</code> in <code>sitemap.xml</code>.</p>
+                        <p><code>kiri export</code> copies <code>kirigami.root</code> into <code>path</code>, excluding any file/dir starting with <code>_</code> or <code>.</code>, <code>.scss</code> files, <code>.map</code> files, and non-minified <code>.js</code> files, plus every <code>ignore</code> pattern. Token replacements happen during the copy: <code>2026</code> and <code>###TIMESTAMP###</code> in <code>.html</code>, <code>2026-09-29</code> in <code>sitemap.xml</code>.</p>
                         <h2 id="scripts">scripts</h2>
                         <p>Named PHP scripts, run with <code>kiri run &lt;name&gt;</code> or on a build trigger.</p>
                         <pre><code class="hljs language-yaml">

@@ -150,6 +150,10 @@ function kirigami_packages(): array
         ['npm_pkg' => 'plugin-highlight', 'role' => 'Build-time syntax highlighting, 0 runtime JS.', 'license' => 'GPL-3.0-or-later'],
         ['npm_pkg' => 'plugin-extlink', 'role' => 'External link preview cards, SCRAPER-backed, cached to disk.', 'license' => 'GPL-3.0-or-later'],
         ['npm_pkg' => 'plugin-embed', 'role' => 'YouTube / Vimeo oEmbed video cards, resolved client-side.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'plugin-player', 'role' => 'Audio players and playlists, waveform baked at build time.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'plugin-clip', 'role' => 'Local video players and silent loops, poster picked at build time.', 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'audiowaveform-wasm', 'role' => "BBC's audiowaveform compiled to WebAssembly: waveform peaks, SVG, ID3 tags.", 'license' => 'GPL-3.0-or-later'],
+        ['npm_pkg' => 'bestframe', 'role' => 'Picks the best still frame of a video with a tiny embedded aesthetic model, in WebAssembly.', 'license' => 'LGPL-2.1-or-later'],
     ];
 }
 

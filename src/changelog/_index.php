@@ -15,6 +15,66 @@
           README, linked below each entry; [Ecosystem](../ecosystem/) always
           shows the current version of everything, fetched live from npm.
 
+          ## September 30, 2026
+
+          **[@kirigami/plugin-player](https://www.npmjs.com/package/@kirigami/plugin-player)**
+          `0.1.0` — new plugin: `<player src="…">` and `<playlist src="….m3u">`
+          (or `{% player %}` / `{% playlist %}` in Markdown) — a SoundCloud-style
+          audio player. The waveform, duration, ID3 tags and cover art are baked
+          at build time and cached in `src/_data/player/`; the cover goes
+          through the image pipeline. Live demo on [Plugins](../plugins/#player).
+
+          **[@kirigami/plugin-clip](https://www.npmjs.com/package/@kirigami/plugin-clip)**
+          `0.1.0` — new plugin: `<clip src="…">` plays a local video with a
+          poster chosen at build time by `@kirigami/bestframe`, and
+          `<inline-clip src="…">` is a silent, looping, autoplaying `<video>`
+          for decoration. Live demo on [Plugins](../plugins/#clip).
+
+          **[@kirigami/audiowaveform-wasm](https://www.npmjs.com/package/@kirigami/audiowaveform-wasm)**
+          `1.1.1` → `1.2.0` — `resamplePeaks()` (resize to a fixed number of
+          points), `peaksToSvg()` and `getAudioPackage()`: the metadata (format,
+          size, duration, bitrate, ID3, cover) and a waveform SVG in one call.
+
+          **[@kirigami/bestframe](https://www.npmjs.com/package/@kirigami/bestframe)**
+          `0.1.1` → `0.2.0` — decodes more videos: MPEG-4 part 2 (DivX/Xvid),
+          VP8, Theora, MPEG-2 and MPEG-1, in AVI, Ogg and MPEG program and
+          transport streams. FFmpeg no longer prints its own warnings to the
+          console.
+
+          **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**
+          `3.1.1` → `3.1.2` — the dev server (`kiri serve`) answers HTTP Range
+          requests and knows the audio and video types, so a browser can seek
+          inside an `<audio>` or `<video>`. **[@kirigami/cli](https://www.npmjs.com/package/@kirigami/cli)**
+          and **[@kirigami/mcp](https://www.npmjs.com/package/@kirigami/mcp)**
+          `0.1.5` follow.
+
+          ## September 29, 2026
+
+          **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**
+          `3.0.2` → `3.1.1` — the new [`studio:` block](../docs/config/#studio)
+          for [Kiri Studio](https://github.com/php-kirigami/kiri-studio), the
+          desktop app that lets a client edit their own site; a watched data
+          file now re-renders the pages that load it, not the whole
+          directory; and the files plugins inject with `sass:before` /
+          `sass:after` and `esbuild:before` / `esbuild:after` go into the
+          **first** task of each type only, instead of being repeated in
+          every stylesheet and bundle of a site with several.
+
+          **[@kirigami/php-prepros](https://www.npmjs.com/package/@kirigami/php-prepros)**
+          `3.0.1` → `3.1.1` — `IMG::palette()` (and Sass's `colors()`) now
+          extract colours with Aura, built into the PHP runtime: up to six
+          swatches (vibrant and muted, dark and light), most present first,
+          instead of an arbitrary number. See [Docs → PHP](../docs/php/#img).
+
+          **[@kirigami/php-wasm](https://www.npmjs.com/package/@kirigami/php-wasm)**
+          `8.5.11` → `8.5.11-1` — a rebuild of PHP 8.5.11 with the `aura` and
+          `translit` extensions linked in.
+
+          **[@kirigami/cli](https://www.npmjs.com/package/@kirigami/cli)**
+          `0.1.2` → `0.1.4` — `kiri export` says why it refused to export
+          (for example an existing `dist/` it did not create), instead of
+          exiting silently. **VS Code extension** `0.1.2` bundles all of it.
+
           ## September 11, 2026
 
           **[@kirigami/php-prepros](https://www.npmjs.com/package/@kirigami/php-prepros)**

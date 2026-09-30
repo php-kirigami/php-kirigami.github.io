@@ -154,6 +154,44 @@
         dest:   images           # rel. to kirigami.root (default images)
       ```
 
+      ## studio
+
+      What [Kiri Studio](https://github.com/php-kirigami/kiri-studio), the
+      desktop app for site owners, lets a client edit. The build ignores
+      this block. `studio: {}` is enough: every `.md` / `.yaml` / `.yml` /
+      `.json` file a page loads through a PHPDOC annotation
+      (`@content _about.md`, `@articles _articles.yaml`) becomes editable,
+      grouped under the page's `@title`. Paths are relative to `cwd()` and
+      are never replaced by the content of the file they name.
+
+      ```yaml
+      studio:
+        files: src/documents          # document manager (PDF, …); omit to hide
+        exclude: [src/features/data/_stats.json]
+        labels:
+          src/features/data/_articles.yaml: Articles
+        schemas:                      # same format as VS Code's yaml.schemas
+          assets/schemas/articles.schema.json: _articles.yaml
+      ```
+
+      | Key | Default | What it does |
+      |---|---|---|
+      | `branch` | repo default | Branch synced from and published to. |
+      | `images` | `image.source` | Image manager folder; `false` hides it. |
+      | `imageWidth` | `800` | Width in the `{% img-asset %}` code Kiri Studio copies for an image. |
+      | `files` | – | Document folder, under `kirigami.root`. |
+      | `include` | `[]` | Extra editable paths or globs; `{ path, label, create }` lets clients add and delete files matching a glob. |
+      | `exclude` | `[]` | Paths or globs hidden from clients. |
+      | `labels` | `{}` | Names shown to clients, by path. |
+      | `schemas` | `{}` | JSON Schemas for data files: schema path or URL → file glob(s). |
+
+      Data files are edited as text and checked against a JSON Schema as
+      the client types. A file's schema is found the way VS Code's YAML
+      extension finds it, so a site already set up for VS Code needs no
+      `schemas` entry: a `# yaml-language-server: $schema=` line in the
+      file, then `studio.schemas`, then `yaml.schemas` in
+      `.vscode/settings.json`.
+
       ## plugins
 
       Kirigami plugins, loaded via `@kirigami/sdk`.

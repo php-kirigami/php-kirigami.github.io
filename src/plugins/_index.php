@@ -25,7 +25,7 @@
           resolves a bare name against the `@kirigami/plugin-*` convention,
           installs it, and prints the `plugins:` block to paste into
           `kirigami.yaml` — see the [CLI reference](../docs/cli/) for the
-          full command. Three official plugins ship today; this page
+          full command. Five official plugins ship today; this page
           demos each one live. The complete list, with versions fetched
           live from npm, is on [Ecosystem](../ecosystem/).
         </markdown>
@@ -107,6 +107,81 @@
 
 <hr class="fold">
 
+<section class="section wrap" id="player">
+    <div class="doc-head">
+        <span class="eyebrow">Build-time</span>
+        <h2>@kirigami/plugin-player</h2>
+        <p class="lead">Audio players and playlists — the waveform is drawn at build time from the audio file itself.</p>
+    </div>
+
+    <div class="prose">
+        <markdown>
+          `<player src="…">` decodes the file once, at build time, with
+          [`@kirigami/audiowaveform-wasm`](https://www.npmjs.com/package/@kirigami/audiowaveform-wasm)
+          (BBC's `audiowaveform`, compiled to WebAssembly), and bakes the
+          waveform, the duration, the ID3 tags and the embedded cover art into
+          the page. The cover goes through the same image pipeline as
+          `<img asset>`; the result is cached in `src/_data/player/`, meant to
+          be committed. The browser only gets a small playback script, and
+          downloads nothing until someone presses play. Click or drag along the
+          waveform to seek:
+        </markdown>
+    </div>
+
+    <player src="media/01-slow-fold.mp3">
+
+    <div class="prose">
+        <markdown>
+          A `<playlist src="….m3u">` is a plain playlist file; the next track
+          starts when one ends. The last track has no tags at all, so its title
+          is tidied up from the file name and a placeholder stands in for the
+          cover:
+        </markdown>
+    </div>
+
+    <playlist src="media/set.m3u">
+
+    <p><a href="https://www.npmjs.com/package/@kirigami/plugin-player">npm</a> &middot; <a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-player">Source</a></p>
+</section>
+
+<hr class="fold">
+
+<section class="section wrap" id="clip">
+    <div class="doc-head">
+        <span class="eyebrow">Build-time</span>
+        <h2>@kirigami/plugin-clip</h2>
+        <p class="lead">Local video files — the poster is picked automatically, at build time, by an aesthetic model.</p>
+    </div>
+
+    <div class="prose">
+        <markdown>
+          The local counterpart of `<youtube>` / `<vimeo>`: `<clip src="…">` plays
+          a video file served from your own site. The poster is not the first
+          frame — [`@kirigami/bestframe`](https://www.npmjs.com/package/@kirigami/bestframe)
+          samples the video, drops black, flat and blurry frames, and lets a
+          small embedded model score the rest. The winner is published like an
+          `<img asset>`; nothing is downloaded from the video until the play
+          button is pressed:
+        </markdown>
+    </div>
+
+    <clip src="media/zoom.mp4">
+
+    <div class="prose">
+        <markdown>
+          `<inline-clip src="…">` is for decoration rather than watching: a
+          single `<video>` that autoplays, muted, in a loop, with no controls,
+          and pauses while it's off-screen:
+        </markdown>
+    </div>
+
+    <inline-clip src="media/life-loop.mp4">
+
+    <p><a href="https://www.npmjs.com/package/@kirigami/plugin-clip">npm</a> &middot; <a href="https://github.com/php-kirigami/kirigami/tree/main/packages/plugin-clip">Source</a></p>
+</section>
+
+<hr class="fold">
+
 <section class="section wrap">
     <div class="prose">
         <markdown>
@@ -120,7 +195,7 @@
           into. [**Writing a plugin →**](authoring/) walks through building
           one from scratch — package shape, registering a tag, shipping
           default styles, the options schema, and a couple of gotchas that
-          only show up once you actually try it. The three plugins above
+          only show up once you actually try it. The plugins above
           are real, open-source, source-linked examples to read alongside
           it — `plugin-highlight`'s `index.js` is the shortest complete one.
         </markdown>

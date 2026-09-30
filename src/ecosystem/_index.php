@@ -71,6 +71,8 @@ $packages = kirigami_packages();
           ```
           sdk → canva → struct-walker → php-prepros → kirigami
               → plugin-highlight → plugin-extlink → plugin-embed
+          audiowaveform-wasm → plugin-player
+          bestframe → plugin-clip
           ```
 
           For each one still needing a release: run its `build` script,
