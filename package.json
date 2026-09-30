@@ -22,7 +22,7 @@
     "@kirigami/plugin-embed": "^0.2.1",
     "@kirigami/plugin-extlink": "^0.2.1",
     "@kirigami/plugin-highlight": "^0.2.1",
-    "@kirigami/plugin-player": "^0.1.0",
-    "@kirigami/plugin-clip": "^0.1.0"
+    "@kirigami/plugin-player": "^0.1.1",
+    "@kirigami/plugin-clip": "^0.1.1"
   }
 }
