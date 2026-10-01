@@ -36,15 +36,15 @@ $palette = img_palette('male-african-bush-elephant.jpg', 5);
           the same eight every Kirigami project starts from and overrides
           through `@forward "@kirigami/canva/conf" with (...)`. This page is
           what that override looks like once it's actually been used —
-          [Config → conf tokens](../docs/config/#conf) has the full option
-          list, including the dark-palette counterparts (`$dark-bg`,
+          [Design system → tokens](../docs/canva/#tokens-conf) has the full
+          option list, including the dark-palette counterparts (`$dark-bg`,
           `$dark-ink`, …) this site's own dark mode is built from.
         </markdown>
     </div>
 </section>
 
 <section class="section wrap">
-    <h2>Palette</h2>
+    <h2 id="palette">Palette</h2>
     <div class="grid" data-reveal>
         <?php foreach ($tokens as [$name, $role]): ?>
             <div class="card card--static token-card">
@@ -61,7 +61,7 @@ $palette = img_palette('male-african-bush-elephant.jpg', 5);
 <hr class="fold">
 
 <section class="section wrap">
-    <h2>Type</h2>
+    <h2 id="type">Type</h2>
     <div class="prose">
         <p>
             Three roles, three families, all embedded locally (no Google
@@ -96,7 +96,7 @@ $palette = img_palette('male-african-bush-elephant.jpg', 5);
 <hr class="fold">
 
 <section class="section wrap">
-    <h2>Imagery</h2>
+    <h2 id="imagery">Imagery</h2>
     <div class="prose">
         <markdown>
           Kirigami means cut and folded paper, and the images say so.
@@ -126,7 +126,7 @@ $palette = img_palette('male-african-bush-elephant.jpg', 5);
 <hr class="fold">
 
 <section class="section wrap">
-    <h2>Shared components</h2>
+    <h2 id="shared-components">Shared components</h2>
     <div class="prose">
         <markdown>
           Five small, generic patterns that kept turning up identically

@@ -103,10 +103,10 @@
 
       A task with no build step for the current change (nothing to
       re-run) is skipped, unless it sets `force: true`. `kiri build`
-      fires the `before-build` [trigger](#run) first — a `scripts:`
+      fires the `before-build` [trigger](#kiri-run) first — a `scripts:`
       entry can hook into that without any manual `kiri run` call. For
       production output (minified, exported to `dist/`), use
-      [`kiri export`](#export) instead.
+      [`kiri export`](#kiri-export) instead.
 
       ## kiri export
 
@@ -121,7 +121,7 @@
       ```
 
       Trigger order is `before-export` → `before-build` → the build
-      itself → `after-export` (see [`kiri run`](#run) for what a trigger
+      itself → `after-export` (see [`kiri run`](#kiri-run) for what a trigger
       actually runs). That means anything a project wires to
       `before-build` also runs during export — no need to duplicate a
       script under both triggers.
@@ -144,12 +144,12 @@
       ```
 
       It only writes files to disk — no server, no browser reload. For
-      that, use [`kiri serve`](#serve), which does everything `watch`
+      that, use [`kiri serve`](#kiri-serve), which does everything `watch`
       does plus the two things it's missing.
 
       ## kiri serve
 
-      Everything [`kiri watch`](#watch) does, plus: serves
+      Everything [`kiri watch`](#kiri-watch) does, plus: serves
       `kirigami.root` over plain HTTP and reloads any open browser tab
       once a rebuild batch finishes (Server-Sent Events — no WebSocket
       library, no live-reload framework, just `node:http` + `node:fs`).

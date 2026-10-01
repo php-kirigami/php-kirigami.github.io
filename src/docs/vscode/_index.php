@@ -25,6 +25,20 @@
   recommends it in `.vscode/extensions.json`, so VS Code offers to install it
   when you open a new project.
 
+  ## Install
+
+  Get it from the
+  [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=php-kirigami.kirigami-vscode),
+  or search for **Kirigami** in the Extensions view (*Ctrl+Shift+X*). From a
+  terminal:
+
+  ```bash
+  code --install-extension php-kirigami.kirigami-vscode
+  ```
+
+  The package is built per platform, so VS Code picks the right one for your
+  system. The [requirements](#requirements) are below.
+
   ## What it can do
 
   | You want to… | Use |

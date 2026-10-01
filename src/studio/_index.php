@@ -120,8 +120,8 @@
 
         The build ignores that block, so a site works the same with or without
         Studio. Every key is documented in the [configuration
-        reference](docs/config/#studio) and in [Kiri Studio for
-        maintainers](docs/studio/).
+        reference](../docs/config/#studio) and in [Kiri Studio for
+        maintainers](../docs/studio/).
         </markdown>
     </div>
 </section>
