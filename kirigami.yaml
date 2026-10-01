@@ -41,12 +41,14 @@ prepros:
   types:                          # a page opts in with @type <name>
     doc:                          # page head: breadcrumb, eyebrow, title, lead
       before: _layouts/types/doc.before.php
-    guide:                        # doc head + prev/next along the Getting started path
-      before: _layouts/types/guide.before.php
-      after:  _layouts/types/guide.after.php
-    docs:                         # the /docs/ sub-site: sidebar, head, "On this page", prev/next
-      before: _layouts/types/docs.before.php
-      after:  _layouts/types/docs.after.php
+    # `docs` and `guide` share one Kiridoc-style layout (sidebar, article, "On this
+    # page", prev/next) for the rail sections: docs/, start/ and plugins/.
+    guide:
+      before: _layouts/types/rail.before.php
+      after:  _layouts/types/rail.after.php
+    docs:
+      before: _layouts/types/rail.before.php
+      after:  _layouts/types/rail.after.php
 
 
 # The image autogenerator. Source originals in assets/images/ (rel. to cwd),

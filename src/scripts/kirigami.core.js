@@ -29,3 +29,30 @@ ready(() => {
         navToggle.setAttribute('aria-expanded', String(open));
     });
 });
+
+// "On this page": highlights the section being read — the last h2 that has
+// scrolled past a line a quarter down the viewport, or the last one once the
+// page bottom is reached (a short final section would never get there).
+ready(() => {
+    const links = [...document.querySelectorAll('.toc a[href^="#"]')];
+    const heads = links.map((a) => document.getElementById(decodeURIComponent(a.hash.slice(1))));
+    if (!links.length || heads.includes(null)) return;
+
+    let active = null;
+    const mark = () => {
+        const bottom = Math.ceil(scrollY + innerHeight) >= document.documentElement.scrollHeight - 2;
+        let current = heads[0];
+        for (const h of heads) if (h.getBoundingClientRect().top <= innerHeight * 0.25) current = h;
+        if (bottom) current = heads[heads.length - 1];
+        if (current === active) return;
+        active = current;
+        links.forEach((a, i) => {
+            const on = heads[i] === current;
+            a.toggleAttribute('aria-current', on);
+            if (on) a.scrollIntoView({ block: 'nearest' });
+        });
+    };
+    addEventListener('scroll', mark, { passive: true });
+    addEventListener('resize', mark);
+    mark();
+});

@@ -35,6 +35,7 @@ $nav = [
     'start/'    => ['Start',    'start'],
     'docs/'     => ['Docs',     'docs'],
     'plugins/'  => ['Plugins',  'plugins'],
+    'studio/'   => ['Studio',   'studio'],
     'examples/' => ['Examples', 'examples'],
 ];
 ?>

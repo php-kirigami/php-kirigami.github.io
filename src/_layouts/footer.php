@@ -13,6 +13,7 @@
                         <li><a href="<?php echo $relroot; ?>start/">Getting started</a></li>
                         <li><a href="<?php echo $relroot; ?>docs/">Documentation</a></li>
                         <li><a href="<?php echo $relroot; ?>plugins/">Plugins</a></li>
+                        <li><a href="<?php echo $relroot; ?>studio/">Kiri Studio</a></li>
                         <li><a href="<?php echo $relroot; ?>examples/">Examples</a></li>
                         <li><a href="<?php echo $relroot; ?>templates/">Templates</a></li>
                         <li><a href="<?php echo $relroot; ?>showcase/">Showcase</a></li>
