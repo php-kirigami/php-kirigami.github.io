@@ -2,7 +2,7 @@
 /**
  * @title    Start
  * @section  start
- * @type     doc
+ * @type     docs
  * @abstract Three ways in, depending on how much time you've got.
  */
 ?>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kiri Studio — Kirigami</title>
+        <meta name="description" content="Set up a Kirigami site so its owner can edit and publish it with Kiri Studio, the desktop app.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Kiri Studio — Kirigami">
+        <meta name="twitter:description" content="Set up a Kirigami site so its owner can edit and publish it with Kiri Studio, the desktop app.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Kiri Studio — Kirigami">
+        <meta property="og:description" content="Set up a Kirigami site so its owner can edit and publish it with Kiri Studio, the desktop app.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/studio/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/studio/">
+        <link rel="author" type="text/plain" href="../../humans.txt">
+        <link rel="icon" type="image/png" href="../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/studio/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Documentation",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Kiri Studio",
+                                "item": "https://php-kirigami.github.io/docs/studio/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/studio/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/studio/",
+                        "name": "Kiri Studio",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/studio/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
+                        <li><a href="../../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                        <li><a href="../../docs/troubleshooting/">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/cli/">CLI</a></li>
+                        <li><a href="../../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/">JavaScript API</a></li>
+                        <li><a href="../../docs/studio/" aria-current="page">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/sdk/">Plugin SDK</a></li>
+                        <li><a href="../../docs/internals/">Internals</a></li>
+                        <li><a href="../../docs/struct-walker/">struct-walker</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><span aria-current="page">Kiri Studio</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Tools</span>
+                        <h1>Kiri Studio</h1>
+                        <p class="lead">Set up a Kirigami site so its owner can edit and publish it with Kiri Studio, the desktop app.</p>
+                    </header>
+                    <h2 id="overview">Overview</h2>
+                    <p><a href="../../studio/">Kiri Studio</a> is a desktop app for the <strong>owner</strong> of a Kirigami site: they sign in with GitHub, edit text, data, images and documents, see the real page in a live preview, and click Publish. It sits next to the <a href="../cli/">CLI</a>, the <a href="../vscode/">VS Code extension</a>, the <a href="../mcp/">MCP server</a> and the <a href="../api/">JavaScript API</a>: the same engine, for people who never open a terminal.</p>
+                    <p>This page is for you, the maintainer, who prepares the site. The owner does none of it.</p>
+                    <h2 id="how-it-works">How it works</h2>
+                    <ul>
+                        <li><strong>Sync, not clone.</strong> The app downloads the repository&apos;s tarball at the branch head into a cache and remembers the commit. It re-checks every three minutes and when its window regains focus, so it notices other people&apos;s changes. There is no local Git.</li>
+                        <li><strong>Drafts.</strong> Edits are kept as an overlay apart from the synced files, and saved on every change: a crash or a restart loses nothing.</li>
+                        <li><strong>Preview.</strong> The app runs the site&apos;s own Kirigami in a worker process, through the <code>Project</code> API, so the preview is the real render. The site needs <code>@kirigami/kirigami</code> <strong>3.1.1 or newer</strong>. The preview folds into a thin rail to give the editor the full width.</li>
+                        <li><strong>Publish.</strong> One blob per changed file, one tree, one commit, then a single branch update that is refused if someone else published meanwhile. The app then syncs again and rebuilds on the new head, and follows the GitHub Actions run to tell the owner when the site is online. Files over 25 MB are refused, except paths routed through Git LFS (up to 100 MB).</li>
+                    </ul>
+                    <h2 id="one-time-setup-per-site">One-time setup per site</h2>
+                    <ol>
+                        <li>Install the <strong>Kiri Studio</strong> GitHub App on the site&apos;s repository.</li>
+                        <li>Give the owner write access to that repository.</li>
+                        <li>Optionally add a <code>studio:</code> block to <code>kirigami.yaml</code>.</li>
+                    </ol>
+                    <p>The owner&apos;s sign-in only reaches repositories where the App is installed <em>and</em> they can write. Publishing pushes source files only: the site&apos;s existing GitHub Pages workflow builds and deploys.</p>
+                    <h2 id="the-studio-block">The <code>studio:</code> block</h2>
+                    <p>Nothing is required: without a block, the content that pages load and the site&apos;s images are editable. <code>studio: {}</code> is the explicit minimum. Every <code>.md</code>, <code>.yaml</code>, <code>.yml</code> and <code>.json</code> file that a page loads through a PHPDOC annotation (<code>@content _about.md</code>, <code>@articles _articles.yaml</code>) becomes editable, grouped under the page&apos;s <code>@title</code>. The build ignores the block.</p>
+                    <pre><code class="hljs language-yaml hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-attr">studio:</span></span>
+                        <span class="hljs-line">  <span class="hljs-attr">files:</span> <span class="hljs-string">src/documents</span></span>
+                        <span class="hljs-line">  <span class="hljs-attr">exclude:</span> [<span class="hljs-string">src/features/data/_stats.json</span>]</span>
+                        <span class="hljs-line">  <span class="hljs-attr">labels:</span></span>
+                        <span class="hljs-line">    <span class="hljs-attr">src/features/data/_articles.yaml:</span> <span class="hljs-string">Articles</span></span>
+                        <span class="hljs-line">  <span class="hljs-attr">schemas:</span></span>
+                        <span class="hljs-line">    <span class="hljs-attr">assets/schemas/articles.schema.json:</span> <span class="hljs-string">_articles.yaml</span></span>
+                        <span class="hljs-line">  <span class="hljs-attr">include:</span></span>
+                        <span class="hljs-line">    <span class="hljs-bullet">-</span> { <span class="hljs-attr">path:</span> <span class="hljs-string">&quot;src/news/*/_index.md&quot;</span>, <span class="hljs-attr">label:</span> <span class="hljs-string">Posts</span>, <span class="hljs-attr">create:</span> <span class="hljs-literal">true</span>,</span>
+                        <span class="hljs-line">        <span class="hljs-attr">header:</span> { <span class="hljs-attr">date:</span> <span class="hljs-string">today</span> } }</span>
+                        <span class="hljs-line">  <span class="hljs-attr">pageMedia:</span> [<span class="hljs-string">images</span>, <span class="hljs-string">videos</span>, <span class="hljs-string">files</span>]</span>
+                        <span class="hljs-line">  <span class="hljs-attr">pageImage:</span> <span class="hljs-literal">true</span></span>
+                    </code></pre>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Default</th>
+                                <th>What it does</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>branch</code></td>
+                                <td>repo default</td>
+                                <td>Branch synced from and published to.</td>
+                            </tr>
+                            <tr>
+                                <td><code>images</code></td>
+                                <td><code>image.source</code></td>
+                                <td>The image manager folder; <code>false</code> hides it.</td>
+                            </tr>
+                            <tr>
+                                <td><code>imageWidth</code></td>
+                                <td><code>800</code></td>
+                                <td>Width in the <code>{% img-asset %}</code> code the app copies for an image.</td>
+                            </tr>
+                            <tr>
+                                <td><code>files</code></td>
+                                <td>–</td>
+                                <td>The document folder, under <code>kirigami.root</code>; omit to hide the manager.</td>
+                            </tr>
+                            <tr>
+                                <td><code>include</code></td>
+                                <td><code>[]</code></td>
+                                <td>Extra editable paths or globs. <code>{ path, label, create, header }</code> lets owners add and delete matching files; <code>header</code> sets default tags for new pages (<code>today</code> fills a date).</td>
+                            </tr>
+                            <tr>
+                                <td><code>exclude</code></td>
+                                <td><code>[]</code></td>
+                                <td>Paths or globs hidden from owners.</td>
+                            </tr>
+                            <tr>
+                                <td><code>labels</code></td>
+                                <td><code>{}</code></td>
+                                <td>Names shown to owners, by path. Page labels otherwise come from <code>@title</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>schemas</code></td>
+                                <td><code>{}</code></td>
+                                <td>JSON Schemas for data files: schema path or URL, to file glob(s).</td>
+                            </tr>
+                            <tr>
+                                <td><code>types</code></td>
+                                <td><code>prepros.types</code></td>
+                                <td>The page layouts offered in the page&apos;s &quot;Page layout&quot; select, as a list, or <code>false</code> to hide it.</td>
+                            </tr>
+                            <tr>
+                                <td><code>pageMedia</code></td>
+                                <td>off</td>
+                                <td><code>true</code> (<code>images/</code> and <code>videos/</code>) or a list of folder names; each Markdown page gets its own media folders beside its <code>_index.md</code>. Include <code>files</code> for downloads.</td>
+                            </tr>
+                            <tr>
+                                <td><code>pageImage</code></td>
+                                <td>off</td>
+                                <td>Needs <code>pageMedia</code>: each image gets &quot;Use as page image&quot;, which sets the page&apos;s <code>@image</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><code>pageMedia</code> needs core 3.2.2 and <code>pageImage</code> core 3.2.3: a site can only set an option its installed core&apos;s schema knows.</p>
+                    <h3 id="collections">Collections</h3>
+                    <p>With <code>create: true</code>, a glob makes a creatable collection:</p>
+                    <ul>
+                        <li><code>folder/*/_index.md</code> creates <code>folder/&lt;slug&gt;/_index.md</code> (never over an existing folder), with <code>@title</code> plus the <code>header</code> defaults.</li>
+                        <li><code>folder/**/_index.md</code> is a <strong>tree</strong>: the sidebar nests the pages, with a &quot;+&quot; on each page to add a sub-page.</li>
+                    </ul>
+                    <p>Deleting a page of such a collection removes its whole folder (sub-pages and files beside it) after a confirmation that counts them; the top page of a tree waits until it has no sub-pages.</p>
+                    <h3 id="markdown-pages-and-their-header">Markdown pages and their header</h3>
+                    <p>An <code>_index.md</code> that starts with <code>@tag</code> lines and has no <code>_index.php</code> beside it is a page. The editor shows its header as a form above the text (date picker, checkboxes, a textarea for the abstract, the layout select) and rewrites only the line you changed, so an untouched header keeps its exact bytes. Technical tags (<code>type</code>, <code>content</code>, names starting with <code>_</code>, <code>@@</code>) stay hidden.</p>
+                    <h3 id="schemas">Schemas</h3>
+                    <p>Data files are edited as text and checked against a JSON Schema as the owner types. A file&apos;s schema is found like VS Code&apos;s YAML extension does: a <code># yaml-language-server: $schema=</code> line in the file, then <code>studio.schemas</code>, then <code>yaml.schemas</code> in <code>.vscode/settings.json</code>. A site already set up for VS Code usually needs nothing more.</p>
+                    <h2 id="media-and-git-lfs">Media and Git LFS</h2>
+                    <ul>
+                        <li>Images are <strong>downscaled</strong> before they are committed, so plain Git holds them. Each image can copy a ready <code>{% img-asset %}</code> snippet, its Markdown, or its path.</li>
+                        <li>Documents get a &quot;Copy Markdown link&quot; action (a root-relative path that includes the site&apos;s base path) and &quot;Copy file name&quot;.</li>
+                        <li>Audio (mp3, m4a, aac, wav, flac, ogg, opus) and video (mp4, m4v, webm, ogv, mov) files play in the app, with seeking.</li>
+                        <li>For large binaries, route the extensions through LFS in <code>.gitattributes</code> (for example <code>*.mp4 filter=lfs diff=lfs merge=lfs -text</code>). Studio uploads those through the LFS batch API and commits the pointer. Remember that the Pages build then checks LFS files out on every deploy: new sites should keep media out of LFS where they can.</li>
+                    </ul>
+                    <h2 id="install-and-update">Install and update</h2>
+                    <p>Installers for Windows (x64), macOS (arm64, x64) and Linux (AppImage and <code>.deb</code>) are on the <a href="https://github.com/php-kirigami/kiri-studio/releases" target="_blank" rel="noopener noreferrer">releases page</a>. They are not code-signed yet: Windows warns on first install, and macOS needs right-click, Open. Installed apps update themselves in the background and apply the update on quit (Windows and the AppImage for now). The interface is available in English and French.</p>
+                    <h2 id="limits">Limits</h2>
+                    <ul>
+                        <li>One images folder per site (<code>studio.images</code>).</li>
+                        <li>Studio has one running instance at a time: a second launch shows a dialog and raises the first window.</li>
+                        <li>It is in early development: expect rough edges, and report them on the <a href="https://github.com/php-kirigami/kiri-studio/issues" target="_blank" rel="noopener noreferrer">issue tracker</a>.</li>
+                    </ul>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../docs/api/">JavaScript API</a>
+                        <a class="doc__next" rel="next" href="../../docs/sdk/">Plugin SDK</a>
+                    </nav>
+                </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#how-it-works">How it works</a></li>
+                        <li><a href="#one-time-setup-per-site">One-time setup per site</a></li>
+                        <li><a href="#the-studio-block">The studio: block</a></li>
+                        <li><a href="#media-and-git-lfs">Media and Git LFS</a></li>
+                        <li><a href="#install-and-update">Install and update</a></li>
+                        <li><a href="#limits">Limits</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../about/">About</a></li>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../changelog/">Changelog</a></li>
+                            <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

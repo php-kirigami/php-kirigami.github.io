@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Internals — Kirigami</title>
+        <meta name="description" content="How a build actually runs: who owns what, in which order tasks execute, where the PHP boundary sits, and how watching works.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Internals — Kirigami">
+        <meta name="twitter:description" content="How a build actually runs: who owns what, in which order tasks execute, where the PHP boundary sits, and how watching works.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Internals — Kirigami">
+        <meta property="og:description" content="How a build actually runs: who owns what, in which order tasks execute, where the PHP boundary sits, and how watching works.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/internals/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/internals/">
+        <link rel="author" type="text/plain" href="../../humans.txt">
+        <link rel="icon" type="image/png" href="../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/internals/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Documentation",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Internals",
+                                "item": "https://php-kirigami.github.io/docs/internals/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/internals/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/internals/",
+                        "name": "Internals",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/internals/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
+                        <li><a href="../../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                        <li><a href="../../docs/troubleshooting/">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/cli/">CLI</a></li>
+                        <li><a href="../../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/">JavaScript API</a></li>
+                        <li><a href="../../docs/studio/">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/sdk/">Plugin SDK</a></li>
+                        <li><a href="../../docs/internals/" aria-current="page">Internals</a></li>
+                        <li><a href="../../docs/struct-walker/">struct-walker</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><span aria-current="page">Internals</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Extend</span>
+                        <h1>Internals</h1>
+                        <p class="lead">How a build actually runs: who owns what, in which order tasks execute, where the PHP boundary sits, and how watching works.</p>
+                    </header>
+                    <h2 id="entry-points-and-ownership">Entry points and ownership</h2>
+                    <p>Everything goes through one object, the <code>Project</code> of <a href="../api/"><code>@kirigami/kirigami</code></a>:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Front end</th>
+                                <th>What it adds</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>kiri</code> CLI</td>
+                                <td>Terminal presentation: output, exit codes, prompts.</td>
+                            </tr>
+                            <tr>
+                                <td>MCP server</td>
+                                <td>Translates results into text content for an assistant.</td>
+                            </tr>
+                            <tr>
+                                <td>VS Code extension</td>
+                                <td>Stages the runtime and starts a <strong>separate Node process</strong>, whose working directory is the site, before importing the engine.</td>
+                            </tr>
+                            <tr>
+                                <td>Your code</td>
+                                <td>Calls <code>Project</code> directly.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Behind <code>Project</code> sit the configuration and plugin registration, the task modules, the PHP-prepros bridge (which owns a PHP-WASM runtime), Sass and esbuild, and the watch scheduler with its HTTP server.</p>
+                    <p>The configuration and script modules capture <code>process.cwd()</code> when they are evaluated, and plugin hooks and commands use shared registries. Several <code>Project</code> objects therefore do <strong>not</strong> give independent projects: use one process per site, set its working directory before importing the engine, and await operations one after another.</p>
+                    <h2 id="configuration-and-reload">Configuration and reload</h2>
+                    <p><code>kirigami.yaml</code> is read through <a href="../struct-walker/">struct-walker</a>, which resolves nested file references. The result is validated against the bundled JSON schema, then checked imperatively: paths are resolved, files verified and defaults supplied.</p>
+                    <p><code>Project.reload()</code> runs these steps in order:</p>
+                    <ol>
+                        <li>Mark the project unloaded and drop its configuration and plugin list.</li>
+                        <li>Clear the configuration cache.</li>
+                        <li>Wait for the PHP-prepros runtime reset, then clear the collected plugin PHP includes.</li>
+                        <li>Read the configuration and validate its schema, built-in tasks and paths.</li>
+                        <li>Re-register the active plugins, including their task types, then collect every <code>commands:register</code> result.</li>
+                        <li>Collect every <code>tasks:register</code> result and append it to <code>config.tasks</code>.</li>
+                        <li>Strictly validate every task (the project&apos;s and plugins&apos; alike), and mark the project loaded.</li>
+                    </ol>
+                    <p>Plugins are resolved from the project first, then from the engine&apos;s own installation. Their package metadata and option schemas are checked before <code>register(options, { config, name })</code> is awaited. A reload resets the shared hooks, commands and task types, but <strong>Node&apos;s module cache stays</strong>: restart the process after editing plugin code. <code>validate()</code> only refreshes the configuration, and an existing watcher keeps its original rules.</p>
+                    <h2 id="build-and-export-ordering">Build and export ordering</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operation</th>
+                                <th>Ordered work</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>build()</code></td>
+                                <td><code>before-build</code> scripts; the forced implicit <code>render-all</code> when <code>prepros</code> is set; the configured tasks</td>
+                            </tr>
+                            <tr>
+                                <td><code>export()</code></td>
+                                <td>Check that source and destination are separate; <code>before-export</code>; <code>before-build</code>; implicit rendering; the forced <code>copy-files</code>; the configured tasks; <code>after-export</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>runTask(name)</code></td>
+                                <td>Find one task and force it. No triggers, no other tasks.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul>
+                        <li>Built-in tasks live in <code>bin/tasks/&lt;type&gt;.js</code>; plugins add types through the <a href="../sdk/">SDK</a>. The first parse validates built-ins and defers unknown types; a strict pass after the plugins load rejects any type still unresolved.</li>
+                        <li>Build and export skip a task unless its definition has <code>canbuild</code> or the task sets <code>force</code>. Watch eligibility is separate: <code>canwatch</code> and <code>getWatcher</code>.</li>
+                        <li>A trigger runs its scripts sequentially: the project&apos;s <code>scripts:</code> entries first, then plugin-registered scripts with the same trigger. It stops at the first unsuccessful result, and so does the task loop. Completed work is never rolled back.</li>
+                        <li>Export is not a build into an isolated directory. The implicit PHP task renders <strong>in the source tree</strong>, runs the HTML hooks there and writes the sitemap, and only then does the copy task fill the destination, filtered of private and source files and by <code>export.ignore</code>. It refuses overlapping source and destination paths (lexical or canonical) and empties the dedicated destination. It is not transactional and does not restore the old output if a later step fails.</li>
+                    </ul>
+                    <h2 id="the-php-boundary">The PHP boundary</h2>
+                    <p>The prepros task collects the <code>prepros:php</code> hook results once per include cache, hands those paths to PHP-prepros, then runs <code>prepros:html</code> as a waterfall over each generated page. A whole-site render also runs the sitemap generation and merges the diagnostics and files of both.</p>
+                    <p>PHP-prepros loads its own configuration lazily and owns a disposable PHP-WASM instance. It mounts the framework at <code>/prepros</code> and the source data under <code>/project</code>, prepares the PHP configuration and loads its bootstrap through <code>auto_prepend_file</code>. Mounting filters file extensions: it is not a mirror of the host filesystem.</p>
+                    <ul>
+                        <li>PHP work and resets share one promise queue covering mounting, execution and result extraction. A reset waits behind active work, disposes the instance and drops the cached state. This protects the PHP boundary only, not whole <code>Project</code> operations.</li>
+                        <li>PHP diagnostics go to <strong>stderr</strong>, never into the generated HTML. A task result can carry warnings, stderr and debug output next to its files.</li>
+                        <li>The renderer copies reported outputs back to the host. PHP virtual paths and host paths are not interchangeable.</li>
+                        <li>PHP-WASM also offers shared cached runtimes to direct consumers. Its network runtime bridges WASM sockets to Node TCP through a local proxy and injects Node&apos;s CA roots; libcurl&apos;s <code>poll()</code> is replaced by a version that yields to the event loop, which is what makes HTTPS work.</li>
+                    </ul>
+                    <h2 id="watching-and-serving">Watching and serving</h2>
+                    <ul>
+                        <li>The watch engine builds a local task list without touching the configured one. It watches the glob base directories, filters events and batches callbacks per rule with a default <strong>150 ms</strong> debounce. A failing callback is contained so later batches still run; closing discards the pending batches and awaits the active callbacks.</li>
+                        <li>A change to a PHP structure (a page added, moved or removed) refreshes the mounts, removes the obsolete known outputs and rebuilds the pages and the sitemap. That is a scoped cleanup, not a deletion of everything absent from a listing.</li>
+                        <li><code>watch()</code> and <code>serve()</code> both await a <code>build()</code> first unless <code>initialBuild: false</code>; a failed initial build rejects before any server or watcher exists.</li>
+                        <li>The development server serves the generated files and reloads browsers with Server-Sent Events: a successful Sass rule swaps the stylesheet, any other successful rule reloads the page, and a failed rebuild triggers nothing. Private and source paths (and canonical link targets) are checked. JavaScript and source maps stay available in development, which is <strong>different from export filtering</strong>.</li>
+                        <li><code>serve()</code> waits for the watcher, cleans up the HTTP server if startup fails, and its <code>close()</code> closes the watchers, then the server. The embedder owns that handle.</li>
+                    </ul>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../docs/sdk/">Plugin SDK</a>
+                        <a class="doc__next" rel="next" href="../../docs/struct-walker/">struct-walker</a>
+                    </nav>
+                </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#entry-points-and-ownership">Entry points and ownership</a></li>
+                        <li><a href="#configuration-and-reload">Configuration and reload</a></li>
+                        <li><a href="#build-and-export-ordering">Build and export ordering</a></li>
+                        <li><a href="#the-php-boundary">The PHP boundary</a></li>
+                        <li><a href="#watching-and-serving">Watching and serving</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../about/">About</a></li>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../changelog/">Changelog</a></li>
+                            <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

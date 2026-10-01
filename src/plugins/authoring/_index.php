@@ -2,7 +2,7 @@
 /**
  * @title      Writing a plugin
  * @section    plugins
- * @type       doc
+ * @type       docs
  * @abstract   Package a tag/hook registration as an installable plugin —
  *             from an empty folder to something `kiri install` can find.
  * @breadcrumb true

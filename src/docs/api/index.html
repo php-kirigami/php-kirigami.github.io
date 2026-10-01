@@ -107,6 +107,7 @@
                         <li><a href="../../start/">Start</a></li>
                         <li><a href="../../docs/" aria-current="page">Docs</a></li>
                         <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
                         <li><a href="../../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -120,132 +121,360 @@
             </div>
         </header>
         <main id="main">
-            <div class="docs wrap">
-                <nav class="docs-nav" aria-label="Documentation">
-                    <h2>Start here</h2>
-                    <ul>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../../docs/">Overview</a></li>
-                    </ul>
-                    <h2>Build a site</h2>
-                    <ul>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../../docs/authoring/">Writing pages</a></li>
                         <li><a href="../../docs/config/">Configuration</a></li>
                         <li><a href="../../docs/php/">PHP class library</a></li>
-                    </ul>
-                    <h2>Tools</h2>
-                    <ul>
+                        <li><a href="../../docs/troubleshooting/">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../../docs/cli/">CLI</a></li>
                         <li><a href="../../docs/vscode/">VS Code extension</a></li>
                         <li><a href="../../docs/mcp/">MCP server</a></li>
                         <li><a href="../../docs/api/" aria-current="page">JavaScript API</a></li>
-                    </ul>
-                </nav>
-                <article class="docs-main">
-                    <header class="docs-head">
+                        <li><a href="../../docs/studio/">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/sdk/">Plugin SDK</a></li>
+                        <li><a href="../../docs/internals/">Internals</a></li>
+                        <li><a href="../../docs/struct-walker/">struct-walker</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><span aria-current="page">JavaScript API</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
                         <span class="eyebrow">Tools</span>
                         <h1>JavaScript API</h1>
                         <p class="lead">Load a Kirigami project in your own Node code and build, export, serve or run it: the engine behind the CLI, the VS Code extension and the MCP server.</p>
                     </header>
-                    <nav class="docs-toc" aria-label="On this page">
-                        <h2>On this page</h2>
-                        <ul>
-                            <li><a href="#overview">Overview</a></li>
-                            <li><a href="#load-and-build">Load and build</a></li>
-                            <li><a href="#the-project-api">The Project API</a></li>
-                            <li><a href="#a-dev-server-in-a-few-lines">A dev server in a few lines</a></li>
-                            <li><a href="#scaffolding">Scaffolding</a></li>
-                            <li><a href="#limits">Limits</a></li>
-                        </ul>
+                    <h2 id="overview">Overview</h2>
+                    <p><code>@kirigami/kirigami</code> is the engine. The <a href="../cli/">CLI</a>, the <a href="../vscode/">VS Code extension</a> and the <a href="../mcp/">MCP server</a> are thin front ends over its <code>Project</code> API, and your own tools can use it the same way: a build step in another pipeline, a custom dev server, a test that renders a fixture site.</p>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">npm install --save-dev @kirigami/kirigami</span>
+                    </code></pre>
+                    <p>The API is ESM, needs Node 24+ and ships TypeScript declarations for its public entry point. Everything below is exported from the package root. For how the pieces fit together, see <a href="../internals/">Internals</a>.</p>
+                    <h2 id="load-and-build">Load and build</h2>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { load } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/kirigami&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-comment">// Run this process from the directory that holds kirigami.yaml.</span></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> project = <span class="hljs-keyword">await</span> <span class="hljs-title function_">load</span>();</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> project.<span class="hljs-title function_">build</span>();</span>
+                        <span class="hljs-line"><span class="hljs-keyword">if</span> (!result.<span class="hljs-property">success</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(result));</span>
+                    </code></pre>
+                    <p><code>load()</code> takes no directory argument: launch Node from the folder that holds <code>kirigami.yaml</code>. <code>Kirigami.load()</code> is an equivalent factory, and <code>new Project()</code> constructs an unloaded project whose operational methods load lazily.</p>
+                    <p>A resolved promise is not necessarily a successful build: check <code>success</code>, which is <code>false</code> when a task failed, and read the task <code>results</code> for the diagnostics.</p>
+                    <h2 id="lifecycle-and-state">Lifecycle and state</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Member</th>
+                                <th>Result</th>
+                                <th>Behavior</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>load()</code> / <code>Kirigami.load()</code></td>
+                                <td><code>Promise&lt;Project&gt;</code></td>
+                                <td>Construct and reload a project.</td>
+                            </tr>
+                            <tr>
+                                <td><code>new Project()</code></td>
+                                <td><code>Project</code></td>
+                                <td>Construct unloaded; operational methods load lazily.</td>
+                            </tr>
+                            <tr>
+                                <td><code>reload()</code></td>
+                                <td><code>Promise&lt;Project&gt;</code></td>
+                                <td>Refresh configuration and plugins, and invalidate the PHP runtime and includes.</td>
+                            </tr>
+                            <tr>
+                                <td><code>validate()</code></td>
+                                <td><code>Promise&lt;true&gt;</code></td>
+                                <td>Validate <code>kirigami.yaml</code> on disk; rejects on invalid input. It does not reload plugins or PHP, and does not replace a loaded configuration: call <code>reload()</code> to apply a change.</td>
+                            </tr>
+                            <tr>
+                                <td><code>config</code></td>
+                                <td>object or <code>null</code></td>
+                                <td>The resolved configuration; <code>null</code> before loading.</td>
+                            </tr>
+                            <tr>
+                                <td><code>plugins</code></td>
+                                <td><code>{ name, version }[]</code></td>
+                                <td>The activated plugins; <code>version</code> may be <code>null</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>tasks</code></td>
+                                <td>array</td>
+                                <td>The configured tasks, plus the implicit forced <code>render-all</code> when <code>prepros</code> is enabled. Export&apos;s synthetic copy task is not listed.</td>
+                            </tr>
+                            <tr>
+                                <td><code>scripts</code></td>
+                                <td><code>{ name, mount, trigger }[]</code></td>
+                                <td>The sorted <code>scripts/*.php</code> files with their optional configuration (<code>trigger</code> defaults to <code>null</code>), plus any plugin-registered script not shadowed by a project file of the same name.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Getters do not return immutable snapshots: treat their values as read-only. Call <code>reload()</code> after editing the configuration, and restart the process after changing a plugin&apos;s JavaScript (Node caches modules).</p>
+                    <h2 id="build-export-tasks-and-scripts">Build, export, tasks and scripts</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Options</th>
+                                <th>Returns</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>build()</code></td>
+                                <td>none</td>
+                                <td><code>{ success, trigger, results }</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>export({ path }?)</code></td>
+                                <td>Optional destination override; otherwise <code>export.path</code>, or <code>dist</code></td>
+                                <td><code>{ success, dist, beforeExport, beforeBuild, afterExport, results, error? }</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>runTask(name)</code></td>
+                                <td>An exact name from <code>tasks</code></td>
+                                <td>The task result, with <code>task</code>, <code>type</code>, <code>taskname</code>; an unknown name returns <code>{ success: false, error }</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>run(command, argv = [])</code></td>
+                                <td>A script basename without <code>.php</code>, and an array of arguments</td>
+                                <td>The script result, including a <code>files</code> array</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul>
+                        <li>The build <code>trigger</code> is <code>{ success, results }</code> for <code>before-build</code>. Export trigger fields are <code>null</code> for a stage that has not run.</li>
+                        <li>A task result normally has <code>success</code> and may add <code>files</code>, <code>error</code>, <code>warnings</code>, <code>stderr</code> or <code>debug</code>. The payload varies by task: don&apos;t assume an optional field exists.</li>
+                        <li><code>runTask()</code> forces the named task and bypasses build triggers.</li>
+                        <li><code>run()</code> executes <code>scripts/&lt;command&gt;.php</code>, including a script with no YAML entry (an entry only adds mount and trigger metadata). A missing script throws.</li>
+                        <li>Export resolves its destination relative to the working directory, not <code>kirigami.root</code>. Source and destination must be separate trees, including through symlinks. The destination is cleared, and nothing is rolled back after a failure.</li>
+                    </ul>
+                    <p>These methods run project code: they are not a sandbox for untrusted projects.</p>
+                    <h2 id="errors-and-sequencing">Errors and sequencing</h2>
+                    <p>Check both rejected promises and structured failures:</p>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { load } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/kirigami&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">try</span> {</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">const</span> project = <span class="hljs-keyword">await</span> <span class="hljs-title function_">load</span>();</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> project.<span class="hljs-title function_">build</span>();</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">if</span> (!result.<span class="hljs-property">success</span>) {</span>
+                        <span class="hljs-line">        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(result, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>));</span>
+                        <span class="hljs-line">        process.<span class="hljs-property">exitCode</span> = <span class="hljs-number">1</span>;</span>
+                        <span class="hljs-line">    }</span>
+                        <span class="hljs-line">} <span class="hljs-keyword">catch</span> (error) {</span>
+                        <span class="hljs-line">    <span class="hljs-comment">// Some existing paths throw strings rather than Error instances.</span></span>
+                        <span class="hljs-line">    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(error <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Error</span> ? error.<span class="hljs-property">message</span> : <span class="hljs-title class_">String</span>(error));</span>
+                        <span class="hljs-line">    process.<span class="hljs-property">exitCode</span> = <span class="hljs-number">1</span>;</span>
+                        <span class="hljs-line">}</span>
+                    </code></pre>
+                    <ul>
+                        <li>A successful result may carry warnings. A failed one can contain files produced before the failure.</li>
+                        <li>Don&apos;t reduce a failure to <code>result.error</code>: build failures often live in <code>results</code> or in the trigger results.</li>
+                        <li>Core methods never call <code>process.exit()</code>, but the tasks underneath may log to the console.</li>
+                        <li><strong>Await operations one after another.</strong> There is no whole-project queue: <code>Promise.all([project.build(), project.reload()])</code> is unsupported. The queue inside PHP-prepros only protects PHP work.</li>
+                    </ul>
+                    <h2 id="watching-and-serving">Watching and serving</h2>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { load } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/kirigami&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> project = <span class="hljs-keyword">await</span> <span class="hljs-title function_">load</span>();</span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> server = <span class="hljs-keyword">await</span> project.<span class="hljs-title function_">serve</span>({</span>
+                        <span class="hljs-line">    <span class="hljs-attr">port</span>: <span class="hljs-number">0</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-attr">onBuildResult</span>: <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {</span>
+                        <span class="hljs-line">        <span class="hljs-keyword">if</span> (event.<span class="hljs-property">status</span> === <span class="hljs-string">&#x27;done&#x27;</span> &amp;&amp; event.<span class="hljs-property">success</span> === <span class="hljs-literal">false</span>) {</span>
+                        <span class="hljs-line">            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(event.<span class="hljs-property">error</span> ?? event);</span>
+                        <span class="hljs-line">        }</span>
+                        <span class="hljs-line">    },</span>
+                        <span class="hljs-line">});</span>
+                        <span class="hljs-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Preview at <span class="hljs-subst">${server.url}</span>`</span>);</span>
+                        <span class="hljs-line"><span class="hljs-comment">// The embedding application keeps `server` and awaits server.close()</span></span>
+                        <span class="hljs-line"><span class="hljs-comment">// when the session ends.</span></span>
+                    </code></pre>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Options</th>
+                                <th>Returns</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>watch(opts?)</code></td>
+                                <td><code>initialBuild = true</code></td>
+                                <td><code>Promise&lt;{ close() }&gt;</code>, once the watcher is ready</td>
+                            </tr>
+                            <tr>
+                                <td><code>serve(opts?)</code></td>
+                                <td><code>port = 4321</code>, <code>host = &apos;127.0.0.1&apos;</code>, <code>onBuildResult</code>, <code>initialBuild = true</code></td>
+                                <td><code>Promise&lt;{ address, port, url, close() }&gt;</code>, once the server and watcher are up</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul>
+                        <li>Both await a complete initial build before allocating any resource. Pass <code>initialBuild: false</code> if the output is already current. A failed initial build rejects with the diagnostics in <code>error.result</code>.</li>
+                        <li><code>port: 0</code> asks for a free port; read the real URL from the handle.</li>
+                        <li>Always await <code>close()</code> when your application stops. There is no general <code>Project.dispose()</code>.</li>
+                        <li><code>onBuildResult</code> is awaited. Its events carry <code>status: &apos;start&apos; | &apos;done&apos;</code>, <code>rule</code> and <code>type</code>; the initial build has <code>initial: true</code> and <code>rule: &quot;initial-build&quot;</code>, and the <code>done</code> event holds the full build result. Don&apos;t assume <code>success</code> is always present, keep the observer light, and handle its own errors: an exception can fail a rebuild notification, and a rejection during startup rejects the startup.</li>
+                        <li>Watch rules are fixed when a handle starts: after changing the task or plugin configuration, <code>reload()</code> and create a new handle.</li>
+                    </ul>
+                    <h2 id="project-scaffolding">Project scaffolding</h2>
+                    <p>Creating a project from an official template needs no loaded project and no <code>kirigami.yaml</code>. The functions are exported from the root and from <code>@kirigami/kirigami/create</code>, which skips loading the engine (no PHP runtime). <code>kiri create</code>, the VS Code <em>Create Project</em> command and the MCP <code>kirigami_create_project</code> tool all call them; none of them prompts, prints or exits.</p>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { listTemplates, createProject, installDependencies } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/kirigami/create&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> templates = <span class="hljs-keyword">await</span> <span class="hljs-title function_">listTemplates</span>();   <span class="hljs-comment">// [{ template: &#x27;default&#x27;, description, … }]</span></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title function_">createProject</span>({</span>
+                        <span class="hljs-line">    <span class="hljs-attr">template</span>: <span class="hljs-string">&#x27;default&#x27;</span>,                   <span class="hljs-comment">// a name, &quot;template-default&quot;, or a listTemplates() entry</span></span>
+                        <span class="hljs-line">    <span class="hljs-attr">target</span>: <span class="hljs-string">&#x27;my-site&#x27;</span>,                     <span class="hljs-comment">// created if missing</span></span>
+                        <span class="hljs-line">    <span class="hljs-attr">meta</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;My Site&#x27;</span>, <span class="hljs-attr">baseurl</span>: <span class="hljs-string">&#x27;https://me.github.io&#x27;</span> },</span>
+                        <span class="hljs-line">    <span class="hljs-attr">git</span>: <span class="hljs-literal">true</span>,</span>
+                        <span class="hljs-line">});</span>
+                        <span class="hljs-line"><span class="hljs-keyword">if</span> (!result.<span class="hljs-property">success</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(result.<span class="hljs-property">error</span>);</span>
+                        <span class="hljs-line"><span class="hljs-keyword">await</span> <span class="hljs-title function_">installDependencies</span>(result.<span class="hljs-property">target</span>);  <span class="hljs-comment">// { success, code, error? }</span></span>
+                    </code></pre>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Result</th>
+                                <th>Behavior</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>listTemplates({ refresh })</code></td>
+                                <td><code>Promise&lt;TemplateInfo[]&gt;</code></td>
+                                <td>The <code>php-kirigami/template-*</code> repositories, sorted, each with its short <code>template</code> name. Cached for one hour; rejects when GitHub is unreachable and nothing is cached.</td>
+                            </tr>
+                            <tr>
+                                <td><code>findTemplate(name)</code></td>
+                                <td>entry or <code>null</code></td>
+                                <td>Accepts <code>blog</code> or <code>template-blog</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>inspectTarget(dir)</code></td>
+                                <td><code>{ target, exists, hasPackageJson, hasConfig, entries }</code></td>
+                                <td>What the target already holds.</td>
+                            </tr>
+                            <tr>
+                                <td><code>gitUserConfig()</code></td>
+                                <td><code>{ name, email }</code></td>
+                                <td>Author defaults from git (empty strings when unset).</td>
+                            </tr>
+                            <tr>
+                                <td><code>resolveMeta(dir, meta)</code></td>
+                                <td>metadata with <code>slug</code></td>
+                                <td>Defaults: the name from the directory, the repo from a <code>*.github.io</code> base URL.</td>
+                            </tr>
+                            <tr>
+                                <td><code>canInitGit(dir)</code></td>
+                                <td><code>{ ok }</code> or <code>{ ok: false, reason }</code></td>
+                                <td><code>reason</code> is <code>git-missing</code> or <code>inside-worktree</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>createProject(options)</code></td>
+                                <td><code>{ success: true, … }</code> or <code>{ success: false, error }</code></td>
+                                <td>Downloads and extracts the template, writes the metadata and the starter tooling files when missing, then optionally runs <code>git init</code> and a first commit.</td>
+                            </tr>
+                            <tr>
+                                <td><code>installDependencies(dir, { stdio })</code></td>
+                                <td><code>{ success, code, error? }</code></td>
+                                <td>Runs <code>npm install</code> without a shell. A caller bound to stdout, such as an MCP server, must keep npm off it, for example <code>[&quot;ignore&quot;, 2, 2]</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><code>createProject</code> options are <code>template</code>, <code>target</code> (default: the working directory), <code>meta</code> (<code>name</code>, <code>description</code>, <code>author</code>, <code>email</code>, <code>baseurl</code>, <code>repo</code>; an empty field keeps the template&apos;s value), <code>git</code> (default <code>true</code>), <code>cliVersion</code> (the <code>@kirigami/cli</code> caret range written to a starter <code>package.json</code>) and <code>onProgress({ step: &apos;download&apos;, url })</code>.</p>
+                    <p>Extraction never overwrites: existing files are kept, and an existing <code>package.json</code> is deep-merged with its own values winning. Caches and the lockfile are never copied. A failed git commit is reported in the result&apos;s <code>git</code> field and does not fail the creation. GitHub is queried anonymously (60 requests an hour per IP) unless <code>GITHUB_TOKEN</code> or <code>GH_TOKEN</code> is set; the token is only ever sent to <code>api.github.com</code>.</p>
+                    <h2 id="extending-the-engine-from-a-plugin">Extending the engine from a plugin</h2>
+                    <p>A plugin, through <a href="../sdk/"><code>@kirigami/sdk</code></a>, can add to what <code>Project</code> exposes, and everything it adds goes through the same validation, build, export, <code>runTask()</code> and watch paths as built-in features:</p>
+                    <ul>
+                        <li><strong>Task types</strong>: register a new <code>type</code> usable in <code>tasks:</code>. A configured type with no active registration is rejected.</li>
+                        <li><strong>Tasks</strong>: the <code>tasks:register</code> hook injects ready-made entries, shaped like a <code>tasks:</code> entry. They are merged once after the plugins load, so a project needs no <code>tasks:</code> line of its own. Names must stay unique across the merged list.</li>
+                        <li><strong>Scripts</strong>: the <code>scripts:register</code> hook registers a PHP file under a name that <code>run()</code> and <code>kiri run</code> can call, with an optional <code>trigger</code>. A project&apos;s own <code>scripts/&lt;name&gt;.php</code> always wins.</li>
+                    </ul>
+                    <h2 id="limits">Limits</h2>
+                    <ul>
+                        <li>One project per process, and the working directory must be the project folder <strong>before</strong> the engine is imported: the configuration modules capture <code>process.cwd()</code> when they are evaluated.</li>
+                        <li>Run project operations one after another; don&apos;t start a build while another one is running.</li>
+                        <li>Plugin JavaScript is cached by Node: restart the process after changing a plugin&apos;s code.</li>
+                    </ul>
+                    <h2 id="related-references">Related references</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Need</th>
+                                <th>Where</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hooks, waterfalls, commands, the on-disk cache</td>
+                                <td><a href="../sdk/">Plugin SDK</a></td>
+                            </tr>
+                            <tr>
+                                <td>Direct PHP rendering and the PHP classes</td>
+                                <td><a href="../php/">PHP class library</a></td>
+                            </tr>
+                            <tr>
+                                <td>CLI flags and scaffolding</td>
+                                <td><a href="../cli/">CLI</a></td>
+                            </tr>
+                            <tr>
+                                <td>MCP tools</td>
+                                <td><a href="../mcp/">MCP server</a></td>
+                            </tr>
+                            <tr>
+                                <td>Execution order and state ownership</td>
+                                <td><a href="../internals/">Internals</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../docs/mcp/">MCP server</a>
+                        <a class="doc__next" rel="next" href="../../docs/studio/">Kiri Studio</a>
                     </nav>
-                    <div class="prose">
-                        <h2 id="overview">Overview</h2>
-                        <p><code>@kirigami/kirigami</code> is the engine. The <a href="../cli/">CLI</a>, the <a href="../vscode/">VS Code extension</a> and the <a href="../mcp/">MCP server</a> are thin front ends over its <code>Project</code> API, and your own tools can use it the same way: a build step in another pipeline, a custom dev server, a test that renders a fixture site.</p>
-                        <pre><code class="hljs language-bash hljs-numbered">
-                            <span class="hljs-line">npm install --save-dev @kirigami/kirigami</span>
-                        </code></pre>
-                        <h2 id="load-and-build">Load and build</h2>
-                        <pre><code class="hljs language-js hljs-numbered">
-                            <span class="hljs-line"><span class="hljs-keyword">import</span> { load } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/kirigami&#x27;</span>;</span>
-                            <span class="hljs-line"></span>
-                            <span class="hljs-line"><span class="hljs-comment">// Run this process from the directory that holds kirigami.yaml.</span></span>
-                            <span class="hljs-line"><span class="hljs-keyword">const</span> project = <span class="hljs-keyword">await</span> <span class="hljs-title function_">load</span>();</span>
-                            <span class="hljs-line"></span>
-                            <span class="hljs-line"><span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> project.<span class="hljs-title function_">build</span>();</span>
-                            <span class="hljs-line"><span class="hljs-keyword">if</span> (!result.<span class="hljs-property">success</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(result));</span>
-                        </code></pre>
-                        <p>A resolved promise is not necessarily a successful build: check <code>success</code>, which is <code>false</code> when a task failed, and read the task <code>results</code> for the diagnostics.</p>
-                        <h2 id="the-project-api">The Project API</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Member</th>
-                                    <th>What it does</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><code>build()</code></td>
-                                    <td>Run the <code>before-build</code> trigger, the page rendering and every buildable task. Returns <code>{ success, trigger, results }</code>.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>export({ path }?)</code></td>
-                                    <td>Production build into <code>export.path</code> (or <code>path</code>). Returns <code>success</code>, <code>dist</code> and the trigger and task results.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>serve({ port, host, onBuildResult }?)</code></td>
-                                    <td>Build once, then watch and serve. Returns <code>{ address, port, url, close() }</code>. Port <code>0</code> picks a free port.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>watch()</code></td>
-                                    <td>Build once, then rebuild on change. Returns <code>{ close() }</code>.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>run(name, argv?)</code></td>
-                                    <td>Run <code>scripts/&lt;name&gt;.php</code> and return its result.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>runTask(name)</code></td>
-                                    <td>Run one task by name, without triggers or other tasks.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>validate()</code></td>
-                                    <td>Re-read and validate <code>kirigami.yaml</code>.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>reload()</code></td>
-                                    <td>Reload the configuration and plugins.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>config</code>, <code>plugins</code>, <code>tasks</code>, <code>scripts</code></td>
-                                    <td>The resolved configuration, active plugins, and the discovered tasks and scripts.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h2 id="a-dev-server-in-a-few-lines">A dev server in a few lines</h2>
-                        <pre><code class="hljs language-js hljs-numbered">
-                            <span class="hljs-line"><span class="hljs-keyword">import</span> { load } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/kirigami&#x27;</span>;</span>
-                            <span class="hljs-line"></span>
-                            <span class="hljs-line"><span class="hljs-keyword">const</span> project = <span class="hljs-keyword">await</span> <span class="hljs-title function_">load</span>();</span>
-                            <span class="hljs-line"><span class="hljs-keyword">const</span> server = <span class="hljs-keyword">await</span> project.<span class="hljs-title function_">serve</span>({</span>
-                            <span class="hljs-line">    <span class="hljs-attr">port</span>: <span class="hljs-number">0</span>,</span>
-                            <span class="hljs-line">    <span class="hljs-attr">onBuildResult</span>: <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {</span>
-                            <span class="hljs-line">        <span class="hljs-keyword">if</span> (event.<span class="hljs-property">status</span> === <span class="hljs-string">&#x27;done&#x27;</span>) <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(event.<span class="hljs-property">success</span> ? <span class="hljs-string">&#x27;rebuilt&#x27;</span> : <span class="hljs-string">&#x27;build failed&#x27;</span>);</span>
-                            <span class="hljs-line">    },</span>
-                            <span class="hljs-line">});</span>
-                            <span class="hljs-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Preview at <span class="hljs-subst">${server.url}</span>`</span>);</span>
-                            <span class="hljs-line"><span class="hljs-comment">// later: await server.close();</span></span>
-                        </code></pre>
-                        <h2 id="scaffolding">Scaffolding</h2>
-                        <p>Project creation, the code behind <code>kiri create</code>, needs no loaded project: import <code>listTemplates()</code> and <code>createProject()</code> from <code>@kirigami/kirigami/create</code>.</p>
-                        <h2 id="limits">Limits</h2>
-                        <ul>
-                            <li>One project per process, and the working directory must be the project folder <strong>before</strong> the engine is imported.</li>
-                            <li>Run project operations one after another; don&apos;t start a build while another one is running.</li>
-                            <li>Plugin JavaScript is cached by Node: restart the process after changing a plugin&apos;s code.</li>
-                        </ul>
-                    </div>
-                    <nav class="docs-pager" aria-label="Previous and next"><a rel="prev" href="../../docs/mcp/">MCP server</a></nav>
                 </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#load-and-build">Load and build</a></li>
+                        <li><a href="#lifecycle-and-state">Lifecycle and state</a></li>
+                        <li><a href="#build-export-tasks-and-scripts">Build, export, tasks and scripts</a></li>
+                        <li><a href="#errors-and-sequencing">Errors and sequencing</a></li>
+                        <li><a href="#watching-and-serving">Watching and serving</a></li>
+                        <li><a href="#project-scaffolding">Project scaffolding</a></li>
+                        <li><a href="#extending-the-engine-from-a-plugin">Extending the engine from a plugin</a></li>
+                        <li><a href="#limits">Limits</a></li>
+                        <li><a href="#related-references">Related references</a></li>
+                    </ol>
+                </nav>
             </div>
         </main>
         <footer class="site-footer">
@@ -261,6 +490,7 @@
                             <li><a href="../../start/">Getting started</a></li>
                             <li><a href="../../docs/">Documentation</a></li>
                             <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
                             <li><a href="../../examples/">Examples</a></li>
                             <li><a href="../../templates/">Templates</a></li>
                             <li><a href="../../showcase/">Showcase</a></li>

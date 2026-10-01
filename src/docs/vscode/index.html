@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>VS Code extension — Kirigami</title>
-        <meta name="description" content="Build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.">
+        <meta name="description" content="Create, validate, build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.">
         <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
         <meta name="robots" content="index, follow">
         <meta name="language" content="en">
@@ -16,13 +16,13 @@
         <meta name="author" content="Maxime Larrivée-Roy">
         <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:title" content="VS Code extension — Kirigami">
-        <meta name="twitter:description" content="Build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.">
+        <meta name="twitter:description" content="Create, validate, build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.">
         <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <meta property="og:site_name" content="Kirigami">
         <meta property="og:locale" content="en">
         <meta property="og:type" content="website">
         <meta property="og:title" content="VS Code extension — Kirigami">
-        <meta property="og:description" content="Build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.">
+        <meta property="og:description" content="Create, validate, build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.">
         <meta property="og:url" content="https://php-kirigami.github.io/docs/vscode/">
         <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
         <link rel="canonical" href="https://php-kirigami.github.io/docs/vscode/">
@@ -107,6 +107,7 @@
                         <li><a href="../../start/">Start</a></li>
                         <li><a href="../../docs/" aria-current="page">Docs</a></li>
                         <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
                         <li><a href="../../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -120,118 +121,228 @@
             </div>
         </header>
         <main id="main">
-            <div class="docs wrap">
-                <nav class="docs-nav" aria-label="Documentation">
-                    <h2>Start here</h2>
-                    <ul>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../../docs/">Overview</a></li>
-                    </ul>
-                    <h2>Build a site</h2>
-                    <ul>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../../docs/authoring/">Writing pages</a></li>
                         <li><a href="../../docs/config/">Configuration</a></li>
                         <li><a href="../../docs/php/">PHP class library</a></li>
-                    </ul>
-                    <h2>Tools</h2>
-                    <ul>
+                        <li><a href="../../docs/troubleshooting/">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../../docs/cli/">CLI</a></li>
                         <li><a href="../../docs/vscode/" aria-current="page">VS Code extension</a></li>
                         <li><a href="../../docs/mcp/">MCP server</a></li>
                         <li><a href="../../docs/api/">JavaScript API</a></li>
-                    </ul>
-                </nav>
-                <article class="docs-main">
-                    <header class="docs-head">
+                        <li><a href="../../docs/studio/">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/sdk/">Plugin SDK</a></li>
+                        <li><a href="../../docs/internals/">Internals</a></li>
+                        <li><a href="../../docs/struct-walker/">struct-walker</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><span aria-current="page">VS Code extension</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
                         <span class="eyebrow">Tools</span>
                         <h1>VS Code extension</h1>
-                        <p class="lead">Build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.</p>
+                        <p class="lead">Create, validate, build, export, run scripts and preview a Kirigami site from the Command Palette and the status bar, without a terminal.</p>
                     </header>
-                    <nav class="docs-toc" aria-label="On this page">
-                        <h2>On this page</h2>
-                        <ul>
-                            <li><a href="#overview">Overview</a></li>
-                            <li><a href="#commands">Commands</a></li>
-                            <li><a href="#dev-server-and-preview">Dev server and preview</a></li>
-                            <li><a href="#settings">Settings</a></li>
-                            <li><a href="#requirements">Requirements</a></li>
-                        </ul>
-                    </nav>
-                    <div class="prose">
-                        <h2 id="overview">Overview</h2>
-                        <p>The Kirigami extension for VS Code (<code>php-kirigami.kirigami-vscode</code>) drives the same engine as the <a href="../cli/">CLI</a>. It activates in any workspace whose root holds a <code>kirigami.yaml</code>, and adds a <strong>Kirigami</strong> category to the Command Palette, a status bar item for the dev server, and a <strong>Kirigami</strong> Output channel laid out like the <code>kiri</code> output.</p>
-                        <p>Every official template recommends it in <code>.vscode/extensions.json</code>, so VS Code offers to install it when you open a new project.</p>
-                        <h2 id="commands">Commands</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Command</th>
-                                    <th>What it does</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Kirigami: Create Project…</td>
-                                    <td>Pick a folder, a template and the project&apos;s metadata, then scaffold it, optionally with <code>git init</code> and <code>npm install</code>. Available in any window.</td>
-                                </tr>
-                                <tr>
-                                    <td>Kirigami: Build</td>
-                                    <td>One development build, like <code>kiri build</code>.</td>
-                                </tr>
-                                <tr>
-                                    <td>Kirigami: Export</td>
-                                    <td>Production build into <code>dist/</code>, like <code>kiri export</code>.</td>
-                                </tr>
-                                <tr>
-                                    <td>Kirigami: Run Script…</td>
-                                    <td>Pick one of the project&apos;s <code>scripts/*.php</code> and run it, like <code>kiri run</code>.</td>
-                                </tr>
-                                <tr>
-                                    <td>Kirigami: Validate kirigami.yaml</td>
-                                    <td>Check the configuration against the schema.</td>
-                                </tr>
-                                <tr>
-                                    <td>Kirigami: Toggle Dev Server</td>
-                                    <td>Start or stop the live-reloading dev server, like <code>kiri serve</code>.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p>The project commands appear once a Kirigami project is loaded. Results show as a notification; the full detail, including every rebuild the watcher runs, goes to the <strong>Kirigami</strong> Output channel.</p>
-                        <h2 id="dev-server-and-preview">Dev server and preview</h2>
-                        <p>The status bar item, bottom right, shows the dev server&apos;s state: idle, running (the tooltip shows its URL), building, or error when the last rebuild failed. Clicking it starts the server, after one initial build, and asks whether to open the preview in VS Code&apos;s Simple Browser or in your default browser. Clicking it again stops the server. Saved changes rebuild and reload the preview on their own.</p>
-                        <h2 id="settings">Settings</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Setting</th>
-                                    <th>Default</th>
-                                    <th>Description</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><code>kirigami.nodePath</code></td>
-                                    <td><code>node</code></td>
-                                    <td>Node.js 24+ executable that runs the Kirigami engine. Set it when <code>node</code> is not on your PATH, then restart the extension.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>kirigami.previewPort</code></td>
-                                    <td><code>4321</code></td>
-                                    <td>Port of the dev server; applies the next time it starts.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <h2 id="requirements">Requirements</h2>
-                        <ul>
-                            <li>VS Code 1.90 or later, in a trusted workspace.</li>
-                            <li>Node.js 24 or later with WebAssembly JSPI, installed on the machine: the engine runs in its own Node process, not in VS Code&apos;s.</li>
-                            <li>One project per window: the extension binds to the first workspace folder.</li>
-                        </ul>
-                    </div>
-                    <nav class="docs-pager" aria-label="Previous and next">
-                        <a rel="prev" href="../../docs/cli/">CLI</a>
-                        <a rel="next" href="../../docs/mcp/">MCP server</a>
+                    <h2 id="overview">Overview</h2>
+                    <p>The Kirigami extension for VS Code (<code>php-kirigami.kirigami-vscode</code>) runs the same engine as the <a href="../cli/">CLI</a>, from inside the editor. It adds a <strong>Kirigami</strong> category to the Command Palette, a status bar item that runs the dev server, and a <strong>Kirigami</strong> Output channel laid out like the <code>kiri</code> output and coloured for readability.</p>
+                    <p>It activates in any workspace whose root holds a <code>kirigami.yaml</code>, and reloads the project whenever that file changes. Every official template recommends it in <code>.vscode/extensions.json</code>, so VS Code offers to install it when you open a new project.</p>
+                    <h2 id="what-it-can-do">What it can do</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>You want to…</th>
+                                <th>Use</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Start a new site, without a terminal</td>
+                                <td><strong>Create Project…</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Check your configuration</td>
+                                <td><strong>Validate kirigami.yaml</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Render the site once</td>
+                                <td><strong>Build</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Produce the deployable folder</td>
+                                <td><strong>Export</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Run a maintenance script</td>
+                                <td><strong>Run Script…</strong></td>
+                            </tr>
+                            <tr>
+                                <td>Write with a live preview</td>
+                                <td><strong>Toggle Dev Server</strong> (or the status bar)</td>
+                            </tr>
+                            <tr>
+                                <td>See what the engine did</td>
+                                <td>The <strong>Kirigami</strong> Output channel</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>The extension runs the engine directly through its <code>Project</code> API in a dedicated Node process. It does not shell out to <code>kiri</code> and does not go through MCP, and it ships the engine with it: you do not need to <code>npm install</code> anything for the extension itself to work.</p>
+                    <h2 id="create-a-project">Create a project</h2>
+                    <p><strong>Kirigami: Create Project…</strong> works in any window, even without a folder open. A native wizard asks for:</p>
+                    <ol>
+                        <li>The folder to create the site in.</li>
+                        <li>An official template (the same list as <a href="../../templates/">Templates</a>).</li>
+                        <li>The project&apos;s details: name, description, author, email, base URL and repository.</li>
+                        <li>Whether to initialise <strong>git</strong> (with a first commit) and to run <strong>npm install</strong>.</li>
+                    </ol>
+                    <p>The new project opens as soon as it is ready: in the current window when none was open, in a new window otherwise, or as a reload when it is the folder you already have open. Existing files are never overwritten.</p>
+                    <h2 id="commands">Commands</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Command</th>
+                                <th>What it does</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Kirigami: Create Project…</td>
+                                <td>Scaffold a new site from an official template, then open it. Available in any trusted window.</td>
+                            </tr>
+                            <tr>
+                                <td>Kirigami: Build</td>
+                                <td>One development build, like <code>kiri build</code>.</td>
+                            </tr>
+                            <tr>
+                                <td>Kirigami: Export</td>
+                                <td>Production build into the export folder (<code>dist/</code> by default), like <code>kiri export</code>.</td>
+                            </tr>
+                            <tr>
+                                <td>Kirigami: Run Script…</td>
+                                <td>Pick one of the project&apos;s <code>scripts/*.php</code> (or a plugin&apos;s script) and run it, like <code>kiri run</code>.</td>
+                            </tr>
+                            <tr>
+                                <td>Kirigami: Validate kirigami.yaml</td>
+                                <td>Check the configuration against the schema.</td>
+                            </tr>
+                            <tr>
+                                <td>Kirigami: Toggle Dev Server</td>
+                                <td>Start or stop the live-reloading dev server, like <code>kiri serve</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Only Create Project is available before a project is loaded; the others appear once the folder holds a <code>kirigami.yaml</code>. A result shows as a notification. A failure shows as an error notification, with the engine&apos;s diagnostics in the Output channel. Only a result with <code>success: true</code> produces a success notification.</p>
+                    <h2 id="dev-server-and-preview">Dev server and preview</h2>
+                    <p>The status bar item, bottom right, shows the server&apos;s state:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>State</th>
+                                <th>Meaning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Idle</td>
+                                <td>The server isn&apos;t running.</td>
+                            </tr>
+                            <tr>
+                                <td>Running</td>
+                                <td>The server is up; the tooltip shows its URL.</td>
+                            </tr>
+                            <tr>
+                                <td>Building</td>
+                                <td>A rebuild is in progress.</td>
+                            </tr>
+                            <tr>
+                                <td>Error</td>
+                                <td>The last rebuild failed; see the Output channel.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Clicking it builds the project once, starts the server and asks whether to open the preview in VS Code&apos;s <strong>Simple Browser</strong> (beside your code) or in your <strong>default browser</strong>. Saved changes rebuild and reload the preview on their own: a Sass change swaps the stylesheet without a reload. A failed rebuild never reloads the page, and its diagnostics go to the Output channel. Clicking the item again stops the server, and closing the window cleans it up.</p>
+                    <h2 id="output-channel">Output channel</h2>
+                    <p>Every command and every watcher rebuild is logged to the <strong>Kirigami</strong> Output channel, laid out like the terminal output of <code>kiri</code>: tasks, produced files, warnings and errors. Open it from the notification or from <em>View, Output</em>, and pick <strong>Kirigami</strong> in the drop-down.</p>
+                    <figure class="shot">
+                        <img alt="VS Code with the Kirigami output channel open and the Kirigami item in the status bar" loading="lazy" src="../../images/features/vscode-output-1000w.webp">
+                        <figcaption>The <strong>Kirigami</strong> output channel, with the extension&apos;s item in the status bar (bottom right).</figcaption>
+                    </figure>
+                    <h2 id="settings">Settings</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Setting</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>kirigami.nodePath</code></td>
+                                <td><code>node</code></td>
+                                <td>Node.js 24+ executable that runs the engine. Set it when <code>node</code> isn&apos;t on your PATH, then restart the extension.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kirigami.previewPort</code></td>
+                                <td><code>4321</code></td>
+                                <td>Port of the dev server; applies the next time it starts.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 id="requirements">Requirements</h2>
+                    <ul>
+                        <li>VS Code 1.90 or later, in a <strong>trusted workspace</strong>: the extension does not run in Restricted Mode, since a site&apos;s scripts and plugins execute code.</li>
+                        <li><strong>Node.js 24 or later</strong> with WebAssembly JSPI, installed on the machine. The engine runs in its own Node process, not in VS Code&apos;s.</li>
+                        <li>The extension is published per platform: Windows, Linux and macOS, each on x64 and arm64.</li>
+                    </ul>
+                    <h2 id="limits">Limits</h2>
+                    <ul>
+                        <li><strong>One project per window.</strong> The extension binds to the first workspace folder; multi-root workspaces aren&apos;t supported, because the engine keeps one project per process.</li>
+                        <li><strong>Installing or removing a plugin doesn&apos;t reload the project.</strong> Run <em>Developer: Restart Extension Host</em>, or reopen the folder. (Editing <code>kirigami.yaml</code> does reload it.)</li>
+                        <li><strong>Export needs a dedicated folder</strong> separate from your sources: the engine refuses overlapping paths before running anything.</li>
+                        <li>There is no MCP registration, tasks integration or diagnostics panel yet; they are on the <a href="../../roadmap/">roadmap</a>.</li>
+                    </ul>
+                    <h2 id="for-site-owners-not-developers">For site owners, not developers</h2>
+                    <p>The extension is for people who build the site. If the person who <em>runs</em> it, a client with a small-business site or a blog, needs to edit text and pictures and publish, without an editor or a terminal, that&apos;s <a href="../studio/">Kiri Studio</a>.</p>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../docs/cli/">CLI</a>
+                        <a class="doc__next" rel="next" href="../../docs/mcp/">MCP server</a>
                     </nav>
                 </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#what-it-can-do">What it can do</a></li>
+                        <li><a href="#create-a-project">Create a project</a></li>
+                        <li><a href="#commands">Commands</a></li>
+                        <li><a href="#dev-server-and-preview">Dev server and preview</a></li>
+                        <li><a href="#output-channel">Output channel</a></li>
+                        <li><a href="#settings">Settings</a></li>
+                        <li><a href="#requirements">Requirements</a></li>
+                        <li><a href="#limits">Limits</a></li>
+                        <li><a href="#for-site-owners-not-developers">For site owners, not developers</a></li>
+                    </ol>
+                </nav>
             </div>
         </main>
         <footer class="site-footer">
@@ -247,6 +358,7 @@
                             <li><a href="../../start/">Getting started</a></li>
                             <li><a href="../../docs/">Documentation</a></li>
                             <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
                             <li><a href="../../examples/">Examples</a></li>
                             <li><a href="../../templates/">Templates</a></li>
                             <li><a href="../../showcase/">Showcase</a></li>

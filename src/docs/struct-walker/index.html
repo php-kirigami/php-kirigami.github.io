@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>struct-walker — Kirigami</title>
+        <meta name="description" content="The recursive YAML and JSON walker that resolves nested file references in kirigami.yaml, and turns assets into data URIs.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="struct-walker — Kirigami">
+        <meta name="twitter:description" content="The recursive YAML and JSON walker that resolves nested file references in kirigami.yaml, and turns assets into data URIs.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="struct-walker — Kirigami">
+        <meta property="og:description" content="The recursive YAML and JSON walker that resolves nested file references in kirigami.yaml, and turns assets into data URIs.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/struct-walker/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/struct-walker/">
+        <link rel="author" type="text/plain" href="../../humans.txt">
+        <link rel="icon" type="image/png" href="../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/struct-walker/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Documentation",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "struct-walker",
+                                "item": "https://php-kirigami.github.io/docs/struct-walker/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/struct-walker/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/struct-walker/",
+                        "name": "struct-walker",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/struct-walker/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
+                        <li><a href="../../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                        <li><a href="../../docs/troubleshooting/">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/cli/">CLI</a></li>
+                        <li><a href="../../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/">JavaScript API</a></li>
+                        <li><a href="../../docs/studio/">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/sdk/">Plugin SDK</a></li>
+                        <li><a href="../../docs/internals/">Internals</a></li>
+                        <li><a href="../../docs/struct-walker/" aria-current="page">struct-walker</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><span aria-current="page">struct-walker</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Extend</span>
+                        <h1>struct-walker</h1>
+                        <p class="lead">The recursive YAML and JSON walker that resolves nested file references in kirigami.yaml, and turns assets into data URIs.</p>
+                    </header>
+                    <h2 id="overview">Overview</h2>
+                    <p><code>@kirigami/struct-walker</code> reads a YAML or JSON file and walks every value of the result. A string that points at another YAML or JSON file is replaced by that file&apos;s content, recursively; with an option, a string that points at an asset (an image, a font, audio, video…) becomes a <strong>data URI</strong>. The engine uses it to read <a href="../config/"><code>kirigami.yaml</code></a>, which is why a configuration can be split across files.</p>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">npm install @kirigami/struct-walker</span>
+                    </code></pre>
+                    <h2 id="usage">Usage</h2>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { walkFile } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/struct-walker&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-comment">// Resolve nested YAML / JSON references only.</span></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> config = <span class="hljs-keyword">await</span> <span class="hljs-title function_">walkFile</span>(<span class="hljs-string">&#x27;./config/main.yaml&#x27;</span>);</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-comment">// Also embed asset files as data URIs.</span></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> theme = <span class="hljs-keyword">await</span> <span class="hljs-title function_">walkFile</span>(<span class="hljs-string">&#x27;./theme/index.yaml&#x27;</span>, <span class="hljs-literal">true</span>);</span>
+                    </code></pre>
+                    <h2 id="how-a-value-is-resolved">How a value is resolved</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>The string…</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>has no file extension</td>
+                                <td>Kept as is.</td>
+                            </tr>
+                            <tr>
+                                <td>ends in <code>.yml</code>, <code>.yaml</code> or <code>.json</code>, and the file exists</td>
+                                <td>Replaced by that file&apos;s parsed content (recursive).</td>
+                            </tr>
+                            <tr>
+                                <td>ends in a known asset extension, <code>resolveAssets</code> is <code>true</code> and the file exists</td>
+                                <td>Replaced by a data URI.</td>
+                            </tr>
+                            <tr>
+                                <td>names a missing file, or has an unknown extension</td>
+                                <td>Kept as is.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Every reference is resolved <strong>relative to its own file&apos;s directory</strong>, not to the root file: a file in <code>config/db/</code> that references <code>./credentials.yaml</code> reads <code>config/db/credentials.yaml</code>, wherever the root file lives.</p>
+                    <pre><code class="hljs language-yaml hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-comment"># config/main.yaml</span></span>
+                        <span class="hljs-line"><span class="hljs-attr">app:</span> <span class="hljs-string">My</span> <span class="hljs-string">App</span></span>
+                        <span class="hljs-line"><span class="hljs-attr">database:</span> <span class="hljs-string">./database.yaml</span></span>
+                        <span class="hljs-line"><span class="hljs-attr">theme:</span> <span class="hljs-string">./theme/index.yaml</span></span>
+                    </code></pre>
+                    <pre><code class="hljs language-yaml hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-comment"># config/theme/index.yaml</span></span>
+                        <span class="hljs-line"><span class="hljs-attr">logo:</span> <span class="hljs-string">./logo.svg</span>       <span class="hljs-comment"># becomes data:image/svg+xml;charset=utf-8,...</span></span>
+                        <span class="hljs-line"><span class="hljs-attr">font:</span> <span class="hljs-string">./font.woff2</span>     <span class="hljs-comment"># becomes data:font/woff2;base64,...</span></span>
+                    </code></pre>
+                    <p>Text formats such as SVG and CSS are percent-encoded; binary formats are base64.</p>
+                    <h2 id="api">API</h2>
+                    <h3 id="walkfilefilepath-resolveassets-false"><code>walkFile(filePath, resolveAssets = false)</code></h3>
+                    <p>Returns a promise of the fully resolved value (an object, array, string, number, boolean or <code>null</code>).</p>
+                    <ul>
+                        <li>It rejects on a <strong>circular</strong> reference (<code>A</code> to <code>B</code> to <code>A</code>). Sibling references are fine and are loaded independently; there is no shared file cache.</li>
+                        <li>It rejects on a missing or unreadable root file, invalid JSON or YAML, and empty YAML. A missing <em>nested</em> reference stays its original string.</li>
+                        <li>Strings are trimmed for the lookup and extensions are compared without case; an unresolved string keeps its original whitespace. Object keys are never resolved.</li>
+                        <li>The root file is parsed as JSON only for <code>.json</code>, otherwise as YAML. Nested references are limited to <code>.json</code>, <code>.yaml</code> and <code>.yml</code>, even when <code>resolveAssets</code> is off.</li>
+                    </ul>
+                    <h3 id="filetodatauriabsolutepath"><code>fileToDataUri(absolutePath)</code></h3>
+                    <p>Converts one file to a data URI. The MIME type comes from the file&apos;s magic bytes first, then its extension, with <code>application/octet-stream</code> as a last resort.</p>
+                    <h2 id="good-to-know">Good to know</h2>
+                    <ul>
+                        <li><strong>No project boundary.</strong> Absolute paths and <code>..</code> can read outside the starting directory, and nothing is fetched from the network. Don&apos;t walk untrusted files.</li>
+                        <li>Cycle detection compares resolved path strings, not symlink targets, and doesn&apos;t catch cycles made by YAML aliases.</li>
+                        <li>This is the Node side. YAML read by PHP templates goes through PHP&apos;s native YAML extension (<code>YAML::</code>), which has its own implicit scalar rules: don&apos;t infer one&apos;s behaviour from the other.</li>
+                    </ul>
+                    <nav class="doc__pager" aria-label="Previous and next"><a class="doc__prev" rel="prev" href="../../docs/internals/">Internals</a></nav>
+                </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#usage">Usage</a></li>
+                        <li><a href="#how-a-value-is-resolved">How a value is resolved</a></li>
+                        <li><a href="#api">API</a></li>
+                        <li><a href="#good-to-know">Good to know</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../about/">About</a></li>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../changelog/">Changelog</a></li>
+                            <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

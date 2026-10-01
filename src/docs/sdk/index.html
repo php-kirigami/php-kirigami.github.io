@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Plugin SDK — Kirigami</title>
+        <meta name="description" content="The hook registry, command and task-type registries and on-disk cache that plugins share with the Kirigami engine.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Plugin SDK — Kirigami">
+        <meta name="twitter:description" content="The hook registry, command and task-type registries and on-disk cache that plugins share with the Kirigami engine.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Plugin SDK — Kirigami">
+        <meta property="og:description" content="The hook registry, command and task-type registries and on-disk cache that plugins share with the Kirigami engine.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/sdk/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/sdk/">
+        <link rel="author" type="text/plain" href="../../humans.txt">
+        <link rel="icon" type="image/png" href="../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/sdk/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Documentation",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Plugin SDK",
+                                "item": "https://php-kirigami.github.io/docs/sdk/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/sdk/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/sdk/",
+                        "name": "Plugin SDK",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/sdk/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
+                        <li><a href="../../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                        <li><a href="../../docs/troubleshooting/">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/cli/">CLI</a></li>
+                        <li><a href="../../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/">JavaScript API</a></li>
+                        <li><a href="../../docs/studio/">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/sdk/" aria-current="page">Plugin SDK</a></li>
+                        <li><a href="../../docs/internals/">Internals</a></li>
+                        <li><a href="../../docs/struct-walker/">struct-walker</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><span aria-current="page">Plugin SDK</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Extend</span>
+                        <h1>Plugin SDK</h1>
+                        <p class="lead">The hook registry, command and task-type registries and on-disk cache that plugins share with the Kirigami engine.</p>
+                    </header>
+                    <h2 id="overview">Overview</h2>
+                    <p><code>@kirigami/sdk</code> is the runtime shared by the engine and every plugin: an in-memory registry of <strong>hooks</strong>, <strong>commands</strong> and <strong>task types</strong>, plus a small persistent <strong>cache</strong>. The engine fires named hooks during a build; a plugin subscribes with <code>on(hookName, fn)</code> and never needs to know the engine&apos;s internals.</p>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">npm install @kirigami/sdk</span>
+                    </code></pre>
+                    <p>Core and plugins must resolve the <em>same</em> installed SDK module, since they share its registry. From SDK 0.3.0 on, two copies of the package (a plugin that pins another version than the engine) see the same hooks, commands and task types. Needs <code>@kirigami/kirigami</code> 3.0.0 for the 0.3 features. To write a whole plugin, start with <a href="../../plugins/authoring/">Writing a plugin</a>.</p>
+                    <h2 id="a-plugin-in-one-function">A plugin in one function</h2>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { on, <span class="hljs-variable constant_">HOOKS</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/sdk&#x27;</span>;</span>
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:path&#x27;</span>;</span>
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { fileURLToPath } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:url&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> pluginDir = path.<span class="hljs-title function_">dirname</span>(<span class="hljs-title function_">fileURLToPath</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>));</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">register</span>(<span class="hljs-params"></span>) {</span>
+                        <span class="hljs-line">    <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_BEFORE</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(pluginDir, <span class="hljs-string">&#x27;styles/before.scss&#x27;</span>));</span>
+                        <span class="hljs-line">    <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">SASS_AFTER</span>,  <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(pluginDir, <span class="hljs-string">&#x27;styles/after.scss&#x27;</span>));</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line">    <span class="hljs-comment">// Client-side script, bundled into the first esbuild entry.</span></span>
+                        <span class="hljs-line">    <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">ESBUILD_AFTER</span>, <span class="hljs-function">() =&gt;</span> path.<span class="hljs-title function_">join</span>(pluginDir, <span class="hljs-string">&#x27;client/init.js&#x27;</span>));</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line">    <span class="hljs-comment">// Rewrite the rendered HTML of every page (a waterfall: return the new string).</span></span>
+                        <span class="hljs-line">    <span class="hljs-title function_">on</span>(<span class="hljs-variable constant_">HOOKS</span>.<span class="hljs-property">PREPROS_HTML</span>, <span class="hljs-function">(<span class="hljs-params">html, { file }</span>) =&gt;</span> html.<span class="hljs-title function_">replaceAll</span>(<span class="hljs-string">&#x27;&lt;table&gt;&#x27;</span>, <span class="hljs-string">&#x27;&lt;table class=&quot;striped&quot;&gt;&#x27;</span>));</span>
+                        <span class="hljs-line">}</span>
+                    </code></pre>
+                    <p>Register everything <strong>inside</strong> the default registration function: a reload resets the shared registry, then calls it again. A listener may return a single value, an array (flattened into the result), or <code>null</code>/<code>undefined</code> to contribute nothing this run; it can be <code>async</code>, and each one is awaited before the next.</p>
+                    <h2 id="available-hooks">Available hooks</h2>
+                    <p>The Sass and esbuild hooks receive one <code>hookContext</code>, shaped <code>{ __root, task, exportPath, config }</code>.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Hook</th>
+                                <th>Task</th>
+                                <th>Fired with</th>
+                                <th>Expected return</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>SASS_BEFORE</code></td>
+                                <td>sass</td>
+                                <td><code>hookContext</code></td>
+                                <td><code>.scss</code> path(s), compiled before the entry</td>
+                            </tr>
+                            <tr>
+                                <td><code>SASS_AFTER</code></td>
+                                <td>sass</td>
+                                <td><code>hookContext</code></td>
+                                <td><code>.scss</code> path(s), compiled after the entry</td>
+                            </tr>
+                            <tr>
+                                <td><code>SASS_FUNCTIONS</code></td>
+                                <td>sass</td>
+                                <td><code>hookContext</code></td>
+                                <td>object(s) <code>{ &apos;signature($arg)&apos;: (args) =&gt; SassValue }</code>, as in the Sass API&apos;s <code>functions</code> option</td>
+                            </tr>
+                            <tr>
+                                <td><code>ESBUILD_BEFORE</code></td>
+                                <td>esbuild</td>
+                                <td><code>hookContext</code></td>
+                                <td><code>.js</code> / <code>.ts</code> path(s), bundled as side-effect imports before the entry</td>
+                            </tr>
+                            <tr>
+                                <td><code>ESBUILD_AFTER</code></td>
+                                <td>esbuild</td>
+                                <td><code>hookContext</code></td>
+                                <td><code>.js</code> / <code>.ts</code> path(s), bundled after the entry</td>
+                            </tr>
+                            <tr>
+                                <td><code>ESBUILD_PLUGINS</code></td>
+                                <td>esbuild</td>
+                                <td><code>hookContext</code></td>
+                                <td>esbuild plugin object(s), as in the API&apos;s <code>plugins</code> option</td>
+                            </tr>
+                            <tr>
+                                <td><code>PREPROS_HTML</code></td>
+                                <td>prepros</td>
+                                <td><code>(html, { file, abs, exportPath, config })</code></td>
+                                <td>the modified HTML, or <code>null</code> to leave it alone. A <strong>waterfall</strong> hook.</td>
+                            </tr>
+                            <tr>
+                                <td><code>PREPROS_PHP</code></td>
+                                <td>prepros</td>
+                                <td><code>({ __root, config })</code></td>
+                                <td>absolute path(s) of <code>.php</code> files <code>include_once</code>d before any page renders, to register tags and hooks from PHP</td>
+                            </tr>
+                            <tr>
+                                <td><code>SCRIPTS_REGISTER</code></td>
+                                <td>engine</td>
+                                <td><code>({ config })</code></td>
+                                <td>object(s) <code>{ name, file, trigger?, mount? }</code>: a runnable PHP script</td>
+                            </tr>
+                            <tr>
+                                <td><code>TASKS_REGISTER</code></td>
+                                <td>engine</td>
+                                <td><code>({ config })</code></td>
+                                <td>object(s) shaped like a <code>tasks:</code> entry (<code>{ name, type, … }</code>)</td>
+                            </tr>
+                            <tr>
+                                <td><code>COMMANDS_REGISTER</code></td>
+                                <td>engine</td>
+                                <td><code>({ config })</code></td>
+                                <td>object(s) <code>{ name, description?, run }</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>A few rules worth knowing:</p>
+                    <ul>
+                        <li>Prefer <strong>absolute</strong> paths resolved from the plugin itself. A relative path would resolve from the working directory of the project, not the plugin. esbuild files are bundled as bare imports, so the order is kept: before, entry, after.</li>
+                        <li><code>*_BEFORE</code> / <code>*_AFTER</code> fire for the <strong>first</strong> sass task and the <strong>first</strong> esbuild task only, so a site with several stylesheets doesn&apos;t get the plugin&apos;s files repeated in each. <code>SASS_FUNCTIONS</code> and <code>ESBUILD_PLUGINS</code> fire for every task. If a Sass function collides with a native one (<code>inline-file</code>, <code>img-asset</code>, <code>colors</code>, <code>font-*</code>), the native one wins.</li>
+                        <li><code>PREPROS_HTML</code> fires once per rendered <code>.html</code> file. When no plugin listens, the engine doesn&apos;t even read the files back.</li>
+                        <li><strong>Scripts</strong>: <code>name</code> is what <code>kiri run &lt;name&gt;</code> or <code>Project#run(name)</code> calls; <code>file</code> is an absolute path to the plugin&apos;s own <code>.php</code> (inside the project or an active plugin&apos;s package, so linked and workspace plugins work); <code>trigger</code> is <code>&apos;before-build&apos;</code>, <code>&apos;before-export&apos;</code> or <code>&apos;after-export&apos;</code>; <code>mount</code> is an optional list of globs to mount first. A project&apos;s own <code>scripts/&lt;name&gt;.php</code> always wins over a plugin&apos;s.</li>
+                        <li><strong>Tasks</strong>: collected once after the plugins load and appended to the project&apos;s <code>tasks:</code>, so they follow the same validation, build, export and watch path. The <code>type</code> is usually one the plugin registers itself. Names must be unique.</li>
+                        <li><strong>Commands</strong>: routed through <code>registerCommand()</code>, so a duplicate name or a non-function <code>run</code> throws either way.</li>
+                    </ul>
+                    <h2 id="registries-and-functions">Registries and functions</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>What it does</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>on(hook, fn)</code></td>
+                                <td>Subscribe. Returns the unsubscribe function. The same function object is registered once per hook.</td>
+                            </tr>
+                            <tr>
+                                <td><code>off(hook, fn)</code></td>
+                                <td>Unsubscribe.</td>
+                            </tr>
+                            <tr>
+                                <td><code>run(hook, ...args)</code></td>
+                                <td>Run every listener in order and flatten the results one level into an array. A throw or rejection stops dispatch and rejects <code>run()</code>. The engine calls it; a plugin rarely does.</td>
+                            </tr>
+                            <tr>
+                                <td><code>runWaterfall(hook, value, ...args)</code></td>
+                                <td>Pipe <code>value</code> through each listener; a <code>null</code> / <code>undefined</code> return keeps the previous value.</td>
+                            </tr>
+                            <tr>
+                                <td><code>has(hook)</code></td>
+                                <td><code>true</code> when a hook has at least one listener.</td>
+                            </tr>
+                            <tr>
+                                <td><code>reset(hook?)</code></td>
+                                <td>Remove the listeners of one hook, or all. Commands are cleared by <code>resetCommands()</code>. The engine owns this on reload.</td>
+                            </tr>
+                            <tr>
+                                <td><code>HOOKS</code></td>
+                                <td>The frozen list of known hook names. Prefer it over hand-typed strings.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Don&apos;t mutate registrations during a dispatch: listeners are iterated from a live <code>Set</code>.</p>
+                    <h3 id="commands">Commands</h3>
+                    <p><code>registerCommand(name, { description, run })</code> adds a <code>kiri &lt;name&gt;</code> subcommand. <code>run(args, project)</code> receives the raw arguments and the loaded project. <code>getCommand(name)</code>, <code>listCommands()</code> and <code>resetCommands(name?)</code> complete the registry. Declare <code>kirigami.type: &quot;command&quot;</code> in the plugin&apos;s manifest, or return the entries from <code>COMMANDS_REGISTER</code> instead.</p>
+                    <h3 id="task-types">Task types</h3>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { registerTaskType } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/sdk&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">register</span>(<span class="hljs-params"></span>) {</span>
+                        <span class="hljs-line">    <span class="hljs-title function_">registerTaskType</span>(<span class="hljs-string">&#x27;manifest&#x27;</span>, {</span>
+                        <span class="hljs-line">        <span class="hljs-attr">taskname</span>: <span class="hljs-string">&#x27;Generate manifest&#x27;</span>,</span>
+                        <span class="hljs-line">        <span class="hljs-attr">canbuild</span>: <span class="hljs-literal">true</span>,</span>
+                        <span class="hljs-line">        <span class="hljs-attr">canwatch</span>: <span class="hljs-literal">false</span>,</span>
+                        <span class="hljs-line">        <span class="hljs-title function_">validate</span>(<span class="hljs-params">root, task</span>) {</span>
+                        <span class="hljs-line">            <span class="hljs-keyword">if</span> (!task.<span class="hljs-property">output</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;manifest tasks require output&#x27;</span>);</span>
+                        <span class="hljs-line">        },</span>
+                        <span class="hljs-line">        <span class="hljs-keyword">async</span> <span class="hljs-title function_">run</span>(<span class="hljs-params">root, task, exportPath</span>) {</span>
+                        <span class="hljs-line">            <span class="hljs-comment">// Generate task.output, then return the standard task result.</span></span>
+                        <span class="hljs-line">            <span class="hljs-keyword">return</span> { <span class="hljs-attr">success</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">files</span>: [task.<span class="hljs-property">output</span>] };</span>
+                        <span class="hljs-line">        },</span>
+                        <span class="hljs-line">    });</span>
+                        <span class="hljs-line">}</span>
+                    </code></pre>
+                    <p><code>run(root, task, exportPath?)</code> is required. <code>taskname</code> defaults to the registered name; <code>canbuild</code> and <code>canwatch</code> default to <code>false</code>. <code>validate</code> is optional and may be async. A watchable type sets <code>canwatch: true</code> and provides <code>getWatcher(root, task)</code>, returning the watch engine&apos;s rule shape. Built-in names take precedence and can&apos;t be overridden. <code>getTaskType()</code>, <code>listTaskTypes()</code> and <code>resetTaskTypes()</code> complete the registry.</p>
+                    <h2 id="cache">Cache</h2>
+                    <p>A persistent key/value cache on disk, backed by <code>node:sqlite</code>: built into Node, no native compilation. The engine uses it for its own data (representative colors, font metadata); a plugin can keep its own file.</p>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Cache</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/sdk&#x27;</span>;</span>
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:path&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> cache = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Cache</span>(path.<span class="hljs-title function_">join</span>(process.<span class="hljs-title function_">cwd</span>(), <span class="hljs-string">&#x27;.my-plugin.db&#x27;</span>));</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line">cache.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;meta_home&#x27;</span>, { <span class="hljs-attr">hello</span>: <span class="hljs-string">&#x27;world&#x27;</span> }, <span class="hljs-number">3600</span>); <span class="hljs-comment">// 1 h TTL, in seconds (0 = never)</span></span>
+                        <span class="hljs-line">cache.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;meta_home&#x27;</span>);   <span class="hljs-comment">// { hello: &#x27;world&#x27; }, or null if missing or expired</span></span>
+                        <span class="hljs-line">cache.<span class="hljs-title function_">del</span>(<span class="hljs-string">&#x27;meta_home&#x27;</span>);</span>
+                        <span class="hljs-line">cache.<span class="hljs-title function_">purge</span>();            <span class="hljs-comment">// drop the expired entries</span></span>
+                        <span class="hljs-line">cache.<span class="hljs-title function_">purge</span>(<span class="hljs-string">&#x27;meta_*&#x27;</span>);    <span class="hljs-comment">// drop every &quot;meta_&quot; entry, expired or not</span></span>
+                        <span class="hljs-line">cache.<span class="hljs-title function_">close</span>();</span>
+                    </code></pre>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Returns</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>get(key)</code></td>
+                                <td>value or <code>null</code></td>
+                                <td>The stored value; <code>null</code> when missing or expired.</td>
+                            </tr>
+                            <tr>
+                                <td><code>set(key, val, ttl = 0)</code></td>
+                                <td><code>boolean</code></td>
+                                <td>Store <code>val</code> as JSON. <code>ttl</code> in whole seconds, <code>0</code> for no expiry.</td>
+                            </tr>
+                            <tr>
+                                <td><code>del(key)</code></td>
+                                <td><code>boolean</code></td>
+                                <td>Delete one entry; whether it existed.</td>
+                            </tr>
+                            <tr>
+                                <td><code>purge(mask?)</code></td>
+                                <td><code>number</code></td>
+                                <td>Without a mask, delete expired entries; with a glob mask, every matching entry. Returns the rows deleted.</td>
+                            </tr>
+                            <tr>
+                                <td><code>close()</code></td>
+                                <td><code>void</code></td>
+                                <td>Close the connection (reopened lazily).</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul>
+                        <li><strong>Key naming</strong>: every key starts with a namespace, one or more <code>[a-z]</code> characters followed by <code>_</code> (<code>colors_</code>, <code>meta_</code>, …); anything else throws. The namespace is what <code>purge(&apos;meta_*&apos;)</code> targets (<code>*</code> is the only wildcard).</li>
+                        <li><strong>Values</strong> round-trip through JSON: dates, class instances and buffers lose their type, and circular values or BigInt throw.</li>
+                        <li><code>new Cache()</code> with no argument uses <code>.node.db</code> in the working directory, the file the engine itself uses. Pass a path to keep a plugin&apos;s cache separate, and create its parent directory yourself. Calls are synchronous; SQLite errors propagate. Reads don&apos;t delete expired rows: <code>purge()</code> does.</li>
+                    </ul>
+                    <p>The shipped <code>index.d.ts</code> covers hooks, <code>reset</code>, <code>Cache</code> and the command registry. Requires Node 24+ and ESM.</p>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../docs/studio/">Kiri Studio</a>
+                        <a class="doc__next" rel="next" href="../../docs/internals/">Internals</a>
+                    </nav>
+                </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#a-plugin-in-one-function">A plugin in one function</a></li>
+                        <li><a href="#available-hooks">Available hooks</a></li>
+                        <li><a href="#registries-and-functions">Registries and functions</a></li>
+                        <li><a href="#cache">Cache</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../about/">About</a></li>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../changelog/">Changelog</a></li>
+                            <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Troubleshooting — Kirigami</title>
+        <meta name="description" content="What to check first when a build, a preview or an export doesn&apos;t do what you expect.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Troubleshooting — Kirigami">
+        <meta name="twitter:description" content="What to check first when a build, a preview or an export doesn&apos;t do what you expect.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Troubleshooting — Kirigami">
+        <meta property="og:description" content="What to check first when a build, a preview or an export doesn&apos;t do what you expect.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/troubleshooting/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/troubleshooting/">
+        <link rel="author" type="text/plain" href="../../humans.txt">
+        <link rel="icon" type="image/png" href="../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/troubleshooting/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Documentation",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Troubleshooting",
+                                "item": "https://php-kirigami.github.io/docs/troubleshooting/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/troubleshooting/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/troubleshooting/",
+                        "name": "Troubleshooting",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/troubleshooting/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
+                        <li><a href="../../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                        <li><a href="../../docs/troubleshooting/" aria-current="page">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/cli/">CLI</a></li>
+                        <li><a href="../../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/">JavaScript API</a></li>
+                        <li><a href="../../docs/studio/">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/sdk/">Plugin SDK</a></li>
+                        <li><a href="../../docs/internals/">Internals</a></li>
+                        <li><a href="../../docs/struct-walker/">struct-walker</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><span aria-current="page">Troubleshooting</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Build a site</span>
+                        <h1>Troubleshooting</h1>
+                        <p class="lead">What to check first when a build, a preview or an export doesn&apos;t do what you expect.</p>
+                    </header>
+                    <h2 id="first-checks">First checks</h2>
+                    <p>Run every command from the folder that holds <code>kirigami.yaml</code>, and use <code>npx kiri &lt;command&gt; --help</code> for the options of a command. If a build fails, read the diagnostics before anything else: they name the file and the task.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Symptom</th>
+                                <th>First check</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>kiri</code> not found</td>
+                                <td>Install <code>@kirigami/cli</code> in the project and run it with <code>npx kiri</code>, or from an npm script.</td>
+                            </tr>
+                            <tr>
+                                <td>Configuration not found</td>
+                                <td>You are not in the folder that contains <code>kirigami.yaml</code>.</td>
+                            </tr>
+                            <tr>
+                                <td>Empty preview or a 404</td>
+                                <td>Read the initial build diagnostics, and check that the page follows the <code>_*.php</code> convention (<code>_index.php</code>, <code>_about.php</code>).</td>
+                            </tr>
+                            <tr>
+                                <td>Invalid wrapper path</td>
+                                <td>The <code>prepros.before</code> / <code>prepros.after</code> paths are relative to <code>kirigami.root</code>. Create the referenced file.</td>
+                            </tr>
+                            <tr>
+                                <td>Unsafe export destination</td>
+                                <td>Keep source and output in separate trees such as <code>src</code> and <code>dist</code>. They must not equal, contain or sit inside each other, even through symlinks or junctions.</td>
+                            </tr>
+                            <tr>
+                                <td>A plugin change is ignored</td>
+                                <td>Restart the command: Node caches imported JavaScript modules.</td>
+                            </tr>
+                            <tr>
+                                <td>PHP extension warnings at startup</td>
+                                <td>Nearby extension packages may be auto-discovered and loaded; see the PHP-WASM documentation on extension discovery.</td>
+                            </tr>
+                            <tr>
+                                <td>A change to tasks or plugins has no effect in <code>kiri serve</code></td>
+                                <td>Watch rules are created when the command starts. Restart it.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 id="pages">Pages</h2>
+                    <ul>
+                        <li><strong>A page doesn&apos;t appear.</strong> Source pages are <code>_index.php</code> (for <code>folder/index.html</code>) or <code>_name.php</code> (for <code>name.html</code>). Edit the PHP source, never the generated <code>.html</code>, which is overwritten.</li>
+                        <li><strong>A tag shows up as text, or a block closes early.</strong> A tag shown as example text (<code>&lt;markdown&gt;</code>, <code>&lt;img asset&gt;</code>, a plugin tag) must be in a code span or a fenced block, not bare text and not an indented code block: it would run, and a bare closing <code>&lt;/markdown&gt;</code> closes the real block.</li>
+                        <li><strong>A PHP open tag typed as an example runs.</strong> Describe it in prose instead of typing it.</li>
+                        <li><strong>A variable is undefined.</strong> Page annotations (<code>@title</code>, <code>@abstract</code>, …) and the keys of the <code>kirigami:</code> block become PHP variables; check the spelling and that the block is the page&apos;s first PHPDOC comment.</li>
+                    </ul>
+                    <h2 id="export">Export</h2>
+                    <ul>
+                        <li><code>kiri export</code> <strong>replaces</strong> the destination&apos;s contents and writes a <code>.kirigami-export</code> marker. An existing non-empty folder without that marker is refused rather than emptied: empty it yourself, or create the marker to confirm it may be replaced.</li>
+                        <li>The copy leaves out PHP, Sass sources, source maps, files whose name starts with <code>_</code> or <code>.</code>, and non-minified JavaScript. Declare an esbuild task for your scripts: a raw <code>app.js</code> is not copied. Use <code>export.ignore</code> to leave out more.</li>
+                        <li>A failed build or export can leave a partial output. Deploy only after a success, and never from a folder you also edit by hand.</li>
+                        <li>The preview server serves JavaScript and source maps for debugging, so its file set is not the one export produces: judge a deployment by the exported folder.</li>
+                    </ul>
+                    <h2 id="embedding-and-scripts">Embedding and scripts</h2>
+                    <ul>
+                        <li><code>load()</code> reads the configuration from the <strong>current</strong> working directory: change directory before the import, not after.</li>
+                        <li>Don&apos;t run two operations at once (<code>build()</code> while <code>reload()</code>); await them one after another.</li>
+                        <li>A resolved promise isn&apos;t a successful build. Check <code>success</code> and read <code>results</code>; some failures are in the trigger results rather than in <code>error</code>.</li>
+                        <li>Network access at build time (npm version lookups, link previews) needs <code>prepros.network: true</code>; without it, such calls return nothing and the page must render a fallback.</li>
+                    </ul>
+                    <h2 id="still-stuck">Still stuck?</h2>
+                    <p>Run <code>kiri phpinfo</code> to inspect the bundled PHP, <code>kiri cache</code> to clear stale caches, and open an issue on <a href="https://github.com/php-kirigami/kirigami/issues" target="_blank" rel="noopener noreferrer">GitHub</a> with the command, the diagnostics and your <code>kirigami.yaml</code>. If you use an AI assistant, the <a href="../mcp/">MCP server</a> lets it read the same structured results.</p>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../docs/php/">PHP class library</a>
+                        <a class="doc__next" rel="next" href="../../docs/cli/">CLI</a>
+                    </nav>
+                </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#first-checks">First checks</a></li>
+                        <li><a href="#pages">Pages</a></li>
+                        <li><a href="#export">Export</a></li>
+                        <li><a href="#embedding-and-scripts">Embedding and scripts</a></li>
+                        <li><a href="#still-stuck">Still stuck?</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../about/">About</a></li>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../changelog/">Changelog</a></li>
+                            <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>
