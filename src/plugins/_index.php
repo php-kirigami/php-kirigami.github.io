@@ -27,8 +27,9 @@
           `kirigami.yaml` — see the [CLI reference](../docs/cli/) for the
           full command. Six official plugins ship today; this page
           demos most of them live, and documents the course components of
-          `plugin-educ`. The complete list, with versions fetched
-          live from npm, is on [Ecosystem](../ecosystem/).
+          `plugin-educ`. Every option, tag, cache file and style hook is on the
+          [Plugin reference](reference/). The complete list, with versions
+          fetched live from npm, is on [Ecosystem](../ecosystem/).
         </markdown>
     </div>
 </section>
