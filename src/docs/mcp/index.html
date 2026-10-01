@@ -107,6 +107,7 @@
                         <li><a href="../../start/">Start</a></li>
                         <li><a href="../../docs/" aria-current="page">Docs</a></li>
                         <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
                         <li><a href="../../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -120,124 +121,138 @@
             </div>
         </header>
         <main id="main">
-            <div class="docs wrap">
-                <nav class="docs-nav" aria-label="Documentation">
-                    <h2>Start here</h2>
-                    <ul>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../../docs/">Overview</a></li>
-                    </ul>
-                    <h2>Build a site</h2>
-                    <ul>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../../docs/authoring/">Writing pages</a></li>
                         <li><a href="../../docs/config/">Configuration</a></li>
                         <li><a href="../../docs/php/">PHP class library</a></li>
-                    </ul>
-                    <h2>Tools</h2>
-                    <ul>
+                        <li><a href="../../docs/troubleshooting/">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../../docs/cli/">CLI</a></li>
                         <li><a href="../../docs/vscode/">VS Code extension</a></li>
                         <li><a href="../../docs/mcp/" aria-current="page">MCP server</a></li>
                         <li><a href="../../docs/api/">JavaScript API</a></li>
-                    </ul>
-                </nav>
-                <article class="docs-main">
-                    <header class="docs-head">
+                        <li><a href="../../docs/studio/">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/sdk/">Plugin SDK</a></li>
+                        <li><a href="../../docs/internals/">Internals</a></li>
+                        <li><a href="../../docs/struct-walker/">struct-walker</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><span aria-current="page">MCP server</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
                         <span class="eyebrow">Tools</span>
                         <h1>MCP server</h1>
                         <p class="lead">Let an AI assistant build, validate, export and scaffold a Kirigami project through the Model Context Protocol.</p>
                     </header>
-                    <nav class="docs-toc" aria-label="On this page">
-                        <h2>On this page</h2>
-                        <ul>
-                            <li><a href="#overview">Overview</a></li>
-                            <li><a href="#setup">Setup</a></li>
-                            <li><a href="#tools">Tools</a></li>
-                            <li><a href="#trust">Trust</a></li>
-                        </ul>
-                    </nav>
-                    <div class="prose">
-                        <h2 id="overview">Overview</h2>
-                        <p><code>@kirigami/mcp</code> puts the Kirigami engine behind a <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">Model Context Protocol</a> server. An AI assistant that speaks MCP (Claude Code, Claude Desktop and others) can then build, export, validate and run scripts in your project the way the terminal does, and read structured results instead of parsing console output.</p>
-                        <p>The server talks over stdio and works on the directory it is started in, exactly like <code>kiri</code>.</p>
-                        <h2 id="setup">Setup</h2>
-                        <p>With the <a href="../cli/">CLI</a> installed in the project, no separate install is needed: point your MCP client at <code>kiri mcp</code>, started from the project folder.</p>
-                        <pre><code class="hljs language-bash hljs-numbered">
-                            <span class="hljs-line">npx kiri mcp</span>
-                        </code></pre>
-                        <p>Or run the package directly from the client&apos;s configuration:</p>
-                        <pre><code class="hljs language-json hljs-numbered">
-                            <span class="hljs-line"><span class="hljs-punctuation">{</span></span>
-                            <span class="hljs-line">  <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></span>
-                            <span class="hljs-line">    <span class="hljs-attr">&quot;kirigami&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></span>
-                            <span class="hljs-line">      <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx&quot;</span><span class="hljs-punctuation">,</span></span>
-                            <span class="hljs-line">      <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;-y&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;@kirigami/mcp&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></span>
-                            <span class="hljs-line">      <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/path/to/your/kirigami/project&quot;</span></span>
-                            <span class="hljs-line">    <span class="hljs-punctuation">}</span></span>
-                            <span class="hljs-line">  <span class="hljs-punctuation">}</span></span>
-                            <span class="hljs-line"><span class="hljs-punctuation">}</span></span>
-                        </code></pre>
-                        <p>The working-directory key depends on the client; what matters is that the server starts in the folder that holds <code>kirigami.yaml</code>. It also starts in an empty folder, where the assistant can scaffold a new project first.</p>
-                        <h2 id="tools">Tools</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Tool</th>
-                                    <th>What it does</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><code>kirigami_about</code></td>
-                                    <td>A compact manifest of the project (package metadata, docs, tasks and scripts), to orient the assistant.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>kirigami_config</code></td>
-                                    <td>The resolved <code>kirigami.yaml</code> and the active plugins.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>kirigami_validate</code></td>
-                                    <td>Validate <code>kirigami.yaml</code> against the schema.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>kirigami_build</code></td>
-                                    <td>Same as <code>kiri build</code>.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>kirigami_export</code></td>
-                                    <td>Same as <code>kiri export</code>, with an optional output path.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>kirigami_list_tasks</code> / <code>kirigami_run_task</code></td>
-                                    <td>List the build tasks, run exactly one.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>kirigami_list_scripts</code> / <code>kirigami_run</code></td>
-                                    <td>List <code>scripts/*.php</code>, run one with arguments.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>kirigami_list_templates</code> / <code>kirigami_create_project</code></td>
-                                    <td>List the official templates, scaffold a project from one. Never overwrites files.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>kirigami_site_blueprint</code></td>
-                                    <td>Suggest a site tree, configuration and an example page.</td>
-                                </tr>
-                                <tr>
-                                    <td><code>kirigami_search_docs</code> / <code>kirigami_doc_hints</code></td>
-                                    <td>Search the project&apos;s documentation, or suggest the pages for a topic.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <p>Results are JSON: an operation reports <code>success: false</code> in its payload rather than as a protocol error, so the assistant sees the diagnostics.</p>
-                        <p>There is no <code>serve</code> or <code>watch</code> tool: a long-running server doesn&apos;t fit a request/response protocol. Run <a href="../cli/"><code>kiri serve</code></a> or the <a href="../vscode/">VS Code extension</a> for a live preview.</p>
-                        <h2 id="trust">Trust</h2>
-                        <p><code>kirigami_run</code> and <code>kirigami_run_task</code> execute whatever the project&apos;s scripts and tasks do. Point the server only at projects you trust.</p>
-                    </div>
-                    <nav class="docs-pager" aria-label="Previous and next">
-                        <a rel="prev" href="../../docs/vscode/">VS Code extension</a>
-                        <a rel="next" href="../../docs/api/">JavaScript API</a>
+                    <h2 id="overview">Overview</h2>
+                    <p><code>@kirigami/mcp</code> puts the Kirigami engine behind a <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener noreferrer">Model Context Protocol</a> server. An AI assistant that speaks MCP (Claude Code, Claude Desktop and others) can then build, export, validate and run scripts in your project the way the terminal does, and read structured results instead of parsing console output.</p>
+                    <p>The server talks over stdio and works on the directory it is started in, exactly like <code>kiri</code>.</p>
+                    <h2 id="setup">Setup</h2>
+                    <p>With the <a href="../cli/">CLI</a> installed in the project, no separate install is needed: point your MCP client at <code>kiri mcp</code>, started from the project folder.</p>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">npx kiri mcp</span>
+                    </code></pre>
+                    <p>Or run the package directly from the client&apos;s configuration:</p>
+                    <pre><code class="hljs language-json hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-punctuation">{</span></span>
+                        <span class="hljs-line">  <span class="hljs-attr">&quot;mcpServers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></span>
+                        <span class="hljs-line">    <span class="hljs-attr">&quot;kirigami&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span></span>
+                        <span class="hljs-line">      <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx&quot;</span><span class="hljs-punctuation">,</span></span>
+                        <span class="hljs-line">      <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;-y&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;@kirigami/mcp&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span></span>
+                        <span class="hljs-line">      <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/path/to/your/kirigami/project&quot;</span></span>
+                        <span class="hljs-line">    <span class="hljs-punctuation">}</span></span>
+                        <span class="hljs-line">  <span class="hljs-punctuation">}</span></span>
+                        <span class="hljs-line"><span class="hljs-punctuation">}</span></span>
+                    </code></pre>
+                    <p>The working-directory key depends on the client; what matters is that the server starts in the folder that holds <code>kirigami.yaml</code>. It also starts in an empty folder, where the assistant can scaffold a new project first.</p>
+                    <h2 id="tools">Tools</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Tool</th>
+                                <th>What it does</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>kirigami_about</code></td>
+                                <td>A compact manifest of the project (package metadata, docs, tasks and scripts), to orient the assistant.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kirigami_config</code></td>
+                                <td>The resolved <code>kirigami.yaml</code> and the active plugins.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kirigami_validate</code></td>
+                                <td>Validate <code>kirigami.yaml</code> against the schema.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kirigami_build</code></td>
+                                <td>Same as <code>kiri build</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kirigami_export</code></td>
+                                <td>Same as <code>kiri export</code>, with an optional output path.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kirigami_list_tasks</code> / <code>kirigami_run_task</code></td>
+                                <td>List the build tasks, run exactly one.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kirigami_list_scripts</code> / <code>kirigami_run</code></td>
+                                <td>List <code>scripts/*.php</code>, run one with arguments.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kirigami_list_templates</code> / <code>kirigami_create_project</code></td>
+                                <td>List the official templates, scaffold a project from one. Never overwrites files.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kirigami_site_blueprint</code></td>
+                                <td>Suggest a site tree, configuration and an example page.</td>
+                            </tr>
+                            <tr>
+                                <td><code>kirigami_search_docs</code> / <code>kirigami_doc_hints</code></td>
+                                <td>Search the project&apos;s documentation, or suggest the pages for a topic.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Results are JSON: an operation reports <code>success: false</code> in its payload rather than as a protocol error, so the assistant sees the diagnostics.</p>
+                    <p>There is no <code>serve</code> or <code>watch</code> tool: a long-running server doesn&apos;t fit a request/response protocol. Run <a href="../cli/"><code>kiri serve</code></a> or the <a href="../vscode/">VS Code extension</a> for a live preview.</p>
+                    <h2 id="trust">Trust</h2>
+                    <p><code>kirigami_run</code> and <code>kirigami_run_task</code> execute whatever the project&apos;s scripts and tasks do. Point the server only at projects you trust.</p>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../docs/vscode/">VS Code extension</a>
+                        <a class="doc__next" rel="next" href="../../docs/api/">JavaScript API</a>
                     </nav>
                 </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#setup">Setup</a></li>
+                        <li><a href="#tools">Tools</a></li>
+                        <li><a href="#trust">Trust</a></li>
+                    </ol>
+                </nav>
             </div>
         </main>
         <footer class="site-footer">
@@ -253,6 +268,7 @@
                             <li><a href="../../start/">Getting started</a></li>
                             <li><a href="../../docs/">Documentation</a></li>
                             <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
                             <li><a href="../../examples/">Examples</a></li>
                             <li><a href="../../templates/">Templates</a></li>
                             <li><a href="../../showcase/">Showcase</a></li>

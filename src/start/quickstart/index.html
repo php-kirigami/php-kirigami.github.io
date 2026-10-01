@@ -107,6 +107,7 @@
                         <li><a href="../../start/" aria-current="page">Start</a></li>
                         <li><a href="../../docs/">Docs</a></li>
                         <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
                         <li><a href="../../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -120,82 +121,110 @@
             </div>
         </header>
         <main id="main">
-            <section class="section wrap doc-head">
-                <span class="eyebrow">Getting started</span>
-                <h1>Quickstart</h1>
-                <p class="lead">One page, one config file, two commands. Five minutes.</p>
-            </section>
-            <section class="section wrap">
-                <ol class="steps">
-                    <li>
-                        <h3>Install</h3>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Getting started">
+                    <a class="doc-nav__course" href="../../start/">Getting started</a>
+                    <p class="doc-nav__group">Getting started</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../start/install/">Install</a></li>
+                        <li><a href="../../start/quickstart/" aria-current="page">Quickstart</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tutorial</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../start/tutorial/">Tutorial overview</a></li>
+                        <li><a href="../../start/tutorial/1-setup/">Setup</a></li>
+                        <li><a href="../../start/tutorial/2-pages-layout/">Pages &amp; layout</a></li>
+                        <li><a href="../../start/tutorial/3-content/">Content</a></li>
+                        <li><a href="../../start/tutorial/4-styles-scripts/">Styles &amp; scripts</a></li>
+                        <li><a href="../../start/tutorial/5-images/">Images</a></li>
+                        <li><a href="../../start/tutorial/6-seo/">SEO</a></li>
+                        <li><a href="../../start/tutorial/7-deploy/">Deploy</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><span aria-current="page">Quickstart</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Getting started</span>
+                        <h1>Quickstart</h1>
+                        <p class="lead">One page, one config file, two commands. Five minutes.</p>
+                    </header>
+                    <section class="section wrap">
+                        <ol class="steps">
+                            <li>
+                                <h3>Install</h3>
+                                <div class="prose">
+                                    <pre><code class="hljs language-bash hljs-numbered">
+                                        <span class="hljs-line">npm install -D @kirigami/cli</span>
+                                    </code></pre>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>Add a <code>kirigami.yaml</code></h3>
+                                <div class="prose">
+                                    <p>At the root of your project:</p>
+                                    <pre><code class="hljs language-yaml hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-attr">kirigami:</span></span>
+                                        <span class="hljs-line">  <span class="hljs-attr">project:</span>  <span class="hljs-string">My</span> <span class="hljs-string">Site</span></span>
+                                        <span class="hljs-line">  <span class="hljs-attr">baseurl:</span>  <span class="hljs-string">https://example.com</span></span>
+                                        <span class="hljs-line">  <span class="hljs-attr">root:</span>     <span class="hljs-string">src</span></span>
+                                        <span class="hljs-line"></span>
+                                        <span class="hljs-line"><span class="hljs-attr">prepros:</span> {}</span>
+                                    </code></pre>
+                                    <p><code>prepros: {}</code> — even empty — is what turns on the PHP → HTML compiler for every <code>_*.php</code> file under <code>root</code>.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>Write a page</h3>
+                                <div class="prose">
+                                    <p><code>src/_index.php</code>:</p>
+                                    <pre><code class="hljs language-php hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span> Home</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                                        <span class="hljs-line"></span>
+                                        <span class="hljs-line"><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;Hello, Kirigami.&lt;/h1&gt;&#x27;</span>;</span>
+                                    </code></pre>
+                                    <p>A file named <code>_name.php</code> compiles to <code>name.html</code> in the same folder — <code>_index.php</code> becomes <code>index.html</code>.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>Serve it</h3>
+                                <div class="prose">
+                                    <pre><code class="hljs language-bash hljs-numbered">
+                                        <span class="hljs-line">npx kiri serve</span>
+                                    </code></pre>
+                                    <p>Rebuilds <code>src/index.html</code> every time you save, serves <code>src/</code> at <code>http://127.0.0.1:4321</code>, and reloads the open tab once the rebuild finishes — nothing to open by hand. (<code>kiri watch</code> does the same rebuild with no server, if that&apos;s all you need.)</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>Ship it</h3>
+                                <div class="prose">
+                                    <pre><code class="hljs language-bash hljs-numbered">
+                                        <span class="hljs-line">npx kiri <span class="hljs-built_in">export</span></span>
+                                    </code></pre>
+                                    <p>Writes a fully static, dependency-free site into <code>dist/</code> — ready for GitHub Pages or any static host.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </section>
+                    <hr class="fold">
+                    <section class="section wrap">
                         <div class="prose">
-                            <pre><code class="hljs language-bash hljs-numbered">
-                                <span class="hljs-line">npm install -D @kirigami/cli</span>
-                            </code></pre>
+                            <p>That&apos;s the whole loop. For a site with more than one page, real content, styling and a deploy workflow, the <a href="../../start/tutorial/">full tutorial</a> builds one from scratch, one concept at a time.</p>
                         </div>
-                    </li>
-                    <li>
-                        <h3>Add a <code>kirigami.yaml</code></h3>
-                        <div class="prose">
-                            <p>At the root of your project:</p>
-                            <pre><code class="hljs language-yaml hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-attr">kirigami:</span></span>
-                                <span class="hljs-line">  <span class="hljs-attr">project:</span>  <span class="hljs-string">My</span> <span class="hljs-string">Site</span></span>
-                                <span class="hljs-line">  <span class="hljs-attr">baseurl:</span>  <span class="hljs-string">https://example.com</span></span>
-                                <span class="hljs-line">  <span class="hljs-attr">root:</span>     <span class="hljs-string">src</span></span>
-                                <span class="hljs-line"></span>
-                                <span class="hljs-line"><span class="hljs-attr">prepros:</span> {}</span>
-                            </code></pre>
-                            <p><code>prepros: {}</code> — even empty — is what turns on the PHP → HTML compiler for every <code>_*.php</code> file under <code>root</code>.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <h3>Write a page</h3>
-                        <div class="prose">
-                            <p><code>src/_index.php</code>:</p>
-                            <pre><code class="hljs language-php hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-comment">/**</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span> Home</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> */</span></span>
-                                <span class="hljs-line"></span>
-                                <span class="hljs-line"><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h1&gt;Hello, Kirigami.&lt;/h1&gt;&#x27;</span>;</span>
-                            </code></pre>
-                            <p>A file named <code>_name.php</code> compiles to <code>name.html</code> in the same folder — <code>_index.php</code> becomes <code>index.html</code>.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <h3>Serve it</h3>
-                        <div class="prose">
-                            <pre><code class="hljs language-bash hljs-numbered">
-                                <span class="hljs-line">npx kiri serve</span>
-                            </code></pre>
-                            <p>Rebuilds <code>src/index.html</code> every time you save, serves <code>src/</code> at <code>http://127.0.0.1:4321</code>, and reloads the open tab once the rebuild finishes — nothing to open by hand. (<code>kiri watch</code> does the same rebuild with no server, if that&apos;s all you need.)</p>
-                        </div>
-                    </li>
-                    <li>
-                        <h3>Ship it</h3>
-                        <div class="prose">
-                            <pre><code class="hljs language-bash hljs-numbered">
-                                <span class="hljs-line">npx kiri <span class="hljs-built_in">export</span></span>
-                            </code></pre>
-                            <p>Writes a fully static, dependency-free site into <code>dist/</code> — ready for GitHub Pages or any static host.</p>
-                        </div>
-                    </li>
-                </ol>
-            </section>
-            <hr class="fold">
-            <section class="section wrap">
-                <div class="prose">
-                    <p>That&apos;s the whole loop. For a site with more than one page, real content, styling and a deploy workflow, the <a href="../../start/tutorial/">full tutorial</a> builds one from scratch, one concept at a time.</p>
-                </div>
-            </section>
-            <div class="wrap">
-                <nav class="tutorial-nav">
-                    <span class="tutorial-nav__step">Getting started</span>
-                    <a rel="prev" href="../../start/install/">Install</a>
-                    <a rel="next" href="../../start/tutorial/">Tutorial overview</a>
-                </nav>
+                    </section>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../start/install/">Install</a>
+                        <a class="doc__next" rel="next" href="../../start/tutorial/">Tutorial overview</a>
+                    </nav>
+                </article>
             </div>
         </main>
         <footer class="site-footer">
@@ -211,6 +240,7 @@
                             <li><a href="../../start/">Getting started</a></li>
                             <li><a href="../../docs/">Documentation</a></li>
                             <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
                             <li><a href="../../examples/">Examples</a></li>
                             <li><a href="../../templates/">Templates</a></li>
                             <li><a href="../../showcase/">Showcase</a></li>

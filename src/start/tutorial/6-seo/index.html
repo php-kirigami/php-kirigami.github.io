@@ -40,6 +40,7 @@
                         <li><a href="../../../start/" aria-current="page">Start</a></li>
                         <li><a href="../../../docs/">Docs</a></li>
                         <li><a href="../../../plugins/">Plugins</a></li>
+                        <li><a href="../../../studio/">Studio</a></li>
                         <li><a href="../../../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -53,60 +54,88 @@
             </div>
         </header>
         <main id="main">
-            <section class="section wrap doc-head">
-                <span class="eyebrow">Tutorial · Part 6 of 7</span>
-                <h1>SEO</h1>
-                <p class="lead">One config block and a per-page override, and the whole head is handled.</p>
-            </section>
-            <section class="section wrap">
-                <ol class="steps">
-                    <li>
-                        <h3>Turn metadata on</h3>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Getting started">
+                    <a class="doc-nav__course" href="../../../start/">Getting started</a>
+                    <p class="doc-nav__group">Getting started</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../../start/">Start</a></li>
+                        <li><a href="../../../start/install/">Install</a></li>
+                        <li><a href="../../../start/quickstart/">Quickstart</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tutorial</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../../start/tutorial/">Tutorial overview</a></li>
+                        <li><a href="../../../start/tutorial/1-setup/">Setup</a></li>
+                        <li><a href="../../../start/tutorial/2-pages-layout/">Pages &amp; layout</a></li>
+                        <li><a href="../../../start/tutorial/3-content/">Content</a></li>
+                        <li><a href="../../../start/tutorial/4-styles-scripts/">Styles &amp; scripts</a></li>
+                        <li><a href="../../../start/tutorial/5-images/">Images</a></li>
+                        <li><a href="../../../start/tutorial/6-seo/" aria-current="page">SEO</a></li>
+                        <li><a href="../../../start/tutorial/7-deploy/">Deploy</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../../">Home</a></li>
+                            <li><a href="../../../start/">Getting started</a></li>
+                            <li><span aria-current="page">Tutorial · SEO</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Tutorial · Part 6 of 7</span>
+                        <h1>SEO</h1>
+                        <p class="lead">One config block and a per-page override, and the whole head is handled.</p>
+                    </header>
+                    <section class="section wrap">
+                        <ol class="steps">
+                            <li>
+                                <h3>Turn metadata on</h3>
+                                <div class="prose">
+                                    <p>One block in <code>kirigami.yaml</code>, fine empty:</p>
+                                    <pre><code class="hljs language-yaml hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-attr">seo:</span> {}</span>
+                                    </code></pre>
+                                    <p><code>seo:</code> derives <code>&lt;title&gt;</code>, the description, Open Graph, Twitter Card, the canonical link, and the favicon tags from the <code>kirigami:</code> block plus each page&apos;s PHPDOC — nothing to write by hand in <code>header.php</code>. From the same values it adds a schema.org <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code> graph for search engines; <code>jsonld: false</code> in the block turns just that part off. Drop <code>favicon.ico</code> and <code>apple-touch-icon.png</code> in <code>src/</code> and they&apos;re picked up automatically.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>Override per page</h3>
+                                <div class="prose">
+                                    <p>A page&apos;s own PHPDOC wins over the project-wide defaults:</p>
+                                    <pre><code class="hljs language-php hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span>           The first pleat</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@meta</span>_description How Studio Plié got its name.</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@meta</span>_image      images/fold-01.jpg</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                                    </code></pre>
+                                    <p>A tag <code>header.php</code> already writes by hand is detected and left alone — <code>seo:</code> fills gaps, it never duplicates.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>Check the sitemap</h3>
+                                <div class="prose">
+                                    <p>Every build with <code>prepros:</code> set regenerates <code>sitemap.xml</code> at <code>kirigami.root</code>, one <code>&lt;url&gt;</code> per rendered page, from <code>kirigami.baseurl</code> — nothing to maintain by hand as pages get added or removed.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </section>
+                    <hr class="fold">
+                    <section class="section wrap">
                         <div class="prose">
-                            <p>One block in <code>kirigami.yaml</code>, fine empty:</p>
-                            <pre><code class="hljs language-yaml hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-attr">seo:</span> {}</span>
-                            </code></pre>
-                            <p><code>seo:</code> derives <code>&lt;title&gt;</code>, the description, Open Graph, Twitter Card, the canonical link, and the favicon tags from the <code>kirigami:</code> block plus each page&apos;s PHPDOC — nothing to write by hand in <code>header.php</code>. From the same values it adds a schema.org <code>&lt;script type=&quot;application/ld+json&quot;&gt;</code> graph for search engines; <code>jsonld: false</code> in the block turns just that part off. Drop <code>favicon.ico</code> and <code>apple-touch-icon.png</code> in <code>src/</code> and they&apos;re picked up automatically.</p>
+                            <div class="markdown-alert markdown-alert-note">
+                                <p class="markdown-alert-title">NOTE</p>
+                                <p>This whole site runs on exactly this one block — every page you&apos;ve read in this tutorial got its title, description and social card the same way, straight from its own PHPDOC. It goes one step further for its favicon and <code>og:image</code>: since it already has the <a href="../5-images/">image pipeline</a> wired up, <code>seo.favicon</code> / <code>seo.appleTouchIcon</code> / <code>seo.image</code> point at generated files instead of ones dropped in by hand — see <a href="../../../docs/config/#seo">Docs → Config → seo</a> for that option.</p>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <h3>Override per page</h3>
-                        <div class="prose">
-                            <p>A page&apos;s own PHPDOC wins over the project-wide defaults:</p>
-                            <pre><code class="hljs language-php hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-comment">/**</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span>           The first pleat</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@meta</span>_description How Studio Plié got its name.</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@meta</span>_image      images/fold-01.jpg</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> */</span></span>
-                            </code></pre>
-                            <p>A tag <code>header.php</code> already writes by hand is detected and left alone — <code>seo:</code> fills gaps, it never duplicates.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <h3>Check the sitemap</h3>
-                        <div class="prose">
-                            <p>Every build with <code>prepros:</code> set regenerates <code>sitemap.xml</code> at <code>kirigami.root</code>, one <code>&lt;url&gt;</code> per rendered page, from <code>kirigami.baseurl</code> — nothing to maintain by hand as pages get added or removed.</p>
-                        </div>
-                    </li>
-                </ol>
-            </section>
-            <hr class="fold">
-            <section class="section wrap">
-                <div class="prose">
-                    <div class="markdown-alert markdown-alert-note">
-                        <p class="markdown-alert-title">NOTE</p>
-                        <p>This whole site runs on exactly this one block — every page you&apos;ve read in this tutorial got its title, description and social card the same way, straight from its own PHPDOC. It goes one step further for its favicon and <code>og:image</code>: since it already has the <a href="../5-images/">image pipeline</a> wired up, <code>seo.favicon</code> / <code>seo.appleTouchIcon</code> / <code>seo.image</code> point at generated files instead of ones dropped in by hand — see <a href="../../../docs/config/#seo">Docs → Config → seo</a> for that option.</p>
-                    </div>
-                </div>
-            </section>
-            <div class="wrap">
-                <nav class="tutorial-nav">
-                    <span class="tutorial-nav__step">Part 6 of 7</span>
-                    <a rel="prev" href="../../../start/tutorial/5-images/">Part 5 — Images</a>
-                    <a rel="next" href="../../../start/tutorial/7-deploy/">Part 7 — Deploy</a>
-                </nav>
+                    </section>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../../start/tutorial/5-images/">Images</a>
+                        <a class="doc__next" rel="next" href="../../../start/tutorial/7-deploy/">Deploy</a>
+                    </nav>
+                </article>
             </div>
         </main>
         <footer class="site-footer">
@@ -122,6 +151,7 @@
                             <li><a href="../../../start/">Getting started</a></li>
                             <li><a href="../../../docs/">Documentation</a></li>
                             <li><a href="../../../plugins/">Plugins</a></li>
+                            <li><a href="../../../studio/">Kiri Studio</a></li>
                             <li><a href="../../../examples/">Examples</a></li>
                             <li><a href="../../../templates/">Templates</a></li>
                             <li><a href="../../../showcase/">Showcase</a></li>

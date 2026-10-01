@@ -101,6 +101,7 @@
                         <li><a href="../start/" aria-current="page">Start</a></li>
                         <li><a href="../docs/">Docs</a></li>
                         <li><a href="../plugins/">Plugins</a></li>
+                        <li><a href="../studio/">Studio</a></li>
                         <li><a href="../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -114,33 +115,64 @@
             </div>
         </header>
         <main id="main">
-            <section class="section wrap doc-head">
-                <span class="eyebrow">Getting started</span>
-                <h1>Start</h1>
-                <p class="lead">Three ways in, depending on how much time you&apos;ve got.</p>
-            </section>
-            <section class="section wrap">
-                <div class="grid" data-reveal="">
-                    <a class="card" href="../start/install/">
-                        <h3>Install</h3>
-                        <p>One command, one dependency. Start here if you just want the CLI on your machine.</p>
-                    </a>
-                    <a class="card" href="../start/quickstart/">
-                        <h3>Quickstart</h3>
-                        <p>A minimal <code>kirigami.yaml</code>, one page, one command to watch it, one to export it. Five minutes.</p>
-                    </a>
-                    <a class="card" href="../start/tutorial/">
-                        <h3>Full tutorial</h3>
-                        <p>Build a real small site end to end — pages, content, styling, images, SEO, deployment — one concept per part, seven parts.</p>
-                    </a>
-                </div>
-            </section>
-            <hr class="fold">
-            <section class="section wrap">
-                <div class="prose">
-                    <p>Already comfortable and just need the shape of a config key or a CLI flag? The <a href="../docs/">docs</a> are growing into the full reference; until then, the <a href="https://github.com/php-kirigami/kirigami#readme">monorepo README</a> has it all.</p>
-                </div>
-            </section>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Getting started">
+                    <a class="doc-nav__course" href="../start/">Getting started</a>
+                    <p class="doc-nav__group">Getting started</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../start/" aria-current="page">Start</a></li>
+                        <li><a href="../start/install/">Install</a></li>
+                        <li><a href="../start/quickstart/">Quickstart</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tutorial</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../start/tutorial/">Tutorial overview</a></li>
+                        <li><a href="../start/tutorial/1-setup/">Setup</a></li>
+                        <li><a href="../start/tutorial/2-pages-layout/">Pages &amp; layout</a></li>
+                        <li><a href="../start/tutorial/3-content/">Content</a></li>
+                        <li><a href="../start/tutorial/4-styles-scripts/">Styles &amp; scripts</a></li>
+                        <li><a href="../start/tutorial/5-images/">Images</a></li>
+                        <li><a href="../start/tutorial/6-seo/">SEO</a></li>
+                        <li><a href="../start/tutorial/7-deploy/">Deploy</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../">Home</a></li>
+                            <li><a href="../start/">Getting started</a></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Getting started</span>
+                        <h1>Start</h1>
+                        <p class="lead">Three ways in, depending on how much time you&apos;ve got.</p>
+                    </header>
+                    <section class="section wrap">
+                        <div class="grid" data-reveal="">
+                            <a class="card" href="../start/install/">
+                                <h3>Install</h3>
+                                <p>One command, one dependency. Start here if you just want the CLI on your machine.</p>
+                            </a>
+                            <a class="card" href="../start/quickstart/">
+                                <h3>Quickstart</h3>
+                                <p>A minimal <code>kirigami.yaml</code>, one page, one command to watch it, one to export it. Five minutes.</p>
+                            </a>
+                            <a class="card" href="../start/tutorial/">
+                                <h3>Full tutorial</h3>
+                                <p>Build a real small site end to end — pages, content, styling, images, SEO, deployment — one concept per part, seven parts.</p>
+                            </a>
+                        </div>
+                    </section>
+                    <hr class="fold">
+                    <section class="section wrap">
+                        <div class="prose">
+                            <p>Already comfortable and just need the shape of a config key or a CLI flag? The <a href="../docs/">docs</a> are growing into the full reference; until then, the <a href="https://github.com/php-kirigami/kirigami#readme">monorepo README</a> has it all.</p>
+                        </div>
+                    </section>
+                    <nav class="doc__pager" aria-label="Previous and next"><a class="doc__next" rel="next" href="../start/install/">Install</a></nav>
+                </article>
+            </div>
         </main>
         <footer class="site-footer">
             <div class="wrap">
@@ -155,6 +187,7 @@
                             <li><a href="../start/">Getting started</a></li>
                             <li><a href="../docs/">Documentation</a></li>
                             <li><a href="../plugins/">Plugins</a></li>
+                            <li><a href="../studio/">Kiri Studio</a></li>
                             <li><a href="../examples/">Examples</a></li>
                             <li><a href="../templates/">Templates</a></li>
                             <li><a href="../showcase/">Showcase</a></li>

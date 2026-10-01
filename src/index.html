@@ -80,6 +80,7 @@
                         <li><a href="./start/">Start</a></li>
                         <li><a href="./docs/">Docs</a></li>
                         <li><a href="./plugins/">Plugins</a></li>
+                        <li><a href="./studio/">Studio</a></li>
                         <li><a href="./examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -94,19 +95,22 @@
         </header>
         <main id="main">
             <section class="hero wrap">
-                <p class="eyebrow">PHP 8.5 · WebAssembly · zero server</p>
-                <h1>Fold PHP into flat HTML.</h1>
-                <p class="lead">A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.</p>
-                <p>
-                    <a class="btn" href="./start/">Get started</a>
-                    <a class="btn btn--ghost" href="./docs/">Read the docs</a>
-                </p>
+                <div class="hero__text">
+                    <p class="eyebrow">PHP 8.5 · WebAssembly · zero server</p>
+                    <h1>Fold PHP into flat HTML.</h1>
+                    <p class="lead">A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.</p>
+                    <p>
+                        <a class="btn" href="./start/">Get started</a>
+                        <a class="btn btn--ghost" href="./docs/">Read the docs</a>
+                    </p>
+                </div>
+                <figure class="hero__art"><img alt="An elephant folded from green paper" src="./images/hero/elephant-720w.webp"></figure>
             </section>
             <section class="section wrap">
                 <h2 class="section-title">Four ways in, one engine</h2>
                 <div class="gateways">
                     <article class="gateway gateway--vscode">
-                        <span class="gateway__art" aria-hidden="true"></span>
+                        <img class="gateway__art" src="./images/features/vscode-800x500-cover.webp" alt="" loading="lazy">
                         <div class="gateway__body">
                             <span class="eyebrow">In your editor</span>
                             <h3><a href="./docs/vscode/">VS Code extension</a></h3>
@@ -114,7 +118,7 @@
                         </div>
                     </article>
                     <article class="gateway gateway--cli">
-                        <span class="gateway__art" aria-hidden="true"></span>
+                        <img class="gateway__art" src="./images/features/cli-800x500-cover.webp" alt="" loading="lazy">
                         <div class="gateway__body">
                             <span class="eyebrow">In your terminal</span>
                             <h3><a href="./docs/cli/">Command line</a></h3>
@@ -122,7 +126,7 @@
                         </div>
                     </article>
                     <article class="gateway gateway--mcp">
-                        <span class="gateway__art" aria-hidden="true"></span>
+                        <img class="gateway__art" src="./images/features/mcp-800x500-cover.webp" alt="" loading="lazy">
                         <div class="gateway__body">
                             <span class="eyebrow">With your AI assistant</span>
                             <h3><a href="./docs/mcp/">MCP server</a></h3>
@@ -130,11 +134,33 @@
                         </div>
                     </article>
                     <article class="gateway gateway--api">
-                        <span class="gateway__art" aria-hidden="true"></span>
+                        <img class="gateway__art" src="./images/features/api-800x500-cover.webp" alt="" loading="lazy">
                         <div class="gateway__body">
                             <span class="eyebrow">In your own code</span>
                             <h3><a href="./docs/api/">JavaScript API</a></h3>
                             <p><code>load()</code> a project and call <code>build()</code>, <code>export()</code> or <code>serve()</code> from any Node script: the engine the other three are built on.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
+                <h2 class="section-title">And for the people who run the site</h2>
+                <div class="gateways">
+                    <article class="gateway gateway--studio">
+                        <img class="gateway__art" src="./images/features/studio-1000x500-cover.webp" alt="" loading="lazy">
+                        <div class="gateway__body">
+                            <span class="eyebrow">For site owners</span>
+                            <h3><a href="./studio/">Kiri Studio</a></h3>
+                            <p>A desktop app for your client: sign in with GitHub, edit text, data and pictures with a live preview, click Publish. No Git, no code, no terminal.</p>
+                        </div>
+                    </article>
+                    <article class="gateway gateway--vscode-ext">
+                        <img class="gateway__art" src="./images/features/studio-setup-800x500-cover.webp" alt="" loading="lazy">
+                        <div class="gateway__body">
+                            <span class="eyebrow">For the maintainer</span>
+                            <h3><a href="./docs/studio/">Set a site up for editing</a></h3>
+                            <p>Declare what is editable in a <code>studio:</code> block of <code>kirigami.yaml</code>, with schemas, labels and creatable collections. The build ignores it.</p>
                         </div>
                     </article>
                 </div>
@@ -230,6 +256,7 @@
                             <li><a href="./start/">Getting started</a></li>
                             <li><a href="./docs/">Documentation</a></li>
                             <li><a href="./plugins/">Plugins</a></li>
+                            <li><a href="./studio/">Kiri Studio</a></li>
                             <li><a href="./examples/">Examples</a></li>
                             <li><a href="./templates/">Templates</a></li>
                             <li><a href="./showcase/">Showcase</a></li>

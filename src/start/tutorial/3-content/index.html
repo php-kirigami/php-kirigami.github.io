@@ -113,6 +113,7 @@
                         <li><a href="../../../start/" aria-current="page">Start</a></li>
                         <li><a href="../../../docs/">Docs</a></li>
                         <li><a href="../../../plugins/">Plugins</a></li>
+                        <li><a href="../../../studio/">Studio</a></li>
                         <li><a href="../../../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -126,78 +127,106 @@
             </div>
         </header>
         <main id="main">
-            <section class="section wrap doc-head">
-                <span class="eyebrow">Tutorial · Part 3 of 7</span>
-                <h1>Content</h1>
-                <p class="lead">Markdown in a page, a YAML data file for a listing, and the annotation that renders a page as pure Markdown.</p>
-            </section>
-            <section class="section wrap">
-                <ol class="steps">
-                    <li>
-                        <h3>Write prose with the markdown tag</h3>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Getting started">
+                    <a class="doc-nav__course" href="../../../start/">Getting started</a>
+                    <p class="doc-nav__group">Getting started</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../../start/">Start</a></li>
+                        <li><a href="../../../start/install/">Install</a></li>
+                        <li><a href="../../../start/quickstart/">Quickstart</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tutorial</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../../start/tutorial/">Tutorial overview</a></li>
+                        <li><a href="../../../start/tutorial/1-setup/">Setup</a></li>
+                        <li><a href="../../../start/tutorial/2-pages-layout/">Pages &amp; layout</a></li>
+                        <li><a href="../../../start/tutorial/3-content/" aria-current="page">Content</a></li>
+                        <li><a href="../../../start/tutorial/4-styles-scripts/">Styles &amp; scripts</a></li>
+                        <li><a href="../../../start/tutorial/5-images/">Images</a></li>
+                        <li><a href="../../../start/tutorial/6-seo/">SEO</a></li>
+                        <li><a href="../../../start/tutorial/7-deploy/">Deploy</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../../">Home</a></li>
+                            <li><a href="../../../start/">Getting started</a></li>
+                            <li><span aria-current="page">Tutorial · Content</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Tutorial · Part 3 of 7</span>
+                        <h1>Content</h1>
+                        <p class="lead">Markdown in a page, a YAML data file for a listing, and the annotation that renders a page as pure Markdown.</p>
+                    </header>
+                    <section class="section wrap">
+                        <ol class="steps">
+                            <li>
+                                <h3>Write prose with the markdown tag</h3>
+                                <div class="prose">
+                                    <p>In <code>atelier/_index.php</code>, drop Markdown straight into the page — it&apos;s converted to HTML after PHP runs, so PHP variables and Markdown mix freely. Wrap the paragraph between an opening and a closing tag named <code>markdown</code>, the same way every paragraph on this tutorial page is written — view this page&apos;s source to see the real thing, since showing the tag&apos;s own angle brackets here would trip the very tag it&apos;s demonstrating.</p>
+                                    <p>Add a <code>prose</code> attribute on the opening tag to wrap the output in <code>.prose</code> — this site&apos;s own <code>@kirigami/canva</code>-based typography for long-form content.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>List notes from a YAML file</h3>
+                                <div class="prose">
+                                    <p><code>notes/_notes.yaml</code>:</p>
+                                    <pre><code class="hljs language-yaml hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">The</span> <span class="hljs-string">first</span> <span class="hljs-string">pleat</span></span>
+                                        <span class="hljs-line">  <span class="hljs-attr">date:</span> <span class="hljs-number">2026-08-02</span></span>
+                                        <span class="hljs-line">  <span class="hljs-attr">excerpt:</span> <span class="hljs-string">Where</span> <span class="hljs-string">the</span> <span class="hljs-string">studio&#x27;s</span> <span class="hljs-string">name</span> <span class="hljs-string">actually</span> <span class="hljs-string">comes</span> <span class="hljs-string">from.</span></span>
+                                        <span class="hljs-line"><span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">Paper</span> <span class="hljs-string">weights,</span> <span class="hljs-string">compared</span></span>
+                                        <span class="hljs-line">  <span class="hljs-attr">date:</span> <span class="hljs-number">2026-08-19</span></span>
+                                        <span class="hljs-line">  <span class="hljs-attr">excerpt:</span> <span class="hljs-string">80gsm</span> <span class="hljs-string">folds</span> <span class="hljs-string">crisp;</span> <span class="hljs-string">120gsm</span> <span class="hljs-string">holds</span> <span class="hljs-string">a</span> <span class="hljs-string">curve.</span></span>
+                                    </code></pre>
+                                    <p><code>notes/_index.php</code> points a PHPDOC annotation at it, and gets the parsed data back as a plain array of objects — no manual <code>file_get_contents()</code> / <code>yaml_parse()</code>:</p>
+                                    <pre><code class="hljs language-php hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span> Notes</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@posts</span> _notes.yaml</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                                    </code></pre>
+                                    <pre><code class="hljs language-php hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$posts</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$post</span>) {</span>
+                                        <span class="hljs-line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h3&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$post</span>-&gt;title) . <span class="hljs-string">&#x27;&lt;/h3&gt;&#x27;</span>;</span>
+                                        <span class="hljs-line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$post</span>-&gt;excerpt) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;</span>
+                                        <span class="hljs-line">}</span>
+                                    </code></pre>
+                                    <p>Any annotation value ending in <code>.yaml</code>, <code>.yml</code>, <code>.json</code> or <code>.md</code> that resolves to a real file is loaded and parsed automatically — the string becomes structured data instead.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>A whole page that&apos;s just Markdown</h3>
+                                <div class="prose">
+                                    <p>For a single note that&apos;s pure prose, skip writing PHP at all. <code>notes/premier-pli/_premier-pli.md</code> holds the text; the page file becomes almost nothing:</p>
+                                    <pre><code class="hljs language-php hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span>   The first pleat</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@content</span> _premier-pli.md</span></span>
+                                        <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                                    </code></pre>
+                                    <p><code>@content</code> renders that file&apos;s contents <strong>as the page body</strong> and skips executing the PHP file entirely — reserved for pages that are pure data or Markdown, wrapped by the same shared header/footer as everything else.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </section>
+                    <hr class="fold">
+                    <section class="section wrap">
                         <div class="prose">
-                            <p>In <code>atelier/_index.php</code>, drop Markdown straight into the page — it&apos;s converted to HTML after PHP runs, so PHP variables and Markdown mix freely. Wrap the paragraph between an opening and a closing tag named <code>markdown</code>, the same way every paragraph on this tutorial page is written — view this page&apos;s source to see the real thing, since showing the tag&apos;s own angle brackets here would trip the very tag it&apos;s demonstrating.</p>
-                            <p>Add a <code>prose</code> attribute on the opening tag to wrap the output in <code>.prose</code> — this site&apos;s own <code>@kirigami/canva</code>-based typography for long-form content.</p>
+                            <div class="markdown-alert markdown-alert-note">
+                                <p class="markdown-alert-title">NOTE</p>
+                                <p>Three different shapes, same output family: <code>&lt;markdown&gt;</code> for prose mixed with logic, an auto-loaded data file for structured listings, <code>@content</code> for pages that are only ever going to be prose. Pick the one that matches the page, not one convention for the whole site.</p>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <h3>List notes from a YAML file</h3>
-                        <div class="prose">
-                            <p><code>notes/_notes.yaml</code>:</p>
-                            <pre><code class="hljs language-yaml hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">The</span> <span class="hljs-string">first</span> <span class="hljs-string">pleat</span></span>
-                                <span class="hljs-line">  <span class="hljs-attr">date:</span> <span class="hljs-number">2026-08-02</span></span>
-                                <span class="hljs-line">  <span class="hljs-attr">excerpt:</span> <span class="hljs-string">Where</span> <span class="hljs-string">the</span> <span class="hljs-string">studio&#x27;s</span> <span class="hljs-string">name</span> <span class="hljs-string">actually</span> <span class="hljs-string">comes</span> <span class="hljs-string">from.</span></span>
-                                <span class="hljs-line"><span class="hljs-bullet">-</span> <span class="hljs-attr">title:</span> <span class="hljs-string">Paper</span> <span class="hljs-string">weights,</span> <span class="hljs-string">compared</span></span>
-                                <span class="hljs-line">  <span class="hljs-attr">date:</span> <span class="hljs-number">2026-08-19</span></span>
-                                <span class="hljs-line">  <span class="hljs-attr">excerpt:</span> <span class="hljs-string">80gsm</span> <span class="hljs-string">folds</span> <span class="hljs-string">crisp;</span> <span class="hljs-string">120gsm</span> <span class="hljs-string">holds</span> <span class="hljs-string">a</span> <span class="hljs-string">curve.</span></span>
-                            </code></pre>
-                            <p><code>notes/_index.php</code> points a PHPDOC annotation at it, and gets the parsed data back as a plain array of objects — no manual <code>file_get_contents()</code> / <code>yaml_parse()</code>:</p>
-                            <pre><code class="hljs language-php hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-comment">/**</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span> Notes</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@posts</span> _notes.yaml</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> */</span></span>
-                            </code></pre>
-                            <pre><code class="hljs language-php hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-keyword">foreach</span> (<span class="hljs-variable">$posts</span> <span class="hljs-keyword">as</span> <span class="hljs-variable">$post</span>) {</span>
-                                <span class="hljs-line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;h3&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$post</span>-&gt;title) . <span class="hljs-string">&#x27;&lt;/h3&gt;&#x27;</span>;</span>
-                                <span class="hljs-line">    <span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$post</span>-&gt;excerpt) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;</span>
-                                <span class="hljs-line">}</span>
-                            </code></pre>
-                            <p>Any annotation value ending in <code>.yaml</code>, <code>.yml</code>, <code>.json</code> or <code>.md</code> that resolves to a real file is loaded and parsed automatically — the string becomes structured data instead.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <h3>A whole page that&apos;s just Markdown</h3>
-                        <div class="prose">
-                            <p>For a single note that&apos;s pure prose, skip writing PHP at all. <code>notes/premier-pli/_premier-pli.md</code> holds the text; the page file becomes almost nothing:</p>
-                            <pre><code class="hljs language-php hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-comment">/**</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span>   The first pleat</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@content</span> _premier-pli.md</span></span>
-                                <span class="hljs-line"><span class="hljs-comment"> */</span></span>
-                            </code></pre>
-                            <p><code>@content</code> renders that file&apos;s contents <strong>as the page body</strong> and skips executing the PHP file entirely — reserved for pages that are pure data or Markdown, wrapped by the same shared header/footer as everything else.</p>
-                        </div>
-                    </li>
-                </ol>
-            </section>
-            <hr class="fold">
-            <section class="section wrap">
-                <div class="prose">
-                    <div class="markdown-alert markdown-alert-note">
-                        <p class="markdown-alert-title">NOTE</p>
-                        <p>Three different shapes, same output family: <code>&lt;markdown&gt;</code> for prose mixed with logic, an auto-loaded data file for structured listings, <code>@content</code> for pages that are only ever going to be prose. Pick the one that matches the page, not one convention for the whole site.</p>
-                    </div>
-                </div>
-            </section>
-            <div class="wrap">
-                <nav class="tutorial-nav">
-                    <span class="tutorial-nav__step">Part 3 of 7</span>
-                    <a rel="prev" href="../../../start/tutorial/2-pages-layout/">Part 2 — Pages &amp; layout</a>
-                    <a rel="next" href="../../../start/tutorial/4-styles-scripts/">Part 4 — Styles &amp; scripts</a>
-                </nav>
+                    </section>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../../start/tutorial/2-pages-layout/">Pages &amp; layout</a>
+                        <a class="doc__next" rel="next" href="../../../start/tutorial/4-styles-scripts/">Styles &amp; scripts</a>
+                    </nav>
+                </article>
             </div>
         </main>
         <footer class="site-footer">
@@ -213,6 +242,7 @@
                             <li><a href="../../../start/">Getting started</a></li>
                             <li><a href="../../../docs/">Documentation</a></li>
                             <li><a href="../../../plugins/">Plugins</a></li>
+                            <li><a href="../../../studio/">Kiri Studio</a></li>
                             <li><a href="../../../examples/">Examples</a></li>
                             <li><a href="../../../templates/">Templates</a></li>
                             <li><a href="../../../showcase/">Showcase</a></li>

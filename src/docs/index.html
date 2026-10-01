@@ -101,6 +101,7 @@
                         <li><a href="../start/">Start</a></li>
                         <li><a href="../docs/" aria-current="page">Docs</a></li>
                         <li><a href="../plugins/">Plugins</a></li>
+                        <li><a href="../studio/">Studio</a></li>
                         <li><a href="../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -114,59 +115,72 @@
             </div>
         </header>
         <main id="main">
-            <div class="docs wrap">
-                <nav class="docs-nav" aria-label="Documentation">
-                    <h2>Start here</h2>
-                    <ul>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../docs/" aria-current="page">Overview</a></li>
-                    </ul>
-                    <h2>Build a site</h2>
-                    <ul>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../docs/authoring/">Writing pages</a></li>
                         <li><a href="../docs/config/">Configuration</a></li>
                         <li><a href="../docs/php/">PHP class library</a></li>
-                    </ul>
-                    <h2>Tools</h2>
-                    <ul>
+                        <li><a href="../docs/troubleshooting/">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
                         <li><a href="../docs/cli/">CLI</a></li>
                         <li><a href="../docs/vscode/">VS Code extension</a></li>
                         <li><a href="../docs/mcp/">MCP server</a></li>
                         <li><a href="../docs/api/">JavaScript API</a></li>
-                    </ul>
-                </nav>
-                <article class="docs-main">
-                    <header class="docs-head">
-                        <span class="eyebrow">Documentation</span>
+                        <li><a href="../docs/studio/">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../docs/sdk/">Plugin SDK</a></li>
+                        <li><a href="../docs/internals/">Internals</a></li>
+                        <li><a href="../docs/struct-walker/">struct-walker</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../">Home</a></li>
+                            <li><a href="../docs/">Documentation</a></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Start here</span>
                         <h1>Documentation</h1>
                         <p class="lead">The reference for building a site with Kirigami, and for the four ways to drive it: the VS Code extension, the command line, the MCP server and the JavaScript API.</p>
                     </header>
-                    <nav class="docs-toc" aria-label="On this page">
-                        <h2>On this page</h2>
-                        <ul>
-                            <li><a href="#build-a-site">Build a site</a></li>
-                            <li><a href="#tools">Tools</a></li>
-                        </ul>
-                    </nav>
-                    <div class="prose">
-                        <p>New to Kirigami? The <a href="../start/">Getting started</a> path walks you from an empty folder to a deployed site. These pages are the reference: precise and complete, one topic per page, with the full detail the tutorial links back to.</p>
-                        <h2 id="build-a-site">Build a site</h2>
-                        <ul>
-                            <li><a href="authoring/">Writing pages</a>: the PHPDOC header, data files, page types, built-in tags, and registering your own tags and hooks.</li>
-                            <li><a href="config/">Configuration</a>: every key of <code>kirigami.yaml</code>.</li>
-                            <li><a href="php/">PHP class library</a>: Markdown, YAML, images, caching, SEO and the other classes every page can call.</li>
-                        </ul>
-                        <h2 id="tools">Tools</h2>
-                        <p>The same engine behind four front doors. Pick the one that fits how you work; they build the same site.</p>
-                        <ul>
-                            <li><a href="cli/">CLI</a>: <code>kiri build</code>, <code>serve</code>, <code>export</code> and the rest, from any terminal.</li>
-                            <li><a href="vscode/">VS Code extension</a>: build, export and preview from the editor&apos;s Command Palette and status bar.</li>
-                            <li><a href="mcp/">MCP server</a>: let an AI assistant build, validate and scaffold a project through the Model Context Protocol.</li>
-                            <li><a href="api/">JavaScript API</a>: load a project in your own Node code and call <code>build()</code>, <code>export()</code> or <code>serve()</code>.</li>
-                        </ul>
-                        <p>Every code block on this site is colored at build time by <a href="../plugins/"><code>@kirigami/plugin-highlight</code></a>: no highlighter reaches your browser.</p>
-                    </div>
-                    <nav class="docs-pager" aria-label="Previous and next"><a rel="next" href="../docs/authoring/">Writing pages</a></nav>
+                    <p>New to Kirigami? The <a href="../start/">Getting started</a> path walks you from an empty folder to a deployed site. These pages are the reference: precise and complete, one topic per page, with the full detail the tutorial links back to.</p>
+                    <h2 id="build-a-site">Build a site</h2>
+                    <ul>
+                        <li><a href="authoring/">Writing pages</a>: the PHPDOC header, data files, page types, built-in tags, and registering your own tags and hooks.</li>
+                        <li><a href="config/">Configuration</a>: every key of <code>kirigami.yaml</code>.</li>
+                        <li><a href="php/">PHP class library</a>: Markdown, YAML, images, caching, SEO and the other classes every page can call.</li>
+                    </ul>
+                    <h2 id="tools">Tools</h2>
+                    <p>The same engine behind four front doors. Pick the one that fits how you work; they build the same site.</p>
+                    <ul>
+                        <li><a href="cli/">CLI</a>: <code>kiri build</code>, <code>serve</code>, <code>export</code> and the rest, from any terminal.</li>
+                        <li><a href="vscode/">VS Code extension</a>: build, export and preview from the editor&apos;s Command Palette and status bar.</li>
+                        <li><a href="mcp/">MCP server</a>: let an AI assistant build, validate and scaffold a project through the Model Context Protocol.</li>
+                        <li><a href="api/">JavaScript API</a>: load a project in your own Node code and call <code>build()</code>, <code>export()</code> or <code>serve()</code>.</li>
+                    </ul>
+                    <p>Every code block on this site is colored at build time by <a href="../plugins/"><code>@kirigami/plugin-highlight</code></a>: no highlighter reaches your browser.</p>
+                    <nav class="doc__pager" aria-label="Previous and next"><a class="doc__next" rel="next" href="../docs/authoring/">Writing pages</a></nav>
                 </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#build-a-site">Build a site</a></li>
+                        <li><a href="#tools">Tools</a></li>
+                    </ol>
+                </nav>
             </div>
         </main>
         <footer class="site-footer">
@@ -182,6 +196,7 @@
                             <li><a href="../start/">Getting started</a></li>
                             <li><a href="../docs/">Documentation</a></li>
                             <li><a href="../plugins/">Plugins</a></li>
+                            <li><a href="../studio/">Kiri Studio</a></li>
                             <li><a href="../examples/">Examples</a></li>
                             <li><a href="../templates/">Templates</a></li>
                             <li><a href="../showcase/">Showcase</a></li>

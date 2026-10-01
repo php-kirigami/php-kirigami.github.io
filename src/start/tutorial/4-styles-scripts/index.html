@@ -113,6 +113,7 @@
                         <li><a href="../../../start/" aria-current="page">Start</a></li>
                         <li><a href="../../../docs/">Docs</a></li>
                         <li><a href="../../../plugins/">Plugins</a></li>
+                        <li><a href="../../../studio/">Studio</a></li>
                         <li><a href="../../../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -126,72 +127,100 @@
             </div>
         </header>
         <main id="main">
-            <section class="section wrap doc-head">
-                <span class="eyebrow">Tutorial · Part 4 of 7</span>
-                <h1>Styles &amp; scripts</h1>
-                <p class="lead">Retheme with canva, wire up dark mode, and let the managed head handle the rest.</p>
-            </section>
-            <section class="section wrap">
-                <ol class="steps">
-                    <li>
-                        <h3>Retheme with a few tokens</h3>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Getting started">
+                    <a class="doc-nav__course" href="../../../start/">Getting started</a>
+                    <p class="doc-nav__group">Getting started</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../../start/">Start</a></li>
+                        <li><a href="../../../start/install/">Install</a></li>
+                        <li><a href="../../../start/quickstart/">Quickstart</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tutorial</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../../start/tutorial/">Tutorial overview</a></li>
+                        <li><a href="../../../start/tutorial/1-setup/">Setup</a></li>
+                        <li><a href="../../../start/tutorial/2-pages-layout/">Pages &amp; layout</a></li>
+                        <li><a href="../../../start/tutorial/3-content/">Content</a></li>
+                        <li><a href="../../../start/tutorial/4-styles-scripts/" aria-current="page">Styles &amp; scripts</a></li>
+                        <li><a href="../../../start/tutorial/5-images/">Images</a></li>
+                        <li><a href="../../../start/tutorial/6-seo/">SEO</a></li>
+                        <li><a href="../../../start/tutorial/7-deploy/">Deploy</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../../">Home</a></li>
+                            <li><a href="../../../start/">Getting started</a></li>
+                            <li><span aria-current="page">Tutorial · Styles &amp; scripts</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Tutorial · Part 4 of 7</span>
+                        <h1>Styles &amp; scripts</h1>
+                        <p class="lead">Retheme with canva, wire up dark mode, and let the managed head handle the rest.</p>
+                    </header>
+                    <section class="section wrap">
+                        <ol class="steps">
+                            <li>
+                                <h3>Retheme with a few tokens</h3>
+                                <div class="prose">
+                                    <p><code>styles/partials/_conf.scss</code> forwards <code>@kirigami/canva</code>&apos;s token layer — override a handful of variables and every component built on them (buttons, cards, the toggle) follows:</p>
+                                    <pre><code class="hljs language-scss hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-keyword">@forward</span> <span class="hljs-string">&quot;@kirigami/canva/conf&quot;</span> with (</span>
+                                        <span class="hljs-line">    <span class="hljs-variable">$bg</span>:     <span class="hljs-number">#faf7f2</span>,</span>
+                                        <span class="hljs-line">    <span class="hljs-variable">$ink</span>:    <span class="hljs-number">#26221c</span>,</span>
+                                        <span class="hljs-line">    <span class="hljs-variable">$accent</span>: <span class="hljs-number">#a8562e</span>,</span>
+                                        <span class="hljs-line">    <span class="hljs-variable">$dark</span>:   true,</span>
+                                        <span class="hljs-line">    <span class="hljs-variable">$theme</span>:  both,</span>
+                                        <span class="hljs-line">);</span>
+                                    </code></pre>
+                                    <p><code>$dark: true</code> turns on canva&apos;s built-in dark palette; <code>$theme: both</code> follows the OS by default but lets <code>data-theme=&quot;dark&quot;</code> / <code>&quot;light&quot;</code> on <code>&lt;html&gt;</code> force either way.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>Add the toggle — no JS of your own</h3>
+                                <div class="prose">
+                                    <p>In <code>scripts/kirigami.core.js</code>:</p>
+                                    <pre><code class="hljs language-js hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;@kirigami/canva/theme&quot;</span>;</span>
+                                    </code></pre>
+                                    <p>That import wires every <code>[data-theme-toggle]</code> on the page, persists the choice, and keeps controls in sync with the OS. Drop a button in <code>_layouts/header.php</code>:</p>
+                                    <pre><code class="hljs language-html hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">data-theme-toggle</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Toggle dark mode&quot;</span>&gt;</span>🌓<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+                                    </code></pre>
+                                    <p>No state to manage by hand — the import is the whole feature.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>Stop wiring the &lt;head&gt; by hand</h3>
+                                <div class="prose">
+                                    <p>Once <code>prepros:</code> is set, <code>_layouts/header.php</code> doesn&apos;t need a <code>&lt;link&gt;</code> for the stylesheet or a <code>&lt;script&gt;</code> for the bundle — Kirigami injects both automatically for every <code>sass</code>/<code>esbuild</code> task, per page, cache-busted. It also injects a small theme/FOUC guard as the very first thing in <code>&lt;head&gt;</code>, so the stored preference applies before first paint. All you write:</p>
+                                    <pre><code class="hljs language-php hljs-numbered">
+                                        <span class="hljs-line">&lt;head&gt;</span>
+                                        <span class="hljs-line">    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
+                                        <span class="hljs-line">    &lt;meta name=<span class="hljs-string">&quot;viewport&quot;</span> content=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span>
+                                        <span class="hljs-line">&lt;/head&gt;</span>
+                                    </code></pre>
+                                </div>
+                            </li>
+                        </ol>
+                    </section>
+                    <hr class="fold">
+                    <section class="section wrap">
                         <div class="prose">
-                            <p><code>styles/partials/_conf.scss</code> forwards <code>@kirigami/canva</code>&apos;s token layer — override a handful of variables and every component built on them (buttons, cards, the toggle) follows:</p>
-                            <pre><code class="hljs language-scss hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-keyword">@forward</span> <span class="hljs-string">&quot;@kirigami/canva/conf&quot;</span> with (</span>
-                                <span class="hljs-line">    <span class="hljs-variable">$bg</span>:     <span class="hljs-number">#faf7f2</span>,</span>
-                                <span class="hljs-line">    <span class="hljs-variable">$ink</span>:    <span class="hljs-number">#26221c</span>,</span>
-                                <span class="hljs-line">    <span class="hljs-variable">$accent</span>: <span class="hljs-number">#a8562e</span>,</span>
-                                <span class="hljs-line">    <span class="hljs-variable">$dark</span>:   true,</span>
-                                <span class="hljs-line">    <span class="hljs-variable">$theme</span>:  both,</span>
-                                <span class="hljs-line">);</span>
-                            </code></pre>
-                            <p><code>$dark: true</code> turns on canva&apos;s built-in dark palette; <code>$theme: both</code> follows the OS by default but lets <code>data-theme=&quot;dark&quot;</code> / <code>&quot;light&quot;</code> on <code>&lt;html&gt;</code> force either way.</p>
+                            <div class="markdown-alert markdown-alert-note">
+                                <p class="markdown-alert-title">NOTE</p>
+                                <p>Three separate mechanisms, one result: config tokens for the palette, a one-line import for the toggle behaviour, and an automatic head injection for the plumbing between them. None of the three needs to know about the other two.</p>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <h3>Add the toggle — no JS of your own</h3>
-                        <div class="prose">
-                            <p>In <code>scripts/kirigami.core.js</code>:</p>
-                            <pre><code class="hljs language-js hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;@kirigami/canva/theme&quot;</span>;</span>
-                            </code></pre>
-                            <p>That import wires every <code>[data-theme-toggle]</code> on the page, persists the choice, and keeps controls in sync with the OS. Drop a button in <code>_layouts/header.php</code>:</p>
-                            <pre><code class="hljs language-html hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">data-theme-toggle</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Toggle dark mode&quot;</span>&gt;</span>🌓<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
-                            </code></pre>
-                            <p>No state to manage by hand — the import is the whole feature.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <h3>Stop wiring the &lt;head&gt; by hand</h3>
-                        <div class="prose">
-                            <p>Once <code>prepros:</code> is set, <code>_layouts/header.php</code> doesn&apos;t need a <code>&lt;link&gt;</code> for the stylesheet or a <code>&lt;script&gt;</code> for the bundle — Kirigami injects both automatically for every <code>sass</code>/<code>esbuild</code> task, per page, cache-busted. It also injects a small theme/FOUC guard as the very first thing in <code>&lt;head&gt;</code>, so the stored preference applies before first paint. All you write:</p>
-                            <pre><code class="hljs language-php hljs-numbered">
-                                <span class="hljs-line">&lt;head&gt;</span>
-                                <span class="hljs-line">    &lt;meta charset=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>
-                                <span class="hljs-line">    &lt;meta name=<span class="hljs-string">&quot;viewport&quot;</span> content=<span class="hljs-string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span>
-                                <span class="hljs-line">&lt;/head&gt;</span>
-                            </code></pre>
-                        </div>
-                    </li>
-                </ol>
-            </section>
-            <hr class="fold">
-            <section class="section wrap">
-                <div class="prose">
-                    <div class="markdown-alert markdown-alert-note">
-                        <p class="markdown-alert-title">NOTE</p>
-                        <p>Three separate mechanisms, one result: config tokens for the palette, a one-line import for the toggle behaviour, and an automatic head injection for the plumbing between them. None of the three needs to know about the other two.</p>
-                    </div>
-                </div>
-            </section>
-            <div class="wrap">
-                <nav class="tutorial-nav">
-                    <span class="tutorial-nav__step">Part 4 of 7</span>
-                    <a rel="prev" href="../../../start/tutorial/3-content/">Part 3 — Content</a>
-                    <a rel="next" href="../../../start/tutorial/5-images/">Part 5 — Images</a>
-                </nav>
+                    </section>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../../start/tutorial/3-content/">Content</a>
+                        <a class="doc__next" rel="next" href="../../../start/tutorial/5-images/">Images</a>
+                    </nav>
+                </article>
             </div>
         </main>
         <footer class="site-footer">
@@ -207,6 +236,7 @@
                             <li><a href="../../../start/">Getting started</a></li>
                             <li><a href="../../../docs/">Documentation</a></li>
                             <li><a href="../../../plugins/">Plugins</a></li>
+                            <li><a href="../../../studio/">Kiri Studio</a></li>
                             <li><a href="../../../examples/">Examples</a></li>
                             <li><a href="../../../templates/">Templates</a></li>
                             <li><a href="../../../showcase/">Showcase</a></li>

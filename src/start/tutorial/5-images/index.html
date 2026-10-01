@@ -113,6 +113,7 @@
                         <li><a href="../../../start/" aria-current="page">Start</a></li>
                         <li><a href="../../../docs/">Docs</a></li>
                         <li><a href="../../../plugins/">Plugins</a></li>
+                        <li><a href="../../../studio/">Studio</a></li>
                         <li><a href="../../../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -126,66 +127,94 @@
             </div>
         </header>
         <main id="main">
-            <section class="section wrap doc-head">
-                <span class="eyebrow">Tutorial · Part 5 of 7</span>
-                <h1>Images</h1>
-                <p class="lead">One image config, three surfaces, no native dependency.</p>
-            </section>
-            <section class="section wrap">
-                <ol class="steps">
-                    <li>
-                        <h3>Point Kirigami at your originals</h3>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Getting started">
+                    <a class="doc-nav__course" href="../../../start/">Getting started</a>
+                    <p class="doc-nav__group">Getting started</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../../start/">Start</a></li>
+                        <li><a href="../../../start/install/">Install</a></li>
+                        <li><a href="../../../start/quickstart/">Quickstart</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tutorial</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../../start/tutorial/">Tutorial overview</a></li>
+                        <li><a href="../../../start/tutorial/1-setup/">Setup</a></li>
+                        <li><a href="../../../start/tutorial/2-pages-layout/">Pages &amp; layout</a></li>
+                        <li><a href="../../../start/tutorial/3-content/">Content</a></li>
+                        <li><a href="../../../start/tutorial/4-styles-scripts/">Styles &amp; scripts</a></li>
+                        <li><a href="../../../start/tutorial/5-images/" aria-current="page">Images</a></li>
+                        <li><a href="../../../start/tutorial/6-seo/">SEO</a></li>
+                        <li><a href="../../../start/tutorial/7-deploy/">Deploy</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../../">Home</a></li>
+                            <li><a href="../../../start/">Getting started</a></li>
+                            <li><span aria-current="page">Tutorial · Images</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Tutorial · Part 5 of 7</span>
+                        <h1>Images</h1>
+                        <p class="lead">One image config, three surfaces, no native dependency.</p>
+                    </header>
+                    <section class="section wrap">
+                        <ol class="steps">
+                            <li>
+                                <h3>Point Kirigami at your originals</h3>
+                                <div class="prose">
+                                    <p>Drop full-resolution source photos in <code>assets/images/</code> (kept out of <code>src/</code>, never served as-is), then add a small block to <code>kirigami.yaml</code>:</p>
+                                    <pre><code class="hljs language-yaml hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-attr">image:</span></span>
+                                        <span class="hljs-line">  <span class="hljs-attr">format:</span> <span class="hljs-string">webp</span></span>
+                                        <span class="hljs-line">  <span class="hljs-attr">source:</span> <span class="hljs-string">assets/images</span></span>
+                                        <span class="hljs-line">  <span class="hljs-attr">dest:</span>   <span class="hljs-string">images</span></span>
+                                    </code></pre>
+                                    <p><code>dest</code> is relative to <code>kirigami.root</code> — generated files land in <code>src/images/</code> and get exported like any other page asset. Never hand-edit that folder; it&apos;s regenerated from <code>source</code>.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>A hero background, from Sass</h3>
+                                <div class="prose">
+                                    <p><code>img-asset()</code> resizes, registers the source for the build, and returns the generated URL — one function, used like any other Sass value:</p>
+                                    <pre><code class="hljs language-scss hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-selector-class">.hero</span> {</span>
+                                        <span class="hljs-line">    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">img-asset</span>(<span class="hljs-string">&quot;atelier-hero.jpg&quot;</span>, <span class="hljs-number">1600</span>, <span class="hljs-number">700</span>, true);</span>
+                                        <span class="hljs-line">}</span>
+                                    </code></pre>
+                                    <p>The three trailing arguments are width, height, and <code>cover</code> (crop to fill instead of contain) — the exact same shape every surface below takes.</p>
+                                </div>
+                            </li>
+                            <li>
+                                <h3>A gallery, from a page template</h3>
+                                <div class="prose">
+                                    <p><code>atelier/_index.php</code> gets a plain <code>&lt;img asset&gt;</code> tag per photo — no PHP call needed for the common case:</p>
+                                    <pre><code class="hljs language-html hljs-numbered">
+                                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">asset</span>=<span class="hljs-string">&quot;fold-01.jpg&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;480&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;320&quot;</span> <span class="hljs-attr">cover</span></span></span>
+                                        <span class="hljs-line"><span class="hljs-tag">     <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;A box-pleat in progress&quot;</span>&gt;</span></span>
+                                    </code></pre>
+                                    <p>Any other attribute (<code>alt</code>, <code>class</code>, <code>loading</code>) passes through untouched. Need the URL itself instead — for a <code>srcset</code>, say — call <code>IMG::asset()</code> directly from PHP with the same <code>(path, width, height, cover)</code> shape.</p>
+                                </div>
+                            </li>
+                        </ol>
+                    </section>
+                    <hr class="fold">
+                    <section class="section wrap">
                         <div class="prose">
-                            <p>Drop full-resolution source photos in <code>assets/images/</code> (kept out of <code>src/</code>, never served as-is), then add a small block to <code>kirigami.yaml</code>:</p>
-                            <pre><code class="hljs language-yaml hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-attr">image:</span></span>
-                                <span class="hljs-line">  <span class="hljs-attr">format:</span> <span class="hljs-string">webp</span></span>
-                                <span class="hljs-line">  <span class="hljs-attr">source:</span> <span class="hljs-string">assets/images</span></span>
-                                <span class="hljs-line">  <span class="hljs-attr">dest:</span>   <span class="hljs-string">images</span></span>
-                            </code></pre>
-                            <p><code>dest</code> is relative to <code>kirigami.root</code> — generated files land in <code>src/images/</code> and get exported like any other page asset. Never hand-edit that folder; it&apos;s regenerated from <code>source</code>.</p>
+                            <div class="markdown-alert markdown-alert-note">
+                                <p class="markdown-alert-title">NOTE</p>
+                                <p>Sass function, PHP method, HTML tag — three doors onto the same engine, the same config, and the same output files. Resize logic lives in exactly one place (the <code>IMG</code> class, GD with an Imagick fallback, both inside the WASM runtime) — there&apos;s no native image library anywhere in the toolchain.</p>
+                            </div>
                         </div>
-                    </li>
-                    <li>
-                        <h3>A hero background, from Sass</h3>
-                        <div class="prose">
-                            <p><code>img-asset()</code> resizes, registers the source for the build, and returns the generated URL — one function, used like any other Sass value:</p>
-                            <pre><code class="hljs language-scss hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-selector-class">.hero</span> {</span>
-                                <span class="hljs-line">    <span class="hljs-attribute">background-image</span>: <span class="hljs-built_in">img-asset</span>(<span class="hljs-string">&quot;atelier-hero.jpg&quot;</span>, <span class="hljs-number">1600</span>, <span class="hljs-number">700</span>, true);</span>
-                                <span class="hljs-line">}</span>
-                            </code></pre>
-                            <p>The three trailing arguments are width, height, and <code>cover</code> (crop to fill instead of contain) — the exact same shape every surface below takes.</p>
-                        </div>
-                    </li>
-                    <li>
-                        <h3>A gallery, from a page template</h3>
-                        <div class="prose">
-                            <p><code>atelier/_index.php</code> gets a plain <code>&lt;img asset&gt;</code> tag per photo — no PHP call needed for the common case:</p>
-                            <pre><code class="hljs language-html hljs-numbered">
-                                <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">asset</span>=<span class="hljs-string">&quot;fold-01.jpg&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;480&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;320&quot;</span> <span class="hljs-attr">cover</span></span></span>
-                                <span class="hljs-line"><span class="hljs-tag">     <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;A box-pleat in progress&quot;</span>&gt;</span></span>
-                            </code></pre>
-                            <p>Any other attribute (<code>alt</code>, <code>class</code>, <code>loading</code>) passes through untouched. Need the URL itself instead — for a <code>srcset</code>, say — call <code>IMG::asset()</code> directly from PHP with the same <code>(path, width, height, cover)</code> shape.</p>
-                        </div>
-                    </li>
-                </ol>
-            </section>
-            <hr class="fold">
-            <section class="section wrap">
-                <div class="prose">
-                    <div class="markdown-alert markdown-alert-note">
-                        <p class="markdown-alert-title">NOTE</p>
-                        <p>Sass function, PHP method, HTML tag — three doors onto the same engine, the same config, and the same output files. Resize logic lives in exactly one place (the <code>IMG</code> class, GD with an Imagick fallback, both inside the WASM runtime) — there&apos;s no native image library anywhere in the toolchain.</p>
-                    </div>
-                </div>
-            </section>
-            <div class="wrap">
-                <nav class="tutorial-nav">
-                    <span class="tutorial-nav__step">Part 5 of 7</span>
-                    <a rel="prev" href="../../../start/tutorial/4-styles-scripts/">Part 4 — Styles &amp; scripts</a>
-                    <a rel="next" href="../../../start/tutorial/6-seo/">Part 6 — SEO</a>
-                </nav>
+                    </section>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../../start/tutorial/4-styles-scripts/">Styles &amp; scripts</a>
+                        <a class="doc__next" rel="next" href="../../../start/tutorial/6-seo/">SEO</a>
+                    </nav>
+                </article>
             </div>
         </main>
         <footer class="site-footer">
@@ -201,6 +230,7 @@
                             <li><a href="../../../start/">Getting started</a></li>
                             <li><a href="../../../docs/">Documentation</a></li>
                             <li><a href="../../../plugins/">Plugins</a></li>
+                            <li><a href="../../../studio/">Kiri Studio</a></li>
                             <li><a href="../../../examples/">Examples</a></li>
                             <li><a href="../../../templates/">Templates</a></li>
                             <li><a href="../../../showcase/">Showcase</a></li>

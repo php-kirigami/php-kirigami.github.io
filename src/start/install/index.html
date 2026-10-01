@@ -107,6 +107,7 @@
                         <li><a href="../../start/" aria-current="page">Start</a></li>
                         <li><a href="../../docs/">Docs</a></li>
                         <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
                         <li><a href="../../examples/">Examples</a></li>
                         <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
                     </ul>
@@ -120,43 +121,79 @@
             </div>
         </header>
         <main id="main">
-            <section class="section wrap doc-head">
-                <span class="eyebrow">Getting started</span>
-                <h1>Install</h1>
-                <p class="lead">One dependency, no PHP install, no server.</p>
-            </section>
-            <section class="section wrap">
-                <div class="prose">
-                    <h2 id="requirements">Requirements</h2>
-                    <ul>
-                        <li><strong>Node.js ≥ 24.0.0</strong></li>
-                        <li><strong>npm ≥ 10.2.3</strong></li>
-                    </ul>
-                    <p>That&apos;s the whole list. No PHP to install, no database, no headless browser.</p>
-                    <h2 id="install-the-cli">Install the CLI</h2>
-                    <p>Add it as a dev dependency to your project:</p>
-                    <pre><code class="hljs language-bash hljs-numbered">
-                        <span class="hljs-line">npm install -D @kirigami/cli</span>
-                    </code></pre>
-                    <p>The <code>kiri</code> command is now available through <code>npx</code>, or as an npm script. It brings the engine, <code>@kirigami/kirigami</code>, along with it.</p>
-                    <p>Prefer your editor? The <a href="../../docs/vscode/">VS Code extension</a> runs the same commands from the Command Palette, and its <strong>Create Project</strong> command scaffolds a new site without a terminal.</p>
-                    <h2 id="verify-it">Verify it</h2>
-                    <pre><code class="hljs language-bash hljs-numbered">
-                        <span class="hljs-line">npx kiri --version</span>
-                    </code></pre>
-                    <p>Prints the <code>kiri</code> version alongside the bundled PHP version — the WASM runtime ships with the CLI, so this also confirms PHP itself is there.</p>
-                    <div class="markdown-alert markdown-alert-tip">
-                        <p class="markdown-alert-title">TIP</p>
-                        <p>Every command has its own <code>--help</code>, with the full flag list and a few usage notes.</p>
-                    </div>
-                </div>
-            </section>
-            <hr class="fold">
-            <div class="wrap">
-                <nav class="tutorial-nav">
-                    <span class="tutorial-nav__step">Getting started</span>
-                    <a rel="prev" href="../../start/">Start</a>
-                    <a rel="next" href="../../start/quickstart/">Quickstart</a>
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Getting started">
+                    <a class="doc-nav__course" href="../../start/">Getting started</a>
+                    <p class="doc-nav__group">Getting started</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../start/install/" aria-current="page">Install</a></li>
+                        <li><a href="../../start/quickstart/">Quickstart</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tutorial</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../start/tutorial/">Tutorial overview</a></li>
+                        <li><a href="../../start/tutorial/1-setup/">Setup</a></li>
+                        <li><a href="../../start/tutorial/2-pages-layout/">Pages &amp; layout</a></li>
+                        <li><a href="../../start/tutorial/3-content/">Content</a></li>
+                        <li><a href="../../start/tutorial/4-styles-scripts/">Styles &amp; scripts</a></li>
+                        <li><a href="../../start/tutorial/5-images/">Images</a></li>
+                        <li><a href="../../start/tutorial/6-seo/">SEO</a></li>
+                        <li><a href="../../start/tutorial/7-deploy/">Deploy</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><span aria-current="page">Install</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Getting started</span>
+                        <h1>Install</h1>
+                        <p class="lead">One dependency, no PHP install, no server.</p>
+                    </header>
+                    <section class="section wrap">
+                        <div class="prose">
+                            <h2 id="requirements">Requirements</h2>
+                            <ul>
+                                <li><strong>Node.js ≥ 24.0.0</strong></li>
+                                <li><strong>npm ≥ 10.2.3</strong></li>
+                            </ul>
+                            <p>That&apos;s the whole list. No PHP to install, no database, no headless browser.</p>
+                            <h2 id="install-the-cli">Install the CLI</h2>
+                            <p>Add it as a dev dependency to your project:</p>
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">npm install -D @kirigami/cli</span>
+                            </code></pre>
+                            <p>The <code>kiri</code> command is now available through <code>npx</code>, or as an npm script. It brings the engine, <code>@kirigami/kirigami</code>, along with it.</p>
+                            <p>Prefer your editor? The <a href="../../docs/vscode/">VS Code extension</a> runs the same commands from the Command Palette, and its <strong>Create Project</strong> command scaffolds a new site without a terminal.</p>
+                            <h2 id="verify-it">Verify it</h2>
+                            <pre><code class="hljs language-bash hljs-numbered">
+                                <span class="hljs-line">npx kiri --version</span>
+                            </code></pre>
+                            <p>Prints the <code>kiri</code> version alongside the bundled PHP version — the WASM runtime ships with the CLI, so this also confirms PHP itself is there.</p>
+                            <div class="markdown-alert markdown-alert-tip">
+                                <p class="markdown-alert-title">TIP</p>
+                                <p>Every command has its own <code>--help</code>, with the full flag list and a few usage notes.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <hr class="fold">
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../start/">Start</a>
+                        <a class="doc__next" rel="next" href="../../start/quickstart/">Quickstart</a>
+                    </nav>
+                </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#requirements">Requirements</a></li>
+                        <li><a href="#install-the-cli">Install the CLI</a></li>
+                        <li><a href="#verify-it">Verify it</a></li>
+                    </ol>
                 </nav>
             </div>
         </main>
@@ -173,6 +210,7 @@
                             <li><a href="../../start/">Getting started</a></li>
                             <li><a href="../../docs/">Documentation</a></li>
                             <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
                             <li><a href="../../examples/">Examples</a></li>
                             <li><a href="../../templates/">Templates</a></li>
                             <li><a href="../../showcase/">Showcase</a></li>
