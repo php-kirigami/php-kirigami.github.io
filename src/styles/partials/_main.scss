@@ -74,6 +74,12 @@ h1, h2, h3 { text-wrap: balance; }
 
 a { color: var(--accent); text-underline-offset: .15em; }
 
+// Keyboard focus: one clear ring in the accent, never removed.
+:focus-visible {
+    outline: .125rem solid var(--accent);
+    outline-offset: .2rem;
+}
+
 code {
     font-family: var(--font-mono);
     font-size: .88em;
@@ -237,7 +243,9 @@ code {
     padding: .65rem 1.25rem;
     border-radius: .15rem;
     background: var(--accent);
-    color: #fff;
+    // The page background is the one colour that contrasts with the accent in
+    // both themes (cream on dark green, near-black on light green).
+    color: var(--bg);
     font-weight: 600;
     text-decoration: none;
     box-shadow: 0 .15rem 0 color-mix(in srgb, var(--accent) 60%, var(--ink)), var(--sheet-shadow);
@@ -290,7 +298,7 @@ code {
         align-items: center;
         gap: 1rem 2rem;
 
-        @media (max-width: 48rem) { grid-template-columns: 1fr; }
+        @media (max-width: 48rem) { grid-template-columns: minmax(0, 1fr); }
     }
 }
 
@@ -469,11 +477,11 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
 .compare {
     display: grid;
     gap: 1.25rem;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     margin-top: 1.5rem;
     align-items: start;
 
-    @media (max-width: 40rem) { grid-template-columns: 1fr; }
+    @media (max-width: 40rem) { grid-template-columns: minmax(0, 1fr); }
 }
 
 .compare__panel {
@@ -542,7 +550,7 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
     gap: clamp(1.25rem, 3vw, 2.5rem);
     padding-block: clamp(1.75rem, 4vw, 3rem);
 
-    @media (max-width: 48rem) { grid-template-columns: 1fr; gap: 1.5rem; }
+    @media (max-width: 48rem) { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
 }
 
 .doc-nav {
@@ -574,7 +582,7 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
 .doc-nav__group {
     margin: 1.1rem 0 .35rem;
     font-family: var(--font-mono);
-    font-size: .7rem;
+    font-size: .75rem;
     letter-spacing: .1em;
     text-transform: uppercase;
     color: var(--ink-muted);
@@ -705,7 +713,7 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
 // Prev / next: two paper tabs at the bottom of the page.
 .doc__pager {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 1rem;
     margin-top: 3.5rem;
 
@@ -721,7 +729,7 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
         &::before {
             display: block;
             font-family: var(--font-mono);
-            font-size: .68rem;
+            font-size: .72rem;
             font-weight: 400;
             letter-spacing: .1em;
             text-transform: uppercase;
@@ -736,7 +744,7 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
     .doc__next::before { content: "Next →"; }
 
     @media (max-width: 30rem) {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         .doc__next { grid-column: 1; }
     }
 }
@@ -773,7 +781,7 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
     .toc__title {
         margin-bottom: .6rem;
         font-family: var(--font-mono);
-        font-size: .7rem;
+        font-size: .75rem;
         letter-spacing: .1em;
         text-transform: uppercase;
         color: var(--ink-muted);
@@ -790,7 +798,7 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
         grid-template-columns: 2fr 1fr;
         align-items: start;
 
-        @media (max-width: 30rem) { grid-template-columns: 1fr; }
+        @media (max-width: 30rem) { grid-template-columns: minmax(0, 1fr); }
     }
 
     img {
@@ -938,7 +946,7 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
 .site-footer__text p + p { margin-top: .3rem; }
 
 @media (max-width: 40rem) {
-    .site-footer__grid { grid-template-columns: 1fr 1fr; }
+    .site-footer__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 
 // ── /design/ page ────────────────────────────────────────────────────
