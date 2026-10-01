@@ -38,7 +38,7 @@
                 get their first real usage outside their own repos.
             </p>
             <p class="card__links">
-                <a href="https://php-kirigami.github.io/template-demo/">Live</a>
+                <a href="<?php echo $relroot; ?>template-demo/">Live</a>
                 &middot; <a href="https://github.com/php-kirigami/template-demo">Source</a>
             </p>
         </article>
@@ -54,7 +54,7 @@
                 project shows is how it's organized.
             </p>
             <p class="card__links">
-                <a href="https://php-kirigami.github.io/template-default/">Live</a>
+                <a href="<?php echo $relroot; ?>template-default/">Live</a>
                 &middot; <a href="https://github.com/php-kirigami/template-default">Source</a>
             </p>
         </article>
@@ -71,7 +71,7 @@
                 real course pages.
             </p>
             <p class="card__links">
-                <a href="https://php-kirigami.github.io/template-kiridoc/">Live</a>
+                <a href="<?php echo $relroot; ?>template-kiridoc/">Live</a>
                 &middot; <a href="https://github.com/php-kirigami/template-kiridoc">Source</a>
             </p>
         </article>
@@ -85,7 +85,7 @@
                 site owner write and delete posts without touching the code.
             </p>
             <p class="card__links">
-                <a href="https://php-kirigami.github.io/template-blog/">Live</a>
+                <a href="<?php echo $relroot; ?>template-blog/">Live</a>
                 &middot; <a href="https://github.com/php-kirigami/template-blog">Source</a>
             </p>
         </article>

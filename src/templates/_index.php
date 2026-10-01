@@ -34,7 +34,7 @@
                 nothing to strip out first.
             </p>
             <p class="card__links">
-                <a href="https://php-kirigami.github.io/template-default/">Live demo</a>
+                <a href="<?php echo $relroot; ?>template-default/">Live demo</a>
                 &middot; <a href="https://github.com/php-kirigami/template-default">Source</a>
             </p>
         </article>
@@ -49,7 +49,7 @@
                 a shape for your own site.
             </p>
             <p class="card__links">
-                <a href="https://php-kirigami.github.io/template-demo/">Live demo</a>
+                <a href="<?php echo $relroot; ?>template-demo/">Live demo</a>
                 &middot; <a href="https://github.com/php-kirigami/template-demo">Source</a>
             </p>
         </article>
@@ -65,7 +65,7 @@
                 posts in <a href="<?php echo $relroot; ?>studio/">Kiri Studio</a>.
             </p>
             <p class="card__links">
-                <a href="https://php-kirigami.github.io/template-blog/">Live demo</a>
+                <a href="<?php echo $relroot; ?>template-blog/">Live demo</a>
                 &middot; <a href="https://github.com/php-kirigami/template-blog">Source</a>
             </p>
         </article>
@@ -81,7 +81,7 @@
                 and ships French sample content.
             </p>
             <p class="card__links">
-                <a href="https://php-kirigami.github.io/template-kiridoc/">Live demo</a>
+                <a href="<?php echo $relroot; ?>template-kiridoc/">Live demo</a>
                 &middot; <a href="https://github.com/php-kirigami/template-kiridoc">Source</a>
             </p>
         </article>

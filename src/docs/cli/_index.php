@@ -75,7 +75,7 @@
       kiri — Build Project
 
       › Project   : Kirigami
-      › Base URL  : https://php-kirigami.github.io
+      › Base URL  : https://example.com
       › Root      : /path/to/project/src
 
       Plugins:

@@ -29,6 +29,13 @@ silently worked around here. How the site was built: [docs/HISTORY.md](docs/HIST
   (labels, code), embedded through canva's `$fonts` (`src/styles/partials/_conf.scss`),
   no Google Fonts request. The syntax theme is the site's own
   (`styles/partials/_highlight-theme.scss`).
+- **No absolute links to this site.** The domain will change (`php-kirigami.com`
+  is planned). Link to other pages, and to the template demos (other Pages sites
+  of the org, served under the same origin as `/template-*/`), with `$relroot`,
+  never with `https://php-kirigami.github.io`. `baseurl` in `kirigami.yaml` is
+  the one place the domain lives (canonical, sitemap and Open Graph derive from
+  it): changing domain means editing it and setting the custom domain in the
+  repo's Pages settings. Links to GitHub and npm stay absolute, of course.
 - **Navigation:** the header only lists pages that exist (`$nav` in
   `src/_layouts/header.php`); secondary pages (about, templates, showcase,
   ecosystem, changelog) live in the footer grid.
