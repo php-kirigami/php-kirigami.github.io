@@ -416,7 +416,7 @@
                             <tr>
                                 <td><code>include</code></td>
                                 <td><code>[]</code></td>
-                                <td>Extra editable paths or globs; <code>{ path, label, create }</code> lets clients add and delete files matching a glob.</td>
+                                <td>Extra editable paths or globs; <code>{ path, label, create, header }</code> lets clients add and delete files matching a glob, with <code>header</code> setting the default tags of a new page (<code>today</code> fills a date).</td>
                             </tr>
                             <tr>
                                 <td><code>exclude</code></td>
@@ -433,8 +433,24 @@
                                 <td><code>{}</code></td>
                                 <td>JSON Schemas for data files: schema path or URL → file glob(s).</td>
                             </tr>
+                            <tr>
+                                <td><code>types</code></td>
+                                <td><code>prepros.types</code></td>
+                                <td>The page layouts offered in a page&apos;s &quot;Page layout&quot; select: a list, or <code>false</code> to hide it.</td>
+                            </tr>
+                            <tr>
+                                <td><code>pageMedia</code></td>
+                                <td>off</td>
+                                <td><code>true</code> (<code>images/</code> and <code>videos/</code>) or a list of folder names: each Markdown page gets its own media folders beside its <code>_index.md</code>. Add <code>files</code> for downloads.</td>
+                            </tr>
+                            <tr>
+                                <td><code>pageImage</code></td>
+                                <td>off</td>
+                                <td>With <code>pageMedia</code>: each image gets a &quot;Use as page image&quot; button that sets the page&apos;s <code>@image</code>.</td>
+                            </tr>
                         </tbody>
                     </table>
+                    <p>Every key is explained, with the way Kiri Studio uses it, in <a href="../studio/">Kiri Studio for maintainers</a>.</p>
                     <p>Data files are edited as text and checked against a JSON Schema as the client types. A file&apos;s schema is found the way VS Code&apos;s YAML extension finds it, so a site already set up for VS Code needs no <code>schemas</code> entry: a <code># yaml-language-server: $schema=</code> line in the file, then <code>studio.schemas</code>, then <code>yaml.schemas</code> in <code>.vscode/settings.json</code>.</p>
                     <h2 id="plugins">plugins</h2>
                     <p>Kirigami plugins, loaded via <code>@kirigami/sdk</code>.</p>

@@ -170,7 +170,7 @@
                     <ul>
                         <li>A file <code>_name.php</code> is a <strong>page source</strong>; it compiles to <code>name.html</code> in the same directory (leading <code>_</code> stripped). <code>_index.php</code> → <code>index.html</code>, exactly like this page.</li>
                         <li>A directory whose name starts with <code>_</code> (<code>_layouts/</code>, <code>_lib/</code>) is <strong>skipped</strong> during directory-wide builds — use it for partials, layouts, includes, data.</li>
-                        <li>Data files (<code>.yaml</code>, <code>.yml</code>, <code>.json</code>, <code>.md</code>) are not compiled; they&apos;re loaded by pages via PHPDOC annotations, below.</li>
+                        <li>Data files (<code>.yaml</code>, <code>.yml</code>, <code>.json</code>, <code>.md</code>) are not compiled; they&apos;re loaded by pages via PHPDOC annotations, below. The one exception is an <code>_index.md</code> that starts with annotations: that is a <a href="#markdown-pages">Markdown page</a>.</li>
                     </ul>
                     <h2 id="phpdoc-header">PHPDOC header</h2>
                     <p>Every page starts with a docblock. Each <code>@key value</code> becomes a PHP variable (<code>$key</code>), available in the page <strong>and</strong> in the <code>before</code> / <code>after</code> includes.</p>
@@ -185,6 +185,39 @@
                         <span class="hljs-line"><span class="hljs-keyword">echo</span> <span class="hljs-string">&#x27;&lt;p&gt;&#x27;</span> . <span class="hljs-title function_ invoke__">str_htmlesc</span>(<span class="hljs-variable">$abstract</span>) . <span class="hljs-string">&#x27;&lt;/p&gt;&#x27;</span>;</span>
                     </code></pre>
                     <p>Define any keys you want — <code>before</code> / <code>after</code> typically read <code>$title</code>, <code>$description</code>, etc. to build <code>&lt;head&gt;</code> metas (though with the <code>seo:</code> block on, you rarely need to by hand — see the <a href="../config/#seo">config reference</a>).</p>
+                    <h2 id="markdown-pages">Markdown pages</h2>
+                    <p>A page can be pure Markdown: an <code>_index.md</code> whose first lines are annotations, written like the PHPDOC tags but without the comment around them.</p>
+                    <pre><code class="hljs language-markdown hljs-numbered">
+                        <span class="hljs-line">@title    Hello, world</span>
+                        <span class="hljs-line">@type     post</span>
+                        <span class="hljs-line">@date     2026-09-01</span>
+                        <span class="hljs-line">@abstract The first post.</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line">Some **Markdown** text: the page body.</span>
+                    </code></pre>
+                    <ul>
+                        <li>The header is the <code>@tag value</code> lines at the top of the file (leading blank lines are allowed), with the same rules as a PHPDOC block: a value wraps onto indented continuation lines. It ends at the first blank line, or at the first flush-left line that isn&apos;t a tag, and that is where the body starts.</li>
+                        <li>The body goes through <code>MD::toHtml()</code> and becomes <code>$content</code>, so <code>@type</code>, <code>@indent</code> and the layouts work as they do for a PHP page. <strong>PHP in the file is never run.</strong> <code>@content other.md</code> in the header replaces the body with another file.</li>
+                        <li>An <code>_index.md</code> <strong>without</strong> a header isn&apos;t a page: it stays a data file. So does one next to an <code>_index.php</code>, which is the page of that folder and can load the <code>.md</code> through an annotation.</li>
+                        <li>Only <code>_index.md</code> is a page. Other <code>_*.md</code> files are data files, as before.</li>
+                    </ul>
+                    <p>A Markdown page is the easiest kind for someone else to write, which is why <a href="../studio/">Kiri Studio</a> can create and edit them, and why the <code>blog</code> and <code>kiridoc</code> <a href="../../templates/">templates</a> are built on them.</p>
+                    <h2 id="inherited-annotations">Inherited annotations</h2>
+                    <p>A tag written with <strong>two</strong> <code>@</code> applies to the page <strong>and every page below it</strong>: the pages of its subfolders, and the other pages of its own folder when it is an <code>_index</code>.</p>
+                    <pre><code class="hljs language-php hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-comment">/**</span></span>
+                        <span class="hljs-line"><span class="hljs-comment"> * <span class="hljs-doctag">@title</span> Blog</span></span>
+                        <span class="hljs-line"><span class="hljs-comment"> * @<span class="hljs-doctag">@type</span> post            // every page under blog/ is a post</span></span>
+                        <span class="hljs-line"><span class="hljs-comment"> * @<span class="hljs-doctag">@menu</span> _menu.yaml      // loaded from blog/, wherever the page is</span></span>
+                        <span class="hljs-line"><span class="hljs-comment"> */</span></span>
+                    </code></pre>
+                    <ul>
+                        <li>A child&apos;s <code>@tag</code> overrides the inherited value <strong>for that page only</strong>: its own children still get the ancestor&apos;s value.</li>
+                        <li>A child&apos;s <code>@@tag</code> overrides it <strong>and passes the new value down</strong>.</li>
+                        <li>The nearest ancestor wins. Values come from the page file of each folder above (<code>_index.php</code>, else <code>_index.md</code>), up to <code>kirigami.root</code>.</li>
+                        <li>A relative data-file value (<code>.yaml</code>, <code>.yml</code>, <code>.json</code>, <code>.md</code>) is resolved against the folder of the page that declared it.</li>
+                        <li>It works in PHPDOC blocks and Markdown headers alike. The entries of <code>FS::getChildren()</code> and <code>FS::getBreadcrumb()</code> include inherited values too, so <code>@@breadcrumb true</code> turns the breadcrumb on for a whole section.</li>
+                    </ul>
                     <h2 id="auto-loaded-data-files">Auto-loaded data files</h2>
                     <p>When an annotation value ends in <code>.yaml</code>, <code>.yml</code>, <code>.json</code>, or <code>.md</code> <strong>and</strong> resolves to a file relative to the page&apos;s own directory, it&apos;s parsed and injected as structured data instead of a plain string:</p>
                     <table>
@@ -330,6 +363,8 @@
                     <ol>
                         <li><a href="#project-structure">Project structure</a></li>
                         <li><a href="#phpdoc-header">PHPDOC header</a></li>
+                        <li><a href="#markdown-pages">Markdown pages</a></li>
+                        <li><a href="#inherited-annotations">Inherited annotations</a></li>
                         <li><a href="#auto-loaded-data-files">Auto-loaded data files</a></li>
                         <li><a href="#content-and-indent">Content and indent</a></li>
                         <li><a href="#page-types">Page types</a></li>
