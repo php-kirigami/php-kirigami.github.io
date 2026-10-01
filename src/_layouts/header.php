@@ -44,6 +44,13 @@ $nav = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <?php if ($section === 'notfound'): ?>
+    <?php // The 404 page is served from any address, so its assets and links resolve from the site root.
+          // Declaring the stylesheet and the script here stops the engine injecting relative ones. ?>
+    <base href="/">
+    <link rel="stylesheet" href="/styles/kirigami.core.min.css">
+    <script src="/scripts/kirigami.core.min.js" defer></script>
+    <?php endif; ?>
 </head>
 <body class="page-<?php echo str_htmlesc($section ?: 'home'); ?>">
     <a class="skip-link" href="#main">Skip to content</a>
