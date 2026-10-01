@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kiri Studio — Kirigami</title>
+        <meta name="description" content="The desktop app that lets the owner of a Kirigami site edit it and publish it: no Git, no code, one Publish button.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Kiri Studio — Kirigami">
+        <meta name="twitter:description" content="The desktop app that lets the owner of a Kirigami site edit it and publish it: no Git, no code, one Publish button.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Kiri Studio — Kirigami">
+        <meta property="og:description" content="The desktop app that lets the owner of a Kirigami site edit it and publish it: no Git, no code, one Publish button.">
+        <meta property="og:url" content="https://php-kirigami.github.io/studio/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/studio/">
+        <link rel="author" type="text/plain" href="../humans.txt">
+        <link rel="icon" type="image/png" href="../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/studio/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Kiri Studio",
+                                "item": "https://php-kirigami.github.io/studio/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/studio/#webpage",
+                        "url": "https://php-kirigami.github.io/studio/",
+                        "name": "Kiri Studio",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/studio/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-studio">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../start/">Start</a></li>
+                        <li><a href="../docs/">Docs</a></li>
+                        <li><a href="../plugins/">Plugins</a></li>
+                        <li><a href="../studio/" aria-current="page">Studio</a></li>
+                        <li><a href="../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <section class="hero wrap">
+                <p class="eyebrow">For the people the site is built for</p>
+                <h1>Your client edits. You stay out of it.</h1>
+                <p class="lead">Kiri Studio is a desktop app for site owners. They sign in with GitHub once, change their text, fill in forms, drop in pictures, watch the real page update, and click <strong>Publish</strong>.</p>
+                <p>
+                    <a class="btn" href="https://github.com/php-kirigami/kiri-studio/releases">Download Kiri Studio</a>
+                    <a class="btn btn--ghost" href="../docs/studio/">Set up a site for it</a>
+                </p>
+            </section>
+            <section class="wrap">
+                <figure class="shot">
+                    <img alt="Kiri Studio: the page list, a Markdown page with its header form, and the live preview" loading="lazy" src="../images/features/studio-1200w.webp">
+                    <figcaption>Pages by name on the left, the page&apos;s header as a form, the real page on the right.</figcaption>
+                </figure>
+            </section>
+            <section class="section wrap">
+                <h2 class="section-title">The whole journey, and nothing more</h2>
+                <div class="grid grid--shots" data-reveal="">
+                    <article class="card">
+                        <img class="card__thumb" src="../images/features/studio-signin-640x360-cover.webp" alt="The welcome screen with a Sign in with GitHub button" loading="lazy">
+                        <span class="card__kicker">1</span>
+                        <h3>Sign in once</h3>
+                        <p>One &quot;Sign in with GitHub&quot; button. The app opens the browser with the code already copied; the owner approves and never sees it again.</p>
+                    </article>
+                    <article class="card">
+                        <img class="card__thumb" src="../images/features/studio-sites-640x360-cover.webp" alt="The list of websites the owner can edit" loading="lazy">
+                        <span class="card__kicker">2</span>
+                        <h3>Open the site</h3>
+                        <p>The site appears directly (a picker only shows for more than one), and keeps itself in sync while they read.</p>
+                    </article>
+                    <article class="card">
+                        <img class="card__thumb" src="../images/features/studio-app-640x360-cover.webp" alt="The page list and a page&apos;s header form" loading="lazy">
+                        <span class="card__kicker">3</span>
+                        <h3>Edit by name</h3>
+                        <p>Pages and sections are listed by their plain names: &quot;Team&quot;, &quot;Blog posts&quot;. Text goes in a Markdown editor, data in a form-like editor checked against a JSON Schema. There is no Save button: every change is kept as a draft.</p>
+                    </article>
+                    <article class="card">
+                        <img class="card__thumb" src="../images/features/studio-preview-640x360-cover.webp" alt="The live preview of a page next to the editor" loading="lazy">
+                        <span class="card__kicker">4</span>
+                        <h3>See the real page</h3>
+                        <p>A live preview beside the editor renders the page with the site&apos;s own Kirigami engine, as it will look once online.</p>
+                    </article>
+                    <article class="card">
+                        <img class="card__thumb" src="../images/features/studio-media-640x360-cover.webp" alt="The image manager, with a grid of thumbnails" loading="lazy">
+                        <span class="card__kicker">5</span>
+                        <h3>Drop pictures in</h3>
+                        <p>Pictures and documents go in a manager. Big photos are resized for them, and each one can copy the code that inserts it into a page.</p>
+                    </article>
+                    <article class="card">
+                        <img class="card__thumb" src="../images/features/studio-publish-640x360-cover.webp" alt="A page being published, with the progress in the status bar" loading="lazy">
+                        <span class="card__kicker">6</span>
+                        <h3>Publish</h3>
+                        <p>One button. &quot;Publishing…&quot;, then &quot;Your site is online&quot;, with a link. The site&apos;s usual GitHub Pages workflow does the rest.</p>
+                    </article>
+                </div>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
+                <h2 class="section-title">What owners can edit</h2>
+                <div class="grid" data-reveal="">
+                    <article class="card">
+                        <h3>Text</h3>
+                        <p>Markdown pages, with the page header (title, date, abstract, page layout) shown as a form above the text instead of raw tags.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Structured data</h3>
+                        <p>YAML and JSON files, with schema-aware help and smart indentation. A file&apos;s schema is found the way VS Code finds it.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Images</h3>
+                        <p>Drop pictures in; they are downscaled before they are committed. Copy or insert the Markdown for them, or set one as a page&apos;s image.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Documents, audio, video</h3>
+                        <p>PDFs and other files go in a document manager, and audio and video play inside the app. Large files can go through Git LFS.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Blog-style collections</h3>
+                        <p>Add and delete posts or tree-shaped pages, with default header tags filled in for each new one.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Per-page media</h3>
+                        <p>Optionally, each page gets its own images, videos and downloads next to it, with a panel to manage them.</p>
+                    </article>
+                </div>
+                <figure class="shot">
+                    <img alt="Kiri Studio&apos;s image manager: a grid of thumbnails with New folder and Add images buttons" loading="lazy" src="../images/features/studio-media-1200w.webp">
+                    <figcaption>The image manager: drop pictures in, big photos are resized for you, and each one can copy the code that inserts it.</figcaption>
+                </figure>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
+                <h2 class="section-title">You decide what is editable</h2>
+                <div class="prose">
+                    <p>The maintainer controls it in the site&apos;s own <code>kirigami.yaml</code>, versioned with the site, not in the app. Without anything, the content that pages load and the site&apos;s images are editable; everything else stays out of sight.</p>
+                    <pre><code class="hljs language-yaml hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-attr">studio:</span></span>
+                        <span class="hljs-line">  <span class="hljs-attr">files:</span> <span class="hljs-string">src/documents</span>          <span class="hljs-comment"># a document manager (PDF, …)</span></span>
+                        <span class="hljs-line">  <span class="hljs-attr">exclude:</span> [<span class="hljs-string">src/features/data/_stats.json</span>]</span>
+                        <span class="hljs-line">  <span class="hljs-attr">labels:</span></span>
+                        <span class="hljs-line">    <span class="hljs-attr">src/features/data/_articles.yaml:</span> <span class="hljs-string">Articles</span></span>
+                    </code></pre>
+                    <p>The build ignores that block, so a site works the same with or without Studio. Every key is documented in the <a href="docs/config/#studio">configuration reference</a> and in <a href="docs/studio/">Kiri Studio for maintainers</a>.</p>
+                </div>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
+                <h2 class="section-title">Safe by design</h2>
+                <ul class="reqs">
+                    <li><strong>No Git for the owner.</strong> The app talks to the GitHub API: no <code>git</code> binary, no repository on their disk.</li>
+                    <li><strong>All or nothing.</strong> A publish is one commit, applied by a single branch update. If someone published in between, the app syncs and rebuilds on the new head.</li>
+                    <li><strong>Only what is allowed.</strong> The sign-in only reaches repositories where the Kiri Studio GitHub App is installed <em>and</em> the owner can write.</li>
+                    <li><strong>Plain language.</strong> No commit, branch or conflict. Interface in English and French.</li>
+                    <li><strong>Windows, macOS and Linux.</strong> Installers update themselves on Windows and Linux (AppImage); they are not code-signed yet, so Windows warns on first install and macOS needs right-click, Open.</li>
+                </ul>
+                <p class="lead lead--sm">Kiri Studio is in early development. Source and releases: <a href="https://github.com/php-kirigami/kiri-studio">php-kirigami/kiri-studio</a>.</p>
+            </section>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../start/">Getting started</a></li>
+                            <li><a href="../docs/">Documentation</a></li>
+                            <li><a href="../plugins/">Plugins</a></li>
+                            <li><a href="../studio/">Kiri Studio</a></li>
+                            <li><a href="../examples/">Examples</a></li>
+                            <li><a href="../templates/">Templates</a></li>
+                            <li><a href="../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../about/">About</a></li>
+                            <li><a href="../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../changelog/">Changelog</a></li>
+                            <li><a href="../roadmap/">Roadmap</a></li>
+                            <li><a href="../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

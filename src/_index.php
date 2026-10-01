@@ -8,35 +8,59 @@
 ?>
 
 <section class="hero wrap">
-    <p class="eyebrow">PHP 8.5 &middot; WebAssembly &middot; zero server</p>
-    <h1><?php echo str_htmlesc($tagline); ?></h1>
-    <p class="lead"><?php echo str_htmlesc($description); ?></p>
-    <p>
-        <a class="btn" href="<?php echo $relroot; ?>start/">Get started</a>
-        <a class="btn btn--ghost" href="<?php echo $relroot; ?>docs/">Read the docs</a>
-    </p>
+    <div class="hero__text">
+        <p class="eyebrow">PHP 8.5 &middot; WebAssembly &middot; zero server</p>
+        <h1><?php echo str_htmlesc($tagline); ?></h1>
+        <p class="lead"><?php echo str_htmlesc($description); ?></p>
+        <p>
+            <a class="btn" href="<?php echo $relroot; ?>start/">Get started</a>
+            <a class="btn btn--ghost" href="<?php echo $relroot; ?>docs/">Read the docs</a>
+        </p>
+    </div>
+    <figure class="hero__art">
+        <img asset="hero/elephant.png" width="720" alt="An elephant folded from green paper">
+    </figure>
 </section>
 
 <section class="section wrap">
     <h2 class="section-title">Four ways in, one engine</h2>
 
     <div class="gateways">
-        <gateway name="vscode" kicker="In your editor" title="VS Code extension" href="<?php echo $relroot; ?>docs/vscode/">
+        <gateway name="vscode" kicker="In your editor" title="VS Code extension" href="<?php echo $relroot; ?>docs/vscode/" image="features/vscode.png">
             Create a project, build, export and preview from the Command
             Palette. The status bar runs the dev server; saves rebuild and
             reload the preview.
         </gateway>
-        <gateway name="cli" kicker="In your terminal" title="Command line" href="<?php echo $relroot; ?>docs/cli/">
+        <gateway name="cli" kicker="In your terminal" title="Command line" href="<?php echo $relroot; ?>docs/cli/" image="features/cli.png">
             `kiri serve` while you write, `kiri export` when you ship. One
             `npm install`, no PHP on the machine.
         </gateway>
-        <gateway name="mcp" kicker="With your AI assistant" title="MCP server" href="<?php echo $relroot; ?>docs/mcp/">
+        <gateway name="mcp" kicker="With your AI assistant" title="MCP server" href="<?php echo $relroot; ?>docs/mcp/" image="features/mcp.png">
             `kiri mcp` hands your assistant the project: it scaffolds,
             builds, validates and reads the results as structured data.
         </gateway>
-        <gateway name="api" kicker="In your own code" title="JavaScript API" href="<?php echo $relroot; ?>docs/api/">
+        <gateway name="api" kicker="In your own code" title="JavaScript API" href="<?php echo $relroot; ?>docs/api/" image="features/api.png">
             `load()` a project and call `build()`, `export()` or `serve()`
             from any Node script: the engine the other three are built on.
+        </gateway>
+    </div>
+</section>
+
+<hr class="fold">
+
+<section class="section wrap">
+    <h2 class="section-title">And for the people who run the site</h2>
+
+    <div class="gateways">
+        <gateway name="studio" kicker="For site owners" title="Kiri Studio" href="<?php echo $relroot; ?>studio/" image="features/studio.png" w="1000" h="500">
+            A desktop app for your client: sign in with GitHub, edit text,
+            data and pictures with a live preview, click Publish. No Git, no
+            code, no terminal.
+        </gateway>
+        <gateway name="vscode-ext" kicker="For the maintainer" title="Set a site up for editing" href="<?php echo $relroot; ?>docs/studio/" image="features/studio-setup.png">
+            Declare what is editable in a `studio:` block of `kirigami.yaml`,
+            with schemas, labels and creatable collections. The build ignores
+            it.
         </gateway>
     </div>
 </section>
