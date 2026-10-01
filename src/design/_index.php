@@ -96,6 +96,36 @@ $palette = img_palette('male-african-bush-elephant.jpg', 5);
 <hr class="fold">
 
 <section class="section wrap">
+    <h2>Imagery</h2>
+    <div class="prose">
+        <markdown>
+          Kirigami means cut and folded paper, and the images say so.
+
+          - **The origami elephant** is the mascot of the home page: a real
+            elephant folded from green paper, cut out on a transparent
+            background. It stands on a soft shadow drawn in CSS, so the same
+            file works on the light and the dark palette.
+          - **Screenshots** are taken in the dark theme, at the size they will
+            be shown, with the cursor out of the frame, and cropped to 16:9
+            (or 2:1 for a card). They sit on a paper sheet: slightly rounded
+            corners and a lifted shadow, nothing else. No device frames, no
+            browser chrome.
+          - **Illustrations** stay flat: folded paper, the one green accent and
+            a touch of amber, and no gradients.
+          - **Sizes** go through the image autogenerator. A card picture is
+            800 by 500 (or 1000 by 500 for a 2:1 screenshot), a plugin
+            thumbnail 800 by 450, and a wide screenshot 1200 pixels. The
+            originals live in `assets/images/` and are never served.
+
+          The [design system](../docs/canva/) page documents the tokens,
+          the dark theme and the components these pictures sit in.
+        </markdown>
+    </div>
+</section>
+
+<hr class="fold">
+
+<section class="section wrap">
     <h2>Shared components</h2>
     <div class="prose">
         <markdown>

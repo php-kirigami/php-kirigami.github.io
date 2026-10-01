@@ -15,7 +15,74 @@
           README, linked below each entry; [Ecosystem](../ecosystem/) always
           shows the current version of everything, fetched live from npm.
 
+          ## October 1, 2026
+
+          **[@kirigami/php-wasm](https://www.npmjs.com/package/@kirigami/php-wasm)**
+          `8.5.11-1` → `8.5.11-2` — the PHP 8.5.11 binary now has the
+          `jsonpath` extension built in (JSONPath queries over decoded JSON).
+          Every package that pins it exactly follows:
+          **[@kirigami/php-prepros](https://www.npmjs.com/package/@kirigami/php-prepros)**
+          `3.2.3`, **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**
+          `3.2.5`, **[@kirigami/mcp](https://www.npmjs.com/package/@kirigami/mcp)**
+          `0.1.10` and **[@kirigami/cli](https://www.npmjs.com/package/@kirigami/cli)**
+          `0.1.12`. See [PHP-WASM](../docs/php-wasm/).
+
+          **[@kirigami/plugin-educ](https://www.npmjs.com/package/@kirigami/plugin-educ)**
+          `0.2.0` → `0.2.1` — `<color>` badges have equal widths, and the
+          round badge of a bubble is no longer cropped on a phone. See
+          [Plugin reference](../plugins/reference/#educ).
+
           ## September 30, 2026
+
+          **[@kirigami/php-prepros](https://www.npmjs.com/package/@kirigami/php-prepros)**
+          `3.1.1` → `3.2.2` — **Markdown pages**: a folder whose
+          `_index.md` starts with `@tag value` lines is a page, with no PHP.
+          `@@tag` passes a value down to every page below it, so section-wide
+          defaults stop being repeated. Also in this run: `prepros.format`
+          keeps the spaces around inline elements (it printed
+          `**bold**, next` as "bold , next"), and image URLs in `og:image`,
+          `twitter:image` and the JSON-LD keep the path of `baseurl`, so a
+          site on `user.github.io/repo` gets `…/repo/images/x.png`. See
+          [Writing pages](../docs/authoring/).
+
+          **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**
+          `3.1.2` → `3.2.4` — carries those changes, with a watcher that
+          follows Markdown pages and `@@` data, and new keys for
+          [Kiri Studio](../studio/): `studio.include[].header` and
+          `studio.types` (`3.2.0`), `studio.pageMedia`, which gives each
+          Markdown page its own media folders (`3.2.2`), and `studio.pageImage`,
+          a "Use as page image" button for them (`3.2.3`).
+          **[@kirigami/cli](https://www.npmjs.com/package/@kirigami/cli)** and
+          **[@kirigami/mcp](https://www.npmjs.com/package/@kirigami/mcp)**
+          follow, as they pin core exactly. See the
+          [`studio:` block](../docs/studio/).
+
+          **[@kirigami/plugin-highlight](https://www.npmjs.com/package/@kirigami/plugin-highlight)**
+          `0.2.1` → `0.3.0` — the `lineNumbers` option: each line is wrapped
+          and the number is a CSS counter, so copying never includes it. A
+          block can opt in or out with a class. See
+          [Plugin reference](../plugins/reference/#highlight).
+
+          **[@kirigami/plugin-educ](https://www.npmjs.com/package/@kirigami/plugin-educ)**
+          `0.1.0` → `0.2.0` — new plugin: course components for Kiridoc-style
+          sites. `<checklist>`, five callout bubbles, `<doclink>`, `<intlink>`,
+          `<color>`, `<quote>`, and, in `0.2.0`, `<tool>` and `<codepen>`. See
+          [Plugins](../plugins/#educ).
+
+          **Templates.** `template-kiridoc` (course documentation, successor of
+          Timdoc) and `template-blog` (posts as Markdown pages) join the
+          starters, and `template-default` and `template-demo` move to core
+          `3.2`. See [Templates](../templates/).
+
+          **[Kiri Studio](../studio/)** `0.4.0` → `0.5.2` — edits a Markdown
+          page's header as a form, creates and deletes pages in folder or tree
+          collections, folds the sidebar, gives each page its own images,
+          videos and downloads, plays audio and video in the document manager,
+          and copies ready-made Markdown links.
+
+          **VS Code extension** `0.1.3` and `0.1.4` — bundle core 3.1.2 and
+          then 3.2.1 (Markdown pages, the new `studio.*` keys). See the
+          [extension page](../docs/vscode/).
 
           **[@kirigami/plugin-player](https://www.npmjs.com/package/@kirigami/plugin-player)**
           `0.1.0` — new plugin: `<player src="…">` and `<playlist src="….m3u">`

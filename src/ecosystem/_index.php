@@ -73,6 +73,7 @@ $packages = kirigami_packages();
               → plugin-highlight → plugin-extlink → plugin-embed
           audiowaveform-wasm → plugin-player
           bestframe → plugin-clip
+          sdk → plugin-educ
           ```
 
           For each one still needing a release: run its `build` script,
@@ -105,6 +106,42 @@ $packages = kirigami_packages();
         <article class="card">
             <h3><a href="https://github.com/php-kirigami/template-demo">template-demo</a></h3>
             <p>A full feature tour template. <code>npx kiri create demo</code>.</p>
+        </article>
+        <article class="card">
+            <h3><a href="https://github.com/php-kirigami/template-blog">template-blog</a></h3>
+            <p>A blog with one Markdown page per post. <code>npx kiri create blog</code>.</p>
+        </article>
+        <article class="card">
+            <h3><a href="https://github.com/php-kirigami/template-kiridoc">template-kiridoc</a></h3>
+            <p>Course documentation, with the plugin-educ components. <code>npx kiri create kiridoc</code>.</p>
+        </article>
+        <article class="card">
+            <h3><a href="https://github.com/php-kirigami/kiri-studio">kiri-studio</a></h3>
+            <p>The desktop app that lets a site owner edit and publish: see <a href="<?php echo $relroot; ?>studio/">Kiri Studio</a>.</p>
+        </article>
+        <article class="card">
+            <h3><a href="https://github.com/php-kirigami/php-wasm-compiler">php-wasm-compiler</a></h3>
+            <p>Builds the PHP 8.5 WebAssembly binary and the <code>@kirigami/phpext-*</code> packages. See <a href="<?php echo $relroot; ?>docs/php-wasm/">PHP-WASM</a>.</p>
+        </article>
+        <article class="card">
+            <h3>PHP extensions</h3>
+            <p>
+                Four extensions written for Kirigami and built into the runtime:
+                <a href="https://github.com/php-kirigami/php-jsonk">php-jsonk</a>,
+                <a href="https://github.com/php-kirigami/php-mdhtml">php-mdhtml</a>,
+                <a href="https://github.com/php-kirigami/php-navicat">php-navicat</a> and
+                <a href="https://github.com/php-kirigami/php-norm">php-norm</a>.
+            </p>
+        </article>
+        <article class="card">
+            <h3>Media toolchain</h3>
+            <p>
+                The WebAssembly builds behind the media plugins:
+                <a href="https://github.com/php-kirigami/audiowaveform-wasm-compiler">audiowaveform-wasm-compiler</a>
+                for <code>plugin-player</code> and
+                <a href="https://github.com/php-kirigami/libbestframe">libbestframe</a>
+                for <code>plugin-clip</code>.
+            </p>
         </article>
         <article class="card">
             <h3><a href="https://github.com/php-kirigami/php-kirigami.github.io">php-kirigami.github.io</a></h3>

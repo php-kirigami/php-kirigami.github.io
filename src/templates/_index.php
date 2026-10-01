@@ -53,6 +53,37 @@
                 &middot; <a href="https://github.com/php-kirigami/template-demo">Source</a>
             </p>
         </article>
+        <article class="card">
+            <img asset="showcase/template-blog.png" width="640" height="360" cover class="card__thumb" alt="The blog template's homepage">
+            <h3>blog</h3>
+            <p>
+                A blog where each post is one Markdown page: a home with the
+                latest posts, an archive grouped by year, a post layout with its
+                date and tags, dark mode, build-time syntax highlighting and
+                <code>BlogPosting</code> JSON-LD. It comes with a
+                <code>studio:</code> block, so its owner can add and delete
+                posts in <a href="<?php echo $relroot; ?>studio/">Kiri Studio</a>.
+            </p>
+            <p class="card__links">
+                <a href="https://github.com/php-kirigami/template-blog">Source</a>
+            </p>
+        </article>
+        <article class="card">
+            <img asset="showcase/template-kiridoc.png" width="640" height="360" cover class="card__thumb" alt="The Kiridoc template's homepage">
+            <h3>kiridoc</h3>
+            <p>
+                Course documentation, the Kirigami successor of Timdoc: one
+                folder per course, pages nested to any depth, a sidebar, a
+                breadcrumb, a table of contents and previous and next links.
+                It uses the course components of
+                <a href="<?php echo $relroot; ?>plugins/#educ">plugin-educ</a>
+                and ships French sample content.
+            </p>
+            <p class="card__links">
+                <a href="https://php-kirigami.github.io/template-kiridoc/">Live demo</a>
+                &middot; <a href="https://github.com/php-kirigami/template-kiridoc">Source</a>
+            </p>
+        </article>
     </div>
 </section>
 
@@ -61,12 +92,13 @@
 <section class="section wrap">
     <div class="prose">
         <markdown>
-          Both templates ship a `.github/workflows/page.yml` wired to
+          Every template ships a `.github/workflows/page.yml` wired to
           [kiribuild](https://github.com/marketplace/actions/kiribuild), our
           GitHub Action published on the Marketplace — push to `main` and it
-          deploys to GitHub Pages, no further setup. See
+          deploys to GitHub Pages, no further setup. In the repository's
+          Pages settings, choose **GitHub Actions** as the source. See
           [Tutorial → Deploy](../start/tutorial/7-deploy/) for how that
-          workflow is put together, or [Showcase](../showcase/) to see both
+          workflow is put together, or [Showcase](../showcase/) to see the
           templates live, deployed exactly as cloned.
 
           Each also ships its own `CLAUDE.md` — a project-specific brief for

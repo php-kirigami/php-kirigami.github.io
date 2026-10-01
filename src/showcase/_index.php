@@ -58,6 +58,36 @@
                 &middot; <a href="https://github.com/php-kirigami/template-default">Source</a>
             </p>
         </article>
+        <article class="card">
+            <img asset="showcase/template-kiridoc.png" width="640" height="360" cover class="card__thumb" alt="Kiridoc, the course documentation template, homepage">
+            <h3>Kiridoc</h3>
+            <p>
+                The <code>kiridoc</code> template: courses and exercises in
+                French, with pages nested to any depth, a sidebar, a table of
+                contents and the course components of
+                <code>@kirigami/plugin-educ</code> — checklists, callout
+                bubbles, link cards, colour pills. It is also the site used to
+                try <a href="<?php echo $relroot; ?>studio/">Kiri Studio</a> on
+                real course pages.
+            </p>
+            <p class="card__links">
+                <a href="https://php-kirigami.github.io/template-kiridoc/">Live</a>
+                &middot; <a href="https://github.com/php-kirigami/template-kiridoc">Source</a>
+            </p>
+        </article>
+        <article class="card">
+            <img asset="showcase/template-blog.png" width="640" height="360" cover class="card__thumb" alt="Kirigami Blog, the blog template, homepage">
+            <h3>Kirigami Blog</h3>
+            <p>
+                The <code>blog</code> template: every post is a Markdown page
+                in its own folder, with a home that lists the latest ones, an
+                archive by year and tags. Its <code>studio:</code> block lets a
+                site owner write and delete posts without touching the code.
+            </p>
+            <p class="card__links">
+                <a href="https://github.com/php-kirigami/template-blog">Source</a>
+            </p>
+        </article>
     </div>
 </section>
 
@@ -66,7 +96,7 @@
 <section class="section wrap">
     <div class="prose">
         <markdown>
-          All three deploy the same way: push to `main`, and
+          They deploy the same way: push to `main`, and
           [`kiribuild`](https://github.com/php-kirigami/kiribuild) (the
           reusable GitHub Action) runs `kiri export` and publishes `dist/`
           to GitHub Pages — no separate hosting, no build server to

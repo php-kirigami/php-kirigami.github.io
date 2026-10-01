@@ -17,9 +17,20 @@
           What already shipped lives in the [Changelog](../changelog/).
 
           One rule shapes all of it: the CLI, the MCP server, the VS Code
-          extension and any future interface drive the same `Project` engine
-          from `@kirigami/kirigami`. A new interface extends that engine; it
-          never re-implements a build, an export or a watcher of its own.
+          extension, Kiri Studio and any future interface drive the same
+          `Project` engine from `@kirigami/kirigami`. A new interface extends
+          that engine; it never re-implements a build, an export or a watcher
+          of its own.
+
+          ## Recently moved to the changelog
+
+          These were on this page and have shipped, so they are no longer
+          directions: the audio player (`plugin-player`) and the video player
+          (`plugin-clip`), Markdown pages (`_index.md`), inherited page
+          metadata (`@@tag`), line numbers for `plugin-highlight`, and a
+          [desktop app for site owners](../studio/), now Kiri Studio. The
+          course components of `plugin-educ` and two new templates, Kiridoc
+          and Blog, joined them.
 
           ## Project and build extensibility
 
@@ -29,9 +40,6 @@
           - **Composer support.** Mount a project's `vendor/` tree and load
             `vendor/autoload.php`, with clear limits on what can run
             in the WebAssembly environment.
-          - **Inherited page metadata.** Let an `_index.php` pass its PHPDOC
-            fields down to the pages of its section, so section-wide
-            defaults stop being repeated on every page.
           - **Package resolution for `esbuild`.** The `sass` task already
             resolves Node-style package imports (npm, pnpm, workspaces,
             `npm link`); `esbuild` would get the same, once a hook hands it
@@ -39,6 +47,11 @@
           - **A local CI environment file.** A gitignored file using the
             same variable names as GitHub Actions, so a build can be
             reproduced locally under close-to-CI conditions.
+          - **One helper to publish an image through the pipeline.**
+            `plugin-player` (cover art) and `plugin-clip` (poster) each
+            replicate what `img-asset()` does: output naming, the
+            image job, the export destination. It belongs in `@kirigami/sdk`,
+            where every plugin could use it.
 
           ## Content and data
 
@@ -56,30 +69,27 @@
             already replaces JSON encoding and decoding; it may also replace
             the pure-PHP validator behind `SCHEMA`, but only once it proves
             compatible with Kirigami's and the plugins' schemas.
+          - **JSONPath in the PHP classes.** The runtime now ships the
+            `jsonpath` extension; a small wrapper would make it as easy to
+            reach from a page as `YAML::` and `MD::`.
 
-          ## Upcoming plugins
+          ## Plugins
 
           Each one does its heavy lifting at build time, so the generated
-          page ships only the result. The two media players rest on native
-          code compiled to WebAssembly.
+          page ships only the result.
 
-          - **`plugin-player`: an audio player.** A player card with a
-            SoundCloud-style waveform under the seek bar. The waveform peaks
-            come from [BBC's `audiowaveform`](https://github.com/bbc/audiowaveform)
-            compiled to WebAssembly: MP3, WAV, FLAC, Ogg (Vorbis and Opus),
-            M4A/AAC and WebM audio.
-          - **`plugin-clip`: a video player.** A video card whose cover
-            image is picked automatically by
-            [`@kirigami/bestframe`](https://www.npmjs.com/package/@kirigami/bestframe),
-            a WebAssembly module: it samples frames across the video, discards the unusable ones
-            and lets a small embedded aesthetic model choose the best one.
-            H.264, VP9, HEVC and AV1, in MP4, Matroska and WebM.
           - **`plugin-gdrive`: build a site from Google Drive.** Write
-            pages in Google Docs and keep data in Google Sheets; the build turns each Doc into a Markdown page and each
-            Sheet into a `_data/` file your templates already know how to
-            read. Editors never touch the repository. Fetched documents are
-            cached on disk, like `plugin-extlink`'s previews, so a rebuild
-            only downloads what changed.
+            pages in Google Docs and keep data in Google Sheets; the build
+            turns each Doc into a Markdown page and each Sheet into a
+            `_data/` file your templates already know how to read. Editors
+            never touch the repository. Fetched documents are cached on
+            disk, like `plugin-extlink`'s previews, so a rebuild only
+            downloads what changed. Open: the access model (links published
+            to the web, or a service-account token from the environment), how
+            pages and sections map, and how images are handled.
+          - **A faster poster for `plugin-clip`.** Picking a poster takes
+            about 16 seconds for a three-minute 720p video. The decoder and
+            the scoring in `bestframe` have cheap wins left to find.
 
           ## Generated site features
 
@@ -90,12 +100,15 @@
             working light/dark switch needs no JavaScript, import or task.
             `@kirigami/canva/theme` stays the source of truth for its
             storage, events and attributes.
+          - **A theme fade that plugins keep.** A rule that sets its own
+            `transition` replaces canva's palette fade on that element, so
+            its colours flip at once, as on the `extlink` card and the
+            `embed` play button. canva would expose the list as a custom
+            property that plugins reuse, and settle whether the colour fade
+            should survive `prefers-reduced-motion`.
           - **Icon generation.** `favicon.ico` and `apple-touch-icon.png`
             from one source image, through Imagick and the existing `image:`
             configuration.
-          - **Line numbers for `plugin-highlight`.** An option, with the
-            matching markup and styles, for a numbered gutter on code
-            blocks.
           - **A React template.** An official JSX/TSX template (esbuild
             already compiles both). Not scoped yet: build-time static HTML,
             client hydration or both, and how it sits next to PHP pages,
@@ -103,6 +116,15 @@
 
           ## Interfaces and delivery
 
+          - **Kiri Studio, next.** Signed installers (Windows warns on first
+            install and macOS needs right-click, Open today), which would also
+            turn on automatic updates for macOS; more than one images folder
+            per site; and a wider real-world check, with more clients and more
+            kinds of sites.
+          - **MCP that knows about Studio.** The server validates a `studio:`
+            block but cannot explain it. A `studio` topic for
+            `kirigami_doc_hints` and an example in `kirigami_site_blueprint`
+            would let an assistant set a site up for editing.
           - **MCP discovery for more AI clients.** Today `kiri mcp` is found
             automatically by Claude Code (through the project's `.mcp.json`)
             and by VS Code agents when the Kirigami extension is installed.
@@ -119,14 +141,13 @@
             with explicit start, status and stop, so an agent always knows
             who owns the long-lived server.
           - **More from the VS Code extension.** Editor diagnostics, task
-            integration and multi-root workspaces.
+            integration and multi-root workspaces, once the extension has been
+            checked on every platform it ships for.
           - **`kiri deploy`, with provider plugins.** Ship an exported
             `dist/` over FTP, to a Git branch or elsewhere, for hosting
             outside GitHub Pages. It complements
             [kiribuild](https://github.com/php-kirigami/kiribuild) rather than
             replacing it.
-          - **A desktop app.** An Electron interface for people who don't
-            work in an editor, driving the same `Project` engine.
           - **SchemaStore registration.** Submit `kirigami.schema.json` to
             [SchemaStore](https://www.schemastore.org/), so YAML tooling
             completes `kirigami.yaml` without a schema comment at the top of
