@@ -180,10 +180,16 @@
       | `images` | `image.source` | Image manager folder; `false` hides it. |
       | `imageWidth` | `800` | Width in the `{% img-asset %}` code Kiri Studio copies for an image. |
       | `files` | – | Document folder, under `kirigami.root`. |
-      | `include` | `[]` | Extra editable paths or globs; `{ path, label, create }` lets clients add and delete files matching a glob. |
+      | `include` | `[]` | Extra editable paths or globs; `{ path, label, create, header }` lets clients add and delete files matching a glob, with `header` setting the default tags of a new page (`today` fills a date). |
       | `exclude` | `[]` | Paths or globs hidden from clients. |
       | `labels` | `{}` | Names shown to clients, by path. |
       | `schemas` | `{}` | JSON Schemas for data files: schema path or URL → file glob(s). |
+      | `types` | `prepros.types` | The page layouts offered in a page's "Page layout" select: a list, or `false` to hide it. |
+      | `pageMedia` | off | `true` (`images/` and `videos/`) or a list of folder names: each Markdown page gets its own media folders beside its `_index.md`. Add `files` for downloads. |
+      | `pageImage` | off | With `pageMedia`: each image gets a "Use as page image" button that sets the page's `@image`. |
+
+      Every key is explained, with the way Kiri Studio uses it, in
+      [Kiri Studio for maintainers](../studio/).
 
       Data files are edited as text and checked against a JSON Schema as
       the client types. A file's schema is found the way VS Code's YAML

@@ -22,7 +22,9 @@
         **skipped** during directory-wide builds — use it for partials,
         layouts, includes, data.
       - Data files (`.yaml`, `.yml`, `.json`, `.md`) are not compiled;
-        they're loaded by pages via PHPDOC annotations, below.
+        they're loaded by pages via PHPDOC annotations, below. The one
+        exception is an `_index.md` that starts with annotations: that is a
+        [Markdown page](#markdown-pages).
 
       ## PHPDOC header
 
@@ -45,6 +47,66 @@
       `$title`, `$description`, etc. to build `<head>` metas (though with
       the `seo:` block on, you rarely need to by hand — see the
       [config reference](../config/#seo)).
+
+      ## Markdown pages
+
+      A page can be pure Markdown: an `_index.md` whose first lines are
+      annotations, written like the PHPDOC tags but without the comment
+      around them.
+
+      ```markdown
+      @title    Hello, world
+      @type     post
+      @date     2026-09-01
+      @abstract The first post.
+
+      Some **Markdown** text: the page body.
+      ```
+
+      - The header is the `@tag value` lines at the top of the file (leading
+        blank lines are allowed), with the same rules as a PHPDOC block: a
+        value wraps onto indented continuation lines. It ends at the first
+        blank line, or at the first flush-left line that isn't a tag, and
+        that is where the body starts.
+      - The body goes through `MD::toHtml()` and becomes `$content`, so
+        `@type`, `@indent` and the layouts work as they do for a PHP page.
+        **PHP in the file is never run.** `@content other.md` in the header
+        replaces the body with another file.
+      - An `_index.md` **without** a header isn't a page: it stays a data
+        file. So does one next to an `_index.php`, which is the page of that
+        folder and can load the `.md` through an annotation.
+      - Only `_index.md` is a page. Other `_*.md` files are data files, as
+        before.
+
+      A Markdown page is the easiest kind for someone else to write, which is
+      why [Kiri Studio](../studio/) can create and edit them, and why the
+      `blog` and `kiridoc` [templates](../../templates/) are built on them.
+
+      ## Inherited annotations
+
+      A tag written with **two** `@` applies to the page **and every page
+      below it**: the pages of its subfolders, and the other pages of its own
+      folder when it is an `_index`.
+
+      ```php
+      /**
+       * @title Blog
+       * @@type post            // every page under blog/ is a post
+       * @@menu _menu.yaml      // loaded from blog/, wherever the page is
+       */
+      ```
+
+      - A child's `@tag` overrides the inherited value **for that page only**:
+        its own children still get the ancestor's value.
+      - A child's `@@tag` overrides it **and passes the new value down**.
+      - The nearest ancestor wins. Values come from the page file of each
+        folder above (`_index.php`, else `_index.md`), up to `kirigami.root`.
+      - A relative data-file value (`.yaml`, `.yml`, `.json`, `.md`) is
+        resolved against the folder of the page that declared it.
+      - It works in PHPDOC blocks and Markdown headers alike. The entries of
+        `FS::getChildren()` and `FS::getBreadcrumb()` include inherited
+        values too, so `@@breadcrumb true` turns the breadcrumb on for a
+        whole section.
 
       ## Auto-loaded data files
 
