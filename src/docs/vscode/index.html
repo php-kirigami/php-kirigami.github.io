@@ -168,6 +168,12 @@
                     <h2 id="overview">Overview</h2>
                     <p>The Kirigami extension for VS Code (<code>php-kirigami.kirigami-vscode</code>) runs the same engine as the <a href="../cli/">CLI</a>, from inside the editor. It adds a <strong>Kirigami</strong> category to the Command Palette, a status bar item that runs the dev server, and a <strong>Kirigami</strong> Output channel laid out like the <code>kiri</code> output and coloured for readability.</p>
                     <p>It activates in any workspace whose root holds a <code>kirigami.yaml</code>, and reloads the project whenever that file changes. Every official template recommends it in <code>.vscode/extensions.json</code>, so VS Code offers to install it when you open a new project.</p>
+                    <h2 id="install">Install</h2>
+                    <p>Get it from the <a href="https://marketplace.visualstudio.com/items?itemName=php-kirigami.kirigami-vscode" target="_blank" rel="noopener noreferrer">Visual Studio Marketplace</a>, or search for <strong>Kirigami</strong> in the Extensions view (<em>Ctrl+Shift+X</em>). From a terminal:</p>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">code --install-extension php-kirigami.kirigami-vscode</span>
+                    </code></pre>
+                    <p>The package is built per platform, so VS Code picks the right one for your system. The <a href="#requirements">requirements</a> are below.</p>
                     <h2 id="what-it-can-do">What it can do</h2>
                     <table>
                         <thead>
@@ -334,6 +340,7 @@
                     <p class="toc__title">On this page</p>
                     <ol>
                         <li><a href="#overview">Overview</a></li>
+                        <li><a href="#install">Install</a></li>
                         <li><a href="#what-it-can-do">What it can do</a></li>
                         <li><a href="#create-a-project">Create a project</a></li>
                         <li><a href="#commands">Commands</a></li>

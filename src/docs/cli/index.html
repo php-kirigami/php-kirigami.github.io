@@ -231,22 +231,22 @@
                         <span class="hljs-line"></span>
                         <span class="hljs-line">✔ Build finished!</span>
                     </code></pre>
-                    <p>A task with no build step for the current change (nothing to re-run) is skipped, unless it sets <code>force: true</code>. <code>kiri build</code> fires the <code>before-build</code> <a href="#run">trigger</a> first — a <code>scripts:</code> entry can hook into that without any manual <code>kiri run</code> call. For production output (minified, exported to <code>dist/</code>), use <a href="#export"><code>kiri export</code></a> instead.</p>
+                    <p>A task with no build step for the current change (nothing to re-run) is skipped, unless it sets <code>force: true</code>. <code>kiri build</code> fires the <code>before-build</code> <a href="#kiri-run">trigger</a> first — a <code>scripts:</code> entry can hook into that without any manual <code>kiri run</code> call. For production output (minified, exported to <code>dist/</code>), use <a href="#kiri-export"><code>kiri export</code></a> instead.</p>
                     <h2 id="kiri-export">kiri export</h2>
                     <p>The production build: <strong>forces</strong> every task to run (even ones <code>kiri build</code> would have skipped), copies the result into <code>export:path</code> (default <code>dist/</code>), and stamps the banner (<code>kirigami:banner</code>, or the bundled ASCII one) into every exported text file with its <code>### ###</code> tokens filled in.</p>
                     <pre><code class="hljs language-bash hljs-numbered">
                         <span class="hljs-line">kiri <span class="hljs-built_in">export</span></span>
                     </code></pre>
-                    <p>Trigger order is <code>before-export</code> → <code>before-build</code> → the build itself → <code>after-export</code> (see <a href="#run"><code>kiri run</code></a> for what a trigger actually runs). That means anything a project wires to <code>before-build</code> also runs during export — no need to duplicate a script under both triggers.</p>
+                    <p>Trigger order is <code>before-export</code> → <code>before-build</code> → the build itself → <code>after-export</code> (see <a href="#kiri-run"><code>kiri run</code></a> for what a trigger actually runs). That means anything a project wires to <code>before-build</code> also runs during export — no need to duplicate a script under both triggers.</p>
                     <p>Point CI at this command; <a href="https://github.com/php-kirigami/kiribuild" target="_blank" rel="noopener noreferrer"><code>kiribuild</code></a> (the reusable GitHub Action) runs exactly <code>kiri export</code> under the hood. See <a href="../../start/tutorial/7-deploy/">Tutorial → Deploy</a> for the full GitHub Pages setup.</p>
                     <h2 id="kiri-watch">kiri watch</h2>
                     <p>Dev mode without a server: watches every file that feeds an <code>esbuild</code> / <code>sass</code> / <code>prepros</code> task and rebuilds on change — 150ms debounced, batched per task so five saves in the same second trigger one rebuild, not five. <code>node_modules/</code>, <code>.git/</code> and <code>dist/</code> are always ignored. <code>Ctrl+C</code> stops cleanly.</p>
                     <pre><code class="hljs language-bash hljs-numbered">
                         <span class="hljs-line">kiri watch</span>
                     </code></pre>
-                    <p>It only writes files to disk — no server, no browser reload. For that, use <a href="#serve"><code>kiri serve</code></a>, which does everything <code>watch</code> does plus the two things it&apos;s missing.</p>
+                    <p>It only writes files to disk — no server, no browser reload. For that, use <a href="#kiri-serve"><code>kiri serve</code></a>, which does everything <code>watch</code> does plus the two things it&apos;s missing.</p>
                     <h2 id="kiri-serve">kiri serve</h2>
-                    <p>Everything <a href="#watch"><code>kiri watch</code></a> does, plus: serves <code>kirigami.root</code> over plain HTTP and reloads any open browser tab once a rebuild batch finishes (Server-Sent Events — no WebSocket library, no live-reload framework, just <code>node:http</code> + <code>node:fs</code>). A <code>sass</code>-only change hot-swaps the stylesheet in place instead of reloading the page, so scroll position and form state survive.</p>
+                    <p>Everything <a href="#kiri-watch"><code>kiri watch</code></a> does, plus: serves <code>kirigami.root</code> over plain HTTP and reloads any open browser tab once a rebuild batch finishes (Server-Sent Events — no WebSocket library, no live-reload framework, just <code>node:http</code> + <code>node:fs</code>). A <code>sass</code>-only change hot-swaps the stylesheet in place instead of reloading the page, so scroll position and form state survive.</p>
                     <table>
                         <thead>
                             <tr>

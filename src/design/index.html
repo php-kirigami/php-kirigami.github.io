@@ -123,11 +123,11 @@
             <section class="section wrap">
                 <div class="prose">
                     <p>Warm paper, near-black ink, one deep-green accent — decided once, early, and never redecided per page. Every color below is a <code>@kirigami/canva</code> <code>conf</code> token: a CSS custom property, so this whole page (and the whole site) repaints correctly in dark mode with nothing hand-toggled. Try the switch in the header.</p>
-                    <p>None of these eight names are this site&apos;s invention — they&apos;re <code>conf</code>&apos;s own token set (<code>$bg</code>, <code>$surface</code>, <code>$ink</code>, <code>$accent</code>, …), the same eight every Kirigami project starts from and overrides through <code>@forward &quot;@kirigami/canva/conf&quot; with (...)</code>. This page is what that override looks like once it&apos;s actually been used — <a href="../docs/config/#conf">Config → conf tokens</a> has the full option list, including the dark-palette counterparts (<code>$dark-bg</code>, <code>$dark-ink</code>, …) this site&apos;s own dark mode is built from.</p>
+                    <p>None of these eight names are this site&apos;s invention — they&apos;re <code>conf</code>&apos;s own token set (<code>$bg</code>, <code>$surface</code>, <code>$ink</code>, <code>$accent</code>, …), the same eight every Kirigami project starts from and overrides through <code>@forward &quot;@kirigami/canva/conf&quot; with (...)</code>. This page is what that override looks like once it&apos;s actually been used — <a href="../docs/canva/#tokens-conf">Design system → tokens</a> has the full option list, including the dark-palette counterparts (<code>$dark-bg</code>, <code>$dark-ink</code>, …) this site&apos;s own dark mode is built from.</p>
                 </div>
             </section>
             <section class="section wrap">
-                <h2>Palette</h2>
+                <h2 id="palette">Palette</h2>
                 <div class="grid" data-reveal="">
                     <div class="card card--static token-card">
                         <div class="token-card__swatch token-card__swatch--bg"></div>
@@ -189,7 +189,7 @@
             </section>
             <hr class="fold">
             <section class="section wrap">
-                <h2>Type</h2>
+                <h2 id="type">Type</h2>
                 <div class="prose">
                     <p>Three roles, three families, all embedded locally (no Google Fonts request): <strong>Quicksand</strong> for headings, <strong>Roboto Flex</strong> for body copy, <strong>JetBrains Mono</strong> for labels, nav numbers and code. All three are declared once, in <code>_conf.scss</code>&apos;s <code>$fonts</code> map — `conf` handles the <code>@font-face</code> (variable-font ranges included) and the two role variables (<code>--font-heading</code> / <code>--font-body</code>); <code>--font-mono</code> is this site&apos;s own third role, since `conf` only ships the first two.</p>
                 </div>
@@ -210,7 +210,7 @@
             </section>
             <hr class="fold">
             <section class="section wrap">
-                <h2>Imagery</h2>
+                <h2 id="imagery">Imagery</h2>
                 <div class="prose">
                     <p>Kirigami means cut and folded paper, and the images say so.</p>
                     <ul>
@@ -224,7 +224,7 @@
             </section>
             <hr class="fold">
             <section class="section wrap">
-                <h2>Shared components</h2>
+                <h2 id="shared-components">Shared components</h2>
                 <div class="prose">
                     <p>Five small, generic patterns that kept turning up identically across Kirigami sites — lifted into <a href="https://www.npmjs.com/package/@kirigami/canva" target="_blank" rel="noopener noreferrer"><code>@kirigami/canva</code>&apos;s <code>styles/main</code></a> so nobody has to re-implement them. Opt-in: <code>@use &quot;@kirigami/canva/main&quot;;</code> — every one of them is <code>conf</code> tokens underneath, so light/dark comes for free. Each is used for real elsewhere on this site (linked below its demo), not just shown here in isolation.</p>
                 </div>
