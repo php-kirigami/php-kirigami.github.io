@@ -85,7 +85,8 @@
                 site owner write and delete posts without touching the code.
             </p>
             <p class="card__links">
-                <a href="https://github.com/php-kirigami/template-blog">Source</a>
+                <a href="https://php-kirigami.github.io/template-blog/">Live</a>
+                &middot; <a href="https://github.com/php-kirigami/template-blog">Source</a>
             </p>
         </article>
     </div>

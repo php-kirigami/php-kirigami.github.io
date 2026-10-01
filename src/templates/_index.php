@@ -65,7 +65,8 @@
                 posts in <a href="<?php echo $relroot; ?>studio/">Kiri Studio</a>.
             </p>
             <p class="card__links">
-                <a href="https://github.com/php-kirigami/template-blog">Source</a>
+                <a href="https://php-kirigami.github.io/template-blog/">Live demo</a>
+                &middot; <a href="https://github.com/php-kirigami/template-blog">Source</a>
             </p>
         </article>
         <article class="card">
