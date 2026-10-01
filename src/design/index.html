@@ -210,6 +210,20 @@
             </section>
             <hr class="fold">
             <section class="section wrap">
+                <h2>Imagery</h2>
+                <div class="prose">
+                    <p>Kirigami means cut and folded paper, and the images say so.</p>
+                    <ul>
+                        <li><strong>The origami elephant</strong> is the mascot of the home page: a real elephant folded from green paper, cut out on a transparent background. It stands on a soft shadow drawn in CSS, so the same file works on the light and the dark palette.</li>
+                        <li><strong>Screenshots</strong> are taken in the dark theme, at the size they will be shown, with the cursor out of the frame, and cropped to 16:9 (or 2:1 for a card). They sit on a paper sheet: slightly rounded corners and a lifted shadow, nothing else. No device frames, no browser chrome.</li>
+                        <li><strong>Illustrations</strong> stay flat: folded paper, the one green accent and a touch of amber, and no gradients.</li>
+                        <li><strong>Sizes</strong> go through the image autogenerator. A card picture is 800 by 500 (or 1000 by 500 for a 2:1 screenshot), a plugin thumbnail 800 by 450, and a wide screenshot 1200 pixels. The originals live in <code>assets/images/</code> and are never served.</li>
+                    </ul>
+                    <p>The <a href="../docs/canva/">design system</a> page documents the tokens, the dark theme and the components these pictures sit in.</p>
+                </div>
+            </section>
+            <hr class="fold">
+            <section class="section wrap">
                 <h2>Shared components</h2>
                 <div class="prose">
                     <p>Five small, generic patterns that kept turning up identically across Kirigami sites — lifted into <a href="https://www.npmjs.com/package/@kirigami/canva" target="_blank" rel="noopener noreferrer"><code>@kirigami/canva</code>&apos;s <code>styles/main</code></a> so nobody has to re-implement them. Opt-in: <code>@use &quot;@kirigami/canva/main&quot;;</code> — every one of them is <code>conf</code> tokens underneath, so light/dark comes for free. Each is used for real elsewhere on this site (linked below its demo), not just shown here in isolation.</p>

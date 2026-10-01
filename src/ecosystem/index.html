@@ -214,6 +214,12 @@
                                 <td><span class="badge">GPL-3.0-or-later</span></td>
                             </tr>
                             <tr>
+                                <td><a href="https://www.npmjs.com/package/@kirigami/plugin-educ"> <code>@kirigami/plugin-educ</code> </a></td>
+                                <td>Course components: checklists, callout bubbles, link cards, colour pills, quotes, tool cards, CodePen embeds.</td>
+                                <td class="table__num">v0.2.1</td>
+                                <td><span class="badge">GPL-3.0-or-later</span></td>
+                            </tr>
+                            <tr>
                                 <td><a href="https://www.npmjs.com/package/@kirigami/audiowaveform-wasm"> <code>@kirigami/audiowaveform-wasm</code> </a></td>
                                 <td>BBC&apos;s audiowaveform compiled to WebAssembly: waveform peaks, SVG, ID3 tags.</td>
                                 <td class="table__num">v1.2.0</td>
@@ -239,6 +245,7 @@
                         <span class="hljs-line">    → plugin-highlight → plugin-extlink → plugin-embed</span>
                         <span class="hljs-line">audiowaveform-wasm → plugin-player</span>
                         <span class="hljs-line">bestframe → plugin-<span class="hljs-attribute">clip</span></span>
+                        <span class="hljs-line">sdk → plugin-educ</span>
                     </code></pre>
                     <p>For each one still needing a release: run its <code>build</code> script, <code>npm pack</code> it into <code>packs/</code>, <code>npm publish</code>, then move to the next. Once everything is out, it purges the jsDelivr cache for <code>kirigami.schema.json</code> and every plugin&apos;s <code>kirigami.optionsSchema</code> — both are served from GitHub <code>@main</code>, and an editor would otherwise keep the stale copy for up to 12h after a schema change.</p>
                 </div>
@@ -261,6 +268,30 @@
                     <article class="card">
                         <h3><a href="https://github.com/php-kirigami/template-demo">template-demo</a></h3>
                         <p>A full feature tour template. <code>npx kiri create demo</code>.</p>
+                    </article>
+                    <article class="card">
+                        <h3><a href="https://github.com/php-kirigami/template-blog">template-blog</a></h3>
+                        <p>A blog with one Markdown page per post. <code>npx kiri create blog</code>.</p>
+                    </article>
+                    <article class="card">
+                        <h3><a href="https://github.com/php-kirigami/template-kiridoc">template-kiridoc</a></h3>
+                        <p>Course documentation, with the plugin-educ components. <code>npx kiri create kiridoc</code>.</p>
+                    </article>
+                    <article class="card">
+                        <h3><a href="https://github.com/php-kirigami/kiri-studio">kiri-studio</a></h3>
+                        <p>The desktop app that lets a site owner edit and publish: see <a href="../studio/">Kiri Studio</a>.</p>
+                    </article>
+                    <article class="card">
+                        <h3><a href="https://github.com/php-kirigami/php-wasm-compiler">php-wasm-compiler</a></h3>
+                        <p>Builds the PHP 8.5 WebAssembly binary and the <code>@kirigami/phpext-*</code> packages. See <a href="../docs/php-wasm/">PHP-WASM</a>.</p>
+                    </article>
+                    <article class="card">
+                        <h3>PHP extensions</h3>
+                        <p>Four extensions written for Kirigami and built into the runtime: <a href="https://github.com/php-kirigami/php-jsonk">php-jsonk</a>, <a href="https://github.com/php-kirigami/php-mdhtml">php-mdhtml</a>, <a href="https://github.com/php-kirigami/php-navicat">php-navicat</a> and <a href="https://github.com/php-kirigami/php-norm">php-norm</a>.</p>
+                    </article>
+                    <article class="card">
+                        <h3>Media toolchain</h3>
+                        <p>The WebAssembly builds behind the media plugins: <a href="https://github.com/php-kirigami/audiowaveform-wasm-compiler">audiowaveform-wasm-compiler</a> for <code>plugin-player</code> and <a href="https://github.com/php-kirigami/libbestframe">libbestframe</a> for <code>plugin-clip</code>.</p>
                     </article>
                     <article class="card">
                         <h3><a href="https://github.com/php-kirigami/php-kirigami.github.io">php-kirigami.github.io</a></h3>
