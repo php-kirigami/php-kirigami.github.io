@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Plugin reference — Kirigami</title>
+        <meta name="description" content="Every option, tag, cache file and style hook of the official plugins, in one place.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Plugin reference — Kirigami">
+        <meta name="twitter:description" content="Every option, tag, cache file and style hook of the official plugins, in one place.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Plugin reference — Kirigami">
+        <meta property="og:description" content="Every option, tag, cache file and style hook of the official plugins, in one place.">
+        <meta property="og:url" content="https://php-kirigami.github.io/plugins/reference/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/plugins/reference/">
+        <link rel="author" type="text/plain" href="../../humans.txt">
+        <link rel="icon" type="image/png" href="../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/plugins/reference/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Plugins",
+                                "item": "https://php-kirigami.github.io/plugins/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Plugin reference",
+                                "item": "https://php-kirigami.github.io/plugins/reference/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/plugins/reference/#webpage",
+                        "url": "https://php-kirigami.github.io/plugins/reference/",
+                        "name": "Plugin reference",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/plugins/reference/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-plugins">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/">Docs</a></li>
+                        <li><a href="../../plugins/" aria-current="page">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
+                        <li><a href="../../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Plugins">
+                    <a class="doc-nav__course" href="../../plugins/">Plugins</a>
+                    <p class="doc-nav__group">Plugins</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../plugins/">Official plugins</a></li>
+                        <li><a href="../../plugins/reference/" aria-current="page">Plugin reference</a></li>
+                        <li><a href="../../plugins/authoring/">Writing a plugin</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><span aria-current="page">Plugin reference</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Plugins</span>
+                        <h1>Plugin reference</h1>
+                        <p class="lead">Every option, tag, cache file and style hook of the official plugins, in one place.</p>
+                    </header>
+                    <h2 id="before-you-start">Before you start</h2>
+                    <p>Every plugin is declared under <code>plugins:</code> in <code>kirigami.yaml</code>, with its options under <code>options:</code>. <code>kiri install &lt;name&gt;</code> installs it and prints the entry to paste.</p>
+                    <pre><code class="hljs language-yaml hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-attr">plugins:</span></span>
+                        <span class="hljs-line">  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">&quot;@kirigami/plugin-highlight&quot;</span></span>
+                        <span class="hljs-line">    <span class="hljs-attr">active:</span> <span class="hljs-literal">true</span></span>
+                        <span class="hljs-line">    <span class="hljs-attr">options:</span> {}</span>
+                    </code></pre>
+                    <ul>
+                        <li>Options are checked against the plugin&apos;s own schema before it loads: an unknown key or a bad value stops the build with a clear message. The schema is also wired into <code>kirigami.schema.json</code>, so VS Code completes and validates <code>options:</code> as you type once <code>name:</code> is set.</li>
+                        <li>Most plugins need an <strong><code>esbuild</code> task</strong> in <code>kirigami.yaml</code>, since their browser script is bundled into it. Without one, the build warns and skips the script. The ones that need it are noted below.</li>
+                        <li><code>style: false</code> is shared by every plugin that ships styles: it skips the default CSS so you can write your own on the same class names.</li>
+                        <li>Browser-side and PHP-side work are both covered by the <a href="../../docs/sdk/">SDK hooks</a> the plugin uses; see <a href="../authoring/">Writing a plugin</a> to write your own.</li>
+                    </ul>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Plugin</th>
+                                <th>Needs <code>esbuild</code></th>
+                                <th>Needs <code>prepros.network</code></th>
+                                <th>Cache to commit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="#highlight">highlight</a></td>
+                                <td>for the copy button</td>
+                                <td>no</td>
+                                <td>none</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#extlink">extlink</a></td>
+                                <td>no</td>
+                                <td>yes</td>
+                                <td><code>_data/extlink/</code>, <code>assets/extlink/</code>, <code>assets/images/extlink/</code></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#embed">embed</a></td>
+                                <td>yes</td>
+                                <td>no</td>
+                                <td>none</td>
+                            </tr>
+                            <tr>
+                                <td><a href="#player">player</a></td>
+                                <td>yes</td>
+                                <td>no</td>
+                                <td><code>_data/player/</code></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#clip">clip</a></td>
+                                <td>yes</td>
+                                <td>no</td>
+                                <td><code>_data/clip/</code></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#educ">educ</a></td>
+                                <td>yes</td>
+                                <td>for <code>&lt;doclink&gt;</code></td>
+                                <td><code>_data/doclink/</code>, <code>assets/images/doclink/</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 id="highlight">highlight</h2>
+                    <p>Build-time syntax highlighting. highlight.js is a dev dependency of your build only: the deployed site gets class names in the HTML, the CSS that styles them and, with the copy button, one small script.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>languages</code></td>
+                                <td>list or <code>&quot;all&quot;</code></td>
+                                <td>12 common languages</td>
+                                <td>Languages to register. <code>&quot;all&quot;</code> loads the full build (about 190, slower). An unknown name fails the build.</td>
+                            </tr>
+                            <tr>
+                                <td><code>theme</code></td>
+                                <td><code>auto</code>, <code>dark</code>, <code>light</code>, <code>none</code></td>
+                                <td><code>auto</code></td>
+                                <td>Which theme stylesheet to append. <code>none</code> skips the palette; the font and the copy button are controlled separately.</td>
+                            </tr>
+                            <tr>
+                                <td><code>autodetect</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>Guess the language of blocks that have none, among the registered ones.</td>
+                            </tr>
+                            <tr>
+                                <td><code>embedFont</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>Append the embedded JetBrains Mono <code>@font-face</code> (about 39 KB, base64).</td>
+                            </tr>
+                            <tr>
+                                <td><code>copyButton</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>A hover &quot;Copy&quot; button on every block. Needs an <code>esbuild</code> task.</td>
+                            </tr>
+                            <tr>
+                                <td><code>lineNumbers</code></td>
+                                <td>boolean</td>
+                                <td><code>false</code></td>
+                                <td>Number the lines with a CSS counter, so copying never includes them.</td>
+                            </tr>
+                            <tr>
+                                <td><code>tag</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>Register the <code>&lt;highlight lang=&quot;…&quot;&gt;</code> authoring tag.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>The default languages are PHP, JavaScript, TypeScript, Bash, JSON, YAML, CSS, SCSS, XML (which covers HTML), Markdown, SQL and Python. Aliases include <code>html</code>, <code>htm</code> and <code>svg</code> for <code>xml</code>, <code>js</code> and <code>jsx</code> for <code>javascript</code>, <code>ts</code> and <code>tsx</code> for <code>typescript</code>, <code>yml</code>, <code>sh</code>, <code>zsh</code>, <code>md</code> and <code>py</code>. A block whose language isn&apos;t registered is left as escaped, uncoloured code.</p>
+                    <p><strong>Control.</strong> Skip a page with <code>@highlight false</code> (also <code>no</code>, <code>off</code>, <code>0</code>) in its first PHPDOC block. Skip a block by giving its <code>code</code> a <code>nohighlight</code> class, or by tagging it plain text: <code>plaintext</code>, <code>text</code> or <code>none</code> as the fence&apos;s language. One block can opt in or out of line numbers with a <code>line-numbers</code> or <code>no-line-numbers</code> class, or <code>lines=&quot;true&quot;</code> / <code>&quot;false&quot;</code> on the tag.</p>
+                    <p><strong>The tag.</strong> <code>&lt;highlight lang=&quot;js&quot;&gt;</code> is an alternative to a fence, handy in a PHP layout. <code>lang</code> (also <code>language</code> or <code>l</code>) is optional. A literal closing <code>&lt;/highlight&gt;</code> inside the code ends the block early: use a fence for that.</p>
+                    <p><strong>Theming.</strong> <code>auto</code> emits the light palette, then the dark one under <code>prefers-color-scheme</code> and <code>[data-theme=&quot;dark&quot;]</code>, like the <a href="../../docs/canva/">design system</a>. With <code>theme: none</code>, include the mixin yourself:</p>
+                    <pre><code class="hljs language-scss hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">@use</span> <span class="hljs-string">&quot;@kirigami/plugin-highlight/highlight&quot;</span> as hljs;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">@include</span> hljs.dark();                                   <span class="hljs-comment">// a built-in palette…</span></span>
+                        <span class="hljs-line"><span class="hljs-keyword">@include</span> hljs.light((<span class="hljs-attribute">accent</span>: <span class="hljs-number">#0b6bcb</span>));                 <span class="hljs-comment">// …with overrides…</span></span>
+                        <span class="hljs-line"><span class="hljs-keyword">@include</span> hljs.theme((                                   // …<span class="hljs-keyword">or</span> one of your own</span>
+                        <span class="hljs-line">    <span class="hljs-attribute">bg</span>: <span class="hljs-number">#10131a</span>, <span class="hljs-attribute">surface</span>: <span class="hljs-number">#171b24</span>, surface-<span class="hljs-number">2</span>: <span class="hljs-number">#141821</span>, <span class="hljs-attribute">border</span>: <span class="hljs-number">#2b3140</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-attribute">ink</span>: <span class="hljs-number">#e8ecf1</span>, <span class="hljs-attribute">ink-muted</span>: <span class="hljs-number">#93a0b4</span>, <span class="hljs-attribute">accent</span>: <span class="hljs-number">#7cc4ff</span>, <span class="hljs-attribute">accent-soft</span>: <span class="hljs-number">#1d2b3a</span>,</span>
+                        <span class="hljs-line">));</span>
+                    </code></pre>
+                    <p>A palette needs eight base colours (<code>bg</code>, <code>surface</code>, <code>surface-2</code>, <code>border</code>, <code>ink</code>, <code>ink-muted</code>, <code>accent</code>, <code>accent-soft</code>); the syntax colours are derived from them, and any of <code>keyword</code>, <code>string</code>, <code>number</code>, <code>title</code>, <code>built-in</code>, <code>type</code>, <code>variable</code>, <code>attr</code>, <code>symbol</code>, <code>meta</code> or <code>punctuation</code> can be pinned in the same map. The code font is <code>$code-font</code> on the same <code>@use</code>. The copy button&apos;s layout is always appended; its colours come from the mixin you include.</p>
+                    <p><strong>The copy button</strong> wraps each <code>pre &gt; code.hljs</code> in a <code>.hljs-copy-wrap</code> and adds a <code>.hljs-copy</code> button. It copies the displayed text minus one trailing newline, shows &quot;Copied&quot; on success, and &quot;Press ⌘C&quot; if the clipboard refuses, then resets after 1.6 seconds. It needs <code>navigator.clipboard.writeText</code>.</p>
+                    <p><strong>How it runs.</strong> The plugin hooks <code>prepros:html</code> (it finds each code block, strips the shared indentation, and writes the highlighted markup back), <code>sass:after</code>, <code>esbuild:after</code> and <code>prepros:php</code>. Fenced blocks can therefore be indented in your source without that indentation showing up.</p>
+                    <h2 id="extlink">extlink</h2>
+                    <p>A preview card for an external link: title, description, image and site name, scraped once at build time.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>style</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>Append the default <code>.extlink</code> card styles.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pre><code class="hljs language-html hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">extlink</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://example.com/article&quot;</span>&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">extlink</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;https://example.com/article&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;A better title&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;…&quot;</span> <span class="hljs-attr">image</span>=<span class="hljs-string">&quot;https://example.com/cover.jpg&quot;</span> <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;Example&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;featured&quot;</span>&gt;</span></span>
+                    </code></pre>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">{% extlink https://example.com/article %}</span>
+                        <span class="hljs-line">{% extlink https://example.com/article <span class="hljs-string">&quot;A better title&quot;</span> %}</span>
+                    </code></pre>
+                    <ul>
+                        <li>Any scraped field can be overridden on the tag. In Markdown, only the title can be overridden inline; the other overrides need the full tag.</li>
+                        <li>With no title at all (scraped or given), the tag throws a build error naming the <code>src</code>: pass <code>title=&quot;…&quot;</code>. A bad URL in the tag throws; in the shortcode it becomes an HTML comment.</li>
+                        <li>The card is a link with <code>target=&quot;_blank&quot;</code> and <code>rel=&quot;noopener noreferrer&quot;</code>. A description over 160 characters is cut to 159 plus an ellipsis, and a missing label falls back to the host without <code>www.</code>.</li>
+                        <li>No browser JavaScript is involved. Needs <code>prepros.network: true</code>.</li>
+                    </ul>
+                    <p><strong>Cache.</strong> Each URL is keyed by a short hash of its address.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>File</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>_data/extlink/&lt;hash&gt;.json</code></td>
+                                <td>The scraped metadata. Read when present; no expiry. Delete it to refresh.</td>
+                            </tr>
+                            <tr>
+                                <td><code>assets/extlink/&lt;hash&gt;.jpg</code></td>
+                                <td>The downloaded original, kept as an archive.</td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;image.source&gt;/extlink/&lt;hash&gt;.&lt;format&gt;</code></td>
+                                <td>A 200 by 200 square crop (<code>assets/images/extlink/</code> by default).</td>
+                            </tr>
+                            <tr>
+                                <td><code>&lt;root&gt;/&lt;image.dest&gt;/extlink/&lt;hash&gt;.&lt;format&gt;</code></td>
+                                <td>The published card image; its presence is the reuse check.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Commit them to keep them. In a clean checkout the files alone don&apos;t remove every network call. Changing an <code>image</code> override doesn&apos;t refresh an existing published image, since the key is the page URL: delete it to regenerate.</p>
+                    <p><strong>Styling.</strong> <code>.extlink</code>, <code>.extlink__image</code>, <code>.extlink__body</code>, <code>.extlink__title</code>, <code>.extlink__desc</code> and <code>.extlink__site</code>, all themed from the design tokens.</p>
+                    <h2 id="embed">embed</h2>
+                    <p>YouTube and Vimeo video cards, light until clicked.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>style</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>Append the default <code>.embed</code> card styles.</td>
+                            </tr>
+                            <tr>
+                                <td><code>maxWidth</code></td>
+                                <td>string</td>
+                                <td><code>&quot;40rem&quot;</code></td>
+                                <td>Cap a card&apos;s width (and, through the ratio, its height): any CSS length, or <code>&quot;none&quot;</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>forcedAspectRatio</code></td>
+                                <td>string</td>
+                                <td><code>&quot;&quot;</code></td>
+                                <td>Pin every card to one shape (<code>&quot;16 / 9&quot;</code>, <code>&quot;1 / 1&quot;</code>…) instead of each video&apos;s real ratio, for a uniform grid.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><code>maxWidth</code> and <code>forcedAspectRatio</code> are ignored when <code>style</code> is <code>false</code>.</p>
+                    <pre><code class="hljs language-html hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">youtube</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;dQw4w9WgXcQ&quot;</span>&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">vimeo</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;1084537&quot;</span>&gt;</span></span>
+                    </code></pre>
+                    <pre><code class="hljs hljs-numbered">
+                        <span class="hljs-line">{% youtube dQw4w9WgXcQ %}</span>
+                        <span class="hljs-line">{% vimeo 1084537 %}</span>
+                    </code></pre>
+                    <p>The tag is deliberately non-closing, like <code>img</code>. Only YouTube and Vimeo are implemented; another provider needs your own observer registration.</p>
+                    <p><strong>How it behaves in the browser</strong></p>
+                    <ol>
+                        <li>The tag is swapped at once for a <code>.embed</code> placeholder at 16:9, so the space is reserved.</li>
+                        <li>The video&apos;s oEmbed data comes from <code>localStorage</code> (<code>kirigami-embed:&lt;provider&gt;:&lt;id&gt;</code>) if a visit already resolved it, and is fetched from the provider otherwise.</li>
+                        <li>The thumbnail and title are patched in, and the ratio becomes the video&apos;s real one. Nothing is stretched: the width cap keeps a narrow video from looking oversized.</li>
+                        <li>Only a click on the play button loads the real player (<code>youtube-nocookie.com</code> or <code>player.vimeo.com</code>). The metadata and the thumbnail load earlier.</li>
+                    </ol>
+                    <p><strong>Failures.</strong> The browser accepts YouTube ids of 10 to 12 word or hyphen characters and Vimeo ids made only of digits; anything else leaves the tag as it is. A request that fails logs to the console and leaves the play button usable without metadata. The plugin has no proxy, timeout or retry, and requests follow the browser&apos;s network and CORS rules. If <code>localStorage</code> can&apos;t be read (some restricted contexts), the metadata isn&apos;t fetched.</p>
+                    <p>With <code>style: true</code>, a <code>.generated-vars.scss</code> file is written in the plugin&apos;s install directory to carry the sizing options, which therefore has to be writable. <strong>Styling:</strong> <code>.embed</code>, <code>.embed__title</code>, <code>.embed__play</code>, <code>.embed__player</code>.</p>
+                    <h2 id="player">player</h2>
+                    <p>Audio players and playlists with the waveform drawn at build time.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>style</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>Append the default <code>.player</code> and <code>.playlist</code> styles.</td>
+                            </tr>
+                            <tr>
+                                <td><code>samples</code></td>
+                                <td>integer</td>
+                                <td><code>1000</code></td>
+                                <td>Points in the baked waveform (the SVG&apos;s width).</td>
+                            </tr>
+                            <tr>
+                                <td><code>cover</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>Extract the embedded MP3 cover art and publish it through the image pipeline.</td>
+                            </tr>
+                            <tr>
+                                <td><code>coverSize</code></td>
+                                <td>integer</td>
+                                <td><code>240</code></td>
+                                <td>Edge of the generated square cover, in pixels.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pre><code class="hljs language-html hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">player</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../audio/track.mp3&quot;</span>&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">player</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../audio/track.mp3&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Live at home&quot;</span> <span class="hljs-attr">artist</span>=<span class="hljs-string">&quot;Me&quot;</span>&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">playlist</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../audio/set.m3u&quot;</span>&gt;</span></span>
+                    </code></pre>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">{% player ../audio/track.mp3 %}</span>
+                        <span class="hljs-line">{% playlist ../audio/set.m3u %}</span>
+                    </code></pre>
+                    <ul>
+                        <li><code>src</code> is relative to the page, or from the site root when it starts with <code>/</code>. <code>title</code> and <code>artist</code> override the file&apos;s own tags.</li>
+                        <li>A playlist is a plain <code>.m3u</code> or <code>.m3u8</code>. Entry paths are relative to the playlist; <code>#EXTINF:&lt;seconds&gt;,Artist - Title</code> fills the title and artist of tracks with no tags of their own. <strong>URL entries are skipped with a warning</strong>, since only local files can be analysed. Each track is a regular player, and the next one starts when one ends.</li>
+                        <li>Decoded formats: MP3, WAV, AIFF, FLAC, Ogg Vorbis, Opus, M4A/AAC and WebM, through <code>@kirigami/audiowaveform-wasm</code>. <strong>ID3 tags and cover art are read from MP3 only.</strong></li>
+                        <li>A missing or undecodable file is a build warning replaced by an HTML comment: it never fails the build.</li>
+                    </ul>
+                    <p>The waveform is one SVG path drawn twice: a muted copy, and an accent copy revealed up to the playback position with <code>clip-path</code>.</p>
+                    <p><strong>Cache.</strong> <code>&lt;root&gt;/_data/player/&lt;content-hash&gt;.json</code> holds the metadata and the SVG for each file. The key is the file&apos;s <strong>content</strong>, so a fresh checkout (CI included) hits it. Commit the folder. Changing <code>samples</code> regenerates the entries. A cover found in an MP3 is written to <code>&lt;image.source&gt;/player/</code> and published like any <code>img asset</code>: a square crop in your <code>image.format</code>, for example <code>images/player/&lt;hash&gt;-240x240-cover.webp</code>.</p>
+                    <p><strong>Styling.</strong> <code>.player</code>, <code>.player__cover</code>, <code>.player__toggle</code>, <code>.player__title</code>, <code>.player__artist</code>, <code>.player__wave</code> (with <code>.player__svg</code> and <code>.player__svg--progress</code>), <code>.player__times</code> and <code>.playlist__tracks</code>. The script sets <code>.is-playing</code> on a playing player and a <code>--progress</code> property from 0 to 1.</p>
+                    <h2 id="clip">clip</h2>
+                    <p>Local video with an automatically chosen poster.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>style</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>Append the default <code>.clip</code> styles.</td>
+                            </tr>
+                            <tr>
+                                <td><code>posterWidth</code></td>
+                                <td>integer</td>
+                                <td><code>960</code></td>
+                                <td>Width of the poster in pixels; the height follows the video.</td>
+                            </tr>
+                            <tr>
+                                <td><code>samples</code></td>
+                                <td>integer</td>
+                                <td><code>24</code></td>
+                                <td>Timestamps sampled across the video to choose the poster. More is slower to build; the result is cached.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pre><code class="hljs language-html hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">clip</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../video/movie.mp4&quot;</span>&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">clip</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../video/movie.mp4&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Opening night&quot;</span>&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">inline-clip</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../video/loop.mp4&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;hero&quot;</span>&gt;</span></span>
+                    </code></pre>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">{% clip ../video/movie.mp4 %}</span>
+                        <span class="hljs-line">{% inline-clip ../video/loop.mp4 %}</span>
+                    </code></pre>
+                    <ul>
+                        <li><strong>Use MP4 (H.264) or WebM</strong> so browsers can play the file. <code>bestframe</code> also reads Matroska, AVI, Ogg, MPEG streams and older codecs to choose a poster, but warns for a type most browsers won&apos;t play. A video it can&apos;t decode is a warning and an HTML comment, never a failed build.</li>
+                        <li><code>title</code> overrides the title, which otherwise comes from the video&apos;s own tag, then from its file name (tidied: underscores, a leading track number).</li>
+                        <li>A <strong>vertical</strong> video sits in a default 16:9 box with the picture centred. Change that box with <code>--clip-portrait-ratio</code> and the card&apos;s maximum width with <code>--clip-max-width</code> (default <code>40rem</code>).</li>
+                        <li>Without JavaScript, the play button is a plain link to the file.</li>
+                        <li>On click, the card becomes a <code>video</code> with controls that starts playing. <strong>One clip plays at a time.</strong></li>
+                    </ul>
+                    <p><strong><code>&lt;inline-clip&gt;</code></strong> is for decoration: one <code>video</code> element that plays by itself, <strong>muted, in a loop, with no controls</strong>. It needs no JavaScript, gets its real width and height so the page doesn&apos;t jump, and shows the poster until the first frame. A vertical video keeps its own shape; cap it with <code>--inline-clip-max-width</code>. The script pauses a loop while it&apos;s off-screen and leaves it on its poster for visitors who prefer reduced motion. For the smoothest loop, encode it without an audio track and with the last frame matching the first.</p>
+                    <p><strong>Cache.</strong> Choosing a poster is slow (tens of seconds for a long video), so it is done once. <code>&lt;root&gt;/_data/clip/&lt;id&gt;.json</code> keeps the frame time, its score, the duration, the size and the container tags. The <code>&lt;id&gt;</code> is the file&apos;s size plus a hash of its first and last megabyte: cheap on a huge file, and content-based, so CI hits the cache. Commit the folder. The chosen frame goes to <code>&lt;image.source&gt;/clip/&lt;id&gt;.jpg</code> and is published through the image pipeline (<code>images/clip/&lt;id&gt;-960w.webp</code>). Changing <code>posterWidth</code> or <code>samples</code> regenerates the entries.</p>
+                    <p><strong>Styling.</strong> <code>.clip</code> (with <code>.clip--portrait</code> and <code>.is-playing</code>), <code>.clip__poster</code>, <code>.clip__play</code>, <code>.clip__icon</code>, <code>.clip__title</code>, <code>.clip__duration</code>, <code>.clip__video</code> and <code>.inline-clip</code>.</p>
+                    <h2 id="educ">educ</h2>
+                    <p>Course components for Kiridoc-style sites: checklists, callout bubbles, link cards, colour pills, quotes, tool cards and CodePen embeds. Its options and the components themselves are described on the <a href="../#educ">Plugins</a> page.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Option</th>
+                                <th>Type</th>
+                                <th>Default</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>style</code></td>
+                                <td>boolean</td>
+                                <td><code>true</code></td>
+                                <td>Append the default component styles to every <code>sass</code> task.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>A few facts that matter when you author with it:</p>
+                    <ul>
+                        <li><code>&lt;intlink&gt;</code> reads the target page&apos;s header: <code>@title</code> is the card title, <code>@abstract</code> (or <code>@description</code>) the description, <code>@label</code> (or <code>@code</code>) a small caption and <code>@image</code> (or <code>@ogimage</code>, <code>@meta_image</code>) the picture. With no image, the card falls back to the site&apos;s default Open Graph image (<code>seo.image</code>, then <code>seo.logo</code>, then the <code>image</code> or <code>ogimage</code> keys of <code>kirigami:</code>). The target must be a page folder, or the build fails.</li>
+                        <li><code>&lt;doclink&gt;</code> shows the host&apos;s favicon, looked up once (the icons the home page declares, then <code>/favicon.ico</code>, then a favicon service), saved as a 64 px webp and shared by every link to that host. A host with no icon gets a generic badge; a local <code>.zip</code> gets a zip badge and any other local link a file badge.</li>
+                        <li><code>&lt;quote photo&gt;</code> and <code>&lt;tool image&gt;</code> are cropped square (112 px and 200 px) and published as webp: commit <code>assets/images/quote/</code> and <code>assets/images/tool/</code>. A path can be relative to the page (<code>./x</code>), from the site root (<code>/x</code>), or a URL.</li>
+                        <li><code>&lt;codepen&gt;</code> takes <code>id</code> (the pen&apos;s hash), <code>user</code> (default <code>anonymous</code>), <code>height</code> in pixels (default 400) and <code>tab</code> (default <code>result</code>). The shortcode keeps the argument order of php-prepros&apos; own <code>codepen</code> (id, user, height) and adds the tab at the end.</li>
+                        <li><code>&lt;color&gt;</code> copies its code on click and reads &quot;Copied!&quot;, or &quot;Copié!&quot; when the page&apos;s <code>lang</code> starts with <code>fr</code>.</li>
+                    </ul>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../plugins/">Official plugins</a>
+                        <a class="doc__next" rel="next" href="../../plugins/authoring/">Writing a plugin</a>
+                    </nav>
+                </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#before-you-start">Before you start</a></li>
+                        <li><a href="#highlight">highlight</a></li>
+                        <li><a href="#extlink">extlink</a></li>
+                        <li><a href="#embed">embed</a></li>
+                        <li><a href="#player">player</a></li>
+                        <li><a href="#clip">clip</a></li>
+                        <li><a href="#educ">educ</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../about/">About</a></li>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../changelog/">Changelog</a></li>
+                            <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

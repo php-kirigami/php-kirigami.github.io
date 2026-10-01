@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            (function(){var e=document.documentElement;e.classList.add("js");try{var t=localStorage.getItem("kirigami-theme");if(t==="dark"||t==="light")e.setAttribute("data-theme",t)}catch(x){}})();
+        </script>
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>PHP-WASM runtime — Kirigami</title>
+        <meta name="description" content="PHP 8.5 compiled to WebAssembly for Node: how to run it directly, its networking, its extensions and its limits.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="PHP-WASM runtime — Kirigami">
+        <meta name="twitter:description" content="PHP 8.5 compiled to WebAssembly for Node: how to run it directly, its networking, its extensions and its limits.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="PHP-WASM runtime — Kirigami">
+        <meta property="og:description" content="PHP 8.5 compiled to WebAssembly for Node: how to run it directly, its networking, its extensions and its limits.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/php-wasm/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/php-wasm/">
+        <link rel="author" type="text/plain" href="../../humans.txt">
+        <link rel="icon" type="image/png" href="../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/php-wasm/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Documentation",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "PHP-WASM runtime",
+                                "item": "https://php-kirigami.github.io/docs/php-wasm/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/php-wasm/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/php-wasm/",
+                        "name": "PHP-WASM runtime",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/php-wasm/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
+                        <li><a href="../../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                        <li><a href="../../docs/troubleshooting/">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/cli/">CLI</a></li>
+                        <li><a href="../../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/">JavaScript API</a></li>
+                        <li><a href="../../docs/studio/">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/sdk/">Plugin SDK</a></li>
+                        <li><a href="../../docs/internals/">Internals</a></li>
+                        <li><a href="../../docs/struct-walker/">struct-walker</a></li>
+                        <li><a href="../../docs/php-wasm/" aria-current="page">PHP-WASM runtime</a></li>
+                        <li><a href="../../docs/canva/">Design system (canva)</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><span aria-current="page">PHP-WASM runtime</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Extend</span>
+                        <h1>PHP-WASM runtime</h1>
+                        <p class="lead">PHP 8.5 compiled to WebAssembly for Node: how to run it directly, its networking, its extensions and its limits.</p>
+                    </header>
+                    <h2 id="overview">Overview</h2>
+                    <p><code>@kirigami/php-wasm</code> is what lets Kirigami run PHP without PHP installed. It ships a PHP <strong>8.5.11</strong> WebAssembly binary built by Kirigami&apos;s own compiler, <a href="https://github.com/php-kirigami/php-wasm-compiler" target="_blank" rel="noopener noreferrer"><code>php-wasm-compiler</code></a>, with a Node.js loader and a few runtime helpers. You never need it to build a site: the <a href="../api/">engine</a> and <a href="../php/">PHP-prepros</a> use it for you. Use it directly to run PHP from your own Node code.</p>
+                    <p>It is deliberately narrow:</p>
+                    <ul>
+                        <li><strong>JSPI</strong> (JavaScript Promise Integration) target only, and <strong>Node.js</strong> only. No browser build, no worker or iframe targets, no Asyncify.</li>
+                        <li>Needs Node <strong>24 or later</strong>. Check <code>await jspi()</code> before creating a runtime, since an embedded editor runtime may not support it.</li>
+                    </ul>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">npm install @kirigami/php-wasm</span>
+                    </code></pre>
+                    <p>The version of the package is the version of PHP it contains: <code>8.5.11</code> is PHP 8.5.11. The package is licensed <strong>GPL-2.0-or-later</strong>, separately from the GPL-3.0 core, since it carries a compiled PHP runtime.</p>
+                    <h2 id="running-php">Running PHP</h2>
+                    <h3 id="a-quick-snippet-with-exec">A quick snippet with <code>exec()</code></h3>
+                    <p><code>exec()</code> writes your code to a temporary file, runs it, cleans up and hands back a plain object. The opening PHP tag is added for you.</p>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { exec, phpversion } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/php-wasm&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> { returnCode, stdout, stderr } = <span class="hljs-keyword">await</span> <span class="hljs-title function_">exec</span>(<span class="hljs-string">&#x27;echo &quot;Hello, Kirigami!&quot;;&#x27;</span>);</span>
+                        <span class="hljs-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(returnCode, stdout, stderr);   <span class="hljs-comment">// 0 &quot;Hello, Kirigami!&quot; &quot;&quot;</span></span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">await</span> <span class="hljs-title function_">phpversion</span>());           <span class="hljs-comment">// &quot;8.5.11&quot;</span></span>
+                    </code></pre>
+                    <p>Pass <code>true</code> as the second argument to run against the network-enabled runtime. <code>phpinfo()</code> returns the HTML of PHP&apos;s own <code>phpinfo()</code>.</p>
+                    <h3 id="an-instance-you-keep">An instance you keep</h3>
+                    <p>To write several files into the virtual filesystem and run them in turn, take the instance itself:</p>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { readFile } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:fs/promises&#x27;</span>;</span>
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { getPHPRuntime } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/php-wasm&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> php = <span class="hljs-keyword">await</span> <span class="hljs-title function_">getPHPRuntime</span>();</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-comment">// hello.php is a normal PHP file on your disk, opening tag included.</span></span>
+                        <span class="hljs-line">php.<span class="hljs-title function_">writeFile</span>(<span class="hljs-string">&#x27;/hello.php&#x27;</span>, <span class="hljs-keyword">await</span> <span class="hljs-title function_">readFile</span>(<span class="hljs-string">&#x27;hello.php&#x27;</span>));</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> php.<span class="hljs-title function_">runStream</span>({ <span class="hljs-attr">scriptPath</span>: <span class="hljs-string">&#x27;/hello.php&#x27;</span> });</span>
+                        <span class="hljs-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">await</span> response.<span class="hljs-property">stdoutText</span>);</span>
+                    </code></pre>
+                    <p>Unlike <code>exec()</code>, a file written this way must start with PHP&apos;s opening tag itself.</p>
+                    <p><code>getPHPRuntime()</code> and <code>getPHPRuntimeWithNetwork()</code> are <strong>memoized</strong>: every call in the same process returns the same shared instance, so its state persists. To get an independent one, use <code>createPHPRuntime()</code> and call <code>php.exit()</code> when you are done (it also closes the network proxy and its sockets).</p>
+                    <h3 id="low-level">Low level</h3>
+                    <p>For manual construction, load the module and hand its id to the <code>PHP</code> class of <a href="https://www.npmjs.com/package/@php-wasm/universal" target="_blank" rel="noopener noreferrer"><code>@php-wasm/universal</code></a>, which still provides <code>PHP</code> and <code>loadPHPRuntime()</code>:</p>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { getPHPLoaderModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/php-wasm&#x27;</span>;</span>
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { <span class="hljs-variable constant_">PHP</span>, loadPHPRuntime } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@php-wasm/universal&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> php = <span class="hljs-keyword">new</span> <span class="hljs-title function_">PHP</span>(<span class="hljs-keyword">await</span> <span class="hljs-title function_">loadPHPRuntime</span>(<span class="hljs-keyword">await</span> <span class="hljs-title function_">getPHPLoaderModule</span>()));</span>
+                    </code></pre>
+                    <h2 id="the-helpers">The helpers</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Export</th>
+                                <th>What it does</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>getPHPLoaderModule()</code></td>
+                                <td>The raw JSPI PHP 8.5 loader module.</td>
+                            </tr>
+                            <tr>
+                                <td><code>jspi()</code></td>
+                                <td>Detects JSPI support in the current runtime.</td>
+                            </tr>
+                            <tr>
+                                <td><code>getPHPRuntime()</code></td>
+                                <td>A standard PHP instance (memoized singleton).</td>
+                            </tr>
+                            <tr>
+                                <td><code>getPHPRuntimeWithNetwork()</code></td>
+                                <td>An instance bound to a local outbound proxy, with Node&apos;s SSL root certificates injected (a separate memoized singleton).</td>
+                            </tr>
+                            <tr>
+                                <td><code>createPHPRuntime({ network? })</code></td>
+                                <td>An independent, owned runtime; neither singleton is touched.</td>
+                            </tr>
+                            <tr>
+                                <td><code>getLoadedExtensions()</code></td>
+                                <td>The names of every loaded extension, sorted without regard to case.</td>
+                            </tr>
+                            <tr>
+                                <td><code>exec(code, network?)</code></td>
+                                <td>Run a snippet; returns <code>{ returnCode, stdout, stderr }</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>phpversion()</code>, <code>phpinfo()</code></td>
+                                <td>The version string, and the <code>phpinfo()</code> HTML.</td>
+                            </tr>
+                            <tr>
+                                <td><code>setPhpIniValues(php, values, iniPath?)</code></td>
+                                <td>Update or add <code>php.ini</code> directives. Also <code>php.setIniValues(values)</code> on the two memoized instances.</td>
+                            </tr>
+                            <tr>
+                                <td><code>getPhpIniValue(php, key, iniPath?)</code></td>
+                                <td>Read one active (uncommented) directive.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>The instances are typed: <code>getPHPRuntime()</code> resolves to a <code>KirigamiPHP</code> (a <code>PHP</code> with <code>.setIniValues()</code>), and <code>getPHPRuntimeWithNetwork()</code> to a <code>KirigamiNetworkPHP</code>, which adds <code>._networkProxyServer</code>.</p>
+                    <h2 id="networking">Networking</h2>
+                    <p>PHP inside WebAssembly has no sockets of its own. The network runtime bridges them: a local proxy built on <code>node:http</code>, <code>node:net</code> and <code>node:dgram</code> turns the runtime&apos;s socket calls into real outbound <strong>TCP</strong> connections, and <strong>UDP</strong> for datagram sockets. Node&apos;s root certificates are handed to the PHP side, so <strong>cURL and OpenSSL HTTPS requests work immediately</strong>.</p>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { exec, jspi } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/php-wasm&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">if</span> (!(<span class="hljs-keyword">await</span> <span class="hljs-title function_">jspi</span>())) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;WASM JSPI is not available here.&#x27;</span>);</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-keyword">const</span> { stdout } = <span class="hljs-keyword">await</span> <span class="hljs-title function_">exec</span>(<span class="hljs-string">`</span></span>
+                        <span class="hljs-line"><span class="hljs-string">    $ch = curl_init(&quot;https://api.github.com/zen&quot;);</span></span>
+                        <span class="hljs-line"><span class="hljs-string">    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);</span></span>
+                        <span class="hljs-line"><span class="hljs-string">    curl_setopt($ch, CURLOPT_USERAGENT, &quot;Kirigami-PHP-WASM&quot;);</span></span>
+                        <span class="hljs-line"><span class="hljs-string">    echo curl_exec($ch);</span></span>
+                        <span class="hljs-line"><span class="hljs-string">`</span>, <span class="hljs-literal">true</span>);</span>
+                        <span class="hljs-line"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(stdout);</span>
+                    </code></pre>
+                    <p>Details for the curious:</p>
+                    <ul>
+                        <li>UDP works through PHP streams (<code>stream_socket_client(&apos;udp://host:port&apos;)</code>, <code>fsockopen</code>) and through the <code>sockets</code> extension (<code>socket_sendto()</code>, <code>socket_recvfrom()</code>, <code>socket_select()</code>).</li>
+                        <li>Blocking reads wait for data, end of file or <code>SO_RCVTIMEO</code>. <code>connect()</code> waits for the proxy and fails with <code>ECONNREFUSED</code> when it can&apos;t reach the destination. <code>TCP_NODELAY</code> and <code>SO_KEEPALIVE</code> are applied to the real connection; other options fail with <code>ENOPROTOOPT</code>.</li>
+                        <li>libcurl waits in <code>poll()</code>, which would freeze Node: the runtime replaces it with a version that yields to the event loop.</li>
+                        <li>The proxy only listens on <code>127.0.0.1</code>. Closing it is final for that cached instance: it is not a per-request cleanup.</li>
+                    </ul>
+                    <h2 id="extensions-built-in">Extensions built in</h2>
+                    <p>These are baked into the binary, so they are always loaded. A single <code>config.yaml</code> in <code>php-wasm-compiler</code> is the source of truth for the list.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Extension</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>curl</code>, <code>openssl</code></td>
+                                <td>HTTP(S) client, TLS and crypto</td>
+                            </tr>
+                            <tr>
+                                <td><code>libxml</code>, <code>dom</code>, <code>simplexml</code>, <code>xmlreader</code>, <code>xmlwriter</code></td>
+                                <td>XML and DOM</td>
+                            </tr>
+                            <tr>
+                                <td><code>mbstring</code>, <code>iconv</code></td>
+                                <td>Multibyte strings (with oniguruma) and character sets</td>
+                            </tr>
+                            <tr>
+                                <td><code>gd</code>, <code>imagick</code>, <code>exif</code></td>
+                                <td>Image processing, ImageMagick and metadata</td>
+                            </tr>
+                            <tr>
+                                <td><code>sockets</code></td>
+                                <td>Low-level sockets</td>
+                            </tr>
+                            <tr>
+                                <td><code>zip</code>, <code>bz2</code></td>
+                                <td>ZIP archives; BZip2, which also gives <code>Phar</code> its <code>.tar.bz2</code> support</td>
+                            </tr>
+                            <tr>
+                                <td><code>sqlite3</code>, <code>pdo</code>, <code>pdo_sqlite</code></td>
+                                <td>SQLite and PDO</td>
+                            </tr>
+                            <tr>
+                                <td><code>opcache</code></td>
+                                <td>Bytecode cache (JIT disabled)</td>
+                            </tr>
+                            <tr>
+                                <td><code>yaml</code></td>
+                                <td>YAML 1.1 through LibYAML</td>
+                            </tr>
+                            <tr>
+                                <td><code>jsonpath</code></td>
+                                <td>JSONPath queries over decoded JSON</td>
+                            </tr>
+                            <tr>
+                                <td><code>apcu</code>, <code>igbinary</code></td>
+                                <td>In-memory user cache and compact serialization</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Four more are Kirigami&apos;s own, vendored from their repositories:</p>
+                    <ul>
+                        <li><a href="https://github.com/php-kirigami/php-jsonk" target="_blank" rel="noopener noreferrer"><code>jsonk</code></a>: fast JSON encode and decode plus <strong>JSON Schema</strong> validation; it replaces <code>json_encode()</code> and <code>json_decode()</code> by default.</li>
+                        <li><a href="https://github.com/php-kirigami/php-mdhtml" target="_blank" rel="noopener noreferrer"><code>mdhtml</code></a>: CommonMark and GFM through <code>cmark-gfm</code>, the backend of the <code>MD::</code> class.</li>
+                        <li><a href="https://github.com/php-kirigami/php-navicat" target="_blank" rel="noopener noreferrer"><code>navicat</code></a>: a client for Navicat Premium&apos;s HTTP-tunnel protocol, for MySQL, PostgreSQL and SQLite.</li>
+                        <li><a href="https://github.com/php-kirigami/php-norm" target="_blank" rel="noopener noreferrer"><code>norm</code></a>: Unicode normalization (<code>Normalizer</code>) over <code>utf8proc</code>.</li>
+                    </ul>
+                    <p><code>lexbor</code> (HTML5 parsing and CSS selectors) is built in as well. Don&apos;t assume an extension from another PHP build: ask <code>getLoadedExtensions()</code>, or run <code>kiri phpinfo -m</code> (Markdown) or <code>-j</code> (JSON) from a project.</p>
+                    <blockquote>
+                        <p>The PHP <strong>YAML</strong> path follows YAML 1.1 scalar rules, including implicit booleans: quote a string such as <code>&quot;NO&quot;</code>. Node&apos;s own parsing of <code>kirigami.yaml</code> is a separate path with different rules.</p>
+                    </blockquote>
+                    <h2 id="more-extensions-on-demand">More extensions, on demand</h2>
+                    <p>Everything else ships as separate WebAssembly side modules in <code>@kirigami/phpext-*</code> packages. Install one and the runtime picks it up on its own, with no rebuild:</p>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">npm install @kirigami/phpext-pgsql</span>
+                    </code></pre>
+                    <p>Published today: <code>anydoc</code>, <code>dba</code>, <code>enchant</code>, <code>fastchart</code>, <code>ffi</code>, <code>fileinfo</code>, <code>ftp</code>, <code>gettext</code>, <code>gmp</code>, <code>intl</code>, <code>ldap</code>, <code>mysqli</code>, <code>odbc</code>, <code>pdo_dblib</code>, <code>pdo_firebird</code>, <code>pdo_mysql</code>, <code>pdo_odbc</code>, <code>pdo_pgsql</code>, <code>pgsql</code>, <code>posix</code>, <code>rar</code>, <code>scanmeqr</code>, <code>snmp</code>, <code>soap</code>, <code>sodium</code>, <code>tidy</code> and <code>xsl</code>. <code>mysqli</code> and <code>pdo_mysql</code> bundle <code>mysqlnd</code>. Two worth a warning: <code>intl</code> is about 38 MB since it embeds the ICU data, and <code>anydoc</code> is written in Rust, where a panic aborts the whole PHP runtime.</p>
+                    <h3 id="how-discovery-works">How discovery works</h3>
+                    <p>When a runtime is created, the loader looks for directories named <code>phpext-*</code> (also under <code>@kirigami</code>) in <code>node_modules</code> and <code>packages</code>, in the working directory and its ancestors, and in npm&apos;s global root. It does not search sibling projects, so an unrelated compiler checkout next to your site can&apos;t change its runtime.</p>
+                    <ul>
+                        <li>A package whose <code>index.js</code> exports a default <code>register(phpVersion)</code> (all the generated ones do) returns its modules in load order. One package can bundle a dependency ahead of its extension: <code>mysqli</code> ships <code>mysqlnd</code> first.</li>
+                        <li>Otherwise a <code>manifest.json</code> may list artifacts per PHP version, and failing that the first <code>.so</code> found is used.</li>
+                        <li>The resolved modules are staged under <code>/internal/shared/extensions</code>, each with a numbered <code>.ini</code> file that keeps the discovery order.</li>
+                        <li>Set <code>KIRIGAMI_PHPEXT_DISCOVERY</code> to <code>local</code> to skip the global root, or <code>off</code> to disable discovery.</li>
+                    </ul>
+                    <p>Finding a <code>.so</code> does not prove PHP accepted it, and artifact selection does not establish binary compatibility: check <code>getLoadedExtensions()</code> for what actually loaded. Cached runtimes are not rescanned on every execution.</p>
+                    <h2 id="security">Security</h2>
+                    <p>Code run through <code>exec()</code> or a <code>PHP</code> instance lives in the WebAssembly sandbox: it sees a <strong>virtual</strong> filesystem (<code>writeFile()</code> and <code>unlink()</code> don&apos;t touch your disk) unless the host mounts files or installs bridges. PHP-prepros adds such integration, so don&apos;t treat a project&apos;s PHP as untrusted input.</p>
+                    <ul>
+                        <li><strong>The network runtime opens the door to the network.</strong> The proxy only listens locally, but the PHP code inside can reach out over TCP and UDP like any client.</li>
+                        <li>WebAssembly reduces host exposure but is <strong>not a security boundary</strong> for fully untrusted PHP, such as code submitted by users. Add a container or a virtual machine for that.</li>
+                        <li>It is not <code>child_process.exec()</code>, which runs directly on the host.</li>
+                    </ul>
+                    <h2 id="where-it-comes-from">Where it comes from</h2>
+                    <p>The binary (<code>jspi/8_5_11/php_8_5.wasm</code>) and its Emscripten loader are built by <a href="https://github.com/php-kirigami/php-wasm-compiler" target="_blank" rel="noopener noreferrer"><code>php-wasm-compiler</code></a> with Docker and Emscripten, from a single <code>config.yaml</code> that sets the PHP version, the extensions, the libraries and the build options. The same compiler publishes the <code>@kirigami/phpext-*</code> packages. Its recipes began from WordPress Playground&apos;s compile pipeline; see its <code>NOTICE.md</code> for provenance. The JavaScript side of this package (the networking proxy, extension discovery, <code>php.ini</code> helpers) is Kirigami code.</p>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../docs/struct-walker/">struct-walker</a>
+                        <a class="doc__next" rel="next" href="../../docs/canva/">Design system (canva)</a>
+                    </nav>
+                </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#running-php">Running PHP</a></li>
+                        <li><a href="#the-helpers">The helpers</a></li>
+                        <li><a href="#networking">Networking</a></li>
+                        <li><a href="#extensions-built-in">Extensions built in</a></li>
+                        <li><a href="#more-extensions-on-demand">More extensions, on demand</a></li>
+                        <li><a href="#security">Security</a></li>
+                        <li><a href="#where-it-comes-from">Where it comes from</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../about/">About</a></li>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../changelog/">Changelog</a></li>
+                            <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>

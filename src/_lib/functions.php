@@ -239,6 +239,7 @@ function kirigami_rail_pages(string $section): array
     if ($section === 'plugins') {
         return [
             $page('plugins/', 'Official plugins', 'Plugins'),
+            $page('plugins/reference/', 'Plugin reference', 'Plugins'),
             $page('plugins/authoring/', 'Writing a plugin', 'Plugins'),
         ];
     }

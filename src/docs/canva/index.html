@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="../../styles/kirigami.core.min.css?###TIMESTAMP###">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Design system (canva) — Kirigami</title>
+        <meta name="description" content="The design tokens, Sass helpers, ready-made components and small browser scripts that Kirigami sites share.">
+        <meta name="keywords" content="static site generator, php, webassembly, kirigami, zero dependency, github pages">
+        <meta name="robots" content="index, follow">
+        <meta name="language" content="en">
+        <meta name="generator" content="Kirigami">
+        <meta name="author" content="Maxime Larrivée-Roy">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Design system (canva) — Kirigami">
+        <meta name="twitter:description" content="The design tokens, Sass helpers, ready-made components and small browser scripts that Kirigami sites share.">
+        <meta name="twitter:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <meta property="og:site_name" content="Kirigami">
+        <meta property="og:locale" content="en">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Design system (canva) — Kirigami">
+        <meta property="og:description" content="The design tokens, Sass helpers, ready-made components and small browser scripts that Kirigami sites share.">
+        <meta property="og:url" content="https://php-kirigami.github.io/docs/canva/">
+        <meta property="og:image" content="https://php-kirigami.github.io/images/meta/ogimage-1200x630-cover.webp">
+        <link rel="canonical" href="https://php-kirigami.github.io/docs/canva/">
+        <link rel="author" type="text/plain" href="../../humans.txt">
+        <link rel="icon" type="image/png" href="../../images/meta/favicon-48x48.png">
+        <link rel="apple-touch-icon" href="../../images/meta/favicon-180x180.png">
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@graph": [
+                    {
+                        "@type": "Organization",
+                        "@id": "https://php-kirigami.github.io/#organization",
+                        "name": "Kirigami",
+                        "url": "https://php-kirigami.github.io/",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "email": "mlarriveeroy@gmail.com"
+                    },
+                    {
+                        "@type": "WebSite",
+                        "@id": "https://php-kirigami.github.io/#website",
+                        "url": "https://php-kirigami.github.io/",
+                        "name": "Kirigami",
+                        "description": "A static site generator that turns PHP into fast, dependency-free HTML — no server required. Real PHP templates, compiled to plain HTML by PHP running in WebAssembly, right inside Node.",
+                        "inLanguage": "en",
+                        "publisher": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "keywords": "static site generator, php, webassembly, kirigami, zero dependency, github pages"
+                    },
+                    {
+                        "@type": "BreadcrumbList",
+                        "@id": "https://php-kirigami.github.io/docs/canva/#breadcrumb",
+                        "itemListElement": [
+                            {
+                                "@type": "ListItem",
+                                "position": 1,
+                                "name": "Kirigami",
+                                "item": "https://php-kirigami.github.io/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 2,
+                                "name": "Documentation",
+                                "item": "https://php-kirigami.github.io/docs/"
+                            },
+                            {
+                                "@type": "ListItem",
+                                "position": 3,
+                                "name": "Design system (canva)",
+                                "item": "https://php-kirigami.github.io/docs/canva/"
+                            }
+                        ]
+                    },
+                    {
+                        "@type": "WebPage",
+                        "@id": "https://php-kirigami.github.io/docs/canva/#webpage",
+                        "url": "https://php-kirigami.github.io/docs/canva/",
+                        "name": "Design system (canva)",
+                        "isPartOf": {
+                            "@id": "https://php-kirigami.github.io/#website"
+                        },
+                        "about": {
+                            "@id": "https://php-kirigami.github.io/#organization"
+                        },
+                        "inLanguage": "en",
+                        "breadcrumb": {
+                            "@id": "https://php-kirigami.github.io/docs/canva/#breadcrumb"
+                        }
+                    }
+                ]
+            }
+        </script>
+    </head>
+    <body class="page-docs">
+        <a class="skip-link" href="#main">Skip to content</a>
+        <header class="site-header">
+            <div class="wrap site-header__inner">
+                <a class="brand" href="../../"><span class="brand__mark" aria-hidden="true"></span> Kirigami</a>
+                <nav class="site-nav" id="site-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="../../start/">Start</a></li>
+                        <li><a href="../../docs/" aria-current="page">Docs</a></li>
+                        <li><a href="../../plugins/">Plugins</a></li>
+                        <li><a href="../../studio/">Studio</a></li>
+                        <li><a href="../../examples/">Examples</a></li>
+                        <li><a href="https://github.com/php-kirigami/kirigami">GitHub</a></li>
+                    </ul>
+                </nav>
+                <button class="theme-toggle lightswitch" type="button" data-theme-toggle="" aria-label="Toggle dark mode">
+                    <svg viewBox="0 0 55 55" aria-hidden="true">
+                        <path d="M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z"></path>
+                    </svg>
+                </button>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle menu"><span></span></button>
+            </div>
+        </header>
+        <main id="main">
+            <div class="doc">
+                <aside class="doc-nav" aria-label="Documentation">
+                    <a class="doc-nav__course" href="../../docs/">Documentation</a>
+                    <p class="doc-nav__group">Start here</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/">Overview</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Build a site</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/authoring/">Writing pages</a></li>
+                        <li><a href="../../docs/config/">Configuration</a></li>
+                        <li><a href="../../docs/php/">PHP class library</a></li>
+                        <li><a href="../../docs/troubleshooting/">Troubleshooting</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Tools</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/cli/">CLI</a></li>
+                        <li><a href="../../docs/vscode/">VS Code extension</a></li>
+                        <li><a href="../../docs/mcp/">MCP server</a></li>
+                        <li><a href="../../docs/api/">JavaScript API</a></li>
+                        <li><a href="../../docs/studio/">Kiri Studio</a></li>
+                    </ol>
+                    <p class="doc-nav__group">Extend</p>
+                    <ol class="doc-nav__list">
+                        <li><a href="../../docs/sdk/">Plugin SDK</a></li>
+                        <li><a href="../../docs/internals/">Internals</a></li>
+                        <li><a href="../../docs/struct-walker/">struct-walker</a></li>
+                        <li><a href="../../docs/php-wasm/">PHP-WASM runtime</a></li>
+                        <li><a href="../../docs/canva/" aria-current="page">Design system (canva)</a></li>
+                    </ol>
+                </aside>
+                <article class="doc__body prose">
+                    <nav class="breadcrumb" aria-label="Breadcrumb">
+                        <ol>
+                            <li><a href="../../">Home</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><span aria-current="page">Design system (canva)</span></li>
+                        </ol>
+                    </nav>
+                    <header class="doc__head">
+                        <span class="eyebrow">Extend</span>
+                        <h1>Design system (canva)</h1>
+                        <p class="lead">The design tokens, Sass helpers, ready-made components and small browser scripts that Kirigami sites share.</p>
+                    </header>
+                    <h2 id="overview">Overview</h2>
+                    <p><code>@kirigami/canva</code> is the design layer the starter templates and this very site are built on. It gives a site:</p>
+                    <ul>
+                        <li>a <strong>token set</strong> (colours, fonts, sizes) published as CSS custom properties, with an optional <strong>dark theme</strong>;</li>
+                        <li>an <strong>icon system</strong> that recolours inline SVGs at build time;</li>
+                        <li>a few pure <strong>Sass functions</strong>, long-form <strong>prose styles</strong> and small UI <strong>components</strong>;</li>
+                        <li>tiny <strong>browser scripts</strong> for the theme toggle, reveal-on-scroll and authoring tags.</li>
+                    </ul>
+                    <p>The <code>.scss</code> entries are compiled by the engine&apos;s <code>sass</code> task, which supplies the native functions the token layer relies on (<code>inline-file()</code> and the <code>font-*()</code> family). For the visual identity of this site, see <a href="../../design/">Design</a>.</p>
+                    <pre><code class="hljs language-bash hljs-numbered">
+                        <span class="hljs-line">npm install @kirigami/canva</span>
+                    </code></pre>
+                    <p>There is no barrel export: import each entry by subpath.</p>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { create } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/canva/dom&#x27;</span>;</span>
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { documentReady } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/canva/helpers&#x27;</span>;</span>
+                    </code></pre>
+                    <pre><code class="hljs language-scss hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;@kirigami/canva/utils&#x27;</span> as *;</span>
+                        <span class="hljs-line"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;@kirigami/canva/conf&#x27;</span>;</span>
+                    </code></pre>
+                    <p>Through the engine&apos;s <code>sass</code> task, a missing subpath is retried with a <code>styles/</code> prefix, so <code>@kirigami/canva/conf</code> and <code>@kirigami/canva/styles/conf</code> are the same file. Node&apos;s own resolver needs the <code>styles/</code> segment. Outside Kirigami, enable Dart Sass&apos;s <code>NodePackageImporter</code> and write <code>@use &apos;pkg:@kirigami/canva/styles/utils&apos;</code>.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Import</th>
+                                <th>File</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>@kirigami/canva/&lt;name&gt;</code></td>
+                                <td><code>dist/scripts/&lt;name&gt;.js</code> (<code>dom</code>, <code>helpers</code>, <code>theme</code>, <code>observer</code>, <code>reveal</code>, <code>components/burger</code>)</td>
+                            </tr>
+                            <tr>
+                                <td><code>@kirigami/canva/styles/&lt;name&gt;</code></td>
+                                <td><code>dist/styles/&lt;name&gt;.scss</code> (<code>conf</code>, <code>utils</code>, <code>prose</code>, <code>main</code>, <code>lightswitch</code>)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 id="tokens-conf">Tokens: <code>conf</code></h2>
+                    <p><code>conf</code> declares the palette, the typography and the icon set as <code>!default</code> Sass variables, then:</p>
+                    <ul>
+                        <li>emits an <code>@font-face</code> for every entry of the <code>$fonts</code> map, with the font embedded in the stylesheet;</li>
+                        <li>mirrors every token onto <code>:root</code> as a CSS custom property (<code>--bg</code>, <code>--accent</code>, <code>--font-size</code>, <code>--transition-duration</code>…);</li>
+                        <li>builds one <code>--icon-&lt;name&gt;</code> property per icon, running the SVG through <code>apply-colors()</code> and <code>svg-url()</code> so icons pick up the current palette;</li>
+                        <li>ships a minimal reset, smooth scrolling with <code>scroll-padding-top: var(--scroll-top)</code>, a fluid root font size, themed native scrollbars and <code>.is-busy</code> / <code>.is-working</code> cursor states.</li>
+                    </ul>
+                    <p>Override any token with <code>@forward ... with (...)</code> from a partial of your own:</p>
+                    <pre><code class="hljs language-scss hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-comment">// src/styles/partials/_conf.scss</span></span>
+                        <span class="hljs-line"><span class="hljs-keyword">@forward</span> <span class="hljs-string">&quot;@kirigami/canva/conf&quot;</span> with (</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$bg</span>:           <span class="hljs-number">#f5f8f6</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$surface</span>:      <span class="hljs-number">#e7f0ea</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$ink</span>:          <span class="hljs-number">#263b30</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$accent</span>:       <span class="hljs-number">#c08a2e</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$font-body</span>:    <span class="hljs-string">&quot;Roboto Flex&quot;</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$font-heading</span>: <span class="hljs-string">&quot;Quicksand&quot;</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$fonts</span>: (</span>
+                        <span class="hljs-line">        <span class="hljs-string">&quot;Roboto Flex&quot;</span>: <span class="hljs-string">&quot;assets/fonts/roboto-flex.woff2&quot;</span>,</span>
+                        <span class="hljs-line">        <span class="hljs-string">&quot;Quicksand&quot;</span>:   <span class="hljs-string">&quot;assets/fonts/quicksand.woff2&quot;</span>,</span>
+                        <span class="hljs-line">    ),</span>
+                        <span class="hljs-line">);</span>
+                    </code></pre>
+                    <p>The colour tokens you will meet everywhere are <code>$bg</code>, <code>$surface</code>, <code>$surface-2</code>, <code>$border</code>, <code>$ink</code>, <code>$ink-muted</code>, <code>$accent</code> and <code>$accent-soft</code>, plus the logo colours (<code>$logo-ink</code>, <code>$logo-fold-light</code>, <code>$logo-fold-mid</code>).</p>
+                    <h3 id="type">Type</h3>
+                    <p>The root font size is fluid and bounded on both ends: <code>clamp(var(--font-min), var(--font-resp), var(--font-base))</code>. <code>--font-resp</code> scales with the viewport, <code>$font-base</code> caps it, and <code>$font-min</code> (default 17) keeps a narrow screen from collapsing every <code>rem</code>.</p>
+                    <ul>
+                        <li>A <strong>variable font with an <code>ital</code> axis</strong> gets two <code>@font-face</code> blocks, one normal and one italic, so italic text uses the font&apos;s real italic. This needs <code>@kirigami/kirigami</code> 3.0.0; with an older engine, a single face is emitted.</li>
+                        <li><code>$font-mono</code> / <code>--font-mono</code> defines the monospace stack once, and the <code>prose</code> and <code>main</code> partials use it.</li>
+                    </ul>
+                    <h2 id="dark-theme">Dark theme</h2>
+                    <p><code>conf</code> is single-theme until you opt in with two tokens.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Token</th>
+                                <th>Values</th>
+                                <th>Effect</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>$dark</code></td>
+                                <td><code>false</code> (default), <code>true</code>, or a palette map</td>
+                                <td><code>true</code> enables the built-in dark palette. A map starts from that palette and overrides only the keys you give.</td>
+                            </tr>
+                            <tr>
+                                <td><code>$theme</code></td>
+                                <td><code>auto</code>, <code>class</code>, <code>both</code> (default)</td>
+                                <td><code>auto</code> follows the OS (<code>prefers-color-scheme</code>); <code>class</code> only reacts to <code>data-theme</code> on <code>&lt;html&gt;</code>; <code>both</code> follows the OS but lets <code>data-theme=&quot;light&quot;</code> or <code>&quot;dark&quot;</code> force either way.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pre><code class="hljs language-scss hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">@forward</span> <span class="hljs-string">&quot;@kirigami/canva/conf&quot;</span> with (</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$bg</span>:     <span class="hljs-number">#f7f8f7</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$ink</span>:    <span class="hljs-number">#2f3640</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$accent</span>: <span class="hljs-number">#c7402c</span>,</span>
+                        <span class="hljs-line">    <span class="hljs-variable">$dark</span>: (</span>
+                        <span class="hljs-line">        <span class="hljs-attribute">bg</span>:     <span class="hljs-number">#14181b</span>,</span>
+                        <span class="hljs-line">        <span class="hljs-attribute">ink</span>:    <span class="hljs-number">#e7ecef</span>,</span>
+                        <span class="hljs-line">        <span class="hljs-attribute">accent</span>: <span class="hljs-number">#ff6b52</span>,</span>
+                        <span class="hljs-line">    ),</span>
+                        <span class="hljs-line">);</span>
+                    </code></pre>
+                    <ul>
+                        <li>A second copy of every palette property (and every recoloured <code>--icon-*</code>) is emitted for dark mode. The built-in dark palette is exposed as <code>$dark-*</code> variables, tunable like the light ones.</li>
+                        <li>A short <code>background-color</code>, <code>background-image</code> and <code>color</code> transition (<code>var(--transition-duration)</code>, about 200 ms) eases the switch instead of snapping. It is skipped on first paint and under <code>prefers-reduced-motion</code>. A component that sets its own <code>transition</code> shorthand replaces it: list those properties again there.</li>
+                        <li>A manual toggle needs <code>$theme: class</code> or <code>both</code>, because it drives <code>data-theme</code>. For a first paint without a flash, the managed <code>&lt;head&gt;</code> injects a small guard that reads <code>kirigami-theme</code> from <code>localStorage</code> before the stylesheet.</li>
+                    </ul>
+                    <h2 id="sass-helpers-utils">Sass helpers: <code>utils</code></h2>
+                    <p>Dependency-free functions, loaded with <code>@use ... as *</code>:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>wash($bg, $base, $amount)</code></td>
+                                <td>Mix <code>$base</code> into <code>$bg</code>: tint or shade a colour toward the background.</td>
+                            </tr>
+                            <tr>
+                                <td><code>hex6($c)</code>, <code>hexbin($c)</code></td>
+                                <td>A colour as <code>#rrggbb</code>, or <code>rrggbb</code> without the <code>#</code> (alpha dropped).</td>
+                            </tr>
+                            <tr>
+                                <td><code>str-replace($string, $search, $replace: &quot;&quot;)</code></td>
+                                <td>Recursive replace-all.</td>
+                            </tr>
+                            <tr>
+                                <td><code>url-encode($string)</code></td>
+                                <td>Percent-encode <code>% &lt; &gt; # &quot;</code> for use in a <code>url()</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>svg-url($svg)</code></td>
+                                <td>Wrap raw SVG markup in a <code>url(&quot;data:image/svg+xml,…&quot;)</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>apply-colors($svg, $colors)</code></td>
+                                <td>Replace each <code>%name%</code> placeholder of an SVG string with the mapped colour.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 id="long-form-text-prose">Long-form text: <code>prose</code></h2>
+                    <p>Base typography for rendered Markdown. It follows the light and dark palette by itself.</p>
+                    <pre><code class="hljs language-scss hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-comment">// the ready-made wrapper class</span></span>
+                        <span class="hljs-line"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;@kirigami/canva/prose&#x27;</span>;              <span class="hljs-comment">// defines .prose { … }</span></span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-comment">// …or only the mixin, on a selector of your own</span></span>
+                        <span class="hljs-line"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;@kirigami/canva/prose&#x27;</span> as prose with (<span class="hljs-variable">$emit-class</span>: false);</span>
+                        <span class="hljs-line"><span class="hljs-selector-class">.page-about</span> <span class="hljs-selector-id">#main</span> { <span class="hljs-keyword">@include</span> prose.prose(<span class="hljs-variable">$measure</span>: <span class="hljs-number">46rem</span>); }</span>
+                    </code></pre>
+                    <p>The mixin is <code>prose($measure: 42rem, $flow: 1.5em)</code>: <code>$measure</code> becomes the <code>max-width</code> (<code>none</code> skips it) and <code>$flow</code> the vertical rhythm. At runtime, tune <code>--prose-measure</code>, <code>--prose-flow</code> and <code>--prose-radius</code>.</p>
+                    <p>It styles headings, lists, quotes, rules, tables, code, images and figures, definition lists, <code>&lt;details&gt;</code>, inline <code>mark</code>, <code>sub</code>, <code>sup</code> and <code>abbr</code>, and the GitHub-flavoured output of the <code>MD</code> class: task lists, <code>.markdown-alert*</code> boxes and <code>.footnotes</code>. Tables scroll inside themselves rather than widening the page. The code-block theme of <a href="../../plugins/#highlight"><code>@kirigami/plugin-highlight</code></a> layers on top.</p>
+                    <h2 id="components-main">Components: <code>main</code></h2>
+                    <p>Five small patterns that kept being rewritten identically across sites. Opt in with <code>@use &apos;@kirigami/canva/main&apos;</code>.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Class</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>.breadcrumb</code></td>
+                                <td>A trail of links ending on the current page. Pairs with <code>FS::getBreadcrumb()</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>.docs-toc</code></td>
+                                <td>An inline quick-jump list of anchors, for a long reference page.</td>
+                            </tr>
+                            <tr>
+                                <td><code>.table-wrap</code>, <code>.table</code></td>
+                                <td>A data table. Wrap it in <code>.table-wrap</code> to scroll sideways; <code>.table__num</code> sets a tabular-figure column (a version number, say).</td>
+                            </tr>
+                            <tr>
+                                <td><code>.badge</code>, <code>.badge--muted</code></td>
+                                <td>A small status or licence tag: filled with the accent, or outlined and neutral.</td>
+                            </tr>
+                            <tr>
+                                <td><code>.palette</code>, <code>.palette--compact</code></td>
+                                <td>A row of colour chips, one <code>li</code> per swatch, for <code>IMG::palette()</code> or <code>colors()</code> output. <code>--compact</code> caps it at 20 rem.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 id="the-light-switch-lightswitch">The light switch: <code>lightswitch</code></h2>
+                    <p>An animated theme toggle: a pill whose pin slides and morphs from a sun disc to a crescent moon. The morph is a real CSS <code>d</code> transition between two SVG paths, so the browser interpolates it point by point. It pairs with the <code>theme</code> script, which already keeps <code>data-theme-state</code> on the element, so there is no extra JavaScript.</p>
+                    <pre><code class="hljs language-scss hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">@use</span> <span class="hljs-string">&#x27;@kirigami/canva/lightswitch&#x27;</span>;</span>
+                    </code></pre>
+                    <pre><code class="hljs language-html hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">data-theme-toggle</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;lightswitch&quot;</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Toggle dark mode&quot;</span>&gt;</span></span>
+                        <span class="hljs-line">    <span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">viewBox</span>=<span class="hljs-string">&quot;0 0 55 55&quot;</span> <span class="hljs-attr">aria-hidden</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span></span>
+                        <span class="hljs-line">        <span class="hljs-tag">&lt;<span class="hljs-name">path</span> <span class="hljs-attr">d</span>=<span class="hljs-string">&quot;M55 27.5C55 42.6878 42.6878 55 27.5 55C12.3122 55 0 42.6878 0 27.5C0 12.3122 12.3122 0 27.5 0C42.6878 0 55 12.3122 55 27.5Z&quot;</span>/&gt;</span></span>
+                        <span class="hljs-line">    <span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+                    </code></pre>
+                    <p>The path&apos;s <code>d</code> is the sun shape, kept as a fallback for browsers that can&apos;t animate <code>d</code> yet. Colours come from the tokens (<code>--surface</code> for the track, <code>--accent</code> for the pin), so there is nothing to override for a themed look.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Custom property</th>
+                                <th>Default</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>--lightswitch-size</code></td>
+                                <td><code>1.75rem</code></td>
+                                <td>Pin diameter; the track is twice as wide.</td>
+                            </tr>
+                            <tr>
+                                <td><code>--lightswitch-bg</code></td>
+                                <td><code>var(--surface)</code></td>
+                                <td>Track colour.</td>
+                            </tr>
+                            <tr>
+                                <td><code>--lightswitch-pin</code></td>
+                                <td><code>var(--accent)</code></td>
+                                <td>Pin colour.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h2 id="scripts">Scripts</h2>
+                    <p>ES modules for the browser (<code>es2022</code>). Each source file compiles to its own file, so import them one at a time. <code>dom</code>, <code>theme</code>, <code>observer</code> and <code>reveal</code> touch browser globals when imported: don&apos;t load them in a plain Node process. <code>helpers</code> can be imported in Node for <code>dedent</code>.</p>
+                    <h3 id="dom"><code>dom</code></h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Export</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>create(tag, classname?, content?, attrs?)</code></td>
+                                <td>Create an element, optionally setting its class, its <code>innerHTML</code> and attributes from an object.</td>
+                            </tr>
+                            <tr>
+                                <td><code>el.create(...)</code></td>
+                                <td>The same, on any <code>HTMLElement</code>, but it also appends the new element to <code>el</code>. Importing the module patches <code>HTMLElement.prototype</code>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <h3 id="helpers"><code>helpers</code></h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Export</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>busy(promise or promises)</code></td>
+                                <td>Put <code>is-busy</code> on <code>&lt;html&gt;</code> until the promises settle, then remove it.</td>
+                            </tr>
+                            <tr>
+                                <td><code>working(promise or promises)</code></td>
+                                <td>The same, with <code>is-working</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>preloadImage(url)</code></td>
+                                <td>Resolves when the image has loaded (immediately if cached), rejects on error.</td>
+                            </tr>
+                            <tr>
+                                <td><code>documentReady(cb?)</code></td>
+                                <td>Resolves on <code>DOMContentLoaded</code>, or at once if the document is parsed.</td>
+                            </tr>
+                            <tr>
+                                <td><code>dedent(str)</code></td>
+                                <td>Strip the whitespace prefix shared by every non-blank line, keeping relative indentation; trim leading blank lines and trailing space. Pure string code, no DOM.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p><code>busy</code> and <code>working</code> are not reference-counted across separate calls: the first call to finish can remove the class while another is still pending.</p>
+                    <h3 id="theme"><code>theme</code></h3>
+                    <p>A manual light and dark switch for the dark theme. It writes <code>data-theme</code> on <code>&lt;html&gt;</code> and remembers the choice in <code>localStorage</code> under <code>kirigami-theme</code>. Importing it re-applies the stored preference at once and, on <code>DOMContentLoaded</code>, wires every <code>[data-theme-toggle]</code> control.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Export</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>getTheme()</code></td>
+                                <td>The stored preference: <code>&apos;auto&apos;</code>, <code>&apos;light&apos;</code> or <code>&apos;dark&apos;</code> (<code>&apos;auto&apos;</code> when nothing is stored).</td>
+                            </tr>
+                            <tr>
+                                <td><code>resolvedTheme()</code></td>
+                                <td>The theme on screen, <code>&apos;auto&apos;</code> resolved against <code>prefers-color-scheme</code>.</td>
+                            </tr>
+                            <tr>
+                                <td><code>setTheme(pref)</code></td>
+                                <td>Store and apply a preference; <code>&apos;auto&apos;</code> lets the OS decide. Returns the resolved theme.</td>
+                            </tr>
+                            <tr>
+                                <td><code>toggleTheme()</code></td>
+                                <td>Flip between light and dark.</td>
+                            </tr>
+                            <tr>
+                                <td><code>initTheme()</code></td>
+                                <td>Re-apply the stored preference (it runs on import).</td>
+                            </tr>
+                            <tr>
+                                <td><code>bindToggles(target = document)</code></td>
+                                <td>Wire the toggles under <code>target</code>; idempotent. Call it again after injecting toggles later.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>Declarative toggles need no script of your own, only markup:</p>
+                    <pre><code class="hljs language-html hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">data-theme-toggle</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">&quot;Toggle theme&quot;</span>&gt;</span>🌗<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>   <span class="hljs-comment">&lt;!-- flips light and dark --&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">data-theme-toggle</span>=<span class="hljs-string">&quot;dark&quot;</span>&gt;</span>Dark<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>                    <span class="hljs-comment">&lt;!-- forces a preference --&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">data-theme-toggle</span>=<span class="hljs-string">&quot;light&quot;</span>&gt;</span>Light<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+                        <span class="hljs-line"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">data-theme-toggle</span>=<span class="hljs-string">&quot;auto&quot;</span>&gt;</span>System<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+                    </code></pre>
+                    <p>Each toggle gets <code>data-theme-state=&quot;light|dark&quot;</code> and, on a real control, <code>aria-pressed</code>: style them from those. Every change, a click or an OS switch while in <code>auto</code>, fires a <code>canva:themechange</code> event on <code>window</code>:</p>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;canva:themechange&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {</span>
+                        <span class="hljs-line">    e.<span class="hljs-property">detail</span>;   <span class="hljs-comment">// { theme: &#x27;light&#x27; | &#x27;dark&#x27;, preference: &#x27;auto&#x27; | &#x27;light&#x27; | &#x27;dark&#x27; }</span></span>
+                        <span class="hljs-line">});</span>
+                    </code></pre>
+                    <p>If storage can&apos;t be read, <code>getTheme()</code> falls back to <code>auto</code> without validating arbitrary stored strings. <code>setTheme()</code> still applies the change when it can&apos;t save it.</p>
+                    <h3 id="reveal"><code>reveal</code></h3>
+                    <p>Adds <code>is-in</code> to each <code>[data-reveal]</code> element the first time it scrolls into view, then stops watching it. Pair it with a rule that hides <code>[data-reveal]</code> and shows <code>.is-in</code>, gated on the <code>js</code> class that the managed <code>&lt;head&gt;</code> puts on <code>&lt;html&gt;</code>, so the content stays visible if the bundle never loads:</p>
+                    <pre><code class="hljs language-scss hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">@media</span> (<span class="hljs-attribute">prefers-reduced-motion</span>: no-preference) {</span>
+                        <span class="hljs-line">    <span class="hljs-selector-class">.js</span> <span class="hljs-selector-attr">[data-reveal]</span>       { <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>; <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">14px</span>);</span>
+                        <span class="hljs-line">                              <span class="hljs-attribute">transition</span>: opacity .<span class="hljs-number">5s</span> ease, transform .<span class="hljs-number">5s</span> ease; }</span>
+                        <span class="hljs-line">    <span class="hljs-selector-class">.js</span> <span class="hljs-selector-attr">[data-reveal]</span><span class="hljs-selector-class">.is-in</span> { <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>; <span class="hljs-attribute">transform</span>: none; }</span>
+                        <span class="hljs-line">}</span>
+                    </code></pre>
+                    <p><code>reveal(target = document)</code> reveals the matching descendants of <code>target</code> (not <code>target</code> itself) and skips those already marked, so call it again after inserting content. With <code>prefers-reduced-motion: reduce</code>, or without <code>IntersectionObserver</code>, everything is revealed at once, and a 1.5-second safety timeout reveals whatever is still hidden.</p>
+                    <h3 id="observer"><code>observer</code></h3>
+                    <p>A tiny engine for <strong>non-closing authoring tags</strong>. Register a tag name and a handler: every matching tag already in the page, and every one added later, is handed to the handler and replaced by what it returns. This is the seam the plugins use for shortcuts such as <code>&lt;youtube&gt;</code>.</p>
+                    <pre><code class="hljs language-js hljs-numbered">
+                        <span class="hljs-line"><span class="hljs-keyword">import</span> { register } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@kirigami/canva/observer&#x27;</span>;</span>
+                        <span class="hljs-line"></span>
+                        <span class="hljs-line"><span class="hljs-title function_">register</span>(<span class="hljs-string">&#x27;youtube&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">el</span>) =&gt;</span> {</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">const</span> id = el.<span class="hljs-title function_">getAttribute</span>(<span class="hljs-string">&#x27;id&#x27;</span>) || <span class="hljs-string">&#x27;&#x27;</span>;</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">if</span> (!<span class="hljs-regexp">/^[\w-]{11}$/</span>.<span class="hljs-title function_">test</span>(id)) <span class="hljs-keyword">return</span>;</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">const</span> iframe = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">createElement</span>(<span class="hljs-string">&#x27;iframe&#x27;</span>);</span>
+                        <span class="hljs-line">    iframe.<span class="hljs-property">src</span> = <span class="hljs-string">`https://www.youtube-nocookie.com/embed/<span class="hljs-subst">${id}</span>`</span>;</span>
+                        <span class="hljs-line">    iframe.<span class="hljs-property">loading</span> = <span class="hljs-string">&#x27;lazy&#x27;</span>;</span>
+                        <span class="hljs-line">    iframe.<span class="hljs-property">allowFullscreen</span> = <span class="hljs-literal">true</span>;</span>
+                        <span class="hljs-line">    <span class="hljs-keyword">return</span> iframe;</span>
+                        <span class="hljs-line">});</span>
+                    </code></pre>
+                    <p>Browsers parse an unknown tag as an ordinary element, so whatever follows an unclosed tag ends up nested inside it. With <code>voidLike</code> (the default), those stray children are lifted back out as siblings before the tag is swapped. Set <code>voidLike: false</code> when the tag really wraps content you want to keep.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Export</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>register(tag, fn, options?)</code></td>
+                                <td>Register <code>fn</code> for <code>&lt;tag&gt;</code>; returns a function that removes the registration.</td>
+                            </tr>
+                            <tr>
+                                <td><code>scan(root?)</code></td>
+                                <td>Sweep <code>root</code> (default <code>document</code>) by hand. Rarely needed.</td>
+                            </tr>
+                            <tr>
+                                <td><code>start()</code>, <code>stop()</code></td>
+                                <td>Start or disconnect the <code>MutationObserver</code>. Handlers stay registered.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>What <code>fn(el)</code> returns decides the outcome: an HTML string, a <code>Node</code>, a <code>NodeList</code> or an array replaces the tag; <code>null</code>, <code>false</code> or <code>&quot;&quot;</code> removes it; <code>undefined</code> leaves it in place, for a tag that only needs a side effect.</p>
+                    <p>Good to know: handlers are synchronous (a returned Promise isn&apos;t awaited), and a source element is marked as seen before its handler runs, so throwing doesn&apos;t schedule a retry. Only child additions are observed, not attribute changes. Each replacement fires a <code>canva:observed</code> event on <code>document</code>. <strong>The observer doesn&apos;t sanitise</strong>: a handler that builds HTML from authoring attributes must validate or escape them.</p>
+                    <h3 id="componentsburger"><code>components/burger</code></h3>
+                    <p>An empty class, a placeholder for a shared navigation toggle. It does nothing yet.</p>
+                    <nav class="doc__pager" aria-label="Previous and next"><a class="doc__prev" rel="prev" href="../../docs/php-wasm/">PHP-WASM runtime</a></nav>
+                </article>
+                <nav class="toc" aria-label="On this page">
+                    <p class="toc__title">On this page</p>
+                    <ol>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#tokens-conf">Tokens: conf</a></li>
+                        <li><a href="#dark-theme">Dark theme</a></li>
+                        <li><a href="#sass-helpers-utils">Sass helpers: utils</a></li>
+                        <li><a href="#long-form-text-prose">Long-form text: prose</a></li>
+                        <li><a href="#components-main">Components: main</a></li>
+                        <li><a href="#the-light-switch-lightswitch">The light switch: lightswitch</a></li>
+                        <li><a href="#scripts">Scripts</a></li>
+                    </ol>
+                </nav>
+            </div>
+        </main>
+        <footer class="site-footer">
+            <div class="wrap">
+                <div class="site-footer__grid">
+                    <div class="site-footer__col">
+                        <span class="footer-logo" role="img" aria-label="Kirigami"></span>
+                        <p class="site-footer__tagline">Fold PHP into flat HTML.</p>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Learn</h3>
+                        <ul>
+                            <li><a href="../../start/">Getting started</a></li>
+                            <li><a href="../../docs/">Documentation</a></li>
+                            <li><a href="../../plugins/">Plugins</a></li>
+                            <li><a href="../../studio/">Kiri Studio</a></li>
+                            <li><a href="../../examples/">Examples</a></li>
+                            <li><a href="../../templates/">Templates</a></li>
+                            <li><a href="../../showcase/">Showcase</a></li>
+                        </ul>
+                    </div>
+                    <div class="site-footer__col">
+                        <h3>Kirigami</h3>
+                        <ul>
+                            <li><a href="../../about/">About</a></li>
+                            <li><a href="../../ecosystem/">Ecosystem</a></li>
+                            <li><a href="../../changelog/">Changelog</a></li>
+                            <li><a href="../../roadmap/">Roadmap</a></li>
+                            <li><a href="../../design/">Design</a></li>
+                            <li><a href="https://github.com/php-kirigami/kirigami">Source</a></li>
+                            <li><a href="https://www.npmjs.com/org/kirigami">npm</a></li>
+                            <li><a href="https://github.com/php-kirigami/kiribuild">kiribuild</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="site-footer__inner">
+                    <p>© 2026 Maxime Larrivée-Roy. This site is MIT licensed.</p>
+                    <p>Built with <a href="https://github.com/php-kirigami/kirigami">Kirigami</a> · <a href="../../sitemap.xml">Sitemap</a> · <a href="https://github.com/php-kirigami/php-kirigami.github.io">Source of this site</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            document.querySelectorAll("pre>code").forEach(function(c){var L=c.innerHTML.replace(/^\n+/,"").replace(/\n[^\S\n]*$/,"").split("\n"),n=1/0;L.forEach(function(l){if(l.trim())n=Math.min(n,l.match(/^[ \t]*/)[0].length)});if(n&&n<1/0)c.innerHTML=L.map(function(l){return l.slice(n)}).join("\n")});
+        </script>
+        <script src="../../scripts/kirigami.core.min.js?###TIMESTAMP###"></script>
+    </body>
+</html>
