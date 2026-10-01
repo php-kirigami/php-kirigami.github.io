@@ -148,6 +148,8 @@
                         <li><a href="../../docs/sdk/">Plugin SDK</a></li>
                         <li><a href="../../docs/internals/">Internals</a></li>
                         <li><a href="../../docs/struct-walker/" aria-current="page">struct-walker</a></li>
+                        <li><a href="../../docs/php-wasm/">PHP-WASM runtime</a></li>
+                        <li><a href="../../docs/canva/">Design system (canva)</a></li>
                     </ol>
                 </aside>
                 <article class="doc__body prose">
@@ -235,7 +237,10 @@
                         <li>Cycle detection compares resolved path strings, not symlink targets, and doesn&apos;t catch cycles made by YAML aliases.</li>
                         <li>This is the Node side. YAML read by PHP templates goes through PHP&apos;s native YAML extension (<code>YAML::</code>), which has its own implicit scalar rules: don&apos;t infer one&apos;s behaviour from the other.</li>
                     </ul>
-                    <nav class="doc__pager" aria-label="Previous and next"><a class="doc__prev" rel="prev" href="../../docs/internals/">Internals</a></nav>
+                    <nav class="doc__pager" aria-label="Previous and next">
+                        <a class="doc__prev" rel="prev" href="../../docs/internals/">Internals</a>
+                        <a class="doc__next" rel="next" href="../../docs/php-wasm/">PHP-WASM runtime</a>
+                    </nav>
                 </article>
                 <nav class="toc" aria-label="On this page">
                     <p class="toc__title">On this page</p>
