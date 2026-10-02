@@ -203,7 +203,7 @@
     <div class="doc-head">
         <span class="eyebrow">Authoring tags</span>
         <h2 id="educ">@kirigami/plugin-educ</h2>
-        <p class="lead">Components for course pages — checklists, callout bubbles, link cards, colour pills, quotes and embedded pens.</p>
+        <p class="lead">Components for course pages — checklists, callout bubbles, link cards, colour pills, media files, quotes and embedded pens.</p>
     </div>
     <figure class="plugin-thumb">
         <img asset="plugins/educ.png" width="720" alt="Colour pills, file links and an alert bubble from the course components" loading="lazy">
@@ -235,6 +235,7 @@
           | `<quote>` | A citation with a large quote mark, the author, a title and a round photo. |
           | `<tool>` | A card for a recommended external tool: caption, title, description and a picture. |
           | `<codepen>` | An iframe on a CodePen embed page. |
+          | `<medialink>` | A media file to download: a type glyph, a title, a download button, a copy-link button and the file's full URL. |
 
           A checklist takes one item per line. In Markdown, use the shortcode:
 
@@ -253,6 +254,7 @@
           {% color #ff5500 %}
           {% doclink https://developer.mozilla.org/en-US/docs/Web/CSS CSS on MDN %}
           {% intlink ../html-basics/ %}
+          {% medialink ./images/noise.svg Noise %}
           ```
 
           A few details worth knowing:
@@ -268,6 +270,10 @@
             `#rrggbbaa`); anything else fails the build.
           - Images given to `<quote photo>` and `<tool image>` may be relative
             to the page (`./x`), from the site root (`/x`), or a URL.
+          - The download button of `<medialink>` fetches the file into a blob,
+            so the browser saves it instead of displaying it, even an svg, an
+            image or an mp3. A file on another host without CORS opens in a
+            new tab instead.
           - Every component is fluid: long words wrap, and on phones the cards
             shrink their picture. The bubbles' side badges only appear from
             52 rem up.

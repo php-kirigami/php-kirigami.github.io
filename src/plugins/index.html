@@ -242,7 +242,7 @@
                         <div class="doc-head">
                             <span class="eyebrow">Authoring tags</span>
                             <h2 id="educ">@kirigami/plugin-educ</h2>
-                            <p class="lead">Components for course pages — checklists, callout bubbles, link cards, colour pills, quotes and embedded pens.</p>
+                            <p class="lead">Components for course pages — checklists, callout bubbles, link cards, colour pills, media files, quotes and embedded pens.</p>
                         </div>
                         <figure class="plugin-thumb"><img alt="Colour pills, file links and an alert bubble from the course components" loading="lazy" src="../images/plugins/educ-720w.webp"></figure>
                         <div class="prose">
@@ -293,6 +293,10 @@
                                         <td><code>&lt;codepen&gt;</code></td>
                                         <td>An iframe on a CodePen embed page.</td>
                                     </tr>
+                                    <tr>
+                                        <td><code>&lt;medialink&gt;</code></td>
+                                        <td>A media file to download: a type glyph, a title, a download button, a copy-link button and the file&apos;s full URL.</td>
+                                    </tr>
                                 </tbody>
                             </table>
                             <p>A checklist takes one item per line. In Markdown, use the shortcode:</p>
@@ -309,6 +313,7 @@
                                 <span class="hljs-line">{% color <span class="hljs-comment">#ff5500 %}</span></span>
                                 <span class="hljs-line">{% doclink https://developer.mozilla.org/en-US/docs/Web/CSS CSS on MDN %}</span>
                                 <span class="hljs-line">{% intlink ../html-basics/ %}</span>
+                                <span class="hljs-line">{% medialink ./images/noise.svg Noise %}</span>
                             </code></pre>
                             <p>A few details worth knowing:</p>
                             <ul>
@@ -317,6 +322,7 @@
                                 <li><code>&lt;intlink&gt;</code> fails the build when its target page doesn&apos;t exist.</li>
                                 <li><code>&lt;color&gt;</code> accepts hex colours only (<code>#rgb</code>, <code>#rgba</code>, <code>#rrggbb</code>, <code>#rrggbbaa</code>); anything else fails the build.</li>
                                 <li>Images given to <code>&lt;quote photo&gt;</code> and <code>&lt;tool image&gt;</code> may be relative to the page (<code>./x</code>), from the site root (<code>/x</code>), or a URL.</li>
+                                <li>The download button of <code>&lt;medialink&gt;</code> fetches the file into a blob, so the browser saves it instead of displaying it, even an svg, an image or an mp3. A file on another host without CORS opens in a new tab instead.</li>
                                 <li>Every component is fluid: long words wrap, and on phones the cards shrink their picture. The bubbles&apos; side badges only appear from 52 rem up.</li>
                             </ul>
                             <p>The <a href="../templates/">Kiridoc template</a> uses all of them in its sample course.</p>

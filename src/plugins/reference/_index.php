@@ -318,7 +318,7 @@
   ## educ
 
   Course components for Kiridoc-style sites: checklists, callout bubbles, link
-  cards, colour pills, quotes, tool cards and CodePen embeds. Its options and the
+  cards, colour pills, media files, quotes, tool cards and CodePen embeds. Its options and the
   components themselves are described on the [Plugins](../#educ) page.
 
   | Option | Type | Default | Description |
@@ -348,4 +348,12 @@
     adds the tab at the end.
   - `<color>` copies its code on click and reads "Copied!", or "Copié!" when the
     page's `lang` starts with `fr`.
+  - `<medialink>` takes `src` (as linked from the published page), an optional
+    title as its content (default: the file name), `addr="false"` to hide the
+    URL field and `class`. The shortcode is `{% medialink src Title %}`; a
+    trailing `false` after a quoted title hides the URL field. The glyph follows
+    the extension (image, svg, audio, video, zip, pdf, other). The URL field and
+    the copied link are absolute; the button labels are French when the page's
+    `lang` starts with `fr`. Without JavaScript the download button is a plain
+    `download` link.
 </markdown>

@@ -15,6 +15,29 @@
           README, linked below each entry; [Ecosystem](../ecosystem/) always
           shows the current version of everything, fetched live from npm.
 
+          ## October 2, 2026
+
+          **[@kirigami/plugin-educ](https://www.npmjs.com/package/@kirigami/plugin-educ)**
+          `0.2.1` → `0.3.0` — `<medialink>`: a media file to download, with a
+          type glyph, a title, a download button, a copy-link button and the
+          file's full URL. The download goes through a blob, so the browser
+          saves an svg, an image or an mp3 instead of displaying it. See
+          [Plugins](../plugins/#educ).
+
+          **[@kirigami/php-wasm](https://www.npmjs.com/package/@kirigami/php-wasm)**
+          `8.5.11-2` → `8.5.11-3` — the binary adds two extensions: `fastcsv`
+          (streaming CSV reader and writer) and `aspect` (`Memoize`). Every
+          package that pins it exactly follows:
+          **[@kirigami/php-prepros](https://www.npmjs.com/package/@kirigami/php-prepros)**
+          `3.2.4`, **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**
+          `3.2.7` (also `sass` 1.105.1), **[@kirigami/mcp](https://www.npmjs.com/package/@kirigami/mcp)**
+          `0.1.12` and **[@kirigami/cli](https://www.npmjs.com/package/@kirigami/cli)**
+          `0.1.14`. The VS Code extension `0.1.9` bundles them. See
+          [PHP-WASM](../docs/php-wasm/).
+
+          **[@kirigami/plugin-embed](https://www.npmjs.com/package/@kirigami/plugin-embed)**
+          `0.2.1` → `0.2.2` — the YouTube player URL carries `feature=oembed`.
+
           ## October 1, 2026
 
           **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**

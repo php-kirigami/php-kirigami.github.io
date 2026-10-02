@@ -166,6 +166,8 @@
   | `opcache` | Bytecode cache (JIT disabled) |
   | `yaml` | YAML 1.1 through LibYAML |
   | `jsonpath` | JSONPath queries over decoded JSON |
+  | `fastcsv` | Streaming CSV reading and writing (`FastCSVReader`, `FastCSVWriter`, `FastCSVConfig`) |
+  | `aspect` | The `Memoize` class, for caching function results |
   | `apcu`, `igbinary` | In-memory user cache and compact serialization |
 
   Four more are Kirigami's own, vendored from their repositories:
