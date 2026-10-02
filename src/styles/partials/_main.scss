@@ -808,12 +808,21 @@ a.card:hover { transform: translateY(-.15rem); box-shadow: var(--sheet-shadow-li
         box-shadow: var(--sheet-shadow);
     }
 
-    .palette { margin-top: .75rem; }
+    // Inside .prose a list gets padding and bullets: the swatch row opts out, so
+    // its first cell starts flush with the picture and no marker sits in front.
+    .palette {
+        margin-top: .75rem;
+        padding: 0;
+        list-style: none;
+
+        li { margin: 0; list-style: none; }
+    }
 
     figcaption {
         margin-top: .75rem;
         font-size: .85rem;
         color: var(--ink-muted);
+        text-align: left;
 
         code { font-size: .85em; }
     }
