@@ -16,8 +16,8 @@
     "export": "kiri export"
   },
   "devDependencies": {
-    "@kirigami/cli": "^0.1.7",
-    "@kirigami/kirigami": "^3.2.1",
+    "@kirigami/cli": "^0.1.13",
+    "@kirigami/kirigami": "^3.2.6",
     "@kirigami/canva": "^2.7.0",
     "@kirigami/plugin-embed": "^0.2.1",
     "@kirigami/plugin-extlink": "^0.2.1",

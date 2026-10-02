@@ -17,6 +17,17 @@
 
           ## October 1, 2026
 
+          **[@kirigami/kirigami](https://www.npmjs.com/package/@kirigami/kirigami)**
+          `3.2.5` → `3.2.6` — every font embedded through `$fonts` was
+          declared twice in the stylesheet, a normal face and an italic one
+          that held the same file: the helper that decides whether a font has
+          an `ital` axis always answered yes. It now answers correctly. On
+          this site the stylesheet went from 471 KB to 270 KB. A font that
+          really has an `ital` axis still gets its two faces.
+          **[@kirigami/cli](https://www.npmjs.com/package/@kirigami/cli)**
+          `0.1.13` and **[@kirigami/mcp](https://www.npmjs.com/package/@kirigami/mcp)**
+          `0.1.11` follow, and the VS Code extension `0.1.8` bundles them.
+
           **[@kirigami/php-wasm](https://www.npmjs.com/package/@kirigami/php-wasm)**
           `8.5.11-1` → `8.5.11-2` — the PHP 8.5.11 binary now has the
           `jsonpath` extension built in (JSONPath queries over decoded JSON).
